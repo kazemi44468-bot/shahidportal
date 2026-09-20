@@ -10,6 +10,7 @@ body{transition:padding-right .28s ease}
 .sp-label{font-size:9px;color:#9aabb5;padding:0 11px 7px}
 .sp-link{display:flex;align-items:center;gap:10px;min-height:42px;padding:7px 10px;border:1px solid transparent;border-radius:11px;text-decoration:none;color:#526976;font-size:12px;white-space:nowrap;transition:.18s}
 .sp-link:hover{background:#f6f9fa;color:var(--sp-blue)}
+.sp-item{margin-bottom:2px}.sp-subnav{margin:0 10px 7px 0;padding:3px 0 3px 14px;border-right:1px solid #e4edf1}.sp-sublink{display:flex;align-items:center;gap:7px;min-height:32px;padding:5px 9px;border-radius:8px;color:#71838e;text-decoration:none;font-size:11px;white-space:nowrap}.sp-sublink:hover{background:#f7fafb;color:var(--sp-blue)}.sp-sublink.active{background:#eef6f8;color:var(--sp-blue);font-weight:700}.sp-sublink>span:first-child{font-size:12px;color:#8da3ae}
 .sp-link.active{background:#f1f7f8;border-color:#dcecef;color:var(--sp-blue);font-weight:700}
 .sp-icon{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;background:#f1f5f7;color:#718692;font-size:12px;flex:none}
 .sp-link.active .sp-icon{background:#e1f1f3;color:#397f8e}
