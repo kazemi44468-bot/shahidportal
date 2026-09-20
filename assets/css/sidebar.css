@@ -1,7 +1,7 @@
 @font-face{font-family:ShahidVazir;src:url('../fonts/Vazirmatn.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
 :root{--sp-rail:58px;--sp-open:252px;--sp-ink:#183449;--sp-accent:#176b67;--sp-accent2:#9a8766;--sp-paper:#fffdf9;--sp-line:rgba(23,107,103,.14)}
 body{margin:0;transition:padding-right .3s ease;background:#f5f2eb}
-.sp-sidebar{position:fixed;top:0;right:0;bottom:0;width:var(--sp-rail);z-index:2147483000;background:rgba(255,253,249,.97);border-left:1px solid var(--sp-line);box-shadow:-8px 0 30px rgba(28,37,36,.08);font-family:ShahidVazir,Vazirmatn,Tahoma,sans-serif;direction:rtl;transition:width .35s ease,box-shadow .35s ease;display:flex;flex-direction:column;align-items:center;padding:10px 0}
+.sp-sidebar{position:fixed;top:14px;right:14px;bottom:14px;width:var(--sp-rail);z-index:2147483000;background:rgba(255,253,249,.97);border:1px solid var(--sp-line);box-shadow:-8px 0 30px rgba(28,37,36,.08);font-family:ShahidVazir,Vazirmatn,Tahoma,sans-serif;direction:rtl;transition:width .35s ease,box-shadow .35s ease;display:flex;flex-direction:column;align-items:center;padding:10px 0}
 .sp-sidebar.menu-expanded{width:var(--sp-open);padding:10px}
 .sp-brand{display:none}
 .sp-toggle{position:relative;display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;width:40px;height:40px;margin:0 auto 10px;border:1px solid var(--sp-line);background:var(--sp-paper);border-radius:14px;cursor:pointer;box-shadow:0 6px 18px rgba(28,37,36,.08);padding:0}
@@ -10,7 +10,7 @@ body{margin:0;transition:padding-right .3s ease;background:#f5f2eb}
 .sp-sidebar.menu-expanded .sp-toggle span:nth-child(2){opacity:0}
 .sp-sidebar.menu-expanded .sp-toggle span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
 .sp-mark{width:34px;height:34px;margin:0 auto 11px;border:1px solid rgba(23,107,103,.15);border-radius:50%;display:grid;place-items:center;color:var(--sp-accent);font-weight:800;background:#eef3ef;font-size:15px}
-.sp-nav{width:100%;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 7px;overflow:auto;box-sizing:border-box}
+.sp-nav{width:100%;display:flex;flex-direction:column;align-items:center;gap:3px;padding:0 7px;overflow-y:auto;overflow-x:hidden;box-sizing:border-box;scrollbar-width:thin;scrollbar-color:rgba(23,107,103,.35) transparent}
 .sp-item,.sp-subitem{position:relative;width:42px;height:37px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#68736f;border-radius:19px;margin:0;padding:0;transition:background .2s ease,color .2s ease,transform .2s ease;font-size:11px}
 .sp-item:hover,.sp-subitem:hover{background:#edf3ef;color:var(--sp-accent)}
 .sp-item.active,.sp-subitem.active{background:#e9f1ed;color:var(--sp-accent);font-weight:700;box-shadow:inset 0 0 0 1px rgba(23,107,103,.08)}
@@ -26,13 +26,13 @@ body{margin:0;transition:padding-right .3s ease;background:#f5f2eb}
 .sp-sidebar.menu-expanded .sp-sub{align-items:stretch;padding:2px 0 4px;margin-right:8px;border-right:1px solid rgba(23,107,103,.18)}
 .sp-sidebar.menu-expanded .sp-subitem{margin-right:7px;width:calc(100% - 7px)}
 .sp-mark{font-family:ShahidVazir,Vazirmatn,sans-serif}
-.sp-main{padding-right:calc(var(--sp-rail) + 28px);transition:padding-right .35s ease}
-.sp-sidebar.menu-expanded~.sp-main{padding-right:calc(var(--sp-open) + 28px)}
+.sp-main{padding-right:calc(var(--sp-rail) + 42px);transition:padding-right .35s ease}
+.sp-sidebar.menu-expanded~.sp-main{padding-right:calc(var(--sp-open) + 42px)}
 .sp-overlay,.sp-mobile-btn{display:none}
 @media(max-width:800px){
-.sp-sidebar{width:270px;right:0;transform:translateX(110%);padding:12px 10px;align-items:stretch;transition:transform .25s ease}
+.sp-sidebar{width:270px;right:0;top:0;bottom:0;border-radius:0;transform:translateX(110%);padding:12px 10px;align-items:stretch;transition:transform .25s ease}
 .sp-sidebar.is-open{transform:translateX(0)}
-.sp-sidebar.menu-expanded{width:270px;padding:12px 10px}
+.sp-sidebar.menu-expanded{width:270px;padding:12px 10px;border-radius:0}
 .sp-toggle{display:none}
 .sp-mark{margin:3px auto 14px}
 .sp-nav{align-items:stretch;gap:4px;padding:0 4px}
