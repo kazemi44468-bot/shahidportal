@@ -8,8 +8,8 @@
 </style>
 <style>
 .side-toggle{position:fixed;right:18px;top:18px;z-index:100;width:42px;height:42px;border:1px solid #d9e4ea;border-radius:13px;background:#ffffffeb;color:#164d70;box-shadow:0 8px 24px #17223516;cursor:pointer;font-size:20px;line-height:1;backdrop-filter:blur(12px)}
-.sidebar{position:fixed;right:18px;top:70px;z-index:99;width:245px;background:#ffffffef;border:1px solid #dce6ec;border-radius:20px;padding:14px;box-shadow:0 18px 50px #17223520;backdrop-filter:blur(16px);transform:translateX(285px);opacity:0;pointer-events:none;transition:.25s ease}
-.sidebar.open{transform:translateX(0);opacity:1;pointer-events:auto}
+.sidebar{position:fixed;right:18px;top:70px;z-index:99;width:245px;background:#ffffffef;border:1px solid #dce6ec;border-radius:20px;padding:14px;box-shadow:0 18px 50px #17223520;backdrop-filter:blur(16px);transform:translateX(0);opacity:1;pointer-events:auto;transition:.25s ease}
+.sidebar:not(.open){transform:translateX(285px);opacity:0;pointer-events:none}.sidebar.open{transform:translateX(0);opacity:1;pointer-events:auto}
 .sidebar-head{padding:12px 13px 14px;border-bottom:1px solid #e7edf1;margin-bottom:8px}
 .sidebar-title{font-size:18px;font-weight:800;color:#123e61}.sidebar-sub{font-size:11px;color:#718091;margin-top:2px}
 .side-link{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:11px;text-decoration:none;color:#24465d;font-size:13px;transition:.18s}
