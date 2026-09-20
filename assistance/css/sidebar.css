@@ -1,0 +1,31 @@
+@font-face{font-family:ShahidVazir;src:url('../fonts/Vazirmatn.woff2') format('woff2');font-style:normal;font-weight:100 900;font-display:swap}
+:root{--sp-side:252px;--sp-rail:64px;--sp-ink:#183449;--sp-blue:#164d70;--sp-line:#e4ebef;--sp-accent:#5aaebd}
+body{transition:padding-right .28s ease}
+.sp-sidebar{position:fixed;inset:0 0 0 auto;width:var(--sp-side);z-index:1000;background:#fff;border-left:1px solid var(--sp-line);box-shadow:-10px 0 34px #17374b0b;font-family:ShahidVazir,Vazirmatn,Tahoma,sans-serif;transition:width .28s ease,transform .28s ease;overflow:hidden}
+.sp-sidebar-inner{height:100%;display:flex;flex-direction:column;padding:24px 14px}
+.sp-brand{padding:5px 10px 20px;border-bottom:1px solid var(--sp-line);margin-bottom:18px}
+.sp-mark{width:36px;height:36px;border-radius:11px;background:#edf6f8;color:var(--sp-blue);display:grid;place-items:center;font-weight:800;font-size:15px;margin-bottom:12px}
+.sp-title{font-size:17px;font-weight:800;color:var(--sp-ink);white-space:nowrap}
+.sp-subtitle{font-size:10px;color:#8093a0;margin-top:2px;white-space:nowrap}
+.sp-label{font-size:9px;color:#9aabb5;padding:0 11px 7px}
+.sp-link{display:flex;align-items:center;gap:10px;min-height:42px;padding:7px 10px;border:1px solid transparent;border-radius:11px;text-decoration:none;color:#526976;font-size:12px;white-space:nowrap;transition:.18s}
+.sp-link:hover{background:#f6f9fa;color:var(--sp-blue)}
+.sp-item{margin-bottom:2px}.sp-subnav{margin:0 10px 7px 0;padding:3px 0 3px 14px;border-right:1px solid #e4edf1}.sp-sublink{display:flex;align-items:center;gap:7px;min-height:32px;padding:5px 9px;border-radius:8px;color:#71838e;text-decoration:none;font-size:11px;white-space:nowrap}.sp-sublink:hover{background:#f7fafb;color:var(--sp-blue)}.sp-sublink.active{background:#eef6f8;color:var(--sp-blue);font-weight:700}.sp-sublink>span:first-child{font-size:12px;color:#8da3ae}
+.sp-link.active{background:#f1f7f8;border-color:#dcecef;color:var(--sp-blue);font-weight:700}
+.sp-icon{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;background:#f1f5f7;color:#718692;font-size:12px;flex:none}
+.sp-link.active .sp-icon{background:#e1f1f3;color:#397f8e}
+.sp-footer{margin-top:auto;border-top:1px solid var(--sp-line);padding:13px 10px 2px;color:#a0afb7;font-size:9px;white-space:nowrap}
+.sp-toggle{position:fixed;right:calc(var(--sp-side) + 14px);top:22px;z-index:1010;width:36px;height:36px;border:1px solid var(--sp-line);border-radius:10px;background:#fff;color:#607784;box-shadow:0 7px 20px #17374b10;cursor:pointer;font:500 18px ShahidVazir,Vazirmatn,Tahoma,sans-serif;transition:right .28s ease,transform .18s}
+.sp-toggle:hover{transform:translateY(-1px);color:var(--sp-blue)}
+body.sp-collapsed{padding-right:var(--sp-rail)}
+body.sp-collapsed .sp-sidebar{width:var(--sp-rail)}
+body.sp-collapsed .sp-brand{padding-left:0;padding-right:0}
+body.sp-collapsed .sp-title,body.sp-collapsed .sp-subtitle,body.sp-collapsed .sp-label,body.sp-collapsed .sp-link span:not(.sp-icon),body.sp-collapsed .sp-footer{display:none}
+body.sp-collapsed .sp-link{justify-content:center;padding:7px}
+body.sp-collapsed .sp-icon{width:34px;height:34px}
+body.sp-collapsed .sp-mark{margin-inline:auto}
+body.sp-collapsed .sp-toggle{right:calc(var(--sp-rail) + 14px)}
+@media(min-width:761px){body:not(.sp-collapsed){padding-right:var(--sp-side)}}
+@media(max-width:760px){
+body{padding-right:0!important}.sp-sidebar{width:min(290px,88vw);transform:translateX(100%);box-shadow:-18px 0 42px #17374b20}.sp-sidebar.open{transform:translateX(0)}.sp-toggle{right:14px;top:14px}.sp-footer{display:none}body.sp-collapsed .sp-sidebar{width:min(290px,88vw)}body.sp-collapsed .sp-toggle{right:14px}
+}
