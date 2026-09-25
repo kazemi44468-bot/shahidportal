@@ -2,10 +2,81 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="refresh" content="0;url=tarhha/shahidportal-tarh.html">
-<title>شهیدپورتال | پورتال جامع شهدا و ایثارگران</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f5f7fa;color:#172033;font-family:Tahoma,Arial,sans-serif}main{text-align:center;padding:32px}a{color:#1769aa}</style>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071b2e">
+<meta name="description" content="شهیدپورتال | پورتال جامع شهدا و ایثارگران">
+<title>شهیدپورتال | پورتال جامع شهدا</title>
+<link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Black.woff2") format("woff2");font-weight:900;font-display:swap}
+:root{--navy:#071b2e;--navy2:#0d3048;--gold:#d7b15b;--gold2:#f1d58a;--white:#fff;--ink:#102131;--red:#a82d2d;--green:#196d52}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;overflow:hidden}
+body{font-family:Vazirmatn,Tahoma,sans-serif;background:var(--navy);color:#fff}
+a{color:inherit;text-decoration:none}
+.intro{position:relative;isolation:isolate;width:100vw;height:100vh;min-height:620px;overflow:hidden;background:linear-gradient(180deg,#071b2e 0%,#0d3850 48%,#b6d5d4 100%)}
+.sky{position:absolute;inset:0;z-index:-8;background:
+radial-gradient(circle at 72% 19%,rgba(255,232,167,.85) 0 4%,rgba(255,232,167,.22) 11%,transparent 26%),
+linear-gradient(180deg,#06182a 0%,#0b2a41 35%,#5c9297 71%,#d9e0d3 100%)}
+.haze{position:absolute;left:-10%;right:-10%;bottom:18%;height:24%;z-index:-6;background:radial-gradient(ellipse at center,rgba(255,255,255,.58),transparent 69%);filter:blur(18px)}
+.mountain{position:absolute;bottom:24%;width:110%;left:-5%;z-index:-5;clip-path:polygon(0 100%,0 69%,9% 58%,17% 75%,28% 42%,38% 68%,49% 38%,61% 69%,72% 48%,82% 70%,92% 50%,100% 68%,100% 100%);height:38%;background:linear-gradient(180deg,rgba(31,62,70,.8),rgba(10,34,48,.96));opacity:.82}
+.mountain.back{bottom:30%;height:31%;opacity:.34;transform:scaleX(1.08)}
+.water{position:absolute;inset:auto 0 0;height:32%;z-index:-4;background:
+linear-gradient(180deg,rgba(10,61,75,.2),rgba(4,35,49,.88)),
+repeating-linear-gradient(178deg,rgba(255,255,255,.13) 0 1px,transparent 1px 13px)}
+.water:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 5%,rgba(255,236,180,.38),transparent 42%)}
+.horizon{position:absolute;left:0;right:0;bottom:31%;height:3px;background:rgba(255,255,255,.35);filter:blur(1px)}
+.ribbon{position:absolute;z-index:-2;width:76vw;max-width:980px;height:180px;top:11%;right:-11%;opacity:.62;transform:rotate(-8deg);filter:drop-shadow(0 12px 20px rgba(0,0,0,.14))}
+.ribbon.two{top:auto;right:auto;left:-15%;bottom:17%;transform:rotate(10deg) scale(.7);opacity:.25}
+.arch{position:absolute;z-index:-1;left:50%;bottom:22%;width:min(46vw,530px);height:min(46vw,530px);transform:translateX(-50%);opacity:.32;filter:drop-shadow(0 18px 30px rgba(0,0,0,.2))}
+.content{position:absolute;z-index:5;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:8vh 22px 10vh}
+.panel{width:min(700px,94vw);padding:34px 34px 30px;border:1px solid rgba(255,255,255,.25);background:linear-gradient(145deg,rgba(5,25,41,.52),rgba(9,43,57,.23));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:28px;box-shadow:0 28px 80px rgba(0,0,0,.25)}
+.mark{width:88px;height:88px;margin:0 auto 18px;border:1px solid rgba(215,177,91,.72);border-radius:24px;display:grid;place-items:center;background:rgba(7,27,46,.45);box-shadow:inset 0 0 0 7px rgba(215,177,91,.06),0 14px 34px rgba(0,0,0,.18)}
+.mark svg{width:58px;height:58px}
+h1{margin:0;font-size:clamp(34px,6vw,68px);line-height:1.1;font-weight:900;letter-spacing:-2px;text-shadow:0 4px 24px rgba(0,0,0,.25)}
+h2{margin:12px 0 0;font-size:clamp(18px,2.5vw,28px);font-weight:700;color:#f7e4ae}
+.rule{width:150px;height:1px;margin:23px auto 18px;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
+.tag{margin:0;color:rgba(255,255,255,.88);font-size:clamp(14px,1.8vw,19px);font-weight:400}
+.enter{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:28px;min-width:210px;padding:13px 26px;border:1px solid rgba(241,213,138,.72);border-radius:999px;background:linear-gradient(135deg,#e0bd68,#b88b35);color:#10202b;font-weight:900;font-size:16px;box-shadow:0 12px 28px rgba(0,0,0,.2);transition:.25s ease}
+.enter:hover{transform:translateY(-3px);box-shadow:0 17px 34px rgba(0,0,0,.28)}
+.enter span{font-size:22px;line-height:0}
+.bottom-note{position:absolute;z-index:5;bottom:22px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.4px;color:rgba(255,255,255,.65);white-space:nowrap}
+.petal{position:absolute;z-index:1;width:8px;height:15px;border-radius:80% 10% 80% 10%;background:#a92e32;opacity:.65;animation:drift 8s linear infinite}
+.p1{top:23%;left:21%;animation-delay:-2s}.p2{top:35%;right:17%;animation-delay:-5s}.p3{top:13%;left:42%;animation-delay:-7s}.p4{top:47%;left:13%;animation-delay:-4s}
+@keyframes drift{0%{transform:translate3d(0,-10px) rotate(12deg);opacity:0}15%{opacity:.65}50%{transform:translate3d(55px,100px) rotate(80deg)}100%{transform:translate3d(100px,230px) rotate(150deg);opacity:0}}
+@media(max-width:700px){
+.intro{min-height:560px}.panel{padding:26px 18px 24px;border-radius:22px}.mark{width:72px;height:72px;border-radius:20px}.mark svg{width:47px;height:47px}.arch{width:72vw;height:72vw;bottom:25%;opacity:.25}.ribbon{width:125vw;top:8%;right:-34%}.ribbon.two{width:115vw;left:-38%;bottom:18%}.content{padding:5vh 14px 9vh}.enter{width:100%;max-width:260px}.bottom-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.petal{animation:none}.enter{transition:none}}
+</style>
 </head>
-<body><main><h1>شهیدپورتال</h1><p>در حال انتقال به طرح جامع پروژه...</p><p><a href="tarhha/shahidportal-tarh.html">ورود به طرح جامع</a></p></main></body>
+<body>
+<main class="intro" aria-label="شهیدپورتال">
+<div class="sky"></div><div class="haze"></div>
+<div class="mountain back"></div><div class="mountain"></div>
+<div class="water"></div><div class="horizon"></div>
+<svg class="ribbon" viewBox="0 0 1000 220" aria-hidden="true"><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#196d52" stroke-width="42"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#fff" stroke-width="25"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#a82d2d" stroke-width="12"/></svg>
+<svg class="ribbon two" viewBox="0 0 1000 220" aria-hidden="true"><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#196d52" stroke-width="42"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#fff" stroke-width="25"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#a82d2d" stroke-width="12"/></svg>
+<svg class="arch" viewBox="0 0 600 600" aria-hidden="true">
+<path d="M92 548V254C92 152 174 72 276 72h48c102 0 184 80 184 182v294" fill="none" stroke="#e4c46f" stroke-width="18"/>
+<path d="M137 548V265c0-77 62-139 139-139h48c77 0 139 62 139 139v283" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3"/>
+<path d="M300 177c-31 37-65 73-65 111 0 40 29 70 65 70s65-30 65-70c0-38-34-74-65-111z" fill="none" stroke="#e4c46f" stroke-width="9"/>
+<path d="M300 207c-14 20-27 37-27 55 0 16 12 29 27 29s27-13 27-29c0-18-13-35-27-55z" fill="#e4c46f"/>
+<path d="M110 492h380M148 534h304" stroke="#e4c46f" stroke-width="7" stroke-linecap="round"/>
+</svg>
+<div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+<section class="content">
+<div class="panel">
+<div class="mark" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M40 7 63 20v27L40 60 17 47V20L40 7Z" fill="none" stroke="#e4c46f" stroke-width="3"/><path d="M40 18v26M29 31l11 7 11-7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+<h1>شهیدپورتال</h1>
+<h2>پورتال جامع شهدا</h2>
+<div class="rule"></div>
+<p class="tag">روایتی ماندگار از نام‌ها، زندگی‌ها، یادها و راهی که ادامه دارد</p>
+<a class="enter" href="tarhha/shahidportal-tarh.html" aria-label="ورود به پورتال"><span>←</span> ورود به پورتال</a>
+</div>
+</section>
+<div class="bottom-note">پورتال جامع شهدا و ایثارگران</div>
+</main>
+</body>
 </html>
