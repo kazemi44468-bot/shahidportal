@@ -7,7 +7,7 @@
 <meta name="description" content="شهیدپورتال | پورتال جامع شهدا">
 <title>شهیدپورتال | پورتال جامع شهدا</title>
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="assets/images/intro.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/images/introback.webp" type="image/webp" fetchpriority="high">
 <style>
 @font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
@@ -16,18 +16,54 @@
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b3f56}
 body{font-family:Vazirmatn,Tahoma,sans-serif}
 .scene{position:relative;width:100vw;height:100vh;min-height:520px;overflow:hidden;background:#0b3f56;isolation:isolate}
-.scene::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(3,32,44,.02),rgba(3,32,44,.04))}
+.scene::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(3,32,44,.015),rgba(3,32,44,.05))}
 .scene-image{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;object-fit:cover;object-position:center center;user-select:none;-webkit-user-drag:none}
-.enter-hotspot{position:absolute;z-index:5;left:50%;top:84.1%;transform:translate(-50%,-50%);width:14%;height:6.5%;min-width:185px;min-height:48px;border-radius:999px;outline:none}
-.enter-hotspot:focus-visible{box-shadow:0 0 0 3px rgba(255,255,255,.9),0 0 0 6px rgba(189,139,55,.9)}
-.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-@media(max-width:700px){.scene-image{object-position:center center}.enter-hotspot{top:84.2%;width:42%;height:8%;min-width:175px}}
+.identity{position:absolute;z-index:3;left:50%;top:39.5%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center;width:min(58vw,760px);pointer-events:none}
+.logo{display:block;width:clamp(120px,13vw,210px);height:auto;max-height:22vh;object-fit:contain;filter:drop-shadow(0 5px 12px rgba(0,0,0,.22))}
+.title{margin-top:clamp(7px,1vw,14px);font-size:clamp(25px,3.2vw,48px);line-height:1.15;font-weight:900;color:#fff;text-shadow:0 3px 14px rgba(0,35,48,.45);letter-spacing:-.04em}
+.subtitle{margin-top:clamp(5px,.65vw,9px);font-size:clamp(13px,1.35vw,21px);font-weight:700;color:#fff;text-shadow:0 2px 9px rgba(0,35,48,.42)}
+.tagline{margin-top:clamp(9px,.9vw,14px);font-size:clamp(11px,1vw,16px);font-weight:400;color:rgba(255,255,255,.96);text-shadow:0 2px 8px rgba(0,35,48,.42)}
+.ornament{width:min(22vw,240px);height:2px;margin-top:clamp(10px,1.1vw,17px);background:linear-gradient(90deg,transparent,#d6ad64 22%,#f1d89e 50%,#d6ad64 78%,transparent);opacity:.95}
+.enter{position:absolute;z-index:4;left:50%;top:84%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:190px;min-height:52px;padding:11px 27px;border:1px solid rgba(236,215,171,.65);border-radius:999px;background:rgba(5,62,82,.88);box-shadow:0 9px 28px rgba(0,31,43,.25),inset 0 1px 0 rgba(255,255,255,.12);color:#fff;text-decoration:none;font-size:clamp(13px,1.05vw,16px);font-weight:700;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);transition:transform .25s ease,background .25s ease,box-shadow .25s ease}
+.enter:hover{transform:translate(-50%,-52%);background:rgba(5,72,94,.95);box-shadow:0 12px 32px rgba(0,31,43,.32)}
+.enter:focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:4px}
+.enter-arrow{font-size:20px;line-height:1;transform:translateY(-1px)}
+@media(max-width:700px){
+.scene-image{object-position:center center}
+.identity{top:39%;width:82vw}
+.logo{width:clamp(105px,27vw,155px);max-height:18vh}
+.title{font-size:clamp(24px,7.2vw,34px)}
+.subtitle{font-size:clamp(12px,3.6vw,17px)}
+.tagline{font-size:clamp(10px,3vw,14px)}
+.ornament{width:38vw}
+.enter{top:84%;min-width:175px;min-height:49px;padding-inline:23px}
+}
+@media(max-height:650px) and (min-width:701px){
+.identity{top:37%}
+.enter{top:85%}
+}
+@media(prefers-reduced-motion:reduce){.enter{transition:none}.enter:hover{transform:translate(-50%,-50%)}}
 </style>
 </head>
 <body>
 <main class="scene" aria-label="شهیدپورتال | پورتال جامع شهدا">
-<img class="scene-image" src="assets/images/intro.webp" alt="شهیدپورتال، پورتال جامع شهدا" width="1600" height="900" fetchpriority="high" decoding="async">
-<a class="enter-hotspot" href="tarhha/shahidportal-tarh.html" aria-label="ورود به پورتال"><span class="sr-only">ورود به پورتال</span></a>
+<picture>
+  <source srcset="assets/images/introback.webp" type="image/webp">
+  <img class="scene-image" src="assets/images/introback.png" alt="" width="1672" height="940" fetchpriority="high" decoding="async">
+</picture>
+
+<section class="identity" aria-label="شهیدپورتال">
+  <img class="logo" src="assets/images/logo.png" alt="لوگوی شهیدپورتال" width="930" height="930" decoding="async">
+  <div class="title">شهیدپورتال</div>
+  <div class="subtitle">پورتال جامع شهدا</div>
+  <div class="tagline">یادشان راه ماست...</div>
+  <span class="ornament" aria-hidden="true"></span>
+</section>
+
+<a class="enter" href="tarhha/shahidportal-tarh.html">
+  <span>ورود به پورتال</span>
+  <span class="enter-arrow" aria-hidden="true">←</span>
+</a>
 </main>
 </body>
 </html>
