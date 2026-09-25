@@ -7,8 +7,6 @@
 <meta name="description" content="شهیدپورتال | پورتال جامع شهدا">
 <title>شهیدپورتال | پورتال جامع شهدا</title>
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-<link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="assets/images/favicon.svg">
 <link rel="preload" as="image" href="assets/images/introback.webp" type="image/webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/images/logo.webp" type="image/webp" fetchpriority="high">
 <style>
@@ -19,59 +17,64 @@
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b3f56}
 body{font-family:Vazirmatn,Tahoma,sans-serif}
 .scene{position:relative;width:100vw;height:100vh;min-height:520px;overflow:hidden;background:#0b3f56;isolation:isolate}
-.scene::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(3,32,44,.015),rgba(3,32,44,.05))}
-.scene-image{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;object-fit:cover;object-position:center center;user-select:none;-webkit-user-drag:none}
-.identity{position:absolute;z-index:3;left:50%;top:39%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center;width:min(88vw,780px);pointer-events:none}
-.logo{display:block;width:300px;height:auto;max-width:300px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(0,0,0,.24))}
-.title{margin-top:8px;font-size:clamp(29px,3.2vw,46px);line-height:1.2;font-weight:900;color:#fff4dc;text-shadow:0 3px 14px rgba(0,35,48,.48);letter-spacing:-.04em}
-.subtitle{margin-top:7px;font-size:clamp(14px,1.35vw,20px);font-weight:700;color:#f4ead8;text-shadow:0 2px 9px rgba(0,35,48,.46)}
-.tagline{margin-top:10px;font-size:clamp(11px,1vw,15px);font-weight:400;color:rgba(255,255,255,.95);text-shadow:0 2px 8px rgba(0,35,48,.45)}
-.ornament{width:min(22vw,240px);height:2px;margin-top:14px;background:linear-gradient(90deg,transparent,#d6ad64 22%,#f1d89e 50%,#d6ad64 78%,transparent);opacity:.95}
-.enter{position:absolute;z-index:4;left:50%;top:84%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:13px;min-width:218px;min-height:54px;padding:12px 30px 12px 26px;border:1px solid rgba(238,216,173,.78);border-radius:6px 18px 6px 18px;background:linear-gradient(180deg,rgba(9,72,93,.94),rgba(5,54,73,.96));box-shadow:0 10px 28px rgba(0,29,40,.34),inset 0 1px 0 rgba(255,255,255,.14);color:#fff7e8;text-decoration:none;font-size:clamp(13px,1.05vw,16px);font-weight:700;letter-spacing:-.01em;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);transition:transform .25s ease,background .25s ease,box-shadow .25s ease,border-color .25s ease}
-.enter::before{content:"";position:absolute;inset:5px;border:1px solid rgba(214,173,100,.28);border-radius:3px 13px 3px 13px;pointer-events:none}
-.enter::after{content:"✦";position:absolute;right:13px;top:50%;transform:translateY(-51%);font-size:11px;color:#e6c98f;opacity:.95}
-.enter:hover{transform:translate(-50%,-53%);background:linear-gradient(180deg,rgba(10,82,105,.97),rgba(5,62,82,.98));border-color:rgba(246,226,188,.95);box-shadow:0 13px 34px rgba(0,29,40,.4),inset 0 1px 0 rgba(255,255,255,.16)}
-.enter:focus-visible{outline:3px solid rgba(255,255,255,.9);outline-offset:4px}
-.enter-arrow{font-size:20px;line-height:1;transform:translateY(-1px)}
-@media(max-width:700px){
-.scene-image{object-position:center center}
-.identity{top:38%;width:88vw}
-.logo{width:180px;max-width:180px}
-.title{margin-top:6px;font-size:clamp(25px,7.2vw,34px)}
-.subtitle{font-size:clamp(12px,3.6vw,17px)}
-.tagline{font-size:clamp(10px,3vw,14px)}
-.ornament{width:38vw}
-.enter{top:84%;min-width:188px;min-height:50px;padding-inline:26px 30px;border-radius:5px 15px 5px 15px}
-.enter::before{inset:4px;border-radius:3px 11px 3px 11px}
-.enter::after{right:11px}
+.scene-image{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;object-fit:cover;object-position:center center}
+.scene::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(3,32,44,.01),rgba(3,32,44,.08))}
+.identity{position:absolute;z-index:3;left:50%;top:35%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center;width:min(88vw,780px);pointer-events:none}
+.logo{display:block;width:270px;max-width:270px;height:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.24))}
+.title{margin-top:6px;font-size:clamp(29px,3.2vw,46px);line-height:1.2;font-weight:900;color:#fff4dc;text-shadow:0 3px 14px rgba(0,35,48,.48);letter-spacing:-.04em}
+.subtitle{margin-top:6px;font-size:clamp(14px,1.35vw,20px);font-weight:700;color:#f4ead8;text-shadow:0 2px 9px rgba(0,35,48,.46)}
+.tagline{margin-top:8px;font-size:clamp(11px,1vw,15px);color:rgba(255,255,255,.95);text-shadow:0 2px 8px rgba(0,35,48,.45)}
+.ornament{width:min(22vw,240px);height:2px;margin-top:12px;background:linear-gradient(90deg,transparent,#d6ad64 22%,#f1d89e 50%,#d6ad64 78%,transparent)}
+.gateways{position:absolute;z-index:4;left:50%;bottom:4.5%;transform:translateX(-50%);width:min(94vw,1120px);display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.gateway{position:relative;min-height:49px;padding:8px 11px 7px;border:1px solid rgba(239,218,177,.55);border-radius:5px 13px 5px 13px;background:rgba(6,57,76,.73);box-shadow:0 7px 20px rgba(0,24,35,.25),inset 0 1px rgba(255,255,255,.1);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff8ea;text-decoration:none;text-align:center;transition:.22s ease}
+.gateway strong{display:block;font-size:13px;font-weight:700;line-height:1.35}
+.gateway small{display:block;margin-top:2px;font-size:9px;color:#e7d5ae;opacity:.9}
+.gateway:hover{transform:translateY(-3px);background:rgba(8,72,94,.88);border-color:rgba(246,226,188,.9);box-shadow:0 11px 26px rgba(0,24,35,.35)}
+.gateway.support{border-color:rgba(246,226,188,.82);background:linear-gradient(135deg,rgba(9,73,91,.88),rgba(86,68,38,.5))}
+.gateway.support strong{color:#fff1ca}
+.about{position:absolute;z-index:4;top:4%;right:4%;max-width:330px;padding:13px 16px;border-right:2px solid #d6ad64;border-radius:4px 13px 4px 13px;background:rgba(5,45,61,.58);color:#fff8ea;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 8px 24px rgba(0,25,35,.18)}
+.about b{display:block;font-size:13px;margin-bottom:4px;color:#f1d89e}
+.about span{display:block;font-size:10px;line-height:1.9;color:rgba(255,255,255,.9)}
+@media(max-width:850px){
+.identity{top:29%}.logo{width:190px;max-width:190px}
+.about{top:3%;right:3%;left:3%;max-width:none;padding:9px 12px}.about span{font-size:9px;line-height:1.7}
+.gateways{bottom:2.5%;grid-template-columns:repeat(3,1fr);gap:6px}.gateway{min-height:43px;padding:6px 7px}.gateway strong{font-size:11px}.gateway small{display:none}
 }
-@media(max-height:650px) and (min-width:701px){
-.identity{top:36%}
-.enter{top:85%}
+@media(max-width:560px){
+.identity{top:32%}.logo{width:165px;max-width:165px}.title{font-size:28px}.subtitle{font-size:13px}.tagline{font-size:10px}.ornament{width:35vw}
+.about{top:3%;right:4%;left:4%;text-align:center;border-right:0;border-bottom:1px solid #d6ad64;border-radius:5px 13px 5px 13px}
+.gateways{bottom:2%;width:94vw;grid-template-columns:repeat(2,1fr);gap:5px}.gateway{min-height:38px;border-radius:4px 10px 4px 10px}.gateway strong{font-size:10px}
 }
-@media(prefers-reduced-motion:reduce){.enter{transition:none}.enter:hover{transform:translate(-50%,-50%)}}
+@media(max-height:650px) and (min-width:561px){.identity{top:27%}.about{top:2%;padding:8px 12px}.about span{display:none}.gateways{bottom:2%}}
+@media(prefers-reduced-motion:reduce){.gateway{transition:none}}
 </style>
 </head>
 <body>
-<main class="scene" aria-label="شهیدپورتال | پورتال جامع شهدا">
-<picture>
-  <source srcset="assets/images/introback.webp" type="image/webp">
-  <img class="scene-image" src="assets/images/introback.png" alt="" width="1672" height="940" fetchpriority="high" decoding="async">
-</picture>
-<section class="identity" aria-label="شهیدپورتال">
-  <picture>
-    <source srcset="assets/images/logo.webp" type="image/webp">
-    <img class="logo" src="assets/images/logo.png" alt="لوگوی شهیدپورتال" width="300" height="261" decoding="async">
-  </picture>
-  <div class="title">شهیدپورتال</div>
-  <div class="subtitle">پورتال جامع شهدا</div>
-  <div class="tagline">یادشان راه ماست...</div>
-  <span class="ornament" aria-hidden="true"></span>
+<main class="scene">
+<picture><source srcset="assets/images/introback.webp" type="image/webp"><img class="scene-image" src="assets/images/introback.png" alt="" width="1672" height="940" fetchpriority="high" decoding="async"></picture>
+<section class="about" aria-label="معرفی شهیدپورتال">
+<b>شهیدپورتال؛ معماری مادر اکوسیستم شهدا</b>
+<span>درگاهی یکپارچه برای دسترسی به خدمات، دانش، روایت، میراث، خانواده، مشارکت، فرهنگ و دیگر بخش‌های زیست‌بوم شهدا؛ مستقل در اجرا و یکپارچه در معماری.</span>
 </section>
-<a class="enter" href="tarhha/shahidportal-tarh.html">
-  <span>ورود به پورتال</span>
-  <span class="enter-arrow" aria-hidden="true">←</span>
-</a>
+<section class="identity" aria-label="شهیدپورتال">
+<picture><source srcset="assets/images/logo.webp" type="image/webp"><img class="logo" src="assets/images/logo.png" alt="لوگوی شهیدپورتال" width="270" height="235" decoding="async"></picture>
+<div class="title">شهیدپورتال</div><div class="subtitle">پورتال جامع شهدا</div><div class="tagline">یادشان راه ماست...</div><span class="ornament" aria-hidden="true"></span>
+</section>
+<nav class="gateways" aria-label="درگاه‌های اصلی شهیدپورتال">
+<a class="gateway" href="pages/services.html"><strong>خدمات</strong><small>میز خدمت و خدمات عمومی</small></a>
+<a class="gateway" href="pages/health.html"><strong>سلامت و توانبخشی</strong><small>سلامت، درمان و توانمندسازی</small></a>
+<a class="gateway" href="pages/family.html"><strong>خانواده و زندگی</strong><small>خانواده و زیست اجتماعی</small></a>
+<a class="gateway" href="pages/economy.html"><strong>اشتغال و اقتصاد</strong><small>کار، تولید و فرصت‌های اقتصادی</small></a>
+<a class="gateway" href="pages/education.html"><strong>آموزش</strong><small>آموزش و توسعه مهارت</small></a>
+<a class="gateway" href="pages/encyclopedia.html"><strong>دانشنامه شهدا</strong><small>دانش و اطلاعات شهدا</small></a>
+<a class="gateway" href="pages/narrative.html"><strong>روایت</strong><small>خاطرات، اسناد و روایت‌ها</small></a>
+<a class="gateway" href="pages/treasury.html"><strong>گنجینه</strong><small>آثار، اسناد و یادگارها</small></a>
+<a class="gateway" href="pages/culture.html"><strong>فرهنگ و هنر</strong><small>هنر، تولیدات و برنامه‌ها</small></a>
+<a class="gateway" href="pages/heritage.html"><strong>میراث و مکان</strong><small>مکان‌ها و میراث مرتبط</small></a>
+<a class="gateway" href="pages/community.html"><strong>جامعه و مشارکت</strong><small>شبکه مشارکت و همراهی</small></a>
+<a class="gateway" href="pages/media.html"><strong>رسانه و رویداد</strong><small>رسانه، خبر و رویدادها</small></a>
+<a class="gateway support" href="pages/support.html"><strong>پشتیبانی و ارتباط</strong><small>راهنمایی، ارتباط و پیگیری</small></a>
+</nav>
 </main>
 </body>
 </html>
