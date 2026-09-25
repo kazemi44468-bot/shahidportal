@@ -32,31 +32,27 @@ body{font-family:Vazirmatn,Tahoma,sans-serif}
 .gateway:hover{transform:translateY(-3px);background:rgba(8,72,94,.88);border-color:rgba(246,226,188,.9);box-shadow:0 11px 26px rgba(0,24,35,.35)}
 .gateway.support{border-color:rgba(246,226,188,.82);background:linear-gradient(135deg,rgba(9,73,91,.88),rgba(86,68,38,.5))}
 .gateway.support strong{color:#fff1ca}
-.about{position:absolute;z-index:4;top:4%;right:4%;max-width:330px;padding:13px 16px;border-right:2px solid #d6ad64;border-radius:4px 13px 4px 13px;background:rgba(5,45,61,.58);color:#fff8ea;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);box-shadow:0 8px 24px rgba(0,25,35,.18)}
-.portal-entry{position:absolute;z-index:5;left:50%;top:63%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:16px;width:220px;height:47px;padding:0 24px;border:1px solid rgba(241,216,158,.9);border-radius:5px 16px 5px 16px;background:linear-gradient(180deg,rgba(10,72,93,.96),rgba(5,51,69,.98));box-shadow:0 12px 30px rgba(0,28,39,.34),inset 0 1px rgba(255,255,255,.14);color:#fff7e8;text-decoration:none;font-size:14px;font-weight:700;transition:.22s ease}.portal-entry:before{content:"";position:absolute;inset:4px;border:1px solid rgba(214,173,100,.3);border-radius:3px 12px 3px 12px}.portal-entry b{font-size:18px;color:#e6c98f;font-weight:400}.portal-entry:hover{transform:translate(-50%,-53%);box-shadow:0 15px 35px rgba(0,28,39,.42);border-color:#f7e4b8}
-.about b{display:block;font-size:13px;margin-bottom:4px;color:#f1d89e}
-.about span{display:block;font-size:10px;line-height:1.9;color:rgba(255,255,255,.9)}
+.portal-entry{position:absolute;z-index:5;left:50%;top:63%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:16px;width:220px;height:47px;padding:0 24px;border:1px solid rgba(241,216,158,.9);border-radius:5px 16px 5px 16px;background:linear-gradient(180deg,rgba(10,72,93,.96),rgba(5,51,69,.98));box-shadow:0 12px 30px rgba(0,28,39,.34),inset 0 1px rgba(255,255,255,.14);color:#fff7e8;text-decoration:none;font-size:14px;font-weight:700;transition:.22s ease}
+.portal-entry:before{content:"";position:absolute;inset:4px;border:1px solid rgba(214,173,100,.3);border-radius:3px 12px 3px 12px}
+.portal-entry b{font-size:18px;color:#e6c98f;font-weight:400}
+.portal-entry:hover{transform:translate(-50%,-53%);box-shadow:0 15px 35px rgba(0,28,39,.42);border-color:#f7e4b8}
 @media(max-width:850px){
 .identity{top:29%}.logo{width:190px;max-width:190px}
-.about{top:3%;right:3%;left:3%;max-width:none;padding:9px 12px}.about span{font-size:9px;line-height:1.7}
-.identity{top:29%}.logo{width:190px;max-width:190px}.portal-entry{top:63%;width:200px;height:44px;font-size:12px}.gateways{bottom:1.8%;grid-template-columns:repeat(4,1fr);gap:5px}.gateway{min-height:34px;padding:5px}.gateway strong{font-size:9px}.gateway small{display:none}
+.portal-entry{top:63%;width:200px;height:44px;font-size:12px}
+.gateways{bottom:1.8%;grid-template-columns:repeat(4,1fr);gap:5px}.gateway{min-height:34px;padding:5px}.gateway strong{font-size:9px}.gateway small{display:none}
 }
 @media(max-width:560px){
 .identity{top:28%}.logo{width:150px;max-width:165px}.title{font-size:28px}.subtitle{font-size:13px}.tagline{font-size:10px}.ornament{width:35vw}
-.about{top:3%;right:4%;left:4%;text-align:center;border-right:0;border-bottom:1px solid #d6ad64;border-radius:5px 13px 5px 13px}
-.portal-entry{top:59%;width:184px;height:42px}.gateways{bottom:1.5%;width:94vw;grid-template-columns:repeat(3,1fr);gap:4px}.gateway{min-height:32px;border-radius:4px 10px 4px 10px}.gateway strong{font-size:10px}
+.portal-entry{top:59%;width:184px;height:42px}
+.gateways{bottom:1.5%;width:94vw;grid-template-columns:repeat(3,1fr);gap:4px}.gateway{min-height:32px;border-radius:4px 10px 4px 10px}.gateway strong{font-size:10px}
 }
-@media(max-height:650px) and (min-width:561px){.identity{top:27%}.about{top:2%;padding:8px 12px}.about span{display:none}.gateways{bottom:2%}}
+@media(max-height:650px) and (min-width:561px){.identity{top:27%}.gateways{bottom:2%}}
 @media(prefers-reduced-motion:reduce){.gateway{transition:none}}
 </style>
 </head>
 <body>
 <main class="scene">
 <picture><source srcset="assets/images/introback.webp" type="image/webp"><img class="scene-image" src="assets/images/introback.png" alt="" width="1672" height="940" fetchpriority="high" decoding="async"></picture>
-<section class="about" aria-label="معرفی شهیدپورتال">
-<b>شهیدپورتال؛ معماری مادر اکوسیستم شهدا</b>
-<span>درگاهی یکپارچه برای دسترسی به خدمات، دانش، روایت، میراث، خانواده، مشارکت، فرهنگ و دیگر بخش‌های زیست‌بوم شهدا؛ مستقل در اجرا و یکپارچه در معماری.</span>
-</section>
 <section class="identity" aria-label="شهیدپورتال">
 <picture><source srcset="assets/images/logo.webp" type="image/webp"><img class="logo" src="assets/images/logo.png" alt="لوگوی شهیدپورتال" width="270" height="235" decoding="async"></picture>
 <div class="title">شهیدپورتال</div><div class="subtitle">پورتال جامع شهدا</div><div class="tagline">یادشان راه ماست...</div><span class="ornament" aria-hidden="true"></span>
@@ -75,7 +71,7 @@ body{font-family:Vazirmatn,Tahoma,sans-serif}
 <a class="gateway" href="pages/heritage.html"><strong>میراث و مکان</strong><small>مکان‌ها و میراث مرتبط</small></a>
 <a class="gateway" href="pages/community.html"><strong>جامعه و مشارکت</strong><small>شبکه مشارکت و همراهی</small></a>
 <a class="gateway" href="pages/media.html"><strong>رسانه و رویداد</strong><small>رسانه، خبر و رویدادها</small></a>
-<a class="gateway support" href="pages/support.html"><strong>پشتیبانی و ارتباط</strong><small>راهنمایی، ارتباط و پیگیری</small></a>
+<a class="gateway support" href="pages/support.html"><strong>پشتیبانی و ارتباط</strong><small>ارتباط و پیگیری</small></a>
 </nav>
 </main>
 </body>
