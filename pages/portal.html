@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0b3f56">
 <meta name="description" content="درباره شهیدپورتال | پورتال جامع شهدا">
 <title>درباره شهیدپورتال | پورتال جامع شهدا</title>
-<link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/images/logo.png" type="image/png">
 <style>
 @font-face{font-family:Vazirmatn;src:url("../assets/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:Vazirmatn;src:url("../assets/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
@@ -17,7 +17,7 @@ body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;color:#193b49;background:#
 .shell{width:min(1180px,calc(100% - 32px));margin:auto}
 .header{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#0b3f56;font-weight:900}.brand img{width:48px;height:48px;object-fit:contain}
-.hero-logo{position:relative;z-index:2;display:block;width:118px;height:118px;object-fit:contain;margin:0 auto 18px;filter:drop-shadow(0 8px 16px rgba(11,63,86,.18))}
+.hero-logo-link{position:relative;display:block;width:118px;height:118px;margin:0 auto 18px;text-decoration:none}.hero-logo-link:hover{filter:drop-shadow(0 10px 20px rgba(11,63,86,.24));transform:translateY(-2px)}.hero-logo{position:relative;z-index:2;display:block;width:118px;height:118px;object-fit:contain;margin:0;filter:drop-shadow(0 8px 16px rgba(11,63,86,.18))}
 .hero-logo-ring{position:absolute;top:32px;right:50%;transform:translateX(50%);width:158px;height:158px;border:1px solid rgba(214,173,100,.38);border-radius:50%;box-shadow:0 0 0 9px rgba(214,173,100,.055),0 0 0 18px rgba(11,63,86,.035)}
 .hero-content{position:relative;z-index:2;text-align:center}.hero .eyebrow{text-align:center}.hero .lead{margin-left:auto;margin-right:auto}.hero .rule{margin:27px auto 0}
 .link-card{display:block;text-decoration:none;color:inherit;transition:.2s ease}.link-card:hover{transform:translateY(-3px);border-color:rgba(214,173,100,.48);box-shadow:0 15px 32px rgba(20,51,65,.09)}.link-card h3{color:#0b3f56}
@@ -60,7 +60,7 @@ table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.72);font-
 <section class="hero">
 <div class="hero-content">
 <div class="hero-logo-ring" aria-hidden="true"></div>
-<picture><source srcset="../assets/images/logo.webp" type="image/webp"><img class="hero-logo" src="../assets/images/logo.png" alt="لوگوی شهیدپورتال"></picture>
+<a class="hero-logo-link" href="../index.html" aria-label="صفحه اصلی شهیدپورتال"><picture><source srcset="../assets/images/logo.webp" type="image/webp"><img class="hero-logo" src="../assets/images/logo.png" alt="لوگوی شهیدپورتال"></picture></a>
 <div class="eyebrow">درباره شهیدپورتال</div>
 <h1>شهیدپورتال؛ پورتال جامع شهدا</h1>
 <p class="lead">شهیدپورتال یک مجموعه جامع و توسعه‌پذیر برای گردآوری، سازمان‌دهی، حفظ و ارائه خدمات، دانش، اطلاعات، روایت‌ها، میراث، فرهنگ، پژوهش و ظرفیت‌های اجتماعی مرتبط با شهداست. این مجموعه با نگاه ملی شکل گرفته تا میان خانواده‌ها، پژوهشگران، نهادها، مراکز، خیرین، داوطلبان، فعالان فرهنگی و دیگر ظرفیت‌های این حوزه ارتباطی منسجم و ماندگار ایجاد کند.</p>
@@ -118,18 +118,18 @@ table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.72);font-
 <section class="section" id="scope">
 <div class="section-head"><h2>دوازده قلمرو اجرایی شهیدپورتال</h2><p>حوزه‌هایی که مجموعه در آن‌ها خدمات، محتوا، داده و ظرفیت ایجاد می‌کند</p></div>
 <div class="grid4">
-<a class="card link-card" href="services.html"><div class="number">۰۱</div><h3>خدمات</h3><p>میز خدمت، درخواست‌ها، پیگیری امور، معرفی خدمات و مراکز ارائه‌دهنده.</p></div></a>
-<a class="card link-card" href="health.html"><div class="number">۰۲</div><h3>سلامت و توانبخشی</h3><p>سلامت، درمان، توانبخشی، مراکز تخصصی و برنامه‌های توانمندسازی.</p></div></a>
-<a class="card link-card" href="family.html"><div class="number">۰۳</div><h3>خانواده و زندگی</h3><p>خانواده، حمایت اجتماعی، کیفیت زندگی و خدمات و برنامه‌های مرتبط.</p></div></a>
-<a class="card link-card" href="economy.html"><div class="number">۰۴</div><h3>اشتغال و اقتصاد</h3><p>اشتغال، مهارت، کارآفرینی، تولید، فرصت‌های اقتصادی و شبکه‌های همکاری.</p></div></a>
-<a class="card link-card" href="education.html"><div class="number">۰۵</div><h3>آموزش</h3><p>آموزش، مهارت‌آموزی، فرصت‌های علمی و برنامه‌های رشد و یادگیری.</p></div></a>
-<a class="card link-card" href="encyclopedia.html"><div class="number">۰۶</div><h3>دانشنامه شهدا</h3><p>اطلاعات ساختاریافته، زندگی‌نامه، آثار، اسناد و ارتباطات مربوط به هر شهید.</p></div></a>
-<a class="card link-card" href="narrative.html"><div class="number">۰۷</div><h3>روایت</h3><p>خاطرات، گفت‌وگوها، روایت خانواده و همرزمان و محتوای مستند تاریخی.</p></div></a>
-<a class="card link-card" href="treasury.html"><div class="number">۰۸</div><h3>گنجینه</h3><p>اسناد، تصاویر، فیلم، صوت، نامه‌ها، وصیت‌نامه‌ها، آثار و یادگارها.</p></div></a>
-<a class="card link-card" href="culture.html"><div class="number">۰۹</div><h3>فرهنگ و هنر</h3><p>تولیدات فرهنگی، هنری، ادبی و برنامه‌های مرتبط با فرهنگ ایثار و شهادت.</p></div></a>
-<a class="card link-card" href="heritage.html"><div class="number">۱۰</div><h3>میراث و مکان</h3><p>گلزارها، مزارها، یادمان‌ها، اماکن مرتبط، میراث مادی و معنوی و اطلس ملی.</p></div></a>
-<a class="card link-card" href="community.html"><div class="number">۱۱</div><h3>جامعه و مشارکت</h3><p>خیرین، داوطلبان، خادمان، تشکل‌ها، پروژه‌های مردمی و مشارکت اجتماعی.</p></div></a>
-<a class="card link-card" href="media.html"><div class="number">۱۲</div><h3>رسانه و رویداد</h3><p>اخبار، رسانه، رویدادها، مناسبت‌ها، برنامه‌ها و اطلاع‌رسانی مجموعه.</p></div></a>
+<a class="card link-card" href="services.html"><div class="number">۰۱</div><h3>خدمات</h3><p>میز خدمت، درخواست‌ها، پیگیری امور، معرفی خدمات و مراکز ارائه‌دهنده.</p></a>
+<a class="card link-card" href="health.html"><div class="number">۰۲</div><h3>سلامت و توانبخشی</h3><p>سلامت، درمان، توانبخشی، مراکز تخصصی و برنامه‌های توانمندسازی.</p></a>
+<a class="card link-card" href="family.html"><div class="number">۰۳</div><h3>خانواده و زندگی</h3><p>خانواده، حمایت اجتماعی، کیفیت زندگی و خدمات و برنامه‌های مرتبط.</p></a>
+<a class="card link-card" href="economy.html"><div class="number">۰۴</div><h3>اشتغال و اقتصاد</h3><p>اشتغال، مهارت، کارآفرینی، تولید، فرصت‌های اقتصادی و شبکه‌های همکاری.</p></a>
+<a class="card link-card" href="education.html"><div class="number">۰۵</div><h3>آموزش</h3><p>آموزش، مهارت‌آموزی، فرصت‌های علمی و برنامه‌های رشد و یادگیری.</p></a>
+<a class="card link-card" href="encyclopedia.html"><div class="number">۰۶</div><h3>دانشنامه شهدا</h3><p>اطلاعات ساختاریافته، زندگی‌نامه، آثار، اسناد و ارتباطات مربوط به هر شهید.</p></a>
+<a class="card link-card" href="narrative.html"><div class="number">۰۷</div><h3>روایت</h3><p>خاطرات، گفت‌وگوها، روایت خانواده و همرزمان و محتوای مستند تاریخی.</p></a>
+<a class="card link-card" href="treasury.html"><div class="number">۰۸</div><h3>گنجینه</h3><p>اسناد، تصاویر، فیلم، صوت، نامه‌ها، وصیت‌نامه‌ها، آثار و یادگارها.</p></a>
+<a class="card link-card" href="culture.html"><div class="number">۰۹</div><h3>فرهنگ و هنر</h3><p>تولیدات فرهنگی، هنری، ادبی و برنامه‌های مرتبط با فرهنگ ایثار و شهادت.</p></a>
+<a class="card link-card" href="heritage.html"><div class="number">۱۰</div><h3>میراث و مکان</h3><p>گلزارها، مزارها، یادمان‌ها، اماکن مرتبط، میراث مادی و معنوی و اطلس ملی.</p></a>
+<a class="card link-card" href="community.html"><div class="number">۱۱</div><h3>جامعه و مشارکت</h3><p>خیرین، داوطلبان، خادمان، تشکل‌ها، پروژه‌های مردمی و مشارکت اجتماعی.</p></a>
+<a class="card link-card" href="media.html"><div class="number">۱۲</div><h3>رسانه و رویداد</h3><p>اخبار، رسانه، رویدادها، مناسبت‌ها، برنامه‌ها و اطلاع‌رسانی مجموعه.</p></a>
 </div>
 </section>
 
