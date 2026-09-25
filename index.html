@@ -3,80 +3,106 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#071b2e">
-<meta name="description" content="شهیدپورتال | پورتال جامع شهدا و ایثارگران">
+<meta name="theme-color" content="#dcecf0">
+<meta name="description" content="شهیدپورتال | پورتال جامع شهدا">
 <title>شهیدپورتال | پورتال جامع شهدا</title>
 <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
 <style>
 @font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Regular.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:Vazirmatn;src:url("assets/fonts/Vazirmatn-Black.woff2") format("woff2");font-weight:900;font-display:swap}
-:root{--navy:#071b2e;--navy2:#0d3048;--gold:#d7b15b;--gold2:#f1d58a;--white:#fff;--ink:#102131;--red:#a82d2d;--green:#196d52}
+:root{--navy:#07354a;--deep:#052d42;--gold:#bd8b37;--gold2:#e7c979;--green:#15935b;--red:#c92b31}
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;min-height:100%;overflow:hidden}
-body{font-family:Vazirmatn,Tahoma,sans-serif;background:var(--navy);color:#fff}
-a{color:inherit;text-decoration:none}
-.intro{position:relative;isolation:isolate;width:100vw;height:100vh;min-height:620px;overflow:hidden;background:linear-gradient(180deg,#071b2e 0%,#0d3850 48%,#b6d5d4 100%)}
-.sky{position:absolute;inset:0;z-index:-8;background:
-radial-gradient(circle at 72% 19%,rgba(255,232,167,.85) 0 4%,rgba(255,232,167,.22) 11%,transparent 26%),
-linear-gradient(180deg,#06182a 0%,#0b2a41 35%,#5c9297 71%,#d9e0d3 100%)}
-.haze{position:absolute;left:-10%;right:-10%;bottom:18%;height:24%;z-index:-6;background:radial-gradient(ellipse at center,rgba(255,255,255,.58),transparent 69%);filter:blur(18px)}
-.mountain{position:absolute;bottom:24%;width:110%;left:-5%;z-index:-5;clip-path:polygon(0 100%,0 69%,9% 58%,17% 75%,28% 42%,38% 68%,49% 38%,61% 69%,72% 48%,82% 70%,92% 50%,100% 68%,100% 100%);height:38%;background:linear-gradient(180deg,rgba(31,62,70,.8),rgba(10,34,48,.96));opacity:.82}
-.mountain.back{bottom:30%;height:31%;opacity:.34;transform:scaleX(1.08)}
-.water{position:absolute;inset:auto 0 0;height:32%;z-index:-4;background:
-linear-gradient(180deg,rgba(10,61,75,.2),rgba(4,35,49,.88)),
-repeating-linear-gradient(178deg,rgba(255,255,255,.13) 0 1px,transparent 1px 13px)}
-.water:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 5%,rgba(255,236,180,.38),transparent 42%)}
-.horizon{position:absolute;left:0;right:0;bottom:31%;height:3px;background:rgba(255,255,255,.35);filter:blur(1px)}
-.ribbon{position:absolute;z-index:-2;width:76vw;max-width:980px;height:180px;top:11%;right:-11%;opacity:.62;transform:rotate(-8deg);filter:drop-shadow(0 12px 20px rgba(0,0,0,.14))}
-.ribbon.two{top:auto;right:auto;left:-15%;bottom:17%;transform:rotate(10deg) scale(.7);opacity:.25}
-.arch{position:absolute;z-index:-1;left:50%;bottom:22%;width:min(46vw,530px);height:min(46vw,530px);transform:translateX(-50%);opacity:.32;filter:drop-shadow(0 18px 30px rgba(0,0,0,.2))}
-.content{position:absolute;z-index:5;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:8vh 22px 10vh}
-.panel{width:min(700px,94vw);padding:34px 34px 30px;border:1px solid rgba(255,255,255,.25);background:linear-gradient(145deg,rgba(5,25,41,.52),rgba(9,43,57,.23));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:28px;box-shadow:0 28px 80px rgba(0,0,0,.25)}
-.mark{width:88px;height:88px;margin:0 auto 18px;border:1px solid rgba(215,177,91,.72);border-radius:24px;display:grid;place-items:center;background:rgba(7,27,46,.45);box-shadow:inset 0 0 0 7px rgba(215,177,91,.06),0 14px 34px rgba(0,0,0,.18)}
-.mark svg{width:58px;height:58px}
-h1{margin:0;font-size:clamp(34px,6vw,68px);line-height:1.1;font-weight:900;letter-spacing:-2px;text-shadow:0 4px 24px rgba(0,0,0,.25)}
-h2{margin:12px 0 0;font-size:clamp(18px,2.5vw,28px);font-weight:700;color:#f7e4ae}
-.rule{width:150px;height:1px;margin:23px auto 18px;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
-.tag{margin:0;color:rgba(255,255,255,.88);font-size:clamp(14px,1.8vw,19px);font-weight:400}
-.enter{display:inline-flex;align-items:center;justify-content:center;gap:12px;margin-top:28px;min-width:210px;padding:13px 26px;border:1px solid rgba(241,213,138,.72);border-radius:999px;background:linear-gradient(135deg,#e0bd68,#b88b35);color:#10202b;font-weight:900;font-size:16px;box-shadow:0 12px 28px rgba(0,0,0,.2);transition:.25s ease}
-.enter:hover{transform:translateY(-3px);box-shadow:0 17px 34px rgba(0,0,0,.28)}
-.enter span{font-size:22px;line-height:0}
-.bottom-note{position:absolute;z-index:5;bottom:22px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.4px;color:rgba(255,255,255,.65);white-space:nowrap}
-.petal{position:absolute;z-index:1;width:8px;height:15px;border-radius:80% 10% 80% 10%;background:#a92e32;opacity:.65;animation:drift 8s linear infinite}
-.p1{top:23%;left:21%;animation-delay:-2s}.p2{top:35%;right:17%;animation-delay:-5s}.p3{top:13%;left:42%;animation-delay:-7s}.p4{top:47%;left:13%;animation-delay:-4s}
-@keyframes drift{0%{transform:translate3d(0,-10px) rotate(12deg);opacity:0}15%{opacity:.65}50%{transform:translate3d(55px,100px) rotate(80deg)}100%{transform:translate3d(100px,230px) rotate(150deg);opacity:0}}
-@media(max-width:700px){
-.intro{min-height:560px}.panel{padding:26px 18px 24px;border-radius:22px}.mark{width:72px;height:72px;border-radius:20px}.mark svg{width:47px;height:47px}.arch{width:72vw;height:72vw;bottom:25%;opacity:.25}.ribbon{width:125vw;top:8%;right:-34%}.ribbon.two{width:115vw;left:-38%;bottom:18%}.content{padding:5vh 14px 9vh}.enter{width:100%;max-width:260px}.bottom-note{font-size:10px}}
-@media(prefers-reduced-motion:reduce){.petal{animation:none}.enter{transition:none}}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Vazirmatn,Tahoma,sans-serif;background:#dbecef;color:var(--navy)}
+a{text-decoration:none;color:inherit}
+.scene{position:relative;width:100vw;height:100vh;min-height:620px;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#83bad0 0%,#d9e9eb 48%,#e8eee9 62%,#bdd6d6 100%)}
+.sky{position:absolute;inset:0;z-index:-20;background:
+radial-gradient(circle at 73% 34%,rgba(255,248,220,.98) 0 4%,rgba(255,247,216,.65) 9%,rgba(255,247,216,.18) 19%,transparent 31%),
+radial-gradient(ellipse at 49% 7%,rgba(255,255,255,.55),transparent 29%),
+linear-gradient(180deg,#4d94b0 0%,#b9d7e0 40%,#edf2ed 62%,#d7e1dc 100%)}
+.clouds{position:absolute;inset:0;z-index:-18;opacity:.68;background:
+radial-gradient(ellipse at 16% 12%,rgba(255,255,255,.9) 0 4%,transparent 12%),
+radial-gradient(ellipse at 39% 18%,rgba(255,255,255,.72) 0 5%,transparent 14%),
+radial-gradient(ellipse at 77% 10%,rgba(255,255,255,.85) 0 5%,transparent 15%),
+radial-gradient(ellipse at 61% 30%,rgba(255,255,255,.42) 0 4%,transparent 12%)}
+.mist{position:absolute;left:-5%;right:-5%;top:42%;height:30%;z-index:-10;background:radial-gradient(ellipse at center,rgba(255,255,255,.82),transparent 69%);filter:blur(15px)}
+.mountains{position:absolute;left:-5%;width:110%;bottom:27%;height:34%;z-index:-8}
+.mountains:before,.mountains:after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,transparent 0 7%,#7ea3ad 7.2% 8%,transparent 8.2% 13%,#9bb9c0 13.2% 14%,transparent 14.2% 21%,#7698a4 21.2% 22%,transparent 22.2% 29%,#a9c3c8 29.2% 30%,transparent 30.2% 38%,#789ca7 38.2% 39%,transparent 39.2% 48%,#a6bec4 48.2% 49%,transparent 49.2% 59%,#789aa5 59.2% 60%,transparent 60.2% 69%,#a9c0c4 69.2% 70%,transparent 70.2% 100%);clip-path:polygon(0 100%,0 61%,7% 52%,12% 70%,20% 37%,27% 66%,35% 31%,42% 64%,51% 29%,59% 66%,67% 41%,74% 68%,83% 35%,91% 64%,100% 43%,100% 100%);opacity:.7}
+.mountains:after{transform:scale(1.06) translateY(13px);opacity:.38;filter:blur(2px)}
+.foothills{position:absolute;left:-5%;width:110%;bottom:23%;height:18%;z-index:-7;background:linear-gradient(180deg,#5f8790,#315a68);clip-path:polygon(0 75%,9% 53%,19% 63%,31% 41%,44% 67%,56% 47%,69% 69%,80% 48%,91% 64%,100% 42%,100% 100%,0 100%);opacity:.82}
+.water{position:absolute;left:0;right:0;bottom:0;height:38%;z-index:-6;background:
+linear-gradient(180deg,rgba(126,174,181,.15),rgba(30,88,104,.52) 42%,#0d455a 100%),
+repeating-linear-gradient(178deg,rgba(255,255,255,.17) 0 1px,transparent 1px 13px)}
+.water:before{content:"";position:absolute;left:35%;top:-4%;width:45%;height:125%;background:radial-gradient(ellipse,rgba(255,247,207,.58),transparent 61%);filter:blur(9px)}
+.sun{position:absolute;z-index:-5;right:25%;bottom:30%;width:15vmin;height:15vmin;min-width:72px;min-height:72px;border-radius:50%;background:radial-gradient(circle,#fffdf1 0 27%,rgba(255,248,210,.75) 42%,transparent 72%);filter:blur(.4px)}
+.flag{position:absolute;z-index:-3;width:55vw;max-width:840px;height:170px;top:7%;opacity:.72;filter:drop-shadow(0 10px 16px rgba(0,30,40,.13))}
+.flag.left{left:-13%;transform:rotate(13deg)}
+.flag.right{right:-13%;transform:scaleX(-1) rotate(13deg)}
+.flag path{fill:none;stroke-linecap:round}
+.arch{position:absolute;z-index:-2;right:8%;bottom:22%;width:min(19vw,300px);min-width:150px;height:auto;opacity:.75;filter:drop-shadow(0 12px 18px rgba(0,34,46,.18))}
+.landmark{position:absolute;z-index:-2;right:10%;bottom:25%;width:min(13vw,190px);height:30%;min-width:110px}
+.landmark:before{content:"";position:absolute;left:35%;bottom:0;width:31%;height:78%;background:linear-gradient(100deg,#d9e4e1,#718d91 52%,#dbe6e2);clip-path:polygon(35% 0,64% 0,75% 100%,25% 100%);filter:drop-shadow(0 3px 4px rgba(0,0,0,.12))}
+.landmark:after{content:"";position:absolute;left:12%;bottom:2%;width:77%;height:31%;background:#b9cbc7;clip-path:polygon(50% 0,70% 23%,87% 100%,13% 100%,30% 23%);opacity:.9}
+.logo-wrap{position:absolute;z-index:4;left:50%;top:7%;transform:translateX(-50%);width:min(43vw,590px);display:flex;justify-content:center}
+.logo{width:100%;height:auto;display:block;object-fit:contain;filter:drop-shadow(0 18px 24px rgba(10,46,61,.15))}
+.content{position:absolute;z-index:8;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:0 18px 8.5vh;text-align:center}
+.card{display:flex;flex-direction:column;align-items:center;width:min(650px,92vw)}
+.title{font-size:clamp(39px,5.8vw,74px);font-weight:900;line-height:1.08;color:#123d50;letter-spacing:-2px;text-shadow:0 2px 2px rgba(255,255,255,.55);margin:0}
+.subtitle{margin:9px 0 0;font-size:clamp(17px,2.2vw,28px);font-weight:700;color:#173f50}
+.motto{margin:12px 0 0;color:rgba(18,57,72,.57);font-size:clamp(13px,1.55vw,18px)}
+.rule{width:370px;max-width:65vw;height:1px;margin:10px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.enter{display:inline-flex;align-items:center;justify-content:center;gap:18px;margin-top:22px;width:224px;height:54px;border:1.5px solid #d1a24e;border-radius:999px;background:linear-gradient(135deg,#075071,#0b3549);color:#fff;font-weight:700;font-size:16px;box-shadow:0 12px 26px rgba(2,36,51,.24),inset 0 1px rgba(255,255,255,.18);transition:transform .25s ease,box-shadow .25s ease}
+.enter:hover{transform:translateY(-3px);box-shadow:0 17px 30px rgba(2,36,51,.3)}
+.enter .arrow{font-size:26px;font-family:Arial,sans-serif;line-height:1}
+.ornament{margin-top:18px;width:420px;max-width:68vw;height:24px;display:flex;align-items:center;gap:14px;justify-content:center;color:var(--gold)}
+.ornament:before,.ornament:after{content:"";height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--gold))}
+.ornament:after{background:linear-gradient(90deg,var(--gold),transparent)}
+.ornament i{width:15px;height:15px;border:2px solid var(--gold);transform:rotate(45deg);display:block;position:relative}
+.ornament i:after{content:"";position:absolute;inset:3px;border:1px solid var(--gold)}
+.petals{position:absolute;inset:0;z-index:2;pointer-events:none}
+.petal{position:absolute;width:10px;height:17px;background:#c93337;border-radius:80% 12% 80% 12%;box-shadow:0 3px 8px rgba(120,20,25,.16);animation:fall 9s linear infinite}
+.p1{left:18%;top:47%;animation-delay:-1s}.p2{left:31%;top:66%;animation-delay:-6s}.p3{right:19%;top:54%;animation-delay:-4s}.p4{right:29%;top:68%;animation-delay:-8s}.p5{left:8%;top:39%;animation-delay:-3s}
+@keyframes fall{0%{transform:translate3d(0,-20px) rotate(10deg);opacity:0}15%{opacity:.85}55%{transform:translate3d(35px,110px) rotate(105deg)}100%{transform:translate3d(80px,220px) rotate(180deg);opacity:0}}
+@media(max-width:900px){.logo-wrap{top:8%;width:min(65vw,510px)}.arch{right:3%;opacity:.48}.landmark{right:2%;opacity:.72}.content{padding-bottom:7vh}.title{font-size:clamp(35px,8vw,58px)}}
+@media(max-width:600px){.scene{min-height:560px}.logo-wrap{top:7%;width:78vw}.arch{right:-5%;bottom:26%;width:28vw;min-width:90px;opacity:.34}.landmark{right:-3%;bottom:29%;width:25vw;opacity:.58}.flag{width:100vw;height:130px;top:9%;opacity:.55}.flag.left{left:-48%}.flag.right{right:-48%}.mountains{bottom:30%;height:29%}.water{height:34%}.content{padding:0 12px 6.5vh}.subtitle{margin-top:6px}.motto{margin-top:8px}.enter{margin-top:17px;width:210px;height:50px}.ornament{margin-top:13px}.petals .p5{display:none}}
+@media(prefers-reduced-motion:reduce){.petal,.enter{animation:none;transition:none}}
 </style>
 </head>
 <body>
-<main class="intro" aria-label="شهیدپورتال">
-<div class="sky"></div><div class="haze"></div>
-<div class="mountain back"></div><div class="mountain"></div>
-<div class="water"></div><div class="horizon"></div>
-<svg class="ribbon" viewBox="0 0 1000 220" aria-hidden="true"><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#196d52" stroke-width="42"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#fff" stroke-width="25"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#a82d2d" stroke-width="12"/></svg>
-<svg class="ribbon two" viewBox="0 0 1000 220" aria-hidden="true"><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#196d52" stroke-width="42"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#fff" stroke-width="25"/><path d="M-30 110 C180 15 310 18 500 105 S820 190 1030 70" fill="none" stroke="#a82d2d" stroke-width="12"/></svg>
-<svg class="arch" viewBox="0 0 600 600" aria-hidden="true">
-<path d="M92 548V254C92 152 174 72 276 72h48c102 0 184 80 184 182v294" fill="none" stroke="#e4c46f" stroke-width="18"/>
-<path d="M137 548V265c0-77 62-139 139-139h48c77 0 139 62 139 139v283" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="3"/>
-<path d="M300 177c-31 37-65 73-65 111 0 40 29 70 65 70s65-30 65-70c0-38-34-74-65-111z" fill="none" stroke="#e4c46f" stroke-width="9"/>
-<path d="M300 207c-14 20-27 37-27 55 0 16 12 29 27 29s27-13 27-29c0-18-13-35-27-55z" fill="#e4c46f"/>
-<path d="M110 492h380M148 534h304" stroke="#e4c46f" stroke-width="7" stroke-linecap="round"/>
+<main class="scene">
+<div class="sky"></div><div class="clouds"></div><div class="mist"></div>
+<div class="sun"></div><div class="mountains"></div><div class="foothills"></div><div class="water"></div>
+<svg class="flag left" viewBox="0 0 1000 220" aria-hidden="true">
+<path d="M-20 95C160 15 300 25 475 108S770 190 1030 62" stroke="#168f5b" stroke-width="48"/>
+<path d="M-20 95C160 15 300 25 475 108S770 190 1030 62" stroke="#f7faf9" stroke-width="30"/>
+<path d="M-20 95C160 15 300 25 475 108S770 190 1030 62" stroke="#c92e34" stroke-width="13"/>
 </svg>
-<div class="petal p1"></div><div class="petal p2"></div><div class="petal p3"></div><div class="petal p4"></div>
+<svg class="flag right" viewBox="0 0 1000 220" aria-hidden="true">
+<path d="M-20 95C160 15 300 25 475 108S770 190 1030 62" stroke="#168f5b" stroke-width="48"/>
+<path d="M-20 95C160 15 300 25 475 108S770 190 1030 62" stroke="#f7faf9" stroke-width="30"/>
+<path d="M-20 95C160 15 300 25 475 108S770 190 1030 62" stroke="#c92e34" stroke-width="13"/>
+</svg>
+<div class="landmark" aria-hidden="true"></div>
+<svg class="arch" viewBox="0 0 300 430" aria-hidden="true">
+<defs><linearGradient id="a" x1="0" x2="1"><stop stop-color="#eef4f0"/><stop offset=".48" stop-color="#829b9d"/><stop offset="1" stop-color="#e8efec"/></linearGradient></defs>
+<path d="M55 414V150C55 80 95 34 150 5c55 29 95 75 95 145v264" fill="url(#a)" stroke="#708a8c" stroke-width="2"/>
+<path d="M83 414V158c0-51 25-88 67-115 42 27 67 64 67 115v256" fill="none" stroke="#f1f5f2" stroke-width="12"/>
+<path d="M112 414V176c0-29 14-51 38-69 24 18 38 40 38 69v238" fill="#d7e3df"/>
+<path d="M101 224h98M96 258h108M91 294h118" stroke="#718b8d" stroke-width="3" opacity=".55"/>
+</svg>
+<div class="logo-wrap"><img class="logo" src="assets/images/logo.png" alt="لوگوی شهیدپورتال"></div>
+<div class="petals"><i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i><i class="petal p5"></i></div>
 <section class="content">
-<div class="panel">
-<div class="mark" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M40 7 63 20v27L40 60 17 47V20L40 7Z" fill="none" stroke="#e4c46f" stroke-width="3"/><path d="M40 18v26M29 31l11 7 11-7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-<h1>شهیدپورتال</h1>
-<h2>پورتال جامع شهدا</h2>
+<div class="card">
+<h1 class="title">شهیدپورتال</h1>
+<div class="subtitle">پورتال جامع شهدا</div>
 <div class="rule"></div>
-<p class="tag">روایتی ماندگار از نام‌ها، زندگی‌ها، یادها و راهی که ادامه دارد</p>
-<a class="enter" href="tarhha/shahidportal-tarh.html" aria-label="ورود به پورتال"><span>←</span> ورود به پورتال</a>
+<div class="motto">یادشان، راه ماست...</div>
+<a class="enter" href="tarhha/shahidportal-tarh.html"><span>ورود به پورتال</span><span class="arrow">←</span></a>
+<div class="ornament" aria-hidden="true"><i></i></div>
 </div>
 </section>
-<div class="bottom-note">پورتال جامع شهدا و ایثارگران</div>
 </main>
 </body>
 </html>
