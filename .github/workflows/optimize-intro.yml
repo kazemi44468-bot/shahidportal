@@ -1,0 +1,52 @@
+name: Optimize intro image
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  optimize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Optimize intro image
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir Pillow
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+
+          src = Path("assets/images/intro.png")
+          dst = Path("assets/images/intro.webp")
+
+          if not src.exists():
+              raise SystemExit("assets/images/intro.png not found")
+
+          im = Image.open(src).convert("RGB")
+          max_width = 1600
+          if im.width > max_width:
+              h = round(im.height * max_width / im.width)
+              im = im.resize((max_width, h), Image.Resampling.LANCZOS)
+
+          im.save(dst, "WEBP", quality=60, method=6)
+          print(f"Created {dst}: {dst.stat().st_size} bytes, {im.width}x{im.height}")
+          PY
+
+      - name: Replace source PNG with optimized WebP
+        run: |
+          rm -f assets/images/intro.png
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/intro.webp assets/images/intro.png
+          git diff --cached --quiet && exit 0
+          git commit -m "perf: optimize shahidportal intro image"
+          git push
