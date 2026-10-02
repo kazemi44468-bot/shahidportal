@@ -33,20 +33,20 @@ body{font-family:Vazirmatn,Tahoma,sans-serif}
 .gateway:hover{transform:translateY(-3px);background:rgba(8,72,94,.88);border-color:rgba(246,226,188,.9);box-shadow:0 11px 26px rgba(0,24,35,.35)}
 .gateway.support{border-color:rgba(236,202,139,.72);background:linear-gradient(135deg,rgba(12,70,87,.78),rgba(83,62,34,.48))}
 .gateway.support strong{color:#fff1ca}
-.portal-actions{position:absolute;z-index:5;left:50%;top:58%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:8px;width:min(88vw,460px)}
-.portal-entry{position:relative;z-index:5;left:auto;top:auto;transform:none;left:50%;top:58%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:16px;width:220px;height:47px;padding:0 24px;border:1px solid rgba(241,216,158,.9);border-radius:5px 16px 5px 16px;background:linear-gradient(180deg,rgba(10,72,93,.96),rgba(5,51,69,.98));box-shadow:0 12px 30px rgba(0,28,39,.34),inset 0 1px rgba(255,255,255,.14);color:#fff7e8;text-decoration:none;font-size:14px;font-weight:700;transition:.22s ease}
-.links-entry{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;width:112px;height:47px;padding:0 16px;border:1px solid rgba(214,173,100,.7);border-radius:5px 16px 5px 16px;background:linear-gradient(180deg,rgba(10,64,82,.9),rgba(5,45,61,.94));box-shadow:0 10px 25px rgba(0,28,39,.28);color:#f6dfb0;text-decoration:none;font-size:12px;font-weight:700;transition:.22s ease}.links-entry b{font-size:16px;font-weight:400;color:#e6c98f}.links-entry:hover{transform:translateY(-3px);border-color:#f7e4b8}
+.portal-entry{position:absolute;z-index:5;left:50%;top:58%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;gap:16px;width:220px;height:47px;padding:0 24px;border:1px solid rgba(241,216,158,.9);border-radius:5px 16px 5px 16px;background:linear-gradient(180deg,rgba(10,72,93,.96),rgba(5,51,69,.98));box-shadow:0 12px 30px rgba(0,28,39,.34),inset 0 1px rgba(255,255,255,.14);color:#fff7e8;text-decoration:none;font-size:14px;font-weight:700;transition:.22s ease}
+.gateway.links{border-color:rgba(241,216,158,.78)}.gateway.links strong{color:#fff1ca}
+.gateway.support{grid-column:3}.gateway.links{grid-column:2}
 .portal-entry:before{content:"";position:absolute;inset:4px;border:1px solid rgba(214,173,100,.3);border-radius:3px 12px 3px 12px}
 .portal-entry b{font-size:18px;color:#e6c98f;font-weight:400}
-.portal-entry:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,28,39,.42);border-color:#f7e4b8}
+.portal-entry:hover{transform:translate(-50%,-53%);box-shadow:0 15px 35px rgba(0,28,39,.42);border-color:#f7e4b8}
 @media(max-width:850px){
 .identity{top:27%}.logo{width:190px;max-width:190px}
-.portal-actions{top:57%;width:min(88vw,330px)}.portal-entry{width:200px;height:44px;font-size:12px}.links-entry{height:44px}
+.portal-entry{top:57%;width:200px;height:44px;font-size:12px}
 .gateways{top:67%;width:min(82vw,620px);grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.gateway{min-height:43px;padding:7px 8px}.gateway strong{font-size:10px}.gateway small{display:none}
 }
 @media(max-width:560px){
 .identity{top:24%}.logo{width:150px;max-width:165px}.title{font-size:34px;line-height:1.05}.subtitle{font-size:24px}.tagline{font-size:16px}.ornament{width:35vw}
-.portal-actions{top:54%;width:88vw;gap:6px}.portal-entry{width:184px;height:42px}.links-entry{width:94px;height:42px}
+.portal-entry{top:54%;width:184px;height:42px}
 .gateways{top:63%;width:88vw;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.gateway{min-height:41px;padding:7px 8px;border-radius:4px 11px 4px 11px}.gateway strong{font-size:10px}
 }
 @media(max-height:650px) and (min-width:561px){.identity{top:24%}.portal-entry{top:55%}.gateways{top:64%}}
@@ -60,7 +60,7 @@ body{font-family:Vazirmatn,Tahoma,sans-serif}
 <a class="logo-link" href="index.html" aria-label="صفحه اصلی شهیدپورتال"><picture><source srcset="assets/images/logo.webp" type="image/webp"><img class="logo" src="assets/images/logo.png" alt="لوگوی شهیدپورتال" width="270" height="235" decoding="async"></picture></a>
 <div class="title">شهیدپورتال</div><div class="subtitle">پورتال جامع شهدا</div><div class="tagline">یادشان راه ماست...</div><span class="ornament" aria-hidden="true"></span>
 </section>
-<div class="portal-actions"><a class="portal-entry" href="pages/portal.html"><span>درباره شهیدپورتال</span><b>←</b></a><a class="links-entry" href="pages/links.html"><span>پیوندها</span><b>↗</b></a></div>
+<a class="portal-entry" href="pages/portal.html"><span>درباره شهیدپورتال</span><b>←</b></a>
 <nav id="gateways" class="gateways" aria-label="درگاه‌های اصلی شهیدپورتال">
 <a class="gateway" href="pages/services.html"><strong>خدمات</strong><small>میز خدمت و خدمات عمومی</small></a>
 <a class="gateway" href="pages/health.html"><strong>سلامت و توانبخشی</strong><small>سلامت، درمان و توانمندسازی</small></a>
@@ -75,6 +75,7 @@ body{font-family:Vazirmatn,Tahoma,sans-serif}
 <a class="gateway" href="pages/community.html"><strong>جامعه و مشارکت</strong><small>شبکه مشارکت و همراهی</small></a>
 <a class="gateway" href="pages/media.html"><strong>رسانه و رویداد</strong><small>رسانه، خبر و رویدادها</small></a>
 <a class="gateway support" href="pages/support.html"><strong>پشتیبانی و ارتباط</strong><small>ارتباط و پیگیری</small></a>
+<a class="gateway links" href="pages/links.html"><strong>پیوندها</strong><small>پروژه‌ها و محصولات مجموعه</small></a>
 </nav>
 </main>
 </body>
