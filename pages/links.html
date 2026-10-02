@@ -43,7 +43,7 @@ h1{position:relative;z-index:1;margin:6px 0 8px;color:#0b3f56;font-size:clamp(28
 .footer{margin-top:34px;padding:18px 0 30px;text-align:center;border-top:1px solid rgba(11,63,86,.08);color:#7a888c;font-size:9px}
 @media(max-width:900px){.links-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.shell{width:min(100% - 20px,560px)}.header{height:68px}.brand{width:44px;height:44px}.brand img{width:41px;height:41px}.back{font-size:9px;padding:8px 10px}.hero{padding:34px 18px 31px;border-radius:8px 27px 8px 27px}.hero-logo{width:63px;height:63px}h1{font-size:29px}.hero p{font-size:11px}.search-box{width:100%;padding:7px}.search-wrap{height:46px;padding:0 11px}.search{font-size:11px}.search-meta{font-size:8px}.categories{margin-bottom:20px}.links-grid{grid-template-columns:1fr}.section-title h2{font-size:18px}.link-card{padding:17px 16px}}
-</style>
+.mobile-nav{display:none}@media(max-width:760px){body{padding-bottom:82px}.mobile-nav{display:block;position:fixed;z-index:1000;right:0;bottom:0;left:0;padding:7px max(8px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom));background:rgba(250,249,245,.94);border-top:1px solid rgba(11,63,86,.12);box-shadow:0 -10px 30px rgba(11,63,86,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}.mobile-nav-scroll{display:flex;align-items:center;justify-content:center;gap:6px;width:max-content;min-width:100%;margin:auto}.mobile-nav a{flex:0 0 72px;min-width:72px;height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:1px solid rgba(11,63,86,.08);border-radius:8px 18px 8px 18px;background:rgba(255,255,255,.76);color:#315460;text-decoration:none;font-size:9px;white-space:nowrap}.mobile-nav .mn-icon{font-size:18px;line-height:18px;color:#0b3f56}.mobile-nav .mn-logo{flex-basis:62px;min-width:62px;width:62px;height:62px;margin-top:-13px;border-radius:50%;border:1px solid rgba(214,173,100,.72);background:#fff;box-shadow:0 5px 18px rgba(11,63,86,.15)}.mobile-nav .mn-logo img{width:45px;height:45px;object-fit:contain}@media(max-width:370px){.mobile-nav{overflow:hidden}.mobile-nav-scroll{justify-content:flex-start;overflow-x:auto;overflow-y:hidden;padding:0 4px;scrollbar-width:none}.mobile-nav a{flex-basis:68px;min-width:68px}.mobile-nav .mn-logo{flex-basis:60px;min-width:60px}}}</style>
 </head>
 <body>
 <div class="page"><div class="shell">
@@ -144,5 +144,5 @@ empty.style.display=out.length?"none":"block";result.textContent=fa(out.length)+
 }
 search.addEventListener("input",render);renderCats();render();
 </script>
-</body>
+<nav class="mobile-nav" aria-label="منوی پایینی"><div class="mobile-nav-scroll"><a href="../index.html"><span class="mn-icon">⌂</span><span>خانه</span></a><a href="../pages/portal.html"><span class="mn-icon">◈</span><span>درباره</span></a><a class="mn-logo" href="../index.html" aria-label="شهیدپورتال"><img src="../assets/images/logo.png" alt="شهیدپورتال"></a><a href="../pages/links.html"><span class="mn-icon">▦</span><span>پیوندها</span></a><a href="../pages/contact.html"><span class="mn-icon">⌕</span><span>تماس</span></a></div></nav></body>
 </html>
