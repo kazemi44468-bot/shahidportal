@@ -112,6 +112,7 @@ function init(){
  $("searchBtn").onclick=search;$("clearSearch").onclick=clearSearch;$("q").addEventListener("keydown",e=>{if(e.key==="Enter")search()});
  document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{setView(b.dataset.v);draw()});
  $("hamb").onclick=()=>document.querySelector(".nav").classList.toggle("mobileOpen");
+ const requested=new URLSearchParams(location.search).get("view");if(requested==="week"||requested==="year")setView(requested);
  draw()
 }
 init();
