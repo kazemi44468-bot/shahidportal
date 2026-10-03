@@ -30,7 +30,7 @@ function gregForJ(y,m,d){
 }
 function daysInMonth(y,m){const a=gregForJ(y,m,1),b=m===12?gregForJ(y+1,1,1):gregForJ(y,m+1,1);return Math.round((b-a)/86400000)}
 function weekIndex(g){return (g.getUTCDay()+1)%7}
-function eventDate(e){const a=e.date.split("/").map(Number);return key(a[0],a[1],a[2])}
+function eventDate(e){const a=en(e.date).split("/").map(Number);return key(a[0],a[1],a[2])}
 function eventsFor(y,m,d){const k=key(y,m,d);return events.filter(e=>eventDate(e)===k)}
 function displayDate(y,m,d){return fa(d)+" "+MONTHS[m-1]+" "+fa(y)}
 function selectDate(y,m,d,redraw=true){if(y<1300)return;state={y:y,m:m,d:d};if(redraw)draw()}
@@ -91,7 +91,7 @@ function search(){
  if(!q&&!kind){$("resultsBox").hidden=true;return}
  const dateMatch=q.match(/^(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})$/);
  if(dateMatch){const y=Number(dateMatch[1]),m=Number(dateMatch[2]),d=Number(dateMatch[3]);if(y>=1300&&m>=1&&m<=12&&d>=1&&d<=daysInMonth(y,m)){state={y:y,m:m,d:d};setView("month");draw()}}
- const list=events.filter(e=>{const text=[e.title,e.desc,e.tags,e.type,e.date].join(" ").toLowerCase();return (!q||text.includes(q))&&(!kind||e.type===kind)});
+ const list=events.filter(e=>{const text=[e.title,e.desc,e.tags,e.type,en(e.date)].join(" ").toLowerCase();return (!q||text.includes(q))&&(!kind||e.type===kind)});
  $("resultsBox").hidden=false;$("resultsCount").textContent=fa(list.length)+" نتیجه";
  $("searchResults").innerHTML=list.length?list.map((e,i)=>'<button class="resultItem" data-i="'+i+'"><span>'+e.type+'</span><div><strong>'+e.title+'</strong><small>'+e.date+" · "+e.desc+"</small></div></button>").join(""):'<div class="emptyState">نتیجه‌ای برای جست‌وجوی شما پیدا نشد.</div>';
  document.querySelectorAll(".resultItem").forEach((b,i)=>b.onclick=()=>{const e=list[i],a=e.date.split("/").map(Number);state={y:a[0],m:a[1],d:a[2]};setView("month");draw();$("calendar").scrollIntoView({behavior:"smooth",block:"start"})})
