@@ -4,58 +4,118 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>تقویم شهدا | طرح جامع شهیدپورتال</title>
 <style>
-@font-face{font-family:Vazir;src:url('../assets/fonts/Vazirmatn-Regular.woff2')}@font-face{font-family:Vazir;src:url('../assets/fonts/Vazirmatn-Bold.woff2');font-weight:700}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f5f7fa;color:#172235;font-family:Vazir,Tahoma,Arial,sans-serif;line-height:2}.wrap{max-width:1180px;margin:auto;padding:32px 22px 70px}.hero{background:linear-gradient(135deg,#123d4d,#147d78);color:#fff;border-radius:24px;padding:46px 42px;margin-bottom:24px;box-shadow:0 18px 50px #123d4d22}.hero h1{margin:0 0 10px;font-size:34px}.hero p{margin:5px 0;opacity:.94}.nav{position:sticky;top:8px;z-index:5;background:#ffffffee;backdrop-filter:blur(12px);border:1px solid #dce8e6;border-radius:15px;padding:6px 8px;margin-bottom:20px;display:flex;gap:0;flex-wrap:wrap;box-shadow:0 6px 18px #1722350a}.nav a{position:relative;color:#17645f;text-decoration:none;font-size:12px;line-height:1.7;padding:2px 7px;margin:1px 0;border:0;border-radius:5px;background:transparent;white-space:nowrap}.nav a+a:before{content:"|";color:#55aaa4;position:absolute;right:-4px;top:1px;font-size:11px;font-weight:bold}.nav a:hover{background:#edf7f6;color:#124d49}.card{background:#fff;border:1px solid #e1e9e8;border-radius:20px;padding:28px;margin:18px 0;box-shadow:0 8px 25px #17223508}.card h2{margin-top:0;color:#145c58;font-size:24px}.card h3{color:#17645f}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.mini{background:#f6faf9;border:1px solid #e1edeb;border-radius:15px;padding:18px}.mini h3{margin-top:0}.tag{display:inline-block;background:#e7f4f2;color:#17645f;border-radius:999px;padding:2px 11px;margin:3px;font-size:13px}.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:16px 0}.flow div{padding:14px 8px;text-align:center;border-radius:14px;background:#eaf5f3;border:1px solid #d8eae7;color:#155b57;font-weight:700}.quote{border-right:4px solid #19847e;background:#f1f8f7;padding:15px 20px;border-radius:12px;margin:16px 0}.layers{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.layer{padding:18px;border-radius:15px;background:#eaf5f3;text-align:center;font-weight:bold;color:#155b57}.principle{font-size:18px;font-weight:bold;color:#145c58}.footer{text-align:center;color:#657486;padding-top:25px}.back-top{position:fixed;left:20px;bottom:20px;z-index:20;width:42px;height:42px;border:1px solid #d5e4e2;border-radius:12px;background:#ffffffee;color:#17645f;text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:20px;line-height:1;box-shadow:0 8px 22px #17223518;backdrop-filter:blur(10px)}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border:1px solid #dfe8e6;padding:10px;text-align:right;vertical-align:top}th{background:#edf6f5;color:#145c58}@media(max-width:760px){.grid,.layers,.flow{grid-template-columns:1fr}.hero{padding:30px 22px}.hero h1{font-size:27px}.card{padding:21px;overflow-x:auto}.nav{position:static}table{font-size:13px;min-width:700px}}
+@font-face{font-family:Vazir;src:url('../assets/fonts/Vazirmatn-Regular.woff2')}@font-face{font-family:Vazir;src:url('../assets/fonts/Vazirmatn-Bold.woff2');font-weight:700}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f5f7fa;color:#172235;font-family:Vazir,Tahoma,Arial,sans-serif;line-height:2}.wrap{max-width:1200px;margin:auto;padding:32px 22px 70px}.hero{background:linear-gradient(135deg,#123d4d,#147d78);color:#fff;border-radius:24px;padding:46px 42px;margin-bottom:24px;box-shadow:0 18px 50px #123d4d22}.hero h1{margin:0 0 10px;font-size:34px}.hero p{margin:5px 0;opacity:.95}.nav{position:sticky;top:8px;z-index:5;background:#ffffffee;backdrop-filter:blur(12px);border:1px solid #dce8e6;border-radius:15px;padding:7px 9px;margin-bottom:20px;display:flex;flex-wrap:wrap;box-shadow:0 6px 18px #1722350a}.nav a{color:#17645f;text-decoration:none;font-size:12px;padding:2px 7px;white-space:nowrap}.nav a:hover{background:#edf7f6;border-radius:5px}.card{background:#fff;border:1px solid #e1e9e8;border-radius:20px;padding:28px;margin:18px 0;box-shadow:0 8px 25px #17223508}.card h2{margin-top:0;color:#145c58;font-size:24px}.card h3{color:#17645f}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.mini{background:#f6faf9;border:1px solid #e1edeb;border-radius:15px;padding:18px}.mini h3{margin-top:0}.flow,.layers{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:16px 0}.layers{grid-template-columns:repeat(5,1fr)}.flow div,.layer{padding:15px 8px;text-align:center;border-radius:14px;background:#eaf5f3;border:1px solid #d8eae7;color:#155b57;font-weight:700}.quote{border-right:4px solid #19847e;background:#f1f8f7;padding:15px 20px;border-radius:12px;margin:16px 0}table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border:1px solid #dfe8e6;padding:10px;text-align:right;vertical-align:top}th{background:#edf6f5;color:#145c58}.footer{text-align:center;color:#657486;padding-top:25px}.back-top{position:fixed;left:20px;bottom:20px;width:42px;height:42px;border:1px solid #d5e4e2;border-radius:12px;background:#ffffffee;color:#17645f;text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 8px 22px #17223518}@media(max-width:760px){.grid,.layers,.flow{grid-template-columns:1fr}.hero{padding:30px 22px}.hero h1{font-size:27px}.card{padding:21px;overflow-x:auto}.nav{position:static}table{font-size:13px;min-width:760px}}
 </style>
 <link rel="stylesheet" href="../assets/css/sidebar.css">
-<meta name="shahidportal-version" content="2026-10-03-calendar-plan">
+<meta name="shahidportal-version" content="2026-10-03-calendar-plan-v2">
 </head>
 <body data-sidebar-page="calendar" class="sp-main" id="top">
 <div class="wrap main">
-<section class="hero">
-<h1>تقویم شهدا</h1>
-<p>طرح مستقل یک محصول تقویمی، رویدادی و دانشی برای ثبت، کشف و نمایش مناسبت‌ها و رویدادهای مرتبط با شهدا، دفاع مقدس و تاریخ معاصر ایران.</p>
-<p>این صفحه، جایگاه «تقویم شهدا» را در معماری کلان شهیدپورتال و مسیر توسعه محصول مستقل آن مشخص می‌کند.</p>
-</section>
-<nav class="nav">
-<a href="#summary">خلاصه</a><a href="#mission">مأموریت</a><a href="#product">محصول</a><a href="#calendar">قابلیت‌ها</a><a href="#data">داده و منابع</a><a href="#relations">ارتباط با شهیدپورتال</a><a href="#architecture">معماری</a><a href="#roadmap">نقشه راه</a><a href="#preview">پیش‌نمایش</a>
-</nav>
-<section class="card" id="summary"><h2>۱. خلاصه طرح</h2><p>«تقویم شهدا» یک محصول مستقل در سبد محصولات شهیدپورتال است که زمان را به یک لایه قابل جست‌وجو و قابل اتصال از دانش شهدا تبدیل می‌کند. هدف آن فقط نمایش یک تقویم روزانه نیست؛ بلکه ایجاد یک مرجع منظم برای مناسبت‌ها، شهادت‌ها، تولدها، عملیات‌ها، وقایع دفاع مقدس، یادمان‌ها، برنامه‌های مرتبط و رویدادهای آینده است.</p><div class="quote"><strong>اصل محصول:</strong> تقویم شهدا باید از یک «تقویم مناسبتی» به یک «سامانه زمانی ـ رویدادی ـ دانشی» توسعه پیدا کند.</div></section>
-<section class="card" id="mission"><h2>۲. مأموریت</h2><div class="grid">
-<div class="mini"><h3>حفظ حافظه زمانی</h3><p>ثبت منظم رویدادهای مهم مرتبط با شهدا و دفاع مقدس در بستر تاریخ.</p></div>
-<div class="mini"><h3>کشف سریع</h3><p>کاربر بتواند با انتخاب روز، ماه، سال یا جست‌وجوی موضوعی به رویداد موردنظر برسد.</p></div>
-<div class="mini"><h3>اتصال دانش</h3><p>هر رویداد بتواند به شهید، عملیات، مکان، سند، روایت، یادمان و سایر موجودیت‌های مرتبط متصل شود.</p></div>
-<div class="mini"><h3>تقویم زنده</h3><p>علاوه بر رویدادهای تاریخی، امکان مدیریت مناسبت‌ها و رویدادهای آینده و برنامه‌های یادمانی فراهم شود.</p></div>
+<section class="hero"><h1>تقویم شهدا</h1><p>طرح جامع، نقشه حرکت و مرجع توسعه یک محصول مستقل برای ثبت، کشف، روایت و اتصال رویدادهای مرتبط با شهدا، دفاع مقدس و تاریخ معاصر ایران.</p><p>هر قابلیت جدید باید در یکی از لایه‌ها و فازهای این طرح قرار بگیرد.</p></section>
+<nav class="nav"><a href="#summary">خلاصه</a><a href="#mission">مأموریت</a><a href="#position">جایگاه</a><a href="#structure">ساختار</a><a href="#calendar">تقویم</a><a href="#event">رویداد</a><a href="#martyr">شهید</a><a href="#search">جست‌وجو</a><a href="#memory">مشارکت</a><a href="#data">داده</a><a href="#sources">منابع</a><a href="#architecture">معماری</a><a href="#roadmap">نقشه راه</a><a href="#principles">اصول</a><a href="#acceptance">معیار تکمیل</a><a href="#preview">پیش‌نمایش</a></nav>
+
+<section class="card" id="summary"><h2>۱. خلاصه طرح</h2><p>تقویم شهدا فقط یک تقویم مناسبتی نیست؛ هدف نهایی ایجاد یک <strong>سامانه زمانی ـ رویدادی ـ دانشی</strong> است. کاربر از یک روز، ماه، سال یا مناسبت وارد می‌شود و می‌تواند به شهدا، عملیات‌ها، مکان‌ها، اسناد، خاطرات، تصاویر، مراسم و سایر محتوای مرتبط برسد.</p><div class="quote"><strong>تعریف محصول:</strong> تقویم + آرشیو تاریخی + موتور رویداد + دانش مرتبط + جست‌وجو + مشارکت + API.</div></section>
+
+<section class="card" id="mission"><h2>۲. هدف و مأموریت</h2><div class="grid">
+<div class="mini"><h3>حفظ حافظه زمانی</h3><p>ثبت منظم رویدادهای مرتبط با شهدا، دفاع مقدس، انقلاب و تاریخ معاصر.</p></div>
+<div class="mini"><h3>دسترسی آسان</h3><p>یافتن شهدا و رویدادها بر اساس روز، ماه، سال، تاریخ شهادت، تولد یا موضوع.</p></div>
+<div class="mini"><h3>مرجع پژوهشی</h3><p>خدمت به دانش‌آموزان، دانشجویان، پژوهشگران، خانواده‌ها و علاقه‌مندان.</p></div>
+<div class="mini"><h3>تجربه انسانی</h3><p>ارائه محتوایی آرام، محترمانه و معنوی همراه با امکان یادبود و مشارکت کنترل‌شده.</p></div>
 </div></section>
-<section class="card" id="product"><h2>۳. جایگاه محصول</h2><p>تقویم شهدا از نظر تجربه و ساختار، یک وب‌سایت مستقل است و نباید صرفاً یک صفحه داخلی از شهیدپورتال تلقی شود. هویت بصری، منو، هدر، فوتر، صفحات، داده و چرخه توسعه خودش را دارد؛ ارتباط آن با شهیدپورتال در سطح اکوسیستم، داده، شناسه‌ها و پیوند محصولات برقرار می‌شود.</p><div class="layers"><div class="layer">محصول مستقل</div><div class="layer">تقویم</div><div class="layer">رویداد</div><div class="layer">دانش</div><div class="layer">اتصال اکوسیستم</div></div></section>
-<section class="card" id="calendar"><h2>۴. قابلیت‌های اصلی</h2><div class="grid">
-<div class="mini"><h3>نمای ماهانه</h3><p>نمایش روزهای ماه، رویدادهای هر روز و امکان جابه‌جایی میان ماه‌ها.</p></div>
-<div class="mini"><h3>نمای هفتگی</h3><p>نمای هفت روزه برای مشاهده فشرده رویدادها و برنامه‌های زمانی.</p></div>
-<div class="mini"><h3>نمای سالانه</h3><p>نمایش دوازده ماه سال برای مرور سریع مناسبت‌ها و نقاط مهم سال.</p></div>
-<div class="mini"><h3>امروز</h3><p>نمایش تاریخ جاری، رویدادهای همان روز و اطلاعات تکمیلی.</p></div>
-<div class="mini"><h3>جست‌وجوی رویداد</h3><p>جست‌وجو بر اساس تاریخ، عنوان، نوع رویداد، شهید، عملیات، مکان و کلیدواژه.</p></div>
-<div class="mini"><h3>صفحه رویداد</h3><p>برای هر رویداد یک صفحه قابل توسعه با شرح، منابع و ارتباطات دانشی.</p></div>
-<div class="mini"><h3>آرشیو</h3><p>دسترسی تاریخی به رویدادها از سال ۱۳۰۰ به بعد و توسعه تدریجی داده‌ها.</p></div>
-<div class="mini"><h3>زمان و مکان</h3><p>در مراحل بعدی: ساعت جهانی، ساعت تهران، اوقات شرعی و اطلاعات مراکز مذهبی ایران.</p></div>
+
+<section class="card" id="position"><h2>۳. جایگاه محصول و استقلال</h2><p>تقویم شهدا یک <strong>وب‌سایت و محصول مستقل</strong> است؛ هویت بصری، هدر، منو، فوتر، صفحات، داده و چرخه توسعه خودش را دارد و نباید پوسته شهیدپورتال را به ارث ببرد.</p><div class="layers"><div class="layer">هویت مستقل</div><div class="layer">تقویم</div><div class="layer">رویداد</div><div class="layer">داده</div><div class="layer">API</div></div><p>ارتباط با شهیدپورتال فقط در سطح اکوسیستم، لینک محصولات، شناسه‌های داده و اتصال محتوایی برقرار می‌شود.</p></section>
+
+<section class="card" id="structure"><h2>۴. ساختار اصلی سایت</h2><table><tr><th>بخش</th><th>کارکرد</th><th>زمان توسعه</th></tr>
+<tr><td>خانه</td><td>تقویم، شهید امروز، رویدادهای نزدیک و جست‌وجوی سریع.</td><td>هسته</td></tr>
+<tr><td>تقویم</td><td>ماهانه، هفتگی، سالانه و روزانه.</td><td>هسته</td></tr>
+<tr><td>رویدادها</td><td>آرشیو و فهرست رویدادهای تاریخی و آینده.</td><td>فاز ۲</td></tr>
+<tr><td>صفحه رویداد</td><td>شرح، منابع، رسانه و ارتباطات دانشی.</td><td>فاز ۲</td></tr>
+<tr><td>شهدا</td><td>دسترسی به پرونده شهدای مرتبط.</td><td>فاز ۳</td></tr>
+<tr><td>جست‌وجو</td><td>جست‌وجوی ساده و پیشرفته در زمان و محتوا.</td><td>هسته/فاز ۳</td></tr>
+<tr><td>مناسبت‌ها</td><td>ملی، مذهبی، فرهنگی، دفاع مقدس و یادمانی.</td><td>فاز ۲</td></tr>
+<tr><td>مشارکت</td><td>خاطره، اصلاح اطلاعات و پیشنهاد رویداد.</td><td>فاز ۵</td></tr>
+<tr><td>درباره و تماس</td><td>معرفی، منابع، همکاری و ارتباط.</td><td>پایه</td></tr>
+</table></section>
+
+<section class="card" id="calendar"><h2>۵. هسته تقویم</h2><div class="grid">
+<div class="mini"><h3>ماهانه</h3><p>روزهای ماه، نشان رویداد و انتخاب مستقیم روز.</p></div><div class="mini"><h3>هفتگی</h3><p>نمای هفت روزه برای رویدادهای نزدیک.</p></div>
+<div class="mini"><h3>سالانه</h3><p>دوازده ماه برای مرور سریع کل سال.</p></div><div class="mini"><h3>روزانه</h3><p>تاریخ، رویدادها، شهدا، مناسبت‌ها و محتوای وابسته.</p></div>
+<div class="mini"><h3>امروز</h3><p>رویدادهای امروز و بخش «امروز در تاریخ».</p></div><div class="mini"><h3>انتخاب تاریخ</h3><p>حرکت و جست‌وجوی تاریخی از سال ۱۳۰۰ به بعد.</p></div>
+</div><div class="quote"><strong>تقویم پایه:</strong> شمسی محور اصلی است؛ نمایش قمری و میلادی و تبدیل تطبیقی در مراحل بعد اضافه می‌شود.</div></section>
+
+<section class="card" id="event"><h2>۶. موتور رویداد و انواع محتوا</h2><p>تمام محتوای زمانی باید به‌صورت «رویداد» مدل‌سازی شود تا تقویم، جست‌وجو، صفحات اختصاصی و API از یک منبع داده استفاده کنند.</p><div class="grid">
+<div class="mini"><h3>شهادت</h3><p>تاریخ شهادت یک یا چند شهید، محل و زمینه رویداد.</p></div><div class="mini"><h3>تولد</h3><p>تولد شهدا و شخصیت‌های مرتبط در صورت وجود داده معتبر.</p></div>
+<div class="mini"><h3>عملیات</h3><p>آغاز، پایان و نقاط مهم عملیات‌های دفاع مقدس.</p></div><div class="mini"><h3>واقعه تاریخی</h3><p>رویدادهای مستند انقلاب، دفاع مقدس و تاریخ معاصر.</p></div>
+<div class="mini"><h3>یادمان و مراسم</h3><p>یادواره‌ها، سالگردها و برنامه‌های فرهنگی.</p></div><div class="mini"><h3>مناسبت</h3><p>مناسبت‌های ملی، مذهبی و فرهنگی مرتبط.</p></div>
+<div class="mini"><h3>رویداد آینده</h3><p>برنامه‌های آینده با تاریخ، مکان، برگزارکننده و وضعیت انتشار.</p></div><div class="mini"><h3>رویداد چندگانه</h3><p>یک تاریخ می‌تواند به چند شهید، عملیات یا منبع متصل باشد.</p></div>
 </div></section>
-<section class="card" id="data"><h2>۵. مدل داده و منابع</h2><p>هر رویداد باید علاوه بر تاریخ و عنوان، فراداده مشخص داشته باشد تا بعدها بتوان آن را به سایر بخش‌های اکوسیستم متصل کرد.</p><table><tr><th>فیلد</th><th>کاربرد</th></tr><tr><td>شناسه رویداد</td><td>شناسه پایدار برای اتصال داده‌ها و API</td></tr><tr><td>تاریخ</td><td>تاریخ شمسی و در صورت نیاز معادل میلادی و قمری</td></tr><tr><td>نوع</td><td>شهادت، تولد، عملیات، واقعه، مراسم، یادمان و سایر دسته‌ها</td></tr><tr><td>عنوان و شرح</td><td>محتوای اصلی رویداد با ساختار قابل ویرایش</td></tr><tr><td>موجودیت‌های مرتبط</td><td>شهید، عملیات، مکان، خانواده، سازمان، یادمان و سند</td></tr><tr><td>منبع</td><td>منشأ اطلاعات، سطح اعتبار و وضعیت بررسی</td></tr><tr><td>مکان</td><td>شهر، استان، نقطه جغرافیایی و در مراحل بعد نقشه</td></tr></table><div class="quote"><strong>منابع پیشنهادی:</strong> منابع رسمی و ملی، تقویم‌های معتبر، اسناد دفاع مقدس، پرونده‌های شهدا، مراکز فرهنگی و یادمانی، و منابع تخصصی قابل اعتبارسنجی. هر منبع باید قابل ردیابی باشد.</div></section>
-<section class="card" id="relations"><h2>۶. ارتباط با شهیدپورتال</h2><div class="grid">
-<div class="mini"><h3>دانشنامه شهدا</h3><p>رویداد شهادت یا تولد می‌تواند به صفحه شهید متصل شود.</p></div>
-<div class="mini"><h3>اطلس و مکان</h3><p>رویدادهای عملیاتی و یادمانی می‌توانند به مکان و نقشه متصل شوند.</p></div>
-<div class="mini"><h3>روایت و گنجینه</h3><p>هر رویداد می‌تواند اسناد، تصاویر، فیلم، صوت و روایت مرتبط داشته باشد.</p></div>
-<div class="mini"><h3>رسانه و رویداد</h3><p>برنامه‌های آینده و مناسبت‌ها می‌توانند از تقویم به رویدادهای اجرایی متصل شوند.</p></div>
-</div><div class="quote"><strong>مدل اتصال:</strong> تقویم شهدا مستقل در اجرا؛ متصل در شناسه، داده و محتوا.</div></section>
-<section class="card" id="architecture"><h2>۷. معماری پیشنهادی</h2><div class="flow"><div>Calendar UI</div><div>Event Engine</div><div>Event Data</div><div>Identity Links</div><div>Search / API</div><div>Sources</div></div><p>نسخه فعلی می‌تواند به‌صورت Static First توسعه پیدا کند؛ سپس لایه داده، مدیریت محتوا، API، جست‌وجوی پیشرفته و پنل مدیریت بدون تغییر بنیادین تجربه کاربر به آن اضافه شود.</p><div class="grid"><div class="mini"><h3>لایه نمایش</h3><p>ماهانه، هفتگی، سالانه، امروز و صفحات رویداد.</p></div><div class="mini"><h3>موتور تقویم</h3><p>محاسبه تاریخ، جابه‌جایی، فیلتر و مدیریت نماها.</p></div><div class="mini"><h3>لایه داده</h3><p>رویدادها، منابع، موجودیت‌های مرتبط و وضعیت اعتبار.</p></div><div class="mini"><h3>لایه اتصال</h3><p>API و شناسه‌های مشترک برای ارتباط با سایر محصولات.</p></div></div></section>
-<section class="card" id="roadmap"><h2>۸. نقشه راه توسعه</h2><div class="grid">
-<div class="mini"><h3>مرحله اول — پایه</h3><p>هویت مستقل، صفحه اصلی، تقویم ماهانه/هفتگی/سالانه، امروز و جست‌وجوی اولیه.</p></div>
-<div class="mini"><h3>مرحله دوم — داده</h3><p>گسترش رویدادها از سال ۱۳۰۰، دسته‌بندی، منابع و صفحات اختصاصی رویداد.</p></div>
-<div class="mini"><h3>مرحله سوم — اتصال</h3><p>اتصال رویدادها به شهدا، عملیات‌ها، مکان‌ها، اسناد و روایت‌ها.</p></div>
-<div class="mini"><h3>مرحله چهارم — مدیریت</h3><p>پنل مدیریت، ثبت و ویرایش رویداد، بررسی منابع و گردش تأیید.</p></div>
-<div class="mini"><h3>مرحله پنجم — API</h3><p>ارائه داده تقویم برای سایر محصولات و اپلیکیشن‌ها از طریق API استاندارد.</p></div>
-<div class="mini"><h3>مرحله ششم — هوشمندی</h3><p>جست‌وجوی معنایی، پیشنهاد رویداد مرتبط و تحلیل شبکه زمانی و موضوعی.</p></div>
+
+<section class="card" id="martyr"><h2>۷. ارتباط با پرونده شهید</h2><p>در مسیر توسعه، هر رویداد باید بتواند به یک یا چند شهید متصل شود. پرونده شهید می‌تواند شامل اطلاعات پایه، زندگی‌نامه، تصاویر، وصیت‌نامه، خاطرات، صوت، ویدئو، محل شهادت و مزار و اسناد مرتبط باشد؛ مشروط به منبع معتبر و مجاز.</p><div class="grid">
+<div class="mini"><h3>اطلاعات پایه</h3><p>نام، نام پدر، تولد، شهادت، محل تولد، محل شهادت و محل دفن.</p></div><div class="mini"><h3>روایت</h3><p>زندگی‌نامه و خاطرات خانواده و همرزمان با ثبت منبع.</p></div>
+<div class="mini"><h3>رسانه</h3><p>تصویر، صوت و ویدئو در صورت وجود و امکان استفاده.</p></div><div class="mini"><h3>ارتباطات</h3><p>اتصال به رویدادها، عملیات‌ها، مکان‌ها، اسناد و مناسبت‌ها.</p></div>
 </div></section>
-<section class="card" id="preview"><h2>۹. پیش‌نمایش محصول</h2><p>نسخه اجرایی فعلی تقویم شهدا در همین مخزن و در مسیر مستقل محصول قرار دارد.</p><div class="quote"><strong>مسیر پیش‌نمایش:</strong> <a href="../projects/calendar/index.html" style="color:#17645f;font-weight:700">مشاهده تقویم شهدا</a></div><p>این صفحه صرفاً «طرح» و مشخصات محصول است؛ توسعه خود محصول باید داخل <code>projects/calendar/</code> انجام شود.</p></section>
+
+<section class="card" id="search"><h2>۸. جست‌وجو و کشف اطلاعات</h2><div class="grid">
+<div class="mini"><h3>جست‌وجوی سریع</h3><p>نام شهید، عنوان رویداد، عملیات، مکان یا کلیدواژه.</p></div><div class="mini"><h3>جست‌وجوی تاریخی</h3><p>روز، ماه، سال و بازه زمانی از ۱۳۰۰ به بعد.</p></div>
+<div class="mini"><h3>فیلتر ترکیبی</h3><p>استان، شهر، نوع رویداد، عملیات، بازه سال و موضوع.</p></div><div class="mini"><h3>جست‌وجوی معنایی</h3><p>در فاز هوشمندی، جست‌وجو در شرح، خاطرات و اسناد مجاز.</p></div>
+</div></section>
+
+<section class="card" id="memory"><h2>۹. یادبود و مشارکت</h2><div class="grid">
+<div class="mini"><h3>شهید امروز</h3><p>نمایش خودکار شهید یا شهدای مرتبط با تاریخ جاری.</p></div><div class="mini"><h3>یادبود مجازی</h3><p>در صورت تصویب طراحی: شمع، گل یا دعا با تجربه‌ای ساده و محترمانه.</p></div>
+<div class="mini"><h3>ثبت خاطره</h3><p>ارسال خاطره یا محتوای تکمیلی پس از بررسی و تأیید.</p></div><div class="mini"><h3>اصلاح اطلاعات</h3><p>گزارش خطا یا نقص و ورود به فرایند بررسی.</p></div>
+<div class="mini"><h3>علاقه‌مندی</h3><p>در نسخه حساب کاربری، ذخیره شهدا و رویدادها و دریافت یادآوری.</p></div><div class="mini"><h3>اشتراک و چاپ</h3><p>اشتراک‌گذاری و چاپ صفحه روز، ماه، رویداد یا پرونده.</p></div>
+</div></section>
+
+<section class="card" id="data"><h2>۱۰. مدل داده</h2><table><tr><th>فیلد</th><th>کاربرد</th></tr>
+<tr><td>شناسه</td><td>شناسه پایدار رویداد و اتصال به API.</td></tr><tr><td>تاریخ</td><td>شمسی و در آینده میلادی و قمری.</td></tr><tr><td>نوع</td><td>شهادت، تولد، عملیات، واقعه، مراسم، یادمان، مناسبت و غیره.</td></tr>
+<tr><td>عنوان/شرح</td><td>محتوای کوتاه و کامل.</td></tr><tr><td>موجودیت‌های مرتبط</td><td>شهید، عملیات، مکان، خانواده، سازمان، یادمان، سند و رسانه.</td></tr>
+<tr><td>مکان</td><td>کشور، استان، شهر، منطقه و در آینده مختصات.</td></tr><tr><td>منبع</td><td>منشأ، لینک/شناسه، تاریخ دسترسی و وضعیت اعتبارسنجی.</td></tr>
+<tr><td>رسانه</td><td>تصویر، صوت، ویدئو و سند همراه با وضعیت حقوق استفاده.</td></tr><tr><td>انتشار</td><td>پیش‌نویس، بررسی، تأیید، انتشار یا آرشیو.</td></tr></table>
+<div class="quote"><strong>اصل مهم:</strong> هر داده مهم باید قابل ردیابی و دارای منبع و وضعیت بررسی باشد.</div></section>
+
+<section class="card" id="sources"><h2>۱۱. منابع محتوایی پیشنهادی</h2><div class="grid">
+<div class="mini"><h3>منابع رسمی</h3><p>بنیاد شهید و امور ایثارگران و نهادهای رسمی مرتبط.</p></div><div class="mini"><h3>نوید شاهد</h3><p>اطلاعات و روایت‌های مرتبط، با بررسی منبع و حقوق استفاده.</p></div>
+<div class="mini"><h3>اسناد و کتاب‌ها</h3><p>خاطرات، اسناد دفاع مقدس، آثار پژوهشی و آرشیوهای قابل استناد.</p></div><div class="mini"><h3>منابع استانی</h3><p>آرشیوها، مراکز فرهنگی و یادمان‌های استانی.</p></div>
+<div class="mini"><h3>خانواده و همرزمان</h3><p>محتوای ارسالی مستقیم با رضایت، بررسی و ثبت منبع.</p></div><div class="mini"><h3>تقویم‌های عمومی</h3><p>برای داده تقویمی پایه؛ نه جایگزین منبع تاریخی.</p></div>
+</div></section>
+
+<section class="card" id="architecture"><h2>۱۲. معماری فنی</h2><div class="flow"><div>رابط کاربر</div><div>موتور تقویم</div><div>موتور رویداد</div><div>لایه داده</div><div>جست‌وجو/API</div><div>مدیریت</div></div><div class="grid">
+<div class="mini"><h3>Static First</h3><p>نسخه اولیه با HTML/CSS/JS مستقل برای تثبیت تجربه و عملکرد.</p></div><div class="mini"><h3>لایه داده</h3><p>انتقال رویدادها از JS به JSON و تفکیک رویداد، منبع، دسته و مکان.</p></div>
+<div class="mini"><h3>موتور رویداد</h3><p>منطق تاریخ، فیلتر، ارتباط و تولید صفحات رویداد.</p></div><div class="mini"><h3>API</h3><p>ارائه داده به محصولات و اپلیکیشن‌ها بدون وابستگی به رابط.</p></div>
+<div class="mini"><h3>پنل مدیریت</h3><p>ثبت، ویرایش، بررسی منبع، رسانه و انتشار.</p></div><div class="mini"><h3>هوشمندی</h3><p>پس از شکل‌گیری داده معتبر: جست‌وجوی معنایی و کشف ارتباطات.</p></div>
+</div></section>
+
+<section class="card" id="future"><h2>۱۳. قابلیت‌های توسعه‌ای</h2><div class="grid">
+<div class="mini"><h3>نقشه تعاملی</h3><p>محل شهادت، مزار، عملیات و یادمان‌ها روی نقشه.</p></div><div class="mini"><h3>PDF</h3><p>چاپ روز، ماه یا تقویم مناسبتی.</p></div>
+<div class="mini"><h3>حالت شب</h3><p>تم مناسب مطالعه در نور کم.</p></div><div class="mini"><h3>PWA و اپلیکیشن</h3><p>نسخه نصب‌شونده و در آینده اپلیکیشن اختصاصی.</p></div>
+<div class="mini"><h3>اعلان‌ها</h3><p>یادآوری سالگرد شهادت و رویدادهای مورد علاقه.</p></div><div class="mini"><h3>زمان و اوقات شرعی</h3><p>ساعت تهران و جهان، استان‌ها، مراکز مذهبی و اوقات شرعی.</p></div>
+</div></section>
+
+<section class="card" id="roadmap"><h2>۱۴. نقشه راه اجرایی</h2><div class="grid">
+<div class="mini"><h3>فاز ۱ — تثبیت هسته</h3><p>تکمیل هویت مستقل، خانه، ماهانه، هفتگی، سالانه، روزانه، امروز و جست‌وجوی پایه. <strong>اولویت فعلی.</strong></p></div>
+<div class="mini"><h3>فاز ۲ — استانداردسازی داده</h3><p>مدل رویداد، شناسه‌ها، دسته‌بندی، منابع و انتقال داده از JS به ساختار مستقل.</p></div>
+<div class="mini"><h3>فاز ۳ — آرشیو و صفحات رویداد</h3><p>گسترش داده از ۱۳۰۰، آرشیو، صفحه اختصاصی رویداد و فیلتر پیشرفته.</p></div>
+<div class="mini"><h3>فاز ۴ — شبکه دانش</h3><p>اتصال رویدادها به شهدا، عملیات‌ها، مکان‌ها، اسناد و روایت‌ها.</p></div>
+<div class="mini"><h3>فاز ۵ — مشارکت و مدیریت</h3><p>حساب کاربری، علاقه‌مندی، خاطره، اصلاح اطلاعات، پنل و گردش تأیید.</p></div>
+<div class="mini"><h3>فاز ۶ — API و اکوسیستم</h3><p>API پایدار برای سایر محصولات، اپلیکیشن و سرویس‌های وابسته.</p></div>
+<div class="mini"><h3>فاز ۷ — خدمات تکمیلی</h3><p>نقشه، PDF، اعلان، PWA، ساعت جهانی و اوقات شرعی.</p></div>
+<div class="mini"><h3>فاز ۸ — هوشمندی</h3><p>جست‌وجوی معنایی، پیشنهاد ارتباط و کشف الگوهای زمانی بر پایه داده معتبر.</p></div>
+</div></section>
+
+<section class="card" id="principles"><h2>۱۵. اصول طراحی و تجربه کاربری</h2><div class="grid">
+<div class="mini"><h3>وقار و احترام</h3><p>طراحی ایرانی و معنوی، بدون شلوغی و المان‌های کودکانه.</p></div><div class="mini"><h3>خوانایی</h3><p>فونت فارسی خوانا، اندازه مناسب و اعداد فارسی.</p></div>
+<div class="mini"><h3>اولویت محتوا</h3><p>تقویم و اطلاعات واقعی محور باشند؛ تزئینات تابع عملکرد باشند.</p></div><div class="mini"><h3>موبایل‌محور</h3><p>بدون هم‌پوشانی، شکست نما یا اسکرول ناخواسته در همه دستگاه‌ها.</p></div>
+<div class="mini"><h3>معماری باز</h3><p>نسخه Static First باشد اما برای CMS، API و مدیریت آینده قفل نشود.</p></div><div class="mini"><h3>منبع‌محوری</h3><p>هر داده مهم باید منبع و وضعیت بررسی خود را حفظ کند.</p></div>
+</div></section>
+
+<section class="card" id="acceptance"><h2>۱۶. معیارهای تکمیل</h2><table><tr><th>معیار</th><th>هدف</th></tr>
+<tr><td>تقویم ماهانه/هفتگی/سالانه/روزانه</td><td>پایدار و بدون تداخل CSS/JS</td></tr><tr><td>تاریخ و اعداد فارسی</td><td>یکپارچه در رابط</td></tr>
+<tr><td>آرشیو از ۱۳۰۰</td><td>قابل جست‌وجو و توسعه‌پذیر</td></tr><tr><td>رویداد مستقل</td><td>شناسه، منبع و ارتباطات</td></tr>
+<tr><td>صفحه شهید</td><td>قابل اتصال به رویدادها و منابع</td></tr><tr><td>جست‌وجوی پیشرفته</td><td>تاریخ، نوع، مکان، شهید و کلیدواژه</td></tr>
+<tr><td>مدیریت محتوا</td><td>ثبت، بررسی و انتشار</td></tr><tr><td>API</td><td>مستقل از UI</td></tr><tr><td>PWA/موبایل</td><td>قابل نصب و استفاده روزمره</td></tr></table></section>
+
+<section class="card" id="preview"><h2>۱۷. پیش‌نمایش و محل توسعه</h2><p>نسخه اجرایی در مسیر مستقل تقویم قرار دارد.</p><div class="quote"><strong>پیش‌نمایش:</strong> <a href="../projects/calendar/index.html" style="color:#17645f;font-weight:700">مشاهده تقویم شهدا</a></div><p><strong>مسیر توسعه:</strong> <code>projects/calendar/</code></p><p>این صفحه مرجع طرح در پوشه «طرح‌ها» است؛ بنابراین پیش از توسعه هر قابلیت بزرگ، جایگاه آن در این نقشه راه مشخص می‌شود.</p></section>
 <a class="back-top" href="#top" title="بازگشت به بالا" aria-label="بازگشت به بالا">↑</a>
 <footer class="footer">ShahidPortal — طرح جامع | تقویم شهدا</footer>
-</div>
-<script src="../assets/js/sidebar.js"></script>
+</div><script src="../assets/js/sidebar.js"></script>
 </body></html>
