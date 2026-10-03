@@ -1,0 +1,1 @@
+(()=>{const fa=n=>String(n).replace(/\d/g,x=>"۰۱۲۳۴۵۶۷۸۹"[x]);document.documentElement.lang="fa";document.querySelectorAll("[data-fa]").forEach(e=>e.textContent=fa(e.textContent));})();
