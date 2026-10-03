@@ -1,11 +1,20 @@
 const MONTHS=["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
 const WEEK=["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
 const events=[
- {date:"۱۳۵۹/۰۶/۳۱",type:"واقعه",title:"آغاز جنگ تحمیلی",desc:"آغاز جنگ ایران و عراق و شروع دوره‌ای مهم در تاریخ دفاع مقدس.",tags:"جنگ دفاع مقدس عراق ایران"},
- {date:"۱۳۶۰/۰۳/۳۱",type:"شهادت",title:"شهادت دکتر مصطفی چمران",desc:"شهادت مصطفی چمران در دهلاویه.",tags:"مصطفی چمران دهلاویه شهید"},
- {date:"۱۳۶۱/۰۳/۰۳",type:"عملیات",title:"آزادسازی خرمشهر",desc:"پایان عملیات بیت‌المقدس و آزادسازی خرمشهر.",tags:"بیت المقدس خرمشهر عملیات"},
- {date:"۱۳۶۴/۱۱/۲۰",type:"عملیات",title:"آغاز عملیات والفجر ۸",desc:"آغاز عملیات والفجر ۸ در منطقه فاو.",tags:"والفجر ۸ فاو عملیات"},
- {date:"۱۳۶۵/۱۰/۱۹",type:"عملیات",title:"آغاز عملیات کربلای ۵",desc:"آغاز عملیات کربلای ۵ در منطقه شلمچه.",tags:"کربلای ۵ شلمچه عملیات"}
+ {id:"EV-0001",date:"۱۳۵۷/۱۱/۲۲",type:"واقعه",title:"پیروزی انقلاب اسلامی",desc:"ثبت یکی از مهم‌ترین رویدادهای تاریخ معاصر ایران در تقویم تاریخی کشور.",tags:"انقلاب اسلامی ایران",city:"تهران",source:"تقویم رویدادهای ملی"},
+ {id:"EV-0002",date:"۱۳۵۹/۰۶/۳۱",type:"واقعه",title:"آغاز جنگ تحمیلی",desc:"آغاز جنگ ایران و عراق و شروع دوره‌ای مهم در تاریخ دفاع مقدس.",tags:"جنگ دفاع مقدس عراق ایران",city:"سراسر کشور",source:"تقویم دفاع مقدس"},
+ {id:"EV-0003",date:"۱۳۶۰/۰۴/۰۷",type:"شهادت",title:"شهادت آیت‌الله دکتر بهشتی و یاران انقلاب",desc:"شهادت آیت‌الله سیدمحمدحسین بهشتی و جمعی از یاران انقلاب در انفجار دفتر حزب جمهوری اسلامی.",tags:"بهشتی شهدای هفتم تیر حزب جمهوری اسلامی",city:"تهران",source:"تقویم مناسبت‌های انقلاب"},
+ {id:"EV-0004",date:"۱۳۶۰/۰۶/۰۸",type:"شهادت",title:"شهادت شهیدان رجایی و باهنر",desc:"شهادت محمدعلی رجایی و محمدجواد باهنر در انفجار دفتر نخست‌وزیری.",tags:"رجایی باهنر شهدای دولت",city:"تهران",source:"تقویم مناسبت‌های انقلاب"},
+ {id:"EV-0005",date:"۱۳۶۰/۰۳/۳۱",type:"شهادت",title:"شهادت دکتر مصطفی چمران",desc:"شهادت مصطفی چمران در دهلاویه.",tags:"مصطفی چمران دهلاویه شهید",city:"دهلاویه",shahidId:"SHAHID-CHAMRAN",source:"پرونده شهید"},
+ {id:"EV-0006",date:"۱۳۶۰/۰۷/۰۵",type:"عملیات",title:"آغاز عملیات ثامن‌الائمه",desc:"آغاز عملیات ثامن‌الائمه و شکستن حصر آبادان.",tags:"ثامن الائمه آبادان عملیات",city:"آبادان",operationId:"OP-THAMEN-AL-AEMEH",source:"اطلس عملیات"},
+ {id:"EV-0007",date:"۱۳۶۱/۰۱/۰۲",type:"عملیات",title:"آغاز عملیات فتح‌المبین",desc:"آغاز عملیات فتح‌المبین در منطقه غرب شوش و دزفول.",tags:"فتح المبین شوش دزفول عملیات",city:"شوش و دزفول",operationId:"OP-FATH-OL-MOBIN",source:"اطلس عملیات"},
+ {id:"EV-0008",date:"۱۳۶۱/۰۲/۱۰",type:"عملیات",title:"آغاز عملیات بیت‌المقدس",desc:"آغاز عملیات بیت‌المقدس با هدف آزادسازی خرمشهر.",tags:"بیت المقدس خرمشهر عملیات",city:"خرمشهر",operationId:"OP-BEYT-OL-MOGHADDAS",source:"اطلس عملیات"},
+ {id:"EV-0009",date:"۱۳۶۱/۰۳/۰۳",type:"واقعه",title:"آزادسازی خرمشهر",desc:"آزادسازی خرمشهر در جریان عملیات بیت‌المقدس.",tags:"خرمشهر بیت المقدس آزادسازی",city:"خرمشهر",operationId:"OP-BEYT-OL-MOGHADDAS",source:"اطلس عملیات"},
+ {id:"EV-0010",date:"۱۳۶۴/۱۱/۲۰",type:"عملیات",title:"آغاز عملیات والفجر ۸",desc:"آغاز عملیات والفجر ۸ در منطقه فاو.",tags:"والفجر ۸ فاو عملیات",city:"فاو",operationId:"OP-VALFAJR-8",source:"اطلس عملیات"},
+ {id:"EV-0011",date:"۱۳۶۵/۱۰/۱۹",type:"عملیات",title:"آغاز عملیات کربلای ۵",desc:"آغاز عملیات کربلای ۵ در منطقه شلمچه.",tags:"کربلای ۵ شلمچه عملیات",city:"شلمچه",operationId:"OP-KARBALA-5",source:"اطلس عملیات"},
+ {id:"EV-0012",date:"۱۳۶۷/۰۴/۲۷",type:"واقعه",title:"پذیرش قطعنامه ۵۹۸",desc:"پذیرش قطعنامه ۵۹۸ شورای امنیت سازمان ملل از سوی ایران.",tags:"قطعنامه 598 پایان جنگ",city:"ایران",source:"اسناد تاریخی"},
+ {id:"EV-0013",date:"۱۳۶۷/۰۵/۰۵",type:"عملیات",title:"آغاز عملیات مرصاد",desc:"آغاز عملیات مرصاد در منطقه غرب کشور.",tags:"مرصاد کرمانشاه عملیات",city:"کرمانشاه",operationId:"OP-MERSAD",source:"اطلس عملیات"},
+ {id:"EV-0014",date:"۱۳۶۷/۰۵/۰۸",type:"مراسم",title:"یادمان شهدای عملیات مرصاد",desc:"یادبود و بزرگداشت شهدای عملیات مرصاد.",tags:"مرصاد یادواره شهدا",city:"کرمانشاه",operationId:"OP-MERSAD",source:"رویدادهای یادمانی"}
 ];
 const $=id=>document.getElementById(id);
 const fa=n=>String(n).replace(/\d/g,x=>"۰۱۲۳۴۵۶۷۸۹"[x]);
@@ -91,9 +100,9 @@ function search(){
  if(!q&&!kind){$("resultsBox").hidden=true;return}
  const dateMatch=q.match(/^(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})$/);
  if(dateMatch){const y=Number(dateMatch[1]),m=Number(dateMatch[2]),d=Number(dateMatch[3]);if(y>=1300&&m>=1&&m<=12&&d>=1&&d<=daysInMonth(y,m)){state={y:y,m:m,d:d};setView("month");draw()}}
- const list=events.filter(e=>{const text=[e.title,e.desc,e.tags,e.type,en(e.date)].join(" ").toLowerCase();return (!q||text.includes(q))&&(!kind||e.type===kind)});
+ const list=events.filter(e=>{const text=[e.title,e.desc,e.tags,e.type,e.city||"",e.unit||"",e.source||"",en(e.date)].join(" ").toLowerCase();return (!q||text.includes(q))&&(!kind||e.type===kind)});
  $("resultsBox").hidden=false;$("resultsCount").textContent=fa(list.length)+" نتیجه";
- $("searchResults").innerHTML=list.length?list.map((e,i)=>'<button class="resultItem" data-i="'+i+'"><span>'+e.type+'</span><div><strong>'+e.title+'</strong><small>'+e.date+" · "+e.desc+"</small></div></button>").join(""):'<div class="emptyState">نتیجه‌ای برای جست‌وجوی شما پیدا نشد.</div>';
+ $("searchResults").innerHTML=list.length?list.map((e,i)=>'<button class="resultItem" data-i="'+i+'"><span>'+e.type+'</span><div><strong>'+e.title+'</strong><small>'+e.date+" · "+e.desc+(e.city?" · "+e.city:"")+"</small></div></button>").join(""):'<div class="emptyState">نتیجه‌ای برای جست‌وجوی شما پیدا نشد.</div>';
  document.querySelectorAll(".resultItem").forEach((b,i)=>b.onclick=()=>{const e=list[i],a=e.date.split("/").map(Number);state={y:a[0],m:a[1],d:a[2]};setView("month");draw();$("calendar").scrollIntoView({behavior:"smooth",block:"start"})})
 }
 function clearSearch(){$("q").value="";$("kind").value="";$("resultsBox").hidden=true}
