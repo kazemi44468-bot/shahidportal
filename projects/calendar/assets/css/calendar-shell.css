@@ -2,3 +2,5 @@
 /* تنظیم نهایی فونت و لوگوی فوتر */
 .cs-head,.cs-footer,.cs-head *,.cs-footer *{font-family:BYekanLocal,Vazirmatn,sans-serif}.cs-foot-brand img{width:200px!important;height:200px!important}.cs-brand small{font-size:13px!important}.cs-nav>a,.cs-drop>button{font-size:14px!important}.cs-drop-menu a{font-size:13px!important}.cs-foot-title{font-size:18px!important}.cs-foot-text{font-size:14px!important}.cs-products-title{font-size:15px!important}.cs-product{font-size:13px!important}.cs-footer{margin-top:18px}.cs-foot-main{padding:12px 0!important}
 @media(max-width:560px){.cs-foot-brand img{width:150px!important;height:150px!important}.cs-foot-title{font-size:16px!important}}
+
+.cs-foot-main{display:flex;justify-content:center;align-items:center;padding:10px 0!important;min-height:0}.cs-foot-brand{margin:0!important}.cs-foot-brand img{width:200px!important;height:200px!important}@media(max-width:560px){.cs-foot-brand img{width:140px!important;height:140px!important}}
