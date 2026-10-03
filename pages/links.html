@@ -104,7 +104,7 @@ const links=[
 {t:"سینماتک شهدا",d:"آرشیو فیلم‌ها، مستندها و آثار تصویری مرتبط با شهدا و ایثارگران.",c:"رسانه",s:"future",st:"پیش‌بینی‌شده"},
 {t:"رادیو و پادکست شهدا",d:"مجموعه صوتی روایت‌ها، خاطرات، گفت‌وگوها و برنامه‌های تخصصی.",c:"رسانه",s:"future",st:"پیش‌بینی‌شده"},
 {t:"اخبار و اطلاع‌رسانی شهدا و ایثارگران",d:"مرکز رسمی گردآوری، دسته‌بندی و انتشار اخبار و اطلاعیه‌های مرتبط با شهدا، ایثارگران و خانواده‌ها.",c:"اخبار و رسانه",s:"future",st:"پیش‌بینی‌شده"},
-{t:"تقویم رویدادهای شهدا",d:"تقویم مراسم، یادواره‌ها، برنامه‌های فرهنگی، نمایشگاه‌ها و رویدادهای مرتبط.",c:"اخبار و رسانه",s:"future",st:"پیش‌بینی‌شده"},
+{t:"تقویم رویدادهای شهدا",d:"تقویم مراسم، یادواره‌ها، برنامه‌های فرهنگی، نمایشگاه‌ها و رویدادهای مرتبط.",c:"اخبار و رسانه",s:"future",st:"پیش‌بینی‌شده"},\n{t:"تقویم شهدا",d:"محصول مستقل و تخصصی برای سالروز شهادت، تولد شهدا، عملیات‌ها، وقایع، یادواره‌ها و رویدادهای مرتبط.",c:"پروژه‌های تخصصی",s:"build",st:"در حال توسعه",u:"../projects/calendar/index.html"},
 {t:"مرکز اطلاعیه‌ها و فراخوان‌ها",d:"انتشار فراخوان‌ها، اطلاعیه‌های رسمی، برنامه‌ها و اعلامیه‌های مرتبط.",c:"اخبار و رسانه",s:"future",st:"پیش‌بینی‌شده"},
 {t:"کتابخانه شهدا و ایثارگران",d:"کتاب‌ها، مقالات، پایان‌نامه‌ها و منابع مطالعاتی مرتبط با شهدا و ایثارگران.",c:"پژوهش و دانش",s:"future",st:"پیش‌بینی‌شده"},
 {t:"مرکز منابع و پژوهش",d:"مرجع تخصصی منابع، داده‌ها، اسناد و ابزارهای مورد نیاز پژوهشگران و مراکز علمی.",c:"پژوهش و دانش",s:"future",st:"پیش‌بینی‌شده"},
@@ -139,7 +139,7 @@ function renderCats(){document.getElementById("categories").innerHTML=cats.map(c
 function render(){
 const q=search.value.trim().toLowerCase();
 const out=links.filter(x=>(active==="همه"||x.c===active)&&(!q||(x.t+" "+x.d+" "+x.c+" "+x.st).toLowerCase().includes(q)));
-grid.innerHTML=out.map(x=>'<div class="link-card disabled"><span class="tag">'+x.c+'</span><span class="status '+x.s+'">'+x.st+'</span><h3>'+x.t+'</h3><p>'+x.d+'</p><span class="arrow">آدرس مستقل پس از راه‌اندازی</span></div>').join("");
+grid.innerHTML=out.map(x=>'<a href="'+(x.u||'#')+'" class="link-card '+(x.u?'':'disabled')+'"><span class="tag">'+x.c+'</span><span class="status '+x.s+'">'+x.st+'</span><h3>'+x.t+'</h3><p>'+x.d+'</p><span class="arrow">آدرس مستقل پس از راه‌اندازی</span></div>').join("");
 empty.style.display=out.length?"none":"block";result.textContent=fa(out.length)+" پروژه";count.textContent=fa(out.length)+" مورد";
 }
 search.addEventListener("input",render);renderCats();render();
