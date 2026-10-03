@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اطلس ملی شهدا | طرح جامع شهیدپورتال</title>
+<style>
+@font-face{font-family:Vazir;src:url('../assets/fonts/Vazirmatn-Regular.woff2')}@font-face{font-family:Vazir;src:url('../assets/fonts/Vazirmatn-Bold.woff2');font-weight:700}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f7;color:#172235;font-family:Vazir,Tahoma,Arial,sans-serif;line-height:2}.wrap{max-width:1220px;margin:auto;padding:28px 20px 70px}
+.hero{background:linear-gradient(135deg,#103b48,#147d78);color:#fff;border-radius:24px;padding:42px;margin-bottom:20px;box-shadow:0 18px 50px #123d4d22}.hero h1{margin:0 0 8px;font-size:34px}.hero p{margin:4px 0;opacity:.96}.badge{display:inline-block;background:#ffffff1c;border:1px solid #ffffff44;border-radius:999px;padding:2px 12px;margin-top:12px;font-size:13px}
+.nav{position:sticky;top:8px;z-index:5;background:#fffffff2;backdrop-filter:blur(12px);border:1px solid #dce8e6;border-radius:15px;padding:7px 10px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:2px;box-shadow:0 6px 18px #1722350a}.nav a{color:#17645f;text-decoration:none;font-size:12px;padding:2px 7px;white-space:nowrap}.nav a:hover{background:#edf7f6;border-radius:5px}
+.card{background:#fff;border:1px solid #e1e9e8;border-radius:20px;padding:27px;margin:17px 0;box-shadow:0 8px 25px #17223508}.card h2{margin-top:0;color:#145c58;font-size:23px}.card h3{color:#17645f}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}.mini{background:#f6faf9;border:1px solid #e1edeb;border-radius:15px;padding:17px}.mini h3{margin-top:0}.quote{border-right:4px solid #19847e;background:#f1f8f7;padding:14px 19px;border-radius:12px;margin:15px 0}.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin:15px 0}.flow div{padding:14px 7px;text-align:center;border-radius:14px;background:#eaf5f3;border:1px solid #d8eae7;color:#155b57;font-weight:700}
+table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border:1px solid #dfe8e6;padding:9px;text-align:right;vertical-align:top}th{background:#edf6f5;color:#145c58}.status{font-weight:700}.done{color:#176b60}.next{color:#9a6500}.future{color:#687586}.footer{text-align:center;color:#657486;padding-top:25px}.back-top{position:fixed;left:20px;bottom:20px;width:42px;height:42px;border:1px solid #d5e4e2;border-radius:12px;background:#ffffffee;color:#17645f;text-decoration:none;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 8px 22px #17223518}
+code{background:#eef5f4;border-radius:5px;padding:1px 5px}@media(max-width:760px){.grid,.flow{grid-template-columns:1fr}.hero{padding:29px 21px}.hero h1{font-size:27px}.card{padding:20px;overflow-x:auto}.nav{position:static}table{font-size:13px;min-width:760px}}
+</style>
+<link rel="stylesheet" href="../assets/css/sidebar.css">
+<meta name="shahidportal-version" content="2026-10-03-atlas-national-plan-v1">
+</head>
+<body data-sidebar-page="atlas-melli" class="sp-main" id="top">
+<div class="wrap">
+<section class="hero">
+<h1>اطلس ملی شهدا</h1>
+<p>طرح جامع سامانه جغرافیایی شهیدپورتال برای شناسایی، نمایش، ارتباط و کشف مکان‌های مرتبط با شهدا.</p>
+<p>هدف، ساخت یک فهرست ساده از مکان‌ها نیست؛ هدف ایجاد یک <strong>نقشه تعاملی و داده‌محور</strong> است که مکان را به شهید، رویداد، سند، تصویر و روایت متصل کند.</p>
+<span class="badge">نسخه طرح: ۱۴۰۵/۰۷/۱۱ — نسخه ۱ | سند طراحی محصول</span>
+</section>
+
+<nav class="nav">
+<a href="#vision">چشم‌انداز</a><a href="#purpose">هدف</a><a href="#map">نقشه</a><a href="#places">انواع مکان</a><a href="#layers">لایه‌ها</a><a href="#record">پرونده مکان</a><a href="#relations">ارتباطات</a><a href="#search">جست‌وجو</a><a href="#data">داده</a><a href="#participation">مشارکت</a><a href="#architecture">معماری</a><a href="#roadmap">نقشه راه</a><a href="#status">وضعیت</a><a href="#preview">پیش‌نمایش</a>
+</nav>
+
+<section class="card" id="vision"><h2>۱. چشم‌انداز</h2>
+<p>«اطلس ملی شهدا» یکی از بخش‌های اصلی شهیدپورتال برای تبدیل جغرافیای مرتبط با شهدا به یک لایه قابل مشاهده، جست‌وجو و پژوهش است. کاربر باید بتواند روی نقشه ایران حرکت کند، مکان‌های مرتبط را ببیند، فیلتر کند و از هر مکان به پرونده‌های مرتبط برسد.</p>
+<div class="quote"><strong>تعریف مادر:</strong> اطلس ملی شهدا = نقشه + مکان + شهید + رویداد + سند + رسانه + جست‌وجو + ارتباطات + داده معتبر.</div>
+<p>این سامانه در نسخه نخست تمرکز ملی دارد، اما مدل داده باید به‌گونه‌ای باشد که در آینده امکان اتصال به اطلس جهانی و مکان‌های مرتبط در کشورهای دیگر را بدون بازطراحی بنیادی فراهم کند.</p>
+</section>
+
+<section class="card" id="purpose"><h2>۲. هدف و مسئله</h2>
+<div class="grid">
+<div class="mini"><h3>کشف جغرافیایی</h3><p>کاربر به‌جای جست‌وجوی صرفاً متنی، بتواند مکان‌های مرتبط را روی نقشه پیدا کند.</p></div>
+<div class="mini"><h3>اتصال اطلاعات</h3><p>هر نقطه روی نقشه به اشخاص، رویدادها، اسناد، تصاویر و منابع مرتبط متصل شود.</p></div>
+<div class="mini"><h3>معرفی میراث</h3><p>گلزارها، مزارها، یادمان‌ها، موزه‌ها و دیگر مکان‌های مرتبط به‌صورت ساختاریافته معرفی شوند.</p></div>
+<div class="mini"><h3>پژوهش</h3><p>پژوهشگر بتواند مکان‌ها را بر اساس استان، شهر، نوع، دوره، رویداد و شخص بررسی کند.</p></div>
+<div class="mini"><h3>مسیر بازدید</h3><p>در آینده امکان تعریف مسیرهای زیارت، بازدید فرهنگی و مسیرهای تاریخی فراهم شود.</p></div>
+<div class="mini"><h3>حفاظت از داده</h3><p>مختصات و اطلاعات حساس فقط در سطحی نمایش داده شوند که با ملاحظات حریم خصوصی و امنیتی سازگار باشد.</p></div>
+</div></section>
+
+<section class="card" id="map"><h2>۳. نقشه تعاملی</h2>
+<p>هسته اطلس یک نقشه واقعی و تعاملی است؛ نه یک تصویر ثابت از ایران. نقشه پایه از یک موتور نقشه استاندارد تأمین می‌شود و اطلاعات اختصاصی شهیدپورتال به‌صورت لایه‌های داده روی آن قرار می‌گیرد.</p>
+<div class="flow"><div>نقشه پایه</div><div>استان و شهر</div><div>نقاط مکان</div><div>فیلتر و جست‌وجو</div><div>پرونده مکان</div><div>ارتباط با داده‌ها</div></div>
+<table><tr><th>قابلیت</th><th>شرح</th></tr>
+<tr><td>حرکت و بزرگ‌نمایی</td><td>حرکت در نقشه، زوم و بازگشت به محدوده ایران.</td></tr>
+<tr><td>نشانگرها</td><td>نمایش مکان‌های ثبت‌شده با نشانگرهای قابل تشخیص.</td></tr>
+<tr><td>خوشه‌بندی</td><td>در تراکم بالا، چند نقطه نزدیک به‌صورت خوشه نمایش داده شوند.</td></tr>
+<tr><td>پنجره اطلاعات</td><td>با انتخاب نقطه، خلاصه مکان و مسیر ورود به پرونده نمایش داده شود.</td></tr>
+<tr><td>فیلتر زنده</td><td>تغییر نوع مکان، استان، شهر یا موضوع، لایه نقشه را به‌روز کند.</td></tr>
+<tr><td>مسیر</td><td>در مراحل بعد، امکان پیوند به مسیرهای بازدید یا مسیریابی فراهم شود.</td></tr>
+</table>
+</section>
+
+<section class="card" id="places"><h2>۴. انواع مکان‌های اطلس</h2>
+<div class="grid">
+<div class="mini"><h3>گلزار شهدا</h3><p>اطلاعات گلزار، محدوده، تصاویر، وضعیت ثبت و فهرست شهدای مرتبط.</p></div>
+<div class="mini"><h3>مزار</h3><p>مکان دفن یک یا چند شهید و ارتباط مستقیم با پرونده اشخاص.</p></div>
+<div class="mini"><h3>یادمان</h3><p>یادمان‌ها و بناهای مرتبط با شهدا و رویدادهای تاریخی.</p></div>
+<div class="mini"><h3>موزه و مرکز فرهنگی</h3><p>موزه‌ها، مراکز اسناد، باغ‌موزه‌ها و مجموعه‌های فرهنگی مرتبط.</p></div>
+<div class="mini"><h3>مکان تاریخی</h3><p>محل عملیات، شهادت، مقاومت، آزادسازی و دیگر رویدادهای مهم.</p></div>
+<div class="mini"><h3>مکان رسانه‌ای/اسنادی</h3><p>مکان آرشیو یا مجموعه‌ای که آثار و اسناد مرتبط را نگهداری می‌کند.</p></div>
+</div>
+</section>
+
+<section class="card" id="layers"><h2>۵. لایه‌های نقشه</h2>
+<table><tr><th>لایه</th><th>نمونه</th><th>کاربرد</th></tr>
+<tr><td>گلزارها</td><td>گلزارهای شهدا</td><td>کشف و معرفی مراکز تجمع مزارها.</td></tr>
+<tr><td>مزارها</td><td>مزار شهید</td><td>اتصال مستقیم مکان به شخص.</td></tr>
+<tr><td>یادمان‌ها</td><td>یادمان و بنای یادبود</td><td>معرفی میراث و مکان‌های یادمانی.</td></tr>
+<tr><td>موزه‌ها</td><td>موزه دفاع مقدس، مراکز اسناد و فرهنگی</td><td>اتصال جغرافیا به منابع فرهنگی.</td></tr>
+<tr><td>رویدادها</td><td>محل عملیات یا رویداد تاریخی</td><td>نمایش جغرافیای تاریخ.</td></tr>
+<tr><td>مسیرها</td><td>مسیرهای بازدید یا تاریخی</td><td>قابلیت آینده برای تجربه مکانی.</td></tr>
+</table>
+</section>
+
+<section class="card" id="record"><h2>۶. پرونده هر مکان</h2>
+<p>هر نقطه روی نقشه باید پشتوانه یک رکورد مستقل داشته باشد و صرفاً مختصات جغرافیایی نباشد.</p>
+<table><tr><th>گروه اطلاعات</th><th>محتوا</th></tr>
+<tr><td>شناسه</td><td>شناسه پایدار و نام رسمی/رایج مکان.</td></tr>
+<tr><td>جغرافیا</td><td>کشور، استان، شهر، منطقه، مختصات و در صورت نیاز محدوده جغرافیایی.</td></tr>
+<tr><td>نوع</td><td>گلزار، مزار، یادمان، موزه، مرکز فرهنگی، مکان تاریخی و سایر انواع.</td></tr>
+<tr><td>معرفی</td><td>شرح تاریخی و کاربردی مکان.</td></tr>
+<tr><td>اشخاص</td><td>شهدای مرتبط و سایر اشخاص مرتبط.</td></tr>
+<tr><td>رویدادها</td><td>عملیات، شهادت، مراسم و رویدادهای تاریخی مرتبط.</td></tr>
+<tr><td>رسانه</td><td>تصویر، ویدئو، صوت، اسناد و منابع قابل انتشار.</td></tr>
+<tr><td>اعتبار</td><td>منبع، وضعیت بررسی، تاریخ بازبینی و سطح اطمینان داده.</td></tr>
+<tr><td>اطلاعات بازدید</td><td>در صورت امکان: آدرس، ساعات، امکانات و اطلاعات عمومی بازدید.</td></tr>
+</table>
+</section>
+
+<section class="card" id="relations"><h2>۷. شبکه ارتباطات</h2>
+<p>ارزش اطلس زمانی کامل می‌شود که نقشه به شبکه داده‌های شهیدپورتال متصل باشد.</p>
+<div class="flow"><div>مکان</div><div>شهید</div><div>رویداد</div><div>دوره</div><div>سند</div><div>رسانه</div></div>
+<p>مثلاً انتخاب یک مکان می‌تواند به فهرست شهدای آن، رویدادهای مرتبط، اسناد، تصاویر و مکان‌های مرتبط دیگر منتهی شود؛ و برعکس، از پرونده یک شهید می‌توان مکان‌های مرتبط با زندگی، شهادت، دفن و یادمان او را روی نقشه دید.</p>
+</section>
+
+<section class="card" id="search"><h2>۸. جست‌وجو و فیلتر</h2>
+<div class="grid">
+<div class="mini"><h3>جست‌وجوی مکانی</h3><p>استان، شهر، منطقه، نام مکان یا محدوده.</p></div>
+<div class="mini"><h3>نوع مکان</h3><p>گلزار، مزار، یادمان، موزه و سایر دسته‌ها.</p></div>
+<div class="mini"><h3>شخص</h3><p>نمایش مکان‌های مرتبط با یک شهید یا شخصیت.</p></div>
+<div class="mini"><h3>رویداد</h3><p>مکان‌های مرتبط با یک عملیات یا رویداد تاریخی.</p></div>
+<div class="mini"><h3>دوره</h3><p>فیلتر بر اساس دوره تاریخی.</p></div>
+<div class="mini"><h3>ترکیبی</h3><p>مثلاً «یادمان‌های استان خوزستان مرتبط با عملیات بیت‌المقدس».</p></div>
+</div>
+</section>
+
+<section class="card" id="data"><h2>۹. مدل داده</h2>
+<table><tr><th>فیلد</th><th>اصل طراحی</th></tr>
+<tr><td>شناسه یکتا</td><td>هر مکان شناسه پایدار داشته باشد.</td></tr>
+<tr><td>مختصات</td><td>عرض و طول جغرافیایی با استاندارد مشخص و دقت متناسب با نوع مکان.</td></tr>
+<tr><td>محدوده</td><td>در صورت نیاز امکان ثبت محدوده چندضلعی یا مسیر.</td></tr>
+<tr><td>نوع مکان</td><td>از واژگان کنترل‌شده استفاده شود.</td></tr>
+<tr><td>ارتباطات</td><td>پیوند ساختاریافته با شخص، رویداد، دوره و منبع.</td></tr>
+<tr><td>منبع</td><td>منبع و وضعیت اعتبار برای داده‌های مهم الزامی باشد.</td></tr>
+<tr><td>نسخه</td><td>تغییرات مکان و اطلاعات آن قابل ردیابی باشد.</td></tr>
+<tr><td>وضعیت</td><td>پیشنهادی، بررسی، تأیید، منتشرشده یا آرشیوی.</td></tr>
+</table>
+</section>
+
+<section class="card" id="participation"><h2>۱۰. مشارکت و تکمیل اطلس</h2>
+<p>کاربران، خانواده‌ها، مراکز فرهنگی و پژوهشگران در آینده بتوانند مکان جدید پیشنهاد دهند یا اطلاعات موجود را اصلاح کنند.</p>
+<div class="quote"><strong>گردش محتوا:</strong> پیشنهاد مکان → ثبت مختصات و منبع → بررسی اولیه → اعتبارسنجی → اصلاح → تأیید → انتشار → بازبینی دوره‌ای.</div>
+<p>برای جلوگیری از ثبت مکان‌های نادرست، اطلاعات حساس یا مختصات اشتباه، انتشار داده‌های پیشنهادی باید از داده تأییدشده جدا باشد.</p>
+</section>
+
+<section class="card" id="architecture"><h2>۱۱. معماری فنی پیشنهادی</h2>
+<div class="grid">
+<div class="mini"><h3>نسخه اولیه</h3><p>رابط نقشه + داده ساختاریافته + نقاط نمونه برای اثبات تجربه کاربری.</p></div>
+<div class="mini"><h3>نسخه داده‌محور</h3><p>پایگاه داده مکان‌ها، شناسه‌های پایدار و ارتباط با موجودیت‌های شهیدپورتال.</p></div>
+<div class="mini"><h3>موتور نقشه</h3><p>اتصال به سرویس یا کتابخانه نقشه مناسب، با امکان تعویض ارائه‌دهنده بدون تغییر مدل داده.</p></div>
+<div class="mini"><h3>API</h3><p>ارائه مکان‌ها و ارتباطات از طریق API برای وب، اپلیکیشن و محصولات اکوسیستم.</p></div>
+<div class="mini"><h3>کش و خوشه‌بندی</h3><p>برای مقیاس بالا، بارگذاری محدوده‌ای و خوشه‌بندی نقاط در نظر گرفته شود.</p></div>
+<div class="mini"><h3>امنیت و حریم خصوصی</h3><p>اطلاعات عمومی، حساس و مدیریتی از یکدیگر تفکیک شوند.</p></div>
+</div>
+</section>
+
+<section class="card" id="roadmap"><h2>۱۲. نقشه راه توسعه</h2>
+<table><tr><th>فاز</th><th>موضوع</th><th>خروجی</th></tr>
+<tr><td>۱</td><td>تعریف مدل</td><td>تعریف انواع مکان، فیلدها، شناسه و ارتباطات.</td></tr>
+<tr><td>۲</td><td>نمونه اولیه</td><td>یک نقشه تعاملی با چند مکان نمونه.</td></tr>
+<tr><td>۳</td><td>اطلس استانی</td><td>ساختار استان/شهر و مجموعه اولیه مکان‌ها.</td></tr>
+<tr><td>۴</td><td>پرونده مکان</td><td>صفحه مستقل برای هر مکان با منابع و ارتباطات.</td></tr>
+<tr><td>۵</td><td>فیلتر و جست‌وجو</td><td>جست‌وجوی مکانی، نوعی، شخصی، رویدادی و ترکیبی.</td></tr>
+<tr><td>۶</td><td>اتصال به شهدا</td><td>پیوند دوطرفه مکان و پرونده شهید.</td></tr>
+<tr><td>۷</td><td>رسانه و اسناد</td><td>افزودن تصاویر، اسناد و روایت‌های مرتبط.</td></tr>
+<tr><td>۸</td><td>مشارکت</td><td>ثبت پیشنهاد، بررسی و نسخه‌بندی.</td></tr>
+<tr><td>۹</td><td>مسیر و تجربه مکانی</td><td>مسیرهای بازدید و قابلیت‌های مکانی تکمیلی.</td></tr>
+<tr><td>۱۰</td><td>اطلس توسعه‌یافته</td><td>گسترش به مکان‌های تاریخی و در آینده محدوده جهانی.</td></tr>
+</table>
+</section>
+
+<section class="card" id="status"><h2>۱۳. وضعیت فعلی طرح</h2>
+<table><tr><th>مورد</th><th>وضعیت</th><th>یادداشت</th></tr>
+<tr><td>تعریف مفهوم اطلس ملی</td><td class="status done">انجام شده</td><td>نقشه تعاملی و داده‌محور به‌عنوان هسته محصول.</td></tr>
+<tr><td>تعریف انواع مکان</td><td class="status done">انجام شده</td><td>گلزار، مزار، یادمان، موزه و مکان‌های تاریخی.</td></tr>
+<tr><td>مدل اولیه داده</td><td class="status next">گام بعدی</td><td>تبدیل طرح به schema اجرایی.</td></tr>
+<tr><td>نمونه نقشه</td><td class="status next">گام بعدی</td><td>ساخت پیش‌نمایش واقعی با چند نقطه نمونه.</td></tr>
+<tr><td>بانک مکان‌های ملی</td><td class="status future">آینده</td><td>تکمیل تدریجی بر پایه منابع معتبر.</td></tr>
+<tr><td>مشارکت و مدیریت</td><td class="status future">آینده</td><td>پس از تثبیت مدل داده.</td></tr>
+</table>
+</section>
+
+<section class="card" id="preview"><h2>۱۴. پیش‌نمایش و مسیر توسعه</h2>
+<div class="quote"><strong>پیش‌نمایش طرح:</strong> این صفحه سند طراحی و نقشه راه اطلس ملی است؛ نمونه عملیاتی نقشه در مرحله بعد ساخته می‌شود.</div>
+<p><strong>مسیر سند:</strong> <code>tarhha/atlas-melli-tarh.html</code></p>
+<p><strong>رابط آینده:</strong> یک صفحه مستقل اطلس ملی در شهیدپورتال با نقشه تعاملی و داده واقعی.</p>
+<p><strong>اصل توسعه:</strong> نقشه باید یک لایه روی داده‌های ساختاریافته باشد، نه اینکه داده‌ها فقط داخل کد رابط نقشه دفن شوند.</p>
+</section>
+
+<a class="back-top" href="#top" title="بازگشت به بالا" aria-label="بازگشت به بالا">↑</a>
+<footer class="footer">ShahidPortal — طرح جامع | اطلس ملی شهدا</footer>
+</div>
+<script src="../assets/js/sidebar.js"></script>
+</body></html>
