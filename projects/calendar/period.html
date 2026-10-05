@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="شرح، مکان‌ها، برچسب‌ها و منابع یک رویداد در تقویم شهدا" />
+<meta name="description" content="اطلاعات و رویدادهای یک دوره تاریخی در تقویم شهدا" />
 <meta name="theme-color" content="#0f2e24" />
-<title>پرونده رویداد | تقویم شهدا</title>
+<title>پرونده دوره | تقویم شهدا</title>
 <link rel="icon" href="assets/images/logo.png">
 <link rel="stylesheet" href="assets/css/site-pages.css">
 <link rel="stylesheet" href="assets/css/site.css">
@@ -21,21 +21,21 @@
     <nav class="breadcrumb" aria-label="مسیر">
       <ol>
         <li><a href="index.html">خانه</a></li>
-        <li><a href="events.html">رویدادها</a></li>
-        <li aria-current="page">پرونده رویداد</li>
+        <li><a href="periods.html">دوره‌ها</a></li>
+        <li aria-current="page">پرونده دوره</li>
       </ol>
     </nav>
-    <div id="eventHero">
-      <span class="hero-eyebrow">پرونده رویداد</span>
-      <h1 class="page-hero-title" id="eventTitle">در حال بارگذاری…</h1>
-      <p class="page-hero-lead" id="eventLead"></p>
+    <div id="periodHero">
+      <span class="hero-eyebrow">پرونده دوره</span>
+      <h1 class="page-hero-title" id="periodTitle">در حال بارگذاری…</h1>
+      <p class="page-hero-lead" id="periodLead"></p>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div id="eventBody"></div>
+    <div id="periodBody"></div>
   </div>
 </section>
 
@@ -44,69 +44,65 @@
   'use strict';
   var D = window.SiteData;
   var id = D.qs('id');
-  var ev = id ? D.find(D.events, id) : D.events[0];
-  var titleEl = document.getElementById('eventTitle');
-  var leadEl = document.getElementById('eventLead');
-  var bodyEl = document.getElementById('eventBody');
+  var p = id ? D.find(D.periods, id) : D.periods[0];
+  var titleEl = document.getElementById('periodTitle');
+  var leadEl = document.getElementById('periodLead');
+  var bodyEl = document.getElementById('periodBody');
 
-  if (!ev) {
-    titleEl.textContent = 'رویداد یافت نشد';
+  if (!p) {
+    titleEl.textContent = 'دوره یافت نشد';
     leadEl.textContent = 'شناسه‌ای که خواسته‌اید در لایه داده وجود ندارد.';
-    bodyEl.innerHTML = '<div class="empty-state"><strong>رویدادی با این شناسه ثبت نشده است</strong>' +
+    bodyEl.innerHTML = '<div class="empty-state"><strong>دوره‌ای با این شناسه ثبت نشده است</strong>' +
       '<p>شناسه: ' + (id || '—') + '</p>' +
-      '<p style="margin-top:var(--sp-4)"><a class="btn btn-primary" href="events.html">بازگشت به فهرست رویدادها</a></p></div>';
+      '<p style="margin-top:var(--sp-4)"><a class="btn btn-primary" href="periods.html">بازگشت به فهرست دوره‌ها</a></p></div>';
     return;
   }
 
-  document.title = ev.title + ' | تقویم شهدا';
-  titleEl.textContent = ev.title;
-  leadEl.textContent = D.formatJalali(ev.date) + ' — ' + ev.city;
+  document.title = p.title + ' | تقویم شهدا';
+  titleEl.textContent = p.title;
+  leadEl.textContent = (p.from === p.to) ? p.from : (p.from + ' تا ' + p.to);
 
-  var relatedPlaces = D.places.filter(function (p) {
-    return ev.tags.indexOf(p.name) !== -1 || ev.city.indexOf(p.name) !== -1 || p.related.indexOf(ev.tags.split(' ')[0]) !== -1;
+  var relatedEvents = D.events.filter(function (e) {
+    var j = D.parseJalali(e.date);
+    return j && D.parseJalali(p.from) && j.y >= D.parseJalali(p.from).y && j.y <= (D.parseJalali(p.to) ? D.parseJalali(p.to).y : 9999);
   });
 
   bodyEl.innerHTML =
     '<div class="detail-layout">' +
       '<div>' +
         '<article class="detail-card">' +
-          '<h2 class="section-title" style="margin-bottom:var(--sp-4)">شرح رویداد</h2>' +
-          '<p class="detail-text">' + ev.desc + '</p>' +
+          '<h2 class="section-title" style="margin-bottom:var(--sp-4)">درباره این دوره</h2>' +
+          '<p class="detail-text">' + p.note + '</p>' +
         '</article>' +
         '<article class="detail-card" style="margin-top:var(--sp-5)">' +
-          '<h2 class="section-title" style="margin-bottom:var(--sp-4)">مکان‌های مرتبط</h2>' +
-          (relatedPlaces.length
-            ? '<div class="entity-grid">' + relatedPlaces.map(function (p) {
-                return '<article class="entity-card"><span class="entity-kind">' + p.type + '</span>' +
-                  '<h3 class="entity-name">' + p.name + '</h3>' +
-                  '<p class="entity-meta">' + p.region + ' · ' + p.country + '</p>' +
-                  '<p class="entity-text">مرتبط با: ' + p.related + '</p></article>';
-              }).join('') + '</div>'
-            : '<p class="detail-text">برای این رویداد مکان مستقلی ثبت نشده است. می‌توانید از صفحه <a href="places.html" style="color:var(--c-gold)">مکان‌ها</a> پیشنهاد بدهید.</p>') +
+          '<h2 class="section-title" style="margin-bottom:var(--sp-4)">رویدادهای این دوره</h2>' +
+          (relatedEvents.length
+            ? '<ul class="event-list">' + relatedEvents.map(function (e) {
+                var j = D.parseJalali(e.date);
+                return '<li class="event-row"><div class="event-date"><span class="d">' + D.toFa(j.d) +
+                  '</span><span class="m">' + D.MONTHS[j.m - 1] + '</span></div>' +
+                  '<div class="event-info"><h3><a href="event.html?id=' + e.id + '">' + e.title + '</a></h3>' +
+                  '<p>' + e.desc + '</p></div>' +
+                  '<span class="event-tag">' + e.type + '</span></li>';
+              }).join('') + '</ul>'
+            : '<p class="detail-text">برای این دوره رویدادی در لایه داده ثبت نشده است.</p>') +
         '</article>' +
       '</div>' +
       '<aside>' +
         '<div class="aside-card">' +
-          '<h3>اطلاعات رویداد</h3>' +
+          '<h3>اطلاعات دوره</h3>' +
           '<dl class="info-list">' +
-            '<div class="info-row"><dt>شناسه</dt><dd dir="ltr">' + ev.id + '</dd></div>' +
-            '<div class="info-row"><dt>تاریخ</dt><dd>' + D.formatJalali(ev.date) + '</dd></div>' +
-            '<div class="info-row"><dt>نوع</dt><dd>' + ev.type + '</dd></div>' +
-            '<div class="info-row"><dt>مکان</dt><dd>' + ev.city + '</dd></div>' +
-            '<div class="info-row"><dt>منبع</dt><dd>' + ev.source + '</dd></div>' +
-            '<div class="info-row"><dt>وضعیت</dt><dd>' + ev.status + '</dd></div>' +
+            '<div class="info-row"><dt>شناسه</dt><dd dir="ltr">' + p.id + '</dd></div>' +
+            '<div class="info-row"><dt>از</dt><dd>' + (p.from || '—') + '</dd></div>' +
+            '<div class="info-row"><dt>تا</dt><dd>' + (p.to || '—') + '</dd></div>' +
+            '<div class="info-row"><dt>تعداد رویداد</dt><dd>' + D.toFa(relatedEvents.length) + '</dd></div>' +
           '</dl>' +
-        '</div>' +
-        '<div class="aside-card">' +
-          '<h3>برچسب‌ها</h3>' +
-          '<div class="tag-row">' + ev.tags.split(' ').map(function (t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
         '</div>' +
         '<div class="aside-card">' +
           '<h3>اقدام‌ها</h3>' +
           '<div style="display:grid;gap:var(--sp-2)">' +
-            '<a class="btn btn-primary" href="day.html?m=' + (D.parseJalali(ev.date) ? D.parseJalali(ev.date).m : 1) + '&d=' + (D.parseJalali(ev.date) ? D.parseJalali(ev.date).d : 1) + '">همه رویدادهای این روز</a>' +
-            '<a class="btn btn-ghost" href="contribute.html">اصلاح یا تکمیل اطلاعات</a>' +
-            '<a class="btn btn-ghost" href="events.html">فهرست رویدادها</a>' +
+            '<a class="btn btn-primary" href="periods.html">همه دوره‌ها</a>' +
+            '<a class="btn btn-ghost" href="events.html">آرشیو رویدادها</a>' +
           '</div>' +
         '</div>' +
       '</aside>' +

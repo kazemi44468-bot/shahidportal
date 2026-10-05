@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="لایه داده و دسترسی برنامه‌ای در تقویم شهدا" />
+<meta name="theme-color" content="#0f2e24" />
+<title>API و داده | تقویم شهدا</title>
+<link rel="icon" href="assets/images/logo.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/css/site-pages.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+<style>
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:var(--sp-4); }
+  .stats-grid li { text-align:center; padding:var(--sp-6) var(--sp-4); background:var(--c-surface); border:1px solid var(--c-line-soft); border-radius:var(--radius-lg); }
+  .stats-grid strong { display:block; font-size:var(--fs-3xl); font-weight:800; color:var(--c-gold); line-height:1; margin-bottom:var(--sp-3); }
+  .stats-grid span { font-size:var(--fs-sm); color:var(--c-ink-mute); }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+</style>
+</head>
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی"><a data-page="home" href="index.html">نخست</a><a data-page="calendar" href="calendar.html">تقویم</a><a data-page="today" href="today.html">امروز</a><a data-page="martyrs" href="martyrs.html">شهدا</a><a data-page="events" href="events.html">رویدادها</a><a data-page="places" href="places.html">مکان‌ها</a><a data-page="periods" href="periods.html">دوره‌ها</a><a data-page="sources" href="sources.html">منابع</a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه</a><a data-page="search" href="search.html">جست‌وجو</a><a data-page="about" href="about.html">درباره</a><a data-page="contribute" href="contribute.html">همکاری</a><a data-page="contact" href="contact.html">تماس</a></nav></div></header></div></header>
+<main id="main" role="main">
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb" aria-label="مسیر">
+      <ol>
+        <li><a href="index.html">خانه</a></li>
+        <li aria-current="page">API و داده</li>
+      </ol>
+    </nav>
+    <span class="hero-eyebrow fade-up">برای توسعه‌دهندگان</span>
+    <h1 class="page-hero-title fade-up d1">دسترسی <span class="accent">برنامه‌ای</span> به داده</h1>
+    <p class="page-hero-lead fade-up d2">
+      تقویم شهدا در گام «Data First» است: داده از رابط کاربری جدا شده و در قالب دو لایه
+      JavaScript منتشر می‌شود. اپلیکیشن‌ها و محصولات اکوسیستم می‌توانند همین داده را مصرف کنند.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="notice">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 20px;margin-top:3px">
+        <circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12" y2="16.01"/>
+      </svg>
+      <span>نسخه فعلی یک <strong>API ایستا</strong> است: فایل‌های JavaScript با اسکریپت قابل بارگذاری‌اند. نسخه سروری (REST) در نقشه راه مرحله چهارم سند مادر تعریف شده است.</span>
+    </div>
+
+    <header class="section-head">
+      <div>
+        <h2 class="section-title">لایه‌های داده</h2>
+        <p class="section-sub">دو فایل منتشرشده در مسیر <code dir="ltr">assets/js/</code></p>
+      </div>
+    </header>
+
+    <div class="entity-grid">
+      <article class="entity-card">
+        <span class="entity-kind">لایه پایه</span>
+        <h3 class="entity-name" dir="ltr">site-data.js</h3>
+        <p class="entity-meta">داده خام و ابزارهای عمومی</p>
+        <p class="entity-text">
+          همه رکوردهای واقعی به‌همراه توابع <code dir="ltr">toFa</code>،
+          <code dir="ltr">parseJalali</code>، <code dir="ltr">formatJalali</code>،
+          <code dir="ltr">eventsOn</code> و <code dir="ltr">searchAll</code>.
+        </p>
+        <div class="entity-foot"><span dir="ltr">window.SiteData</span><span>لایه پایه</span></div>
+      </article>
+
+      <article class="entity-card">
+        <span class="entity-kind">لایه آداپتور</span>
+        <h3 class="entity-name" dir="ltr">page-data.js</h3>
+        <p class="entity-meta">شکل آماده برای صفحات فهرست</p>
+        <p class="entity-text">
+          همان داده، قالب‌بندی‌شده برای فهرست‌ها و جست‌وجو: آرایه شهدا با فیلدهای
+          تاریخ عددی، رویدادها با ماه/روز، و نمایه جست‌وجوی یکپارچه.
+        </p>
+        <div class="entity-foot"><span dir="ltr">window.PageData</span><span>آداپتور</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <header class="section-head">
+      <div>
+        <h2 class="section-title">آمار زندهٔ داده</h2>
+        <p class="section-sub">مقادیر زیر مستقیماً از لایه داده خوانده می‌شوند</p>
+      </div>
+    </header>
+    <ul class="stats-grid" id="apiStats"></ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <header class="section-head">
+      <div>
+        <h2 class="section-title">نمونه کد</h2>
+        <p class="section-sub">استفاده در هر صفحه‌ای از همین سایت</p>
+      </div>
+    </header>
+
+    <article class="detail-card">
+      <h3 class="entity-name" style="margin-bottom:var(--sp-3)">خواندن رویدادهای یک روز</h3>
+      <pre dir="ltr" style="background:var(--c-surface-2);padding:var(--sp-4);border-radius:var(--radius);overflow-x:auto;font-size:var(--fs-xs);line-height:2"><code>// بارگذاری لایه داده
+&lt;script src="assets/js/site-data.js"&gt;&lt;/script&gt;
+
+// رویدادهای ۳ خرداد
+var list = SiteData.eventsOn(3, 3);
+console.log(list.length, 'رویداد');
+
+// قالب‌بندی خوانا تاریخ شمسی
+SiteData.formatJalali('۱۳۶۱/۰۳/۱۰');
+// «۱۰ خرداد ۱۳۶۱»</code></pre>
+    </article>
+
+    <article class="detail-card" style="margin-top:var(--sp-4)">
+      <h3 class="entity-name" style="margin-bottom:var(--sp-3)">جست‌وجوی سراسری</h3>
+      <pre dir="ltr" style="background:var(--c-surface-2);padding:var(--sp-4);border-radius:var(--radius);overflow-x:auto;font-size:var(--fs-xs);line-height:2"><code>var results = SiteData.searchAll('شلمچه');
+results.forEach(function (r) {
+  console.log(r.kind, r.title, r.href);
+});</code></pre>
+    </article>
+
+    <article class="detail-card" style="margin-top:var(--sp-4)">
+      <h3 class="entity-name" style="margin-bottom:var(--sp-3)">دسترسی به یک رکورد با شناسه</h3>
+      <pre dir="ltr" style="background:var(--c-surface-2);padding:var(--sp-4);border-radius:var(--radius);overflow-x:auto;font-size:var(--fs-xs);line-height:2"><code>var p = SiteData.find(SiteData.places, 'PLACE-SHALAMCHEH');
+// { id, name, region, country, type, related, period, note, source }</code></pre>
+    </article>
+
+    <div class="notice" style="margin-top:var(--sp-5)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 20px;margin-top:3px">
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17.01"/>
+      </svg>
+      <span>رکوردهایی با وضعیت <strong>«نیازمند بررسی»</strong> پیش از استفاده در محصولات دیگر باید با منبع معتبر بازبینی شوند.</span>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+  var D = window.SiteData, P = window.PageData;
+  var rows = [
+    ['شخص', D.martyrs.length, 'رکورد شخص'],
+    ['رویداد', D.events.length, 'رکورد رویداد'],
+    ['مکان', D.places.length, 'رکورد مکان'],
+    ['دوره', D.periods.length, 'رکورد دوره'],
+    ['منبع', D.sources.length, 'رکورد منبع'],
+    ['نمایه جست‌وجو', P ? P.searchIndex.length : 0, 'ورودی جست‌وجو']
+  ];
+  document.getElementById('apiStats').innerHTML = rows.map(function (r) {
+    return '<li><strong class="num-fa">' + D.toFa(r[1]) + '</strong><span>' + r[2] + '</span></li>';
+  }).join('');
+})();
+</script>
+
+</main>
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

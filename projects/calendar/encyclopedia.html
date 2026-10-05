@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="دانشنامه یکپارچه موجودیت‌های تقویم شهدا" />
+<meta name="theme-color" content="#0f2e24" />
+<title>دانشنامه | تقویم شهدا</title>
+<link rel="icon" href="assets/images/logo.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/css/site-pages.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+</head>
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی"><a data-page="home" href="index.html">نخست</a><a data-page="calendar" href="calendar.html">تقویم</a><a data-page="today" href="today.html">امروز</a><a data-page="martyrs" href="martyrs.html">شهدا</a><a data-page="events" href="events.html">رویدادها</a><a data-page="places" href="places.html">مکان‌ها</a><a data-page="periods" href="periods.html">دوره‌ها</a><a data-page="sources" href="sources.html">منابع</a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه</a><a data-page="search" href="search.html">جست‌وجو</a><a data-page="about" href="about.html">درباره</a><a data-page="contribute" href="contribute.html">همکاری</a><a data-page="contact" href="contact.html">تماس</a></nav></div></header></div></header>
+<main id="main" role="main">
+
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb" aria-label="مسیر">
+      <ol>
+        <li><a href="index.html">خانه</a></li>
+        <li aria-current="page">دانشنامه</li>
+      </ol>
+    </nav>
+    <span class="hero-eyebrow fade-up">کشف دانش</span>
+    <h1 class="page-hero-title fade-up d1">دانشنامه <span class="accent">تقویم شهدا</span></h1>
+    <p class="page-hero-lead fade-up d2">
+      نمایی یکپارچه از همه موجودیت‌های ثبت‌شده: اشخاص، رویدادها، مکان‌ها، دوره‌ها و منابع.
+      این صفحه شبکه دانش پروژه را در یک نگاه نشان می‌دهد.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar">
+      <input type="search" id="encSearch" class="search-field" placeholder="جست‌وجو در همه موجودیت‌ها..." aria-label="جست‌وجو در دانشنامه" />
+      <button type="button" class="filter-chip is-active" data-kind="all">همه</button>
+      <button type="button" class="filter-chip" data-kind="شخص">اشخاص</button>
+      <button type="button" class="filter-chip" data-kind="رویداد">رویدادها</button>
+      <button type="button" class="filter-chip" data-kind="مکان">مکان‌ها</button>
+      <button type="button" class="filter-chip" data-kind="دوره">دوره‌ها</button>
+      <button type="button" class="filter-chip" data-kind="منبع">منابع</button>
+    </div>
+
+    <ul class="stats-grid" id="encStats" style="margin-bottom:var(--sp-6)"></ul>
+
+    <p class="section-sub" id="encCount" style="margin-bottom:var(--sp-4)">—</p>
+    <div class="entity-grid" id="encGrid" aria-live="polite"></div>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+  var D = window.SiteData;
+  var grid = document.getElementById('encGrid');
+  var stats = document.getElementById('encStats');
+  var count = document.getElementById('encCount');
+  var input = document.getElementById('encSearch');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.filter-chip'));
+  var kind = 'all';
+
+  // build a unified entry list from the real data layer
+  var entries = [];
+  D.martyrs.forEach(function (m) {
+    entries.push({ kind: 'شخص', title: m.name, meta: m.role || '', text: m.note || '',
+                   href: 'martyrs.html', id: m.id });
+  });
+  D.events.forEach(function (e) {
+    entries.push({ kind: 'رویداد', title: e.title, meta: e.type + ' — ' + D.formatJalali(e.date),
+                   text: e.desc || '', href: 'event.html?id=' + e.id, id: e.id });
+  });
+  D.places.forEach(function (p) {
+    entries.push({ kind: 'مکان', title: p.name, meta: p.type + ' — ' + p.region + '، ' + p.country,
+                   text: p.note || p.related || '', href: 'place.html?id=' + p.id, id: p.id });
+  });
+  D.periods.forEach(function (p) {
+    entries.push({ kind: 'دوره', title: p.title, meta: p.from + ' — ' + p.to,
+                   text: p.note || '', href: 'period.html?id=' + p.id, id: p.id });
+  });
+  D.sources.forEach(function (s) {
+    entries.push({ kind: 'منبع', title: s.title, meta: s.kind + ' — ' + s.org,
+                   text: s.note || '', href: 'source.html?id=' + s.id, id: s.id });
+  });
+
+  var byKind = {};
+  entries.forEach(function (e) { byKind[e.kind] = (byKind[e.kind] || 0) + 1; });
+
+  stats.innerHTML = [
+    ['شخص', byKind['شخص'] || 0, 'شخص ثبت‌شده'],
+    ['رویداد', byKind['رویداد'] || 0, 'رویداد'],
+    ['مکان', byKind['مکان'] || 0, 'مکان'],
+    ['دوره', byKind['دوره'] || 0, 'دوره'],
+    ['منبع', byKind['منبع'] || 0, 'منبع']
+  ].map(function (r) {
+    return '<li><strong class="num-fa">' + D.toFa(r[1]) + '</strong><span>' + r[2] + '</span></li>';
+  }).join('');
+
+  function render() {
+    var q = (input.value || '').trim();
+    var list = entries.filter(function (e) {
+      var okKind = kind === 'all' || e.kind === kind;
+      var hay = e.title + ' ' + e.meta + ' ' + e.text;
+      return okKind && (!q || hay.indexOf(q) !== -1);
+    });
+
+    count.textContent = D.toFa(list.length) + ' مورد از ' + D.toFa(entries.length) + ' موجودیت ثبت‌شده';
+
+    if (!list.length) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1">' +
+        '<strong>موردی یافت نشد</strong><p>عبارت جست‌وجو یا دسته را تغییر دهید.</p></div>';
+      return;
+    }
+
+    grid.innerHTML = list.slice(0, 300).map(function (e) {
+      return '<a class="entity-card fade-up" href="' + e.href + '">' +
+        '<span class="entity-kind">' + e.kind + '</span>' +
+        '<h3 class="entity-name">' + e.title + '</h3>' +
+        '<p class="entity-meta">' + e.meta + '</p>' +
+        '<p class="entity-text">' + (e.text || '').slice(0, 160) + '</p>' +
+        '<div class="entity-foot"><span dir="ltr">' + e.id + '</span><span>' + e.kind + '</span></div>' +
+      '</a>';
+    }).join('');
+  }
+
+  input.addEventListener('input', render);
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      chips.forEach(function (x) { x.classList.remove('is-active'); });
+      c.classList.add('is-active');
+      kind = c.dataset.kind;
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+
+</main>
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

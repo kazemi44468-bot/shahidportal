@@ -1,1 +1,1900 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>تقویم | تقویم شهدا</title><link rel="icon" href="assets/images/logo.png"><link rel="stylesheet" href="assets/css/calendar.css"><link rel="stylesheet" href="assets/css/calendar-shell.css"></head><body><div id="calendarShellHeader"></div><main class="page"><section class="pageHero"><span>هسته زمانی</span><h1>تقویم شهدا</h1><p>نمایش ماهانه، هفتگی و سالانه برای حرکت در خط زمان و رسیدن به رویدادهای ثبت‌شده.</p><div class="pageActions"><a href="index.html?view=month#calendar">ماهانه</a><a href="index.html?view=week#calendar">هفتگی</a><a href="index.html?view=year#calendar">سالانه</a><a href="today.html">امروز</a></div></section><section class="infoGrid"><article><b>ماهانه</b><p>نمایش روزهای ماه و نشانه‌گذاری روزهای دارای رویداد.</p></article><article><b>هفتگی</b><p>مقایسه هفت روز و مشاهده سریع رویدادهای هر روز.</p></article><article><b>سالانه</b><p>نمای کلی دوازده ماه و نقاط دارای داده.</p></article></section></main><div id="calendarShellFooter"></div><script src="assets/js/calendar-shell.js"></script><script src="assets/js/main.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="تقویم شهدا — نمای ماهانه، هفتگی، سالانه و روزانه رویدادها و شهدا" />
+<meta name="theme-color" content="#0f2e24" />
+<title>تقویم | تقویم شهدا</title>
+
+<link rel="icon" href="assets/images/logo.png">
+<style>
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f2ede3;
+  --c-surface: #ffffff;
+  --c-surface-2: #f7f3ea;
+  --c-ink: #1a2420;
+  --c-ink-soft: #4a5651;
+  --c-ink-mute: #7a847f;
+  --c-line: #e6dfd0;
+  --c-line-soft: #efe9dd;
+
+  --c-primary: #0f2e24;
+  --c-primary-2: #1a4a3a;
+  --c-primary-3: #2a6a54;
+  --c-gold: #b8892b;
+  --c-gold-soft: #d4af37;
+  --c-gold-bg: #faf3e0;
+  --c-accent: #8b2f2f;
+  --c-success: #2a6a54;
+
+  --c-night-bg: #0a1a15;
+  --c-night-surface: #11261e;
+  --c-night-ink: #e8e3d5;
+  --c-night-line: #1e3a2e;
+
+  --font: "Vazirmatn", "Tahoma", sans-serif;
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.35rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(15,46,36,.06), 0 1px 3px rgba(15,46,36,.04);
+  --shadow: 0 4px 12px rgba(15,46,36,.06), 0 2px 4px rgba(15,46,36,.04);
+  --shadow-md: 0 12px 32px rgba(15,46,36,.08), 0 4px 8px rgba(15,46,36,.04);
+  --shadow-lg: 0 24px 60px rgba(15,46,36,.10), 0 8px 16px rgba(15,46,36,.06);
+
+  --container: 1280px;
+  --header-h: 76px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-theme="night"] {
+  --c-bg: var(--c-night-bg);
+  --c-bg-alt: #0d2019;
+  --c-surface: var(--c-night-surface);
+  --c-surface-2: #163328;
+  --c-ink: var(--c-night-ink);
+  --c-ink-soft: #b8c4bd;
+  --c-ink-mute: #7a8a82;
+  --c-line: var(--c-night-line);
+  --c-line-soft: #183027;
+  --c-gold-bg: #1a2f24;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--c-ink);
+  background: var(--c-bg);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 243, .85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .site-header { background: rgba(10, 26, 21, .85); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  height: var(--header-h);
+}
+
+.brand { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+
+.brand-logo {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  border-radius: 12px;
+  color: var(--c-gold-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-title {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-primary);
+  line-height: 1.2;
+}
+[data-theme="night"] .brand-title { color: var(--c-gold-soft); }
+
+.brand-sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.2;
+}
+
+.main-nav ul { display: flex; gap: var(--sp-1); align-items: center; }
+
+.main-nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: all .2s var(--ease);
+}
+.main-nav a:hover { color: var(--c-primary); background: var(--c-surface-2); }
+[data-theme="night"] .main-nav a:hover { color: var(--c-gold-soft); }
+
+.main-nav a.is-active { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .main-nav a.is-active { color: var(--c-gold-soft); }
+
+.main-nav a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px; right: 12px; left: 12px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+
+.header-actions { display: flex; gap: var(--sp-2); align-items: center; }
+
+.btn-icon {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+}
+.btn-icon:hover {
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  transform: translateY(-1px);
+}
+[data-theme="night"] .btn-icon:hover { color: var(--c-gold-soft); }
+
+.menu-toggle { display: none; }
+
+/* ============================================================
+   PAGE HEAD
+============================================================ */
+.page-head {
+  padding: var(--sp-7) 0 var(--sp-5);
+  background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg));
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.breadcrumb ol {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-bottom: var(--sp-3);
+}
+.breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-right: var(--sp-3);
+  color: var(--c-line);
+}
+.breadcrumb a { color: var(--c-ink-mute); }
+.breadcrumb a:hover { color: var(--c-gold); }
+.breadcrumb [aria-current] { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .breadcrumb [aria-current] { color: var(--c-gold-soft); }
+
+.page-title {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.02em;
+  margin-bottom: var(--sp-3);
+  line-height: 1.2;
+}
+[data-theme="night"] .page-title { color: var(--c-ink); }
+
+.page-lead {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  max-width: 720px;
+  line-height: 1.9;
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(15,46,36,.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15,46,36,.30);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-primary);
+  border: 1px solid var(--c-line);
+}
+.btn-ghost:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+[data-theme="night"] .btn-ghost { color: var(--c-ink); }
+
+/* ============================================================
+   CALENDAR LAYOUT
+============================================================ */
+.calendar-section { padding: var(--sp-6) 0 var(--sp-8); }
+
+.calendar-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+.calendar-main {
+  background: var(--c-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--c-line-soft);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* ============================================================
+   TOOLBAR
+============================================================ */
+.calendar-toolbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+  background: var(--c-surface-2);
+}
+
+.calendar-views {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+}
+
+.view-btn {
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-ink-mute);
+  border-radius: var(--radius-sm);
+  transition: all .2s var(--ease);
+}
+
+.view-btn:hover { color: var(--c-primary); }
+
+.view-btn.is-active {
+  background: var(--c-primary);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.calendar-title-wrap { text-align: center; }
+
+.calendar-title {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.01em;
+  line-height: 1.2;
+  font-feature-settings: "ss01";
+}
+[data-theme="night"] .calendar-title { color: var(--c-ink); }
+
+.calendar-subtitle {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  margin-top: 2px;
+  font-feature-settings: "ss01";
+}
+
+.calendar-nav {
+  display: flex;
+  gap: var(--sp-1);
+  align-items: center;
+}
+
+.cal-nav-btn {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--c-ink-soft);
+  border: 1px solid var(--c-line);
+  background: var(--c-surface);
+  transition: all .2s var(--ease);
+}
+
+.cal-nav-btn:hover {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.cal-nav-btn.btn-today {
+  width: auto;
+  padding: 0 var(--sp-4);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+/* ============================================================
+   FILTERS BAR
+============================================================ */
+.filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+  background: var(--c-surface);
+  align-items: center;
+}
+
+.filter-label {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--c-ink-mute);
+  margin-left: var(--sp-2);
+}
+
+.filter-chip {
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-line-soft);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+
+.filter-chip:hover { border-color: var(--c-gold); color: var(--c-gold); }
+
+.filter-chip.is-active {
+  background: var(--c-gold-bg);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  font-weight: 600;
+}
+
+/* ============================================================
+   MONTH VIEW
+============================================================ */
+.view-month {
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
+}
+
+.month-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+
+.month-weekdays span {
+  text-align: center;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--c-ink-mute);
+  padding: var(--sp-2) 0;
+  letter-spacing: .02em;
+}
+
+.month-weekdays span.is-holiday { color: var(--c-accent); }
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--sp-2);
+}
+
+.month-cell {
+  position: relative;
+  min-height: 108px;
+  padding: var(--sp-3);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  text-align: right;
+  font-family: inherit;
+  overflow: hidden;
+}
+
+.month-cell:hover {
+  border-color: var(--c-gold);
+  background: var(--c-gold-bg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.month-cell.is-empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.month-cell.is-today {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  border-color: var(--c-primary);
+  color: #fff;
+}
+.month-cell.is-today:hover {
+  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  color: #fff;
+}
+
+.month-cell.is-holiday .cell-num { color: var(--c-accent); }
+.month-cell.is-today .cell-num { color: var(--c-gold-soft); }
+
+.month-cell.is-selected {
+  border-color: var(--c-gold);
+  box-shadow: 0 0 0 2px var(--c-gold-bg), var(--shadow);
+}
+
+.cell-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.cell-num {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-ink);
+  line-height: 1;
+  font-feature-settings: "ss01";
+}
+.month-cell.is-today .cell-num { color: #fff; }
+
+.cell-greg {
+  font-size: 0.68rem;
+  color: var(--c-ink-mute);
+  font-feature-settings: "ss01";
+}
+.month-cell.is-today .cell-greg { color: rgba(255,255,255,.6); }
+
+.cell-events {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: auto;
+  overflow: hidden;
+}
+
+.cell-event {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.month-cell.is-today .cell-event {
+  background: rgba(212, 175, 55, .25);
+  color: var(--c-gold-soft);
+}
+
+.cell-event.type-martyrdom { background: #fbe9e9; color: var(--c-accent); }
+.cell-event.type-operation { background: #e8f0ed; color: var(--c-primary-3); }
+.cell-event.type-ceremony { background: #f5ecd8; color: var(--c-gold); }
+.cell-event.type-birth { background: #eaf1fb; color: #2a5a9a; }
+.month-cell.is-today .cell-event.type-martyrdom,
+.month-cell.is-today .cell-event.type-operation,
+.month-cell.is-today .cell-event.type-ceremony,
+.month-cell.is-today .cell-event.type-birth {
+  background: rgba(255,255,255,.15);
+  color: #fff;
+}
+
+.cell-more {
+  font-size: 0.68rem;
+  color: var(--c-ink-mute);
+  font-weight: 600;
+}
+.month-cell.is-today .cell-more { color: rgba(255,255,255,.7); }
+
+/* ============================================================
+   WEEK VIEW
+============================================================ */
+.view-week {
+  padding: var(--sp-5);
+}
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--sp-2);
+}
+
+.week-col {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+
+.week-col:hover {
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow);
+}
+
+.week-col.is-today {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 1px var(--c-primary);
+}
+
+.week-col-head {
+  padding: var(--sp-3);
+  background: var(--c-surface-2);
+  border-bottom: 1px solid var(--c-line-soft);
+  text-align: center;
+}
+
+.week-col.is-today .week-col-head {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+}
+
+.week-day-name {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--c-ink-mute);
+}
+.week-col.is-today .week-day-name { color: rgba(255,255,255,.8); }
+
+.week-day-num {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--c-ink);
+  line-height: 1.2;
+  margin-top: 2px;
+  font-feature-settings: "ss01";
+}
+.week-col.is-today .week-day-num { color: var(--c-gold-soft); }
+
+.week-col-body {
+  padding: var(--sp-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  flex: 1;
+  overflow-y: auto;
+}
+
+.week-event {
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  border-right: 3px solid var(--c-gold);
+  background: var(--c-gold-bg);
+  color: var(--c-ink-soft);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+
+.week-event:hover { transform: translateX(-2px); }
+
+.week-event strong {
+  display: block;
+  font-size: var(--fs-sm);
+  color: var(--c-ink);
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.week-event.type-martyrdom { background: #fbe9e9; border-color: var(--c-accent); }
+.week-event.type-operation { background: #e8f0ed; border-color: var(--c-primary-3); }
+.week-event.type-ceremony { background: #f5ecd8; border-color: var(--c-gold); }
+.week-event.type-birth { background: #eaf1fb; border-color: #2a5a9a; }
+
+/* ============================================================
+   YEAR VIEW
+============================================================ */
+.view-year {
+  padding: var(--sp-5);
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-4);
+}
+
+.year-month {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+
+.year-month:hover {
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.year-month-name {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-primary);
+  text-align: center;
+  margin-bottom: var(--sp-2);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--c-line-soft);
+  font-feature-settings: "ss01";
+}
+[data-theme="night"] .year-month-name { color: var(--c-gold-soft); }
+
+.year-month-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.year-day {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-size: 0.62rem;
+  color: var(--c-ink-mute);
+  border-radius: 3px;
+  font-feature-settings: "ss01";
+}
+
+.year-day.has-event {
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  font-weight: 700;
+}
+
+.year-day.is-today {
+  background: var(--c-primary);
+  color: #fff;
+  font-weight: 700;
+}
+
+.year-month.has-today { border-color: var(--c-primary); }
+
+/* ============================================================
+   DAY VIEW
+============================================================ */
+.view-day { padding: var(--sp-6) var(--sp-7); }
+
+.day-hero {
+  text-align: center;
+  padding: var(--sp-5) 0 var(--sp-6);
+  border-bottom: 1px solid var(--c-line-soft);
+  margin-bottom: var(--sp-6);
+}
+
+.day-hero-date {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  font-feature-settings: "ss01";
+}
+[data-theme="night"] .day-hero-date { color: var(--c-ink); }
+
+.day-hero-meta {
+  font-size: var(--fs-md);
+  color: var(--c-ink-mute);
+  margin-top: var(--sp-2);
+  font-feature-settings: "ss01";
+}
+
+.day-hero-greg {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-top: var(--sp-1);
+  font-feature-settings: "ss01";
+}
+
+.day-section {
+  margin-bottom: var(--sp-6);
+}
+
+.day-section-title {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-4);
+  padding-right: var(--sp-4);
+  position: relative;
+  font-feature-settings: "ss01";
+}
+[data-theme="night"] .day-section-title { color: var(--c-gold-soft); }
+
+.day-section-title::before {
+  content: "";
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 3px; height: 60%;
+  background: var(--c-gold);
+  border-radius: 3px;
+}
+
+.day-event-card {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--c-surface-2);
+  border-radius: var(--radius);
+  border-right: 3px solid var(--c-gold);
+  margin-bottom: var(--sp-3);
+  transition: all .2s var(--ease);
+  align-items: center;
+}
+
+.day-event-card:hover {
+  background: var(--c-gold-bg);
+  transform: translateX(-3px);
+}
+
+.day-event-card.type-martyrdom { border-color: var(--c-accent); }
+.day-event-card.type-operation { border-color: var(--c-primary-3); }
+
+.day-event-icon {
+  width: 60px; height: 60px;
+  display: grid; place-items: center;
+  background: var(--c-surface);
+  border-radius: var(--radius);
+  color: var(--c-gold);
+  box-shadow: var(--shadow-sm);
+}
+
+.day-event-content h4 {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
+}
+
+.day-event-content p {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  line-height: 1.7;
+}
+
+.day-empty {
+  text-align: center;
+  padding: var(--sp-7) var(--sp-5);
+  color: var(--c-ink-mute);
+}
+
+.day-empty-icon {
+  width: 64px; height: 64px;
+  margin: 0 auto var(--sp-4);
+  display: grid; place-items: center;
+  background: var(--c-surface-2);
+  border-radius: 50%;
+  color: var(--c-ink-mute);
+}
+
+.day-empty p {
+  font-size: var(--fs-sm);
+  max-width: 320px;
+  margin: 0 auto;
+  line-height: 1.9;
+}
+
+/* ============================================================
+   DAY PANEL (SIDE)
+============================================================ */
+.day-panel {
+  position: sticky;
+  top: calc(var(--header-h) + var(--sp-4));
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: none;
+}
+
+.day-panel.is-open { display: block; }
+
+.day-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-4) var(--sp-5);
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+}
+
+.day-panel-date {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  font-feature-settings: "ss01";
+}
+
+.day-panel-close {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: rgba(255,255,255,.8);
+  transition: all .2s var(--ease);
+}
+.day-panel-close:hover { background: rgba(255,255,255,.15); color: #fff; }
+
+.day-panel-body {
+  padding: var(--sp-5);
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.panel-section {
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+.panel-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.panel-section-title {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-ink-mute);
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+  font-feature-settings: "ss01";
+}
+
+.panel-event {
+  padding: var(--sp-3);
+  background: var(--c-surface-2);
+  border-radius: var(--radius-sm);
+  border-right: 3px solid var(--c-gold);
+  margin-bottom: var(--sp-2);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+
+.panel-event:hover {
+  background: var(--c-gold-bg);
+  transform: translateX(-2px);
+}
+
+.panel-event h4 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-bottom: 2px;
+}
+
+.panel-event p {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+}
+
+.panel-empty {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  padding: var(--sp-5) 0;
+}
+
+.panel-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: var(--sp-3);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  background: var(--c-primary);
+  color: rgba(255,255,255,.7);
+  padding: var(--sp-8) 0 var(--sp-5);
+  margin-top: var(--sp-7);
+}
+[data-theme="night"] .site-footer { background: #061410; }
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+.footer-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.footer-desc {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  max-width: 320px;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.footer-col h3 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+}
+
+.footer-col ul { display: grid; gap: var(--sp-2); }
+
+.footer-col a {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,.65);
+  transition: color .2s var(--ease);
+}
+.footer-col a:hover { color: var(--c-gold-soft); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1100px) {
+  .calendar-wrapper { grid-template-columns: 1fr; }
+  .day-panel { position: static; }
+}
+
+@media (max-width: 960px) {
+  .main-nav { display: none; }
+  .menu-toggle { display: grid; }
+
+  .calendar-toolbar {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+  }
+
+  .calendar-views { justify-self: center; }
+  .calendar-nav { justify-self: center; }
+
+  .footer-inner { grid-template-columns: 1fr; }
+
+  .week-grid {
+    grid-template-columns: repeat(7, minmax(140px, 1fr));
+    overflow-x: auto;
+    padding-bottom: var(--sp-3);
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --fs-3xl: 2rem;
+    --fs-2xl: 1.75rem;
+    --fs-xl: 1.35rem;
+    --header-h: 64px;
+  }
+
+  .container { padding: 0 var(--sp-4); }
+
+  .page-head { padding: var(--sp-5) 0 var(--sp-4); }
+
+  .calendar-section { padding: var(--sp-4) 0 var(--sp-6); }
+
+  .month-grid { gap: 4px; }
+
+  .month-cell {
+    min-height: 72px;
+    padding: var(--sp-2);
+    gap: 2px;
+  }
+
+  .cell-num { font-size: var(--fs-sm); }
+  .cell-greg { display: none; }
+  .cell-event { font-size: 0.62rem; padding: 1px 4px; }
+  .cell-more { font-size: 0.6rem; }
+
+  .month-weekdays span { font-size: 0.68rem; }
+
+  .view-day { padding: var(--sp-4); }
+
+  .day-hero-date { font-size: var(--fs-2xl); }
+
+  .day-event-card {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+    text-align: center;
+  }
+
+  .day-event-icon { margin: 0 auto; }
+
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .calendar-toolbar { padding: var(--sp-3); }
+
+  .view-btn { padding: var(--sp-2) var(--sp-3); font-size: var(--fs-xs); }
+
+  .month-cell { min-height: 60px; }
+
+  .cell-event { display: none; }
+  .month-cell.has-events::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--c-gold);
+  }
+  .month-cell.is-today.has-events::after { background: var(--c-gold-soft); }
+}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی"><a data-page="home" href="index.html">نخست</a><a data-page="calendar" href="calendar.html">تقویم</a><a data-page="today" href="today.html">امروز</a><a data-page="martyrs" href="martyrs.html">شهدا</a><a data-page="events" href="events.html">رویدادها</a><a data-page="places" href="places.html">مکان‌ها</a><a data-page="periods" href="periods.html">دوره‌ها</a><a data-page="sources" href="sources.html">منابع</a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه</a><a data-page="search" href="search.html">جست‌وجو</a><a data-page="about" href="about.html">درباره</a><a data-page="contribute" href="contribute.html">همکاری</a><a data-page="contact" href="contact.html">تماس</a></nav></div></header></div></header>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main id="main" role="main">
+
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="مسیر">
+        <ol>
+          <li><a href="index.html">خانه</a></li>
+          <li aria-current="page">تقویم</li>
+        </ol>
+      </nav>
+      <h1 class="page-title">تقویم</h1>
+      <p class="page-lead">
+        حرکت در زمان از گذشته تا امروز و آینده. هر روز می‌تواند دروازه‌ای به یک رویداد، یک شخص یا یک مکان باشد.
+      </p>
+    </div>
+  </section>
+
+  <section class="calendar-section">
+    <div class="container">
+      <div class="calendar-wrapper">
+
+        <!-- ====== تقویم اصلی ====== -->
+        <div class="calendar-main">
+
+          <!-- Toolbar -->
+          <div class="calendar-toolbar">
+            <div class="calendar-views" role="tablist" aria-label="نمای تقویم">
+              <button role="tab" class="view-btn is-active" data-view="month" aria-selected="true">ماهانه</button>
+              <button role="tab" class="view-btn" data-view="week" aria-selected="false">هفتگی</button>
+              <button role="tab" class="view-btn" data-view="year" aria-selected="false">سالانه</button>
+              <button role="tab" class="view-btn" data-view="day" aria-selected="false">روزانه</button>
+            </div>
+
+            <div class="calendar-title-wrap">
+              <div class="calendar-title" id="calTitle" aria-live="polite">فروردین ۱۴۰۵</div>
+              <div class="calendar-subtitle" id="calSubtitle">۲۱ مارس ۲۰۲۶</div>
+            </div>
+
+            <div class="calendar-nav">
+              <button class="cal-nav-btn" data-cal-nav="prev" aria-label="قبلی">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              </button>
+              <button class="cal-nav-btn btn-today" data-cal-nav="today">امروز</button>
+              <button class="cal-nav-btn" data-cal-nav="next" aria-label="بعدی">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="filters-bar" role="group" aria-label="فیلتر رویدادها">
+            <span class="filter-label">نمایش:</span>
+            <button class="filter-chip is-active" data-filter="all">همه</button>
+            <button class="filter-chip" data-filter="martyrdom">شهادت</button>
+            <button class="filter-chip" data-filter="operation">عملیات</button>
+            <button class="filter-chip" data-filter="ceremony">یادواره</button>
+            <button class="filter-chip" data-filter="birth">تولد</button>
+          </div>
+
+          <!-- Views Container -->
+          <div id="viewContainer">
+            <!-- توسط JS پر می‌شود -->
+          </div>
+
+        </div>
+
+        <!-- ====== پنل روز ====== -->
+        <aside class="day-panel" id="dayPanel" aria-label="جزئیات روز انتخاب‌شده">
+          <div class="day-panel-head">
+            <div class="day-panel-date" id="panelDate">—</div>
+            <button class="day-panel-close" id="panelClose" aria-label="بستن پنل">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div class="day-panel-body" id="panelBody">
+            <!-- توسط JS پر می‌شود -->
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ===== اعداد فارسی =====
+  function toFa(n) {
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  // ===== تاریخ شمسی =====
+  function toJalali(gy, gm, gd) {
+    const g_d_m = [0,31,59,90,120,151,181,212,243,273,304,334];
+    let jy = (gy <= 1600) ? 0 : 979;
+    gy -= (gy <= 1600) ? 621 : 1600;
+    const gy2 = (gm > 2) ? (gy + 1) : gy;
+    let days = (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100)
+             + Math.floor((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
+    jy += 33 * Math.floor(days / 12053);
+    days %= 12053;
+    jy += 4 * Math.floor(days / 1461);
+    days %= 1461;
+    if (days > 365) {
+      jy += Math.floor((days - 1) / 365);
+      days = (days - 1) % 365;
+    }
+    const jm = (days < 186) ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
+    const jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+    return [jy, jm, jd];
+  }
+
+  function jalaliToGregorian(jy, jm, jd) {
+    let gy = (jy <= 979) ? 621 : 1600;
+    jy -= (jy <= 979) ? 0 : 979;
+    let days = (365 * jy) + (Math.floor(jy / 33) * 8) + Math.floor(((jy % 33) + 3) / 4) + 78 + jd
+             + ((jm < 7) ? (jm - 1) * 31 : ((jm - 7) * 30) + 186);
+    gy += 400 * Math.floor(days / 146097);
+    days %= 146097;
+    if (days > 36524) {
+      gy += 100 * Math.floor(--days / 36524);
+      days %= 36524;
+      if (days >= 365) days++;
+    }
+    gy += 4 * Math.floor(days / 1461);
+    days %= 1461;
+    if (days > 365) {
+      gy += Math.floor((days - 1) / 365);
+      days = (days - 1) % 365;
+    }
+    let gd = days + 1;
+    const sal_a = [0,31,((gy % 4 === 0 && gy % 100 !== 0) || (gy % 400 === 0)) ? 29 : 28,31,30,31,30,31,31,30,31,30,31];
+    let gm;
+    for (gm = 0; gm < 13 && gd > sal_a[gm]; gm++) gd -= sal_a[gm];
+    return [gy, gm, gd];
+  }
+
+  function getJalaliWeekday(jy, jm, jd) {
+    const [gy, gm, gd] = jalaliToGregorian(jy, jm, jd);
+    const d = new Date(gy, gm - 1, gd);
+    return (d.getDay() + 1) % 7;
+  }
+
+  function daysInJalaliMonth(jy, jm) {
+    if (jm <= 6) return 31;
+    if (jm <= 11) return 30;
+    return isLeapJalali(jy) ? 30 : 29;
+  }
+
+  function isLeapJalali(jy) {
+    const r = (jy - 979) % 33;
+    return r === 1 || r === 2 || r === 3 || r === 5 || r === 6 || r === 10 || r === 11 || r === 14 || r === 15 || r === 18 || r === 19 || r === 22 || r === 23 || r === 26 || r === 27 || r === 30 || r === 31;
+  }
+
+  const MONTHS_FA = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+  const WEEKDAYS_FA = ['شنبه','یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه'];
+  const WEEKDAYS_SHORT = ['ش','ی','د','س','چ','پ','ج'];
+  const GREG_MONTHS = ['ژانویه','فوریه','مارس','آوریل','مه','ژوئن','ژوئیه','اوت','سپتامبر','اکتبر','نوامبر','دسامبر'];
+
+  // ===== تاریخ امروز =====
+  const now = new Date();
+  const [TODAY_JY, TODAY_JM, TODAY_JD] = toJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+
+  // ===== داده نمونه رویدادها =====
+  var EVENTS = window.PageData.events;
+  // ===== State =====
+  const state = {
+    view: 'month',
+    jy: TODAY_JY,
+    jm: TODAY_JM,
+    jd: TODAY_JD,
+    selectedJy: TODAY_JY,
+    selectedJm: TODAY_JM,
+    selectedJd: TODAY_JD,
+    filter: 'all',
+    weekStart: null
+  };
+
+  // ===== Helpers =====
+  function getEventsFor(jy, jm, jd) {
+    return EVENTS.filter(e => {
+      if (e.jy !== jy || e.jm !== jm || e.jd !== jd) return false;
+      if (state.filter === 'all') return true;
+      return e.type === state.filter;
+    });
+  }
+
+  function getEventsForMonth(jy, jm) {
+    return EVENTS.filter(e => {
+      if (e.jy !== jy || e.jm !== jm) return false;
+      if (state.filter === 'all') return true;
+      return e.type === state.filter;
+    });
+  }
+
+  function typeLabel(type) {
+    return { martyrdom: 'شهادت', operation: 'عملیات', ceremony: 'یادواره', birth: 'تولد' }[type] || '';
+  }
+
+  function typeIcon(type) {
+    switch (type) {
+      case 'martyrdom': return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 L14 9 L20 10 L14 11 L12 17 L10 11 L4 10 L10 9 Z" fill="currentColor" stroke="none"/></svg>';
+      case 'operation': return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L4 7 L4 12 C4 17 12 22 12 22 C12 22 20 17 20 12 L20 7 Z"/></svg>';
+      case 'ceremony': return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L15 9 L22 9 L17 14 L19 21 L12 17 L5 21 L7 14 L2 9 L9 9 Z"/></svg>';
+      case 'birth': return '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L15 15"/></svg>';
+      default: return '';
+    }
+  }
+
+  function updateTitle() {
+    const titleEl = document.getElementById('calTitle');
+    const subtitleEl = document.getElementById('calSubtitle');
+
+    if (state.view === 'year') {
+      titleEl.textContent = `سال ${toFa(state.jy)}`;
+      subtitleEl.textContent = '';
+    } else if (state.view === 'day') {
+      const [gy, gm, gd] = jalaliToGregorian(state.selectedJy, state.selectedJm, state.selectedJd);
+      titleEl.textContent = `${WEEKDAYS_FA[getJalaliWeekday(state.selectedJy, state.selectedJm, state.selectedJd)]} ${toFa(state.selectedJd)} ${MONTHS_FA[state.selectedJm - 1]} ${toFa(state.selectedJy)}`;
+      subtitleEl.textContent = `${gd} ${GREG_MONTHS[gm - 1]} ${gy}`;
+    } else {
+      const [gy, gm] = jalaliToGregorian(state.jy, state.jm, 1);
+      titleEl.textContent = `${MONTHS_FA[state.jm - 1]} ${toFa(state.jy)}`;
+      subtitleEl.textContent = `${GREG_MONTHS[gm - 1]} ${gy}`;
+    }
+  }
+
+  // ===== Render: Month View =====
+  function renderMonthView() {
+    const firstWeekday = getJalaliWeekday(state.jy, state.jm, 1);
+    const totalDays = daysInJalaliMonth(state.jy, state.jm);
+    const monthEvents = getEventsForMonth(state.jy, state.jm);
+
+    let weekdaysHtml = WEEKDAYS_FA.map((d, i) => 
+      `<span class="${i === 6 ? 'is-holiday' : ''}">${d}</span>`
+    ).join('');
+
+    let cellsHtml = '';
+    for (let i = 0; i < firstWeekday; i++) {
+      cellsHtml += `<div class="month-cell is-empty" aria-hidden="true"></div>`;
+    }
+
+    for (let d = 1; d <= totalDays; d++) {
+      const isToday = state.jy === TODAY_JY && state.jm === TODAY_JM && d === TODAY_JD;
+      const isSelected = state.selectedJy === state.jy && state.selectedJm === state.jm && state.selectedJd === d;
+      const dayEvents = monthEvents.filter(e => e.jd === d);
+      const [gy, gm, gd] = jalaliToGregorian(state.jy, state.jm, d);
+      const isHoliday = getJalaliWeekday(state.jy, state.jm, d) === 6;
+
+      const eventsHtml = dayEvents.slice(0, 2).map(e => 
+        `<span class="cell-event type-${e.type}">${e.title}</span>`
+      ).join('');
+      const moreHtml = dayEvents.length > 2 ? `<span class="cell-more">+${toFa(dayEvents.length - 2)} مورد دیگر</span>` : '';
+
+      const cls = [
+        'month-cell',
+        isToday ? 'is-today' : '',
+        isSelected ? 'is-selected' : '',
+        isHoliday ? 'is-holiday' : '',
+        dayEvents.length ? 'has-events' : ''
+      ].filter(Boolean).join(' ');
+
+      cellsHtml += `
+        <button type="button" class="${cls}" data-day="${d}" aria-label="${toFa(d)} ${MONTHS_FA[state.jm - 1]}">
+          <div class="cell-head">
+            <span class="cell-num">${toFa(d)}</span>
+            <span class="cell-greg">${toFa(gd)} ${GREG_MONTHS[gm - 1].slice(0, 3)}</span>
+          </div>
+          <div class="cell-events">${eventsHtml}${moreHtml}</div>
+        </button>
+      `;
+    }
+
+    return `
+      <div class="view-month">
+        <div class="month-weekdays" aria-hidden="true">${weekdaysHtml}</div>
+        <div class="month-grid">${cellsHtml}</div>
+      </div>
+    `;
+  }
+
+  // ===== Render: Week View =====
+  function renderWeekView() {
+    const baseJy = state.jy, baseJm = state.jm, baseJd = state.jd;
+    const baseWeekday = getJalaliWeekday(baseJy, baseJm, baseJd);
+
+    // پیدا کردن شنبه هفته
+    let startJy = baseJy, startJm = baseJm, startJd = baseJd - baseWeekday;
+    
+    // اصلاح اگر منفی شد
+    while (startJd < 1) {
+      startJm--;
+      if (startJm < 1) { startJm = 12; startJy--; }
+      startJd += daysInJalaliMonth(startJy, startJm);
+    }
+
+    let colsHtml = '';
+    let curJy = startJy, curJm = startJm, curJd = startJd;
+
+    for (let i = 0; i < 7; i++) {
+      const isToday = curJy === TODAY_JY && curJm === TODAY_JM && curJd === TODAY_JD;
+      const dayEvents = getEventsFor(curJy, curJm, curJd);
+      const isHoliday = i === 6;
+
+      const eventsHtml = dayEvents.length
+        ? dayEvents.map(e => `
+            <div class="week-event type-${e.type}" data-day="${curJd}">
+              <strong>${e.title}</strong>
+              <span>${e.desc}</span>
+            </div>
+          `).join('')
+        : `<p style="font-size: 0.75rem; color: var(--c-ink-mute); text-align: center; padding: 1rem 0;">رویدادی ثبت نشده</p>`;
+
+      colsHtml += `
+        <div class="week-col ${isToday ? 'is-today' : ''}" data-day="${curJd}" data-jm="${curJm}" data-jy="${curJy}">
+          <div class="week-col-head">
+            <span class="week-day-name ${isHoliday ? 'is-holiday' : ''}">${WEEKDAYS_FA[i]}</span>
+            <span class="week-day-num">${toFa(curJd)}</span>
+          </div>
+          <div class="week-col-body">${eventsHtml}</div>
+        </div>
+      `;
+
+      curJd++;
+      if (curJd > daysInJalaliMonth(curJy, curJm)) {
+        curJd = 1;
+        curJm++;
+        if (curJm > 12) { curJm = 1; curJy++; }
+      }
+    }
+
+    return `<div class="view-week"><div class="week-grid">${colsHtml}</div></div>`;
+  }
+
+  // ===== Render: Year View =====
+  function renderYearView() {
+    let monthsHtml = '';
+
+    for (let m = 1; m <= 12; m++) {
+      const totalDays = daysInJalaliMonth(state.jy, m);
+      const firstWeekday = getJalaliWeekday(state.jy, m, 1);
+      const monthEvents = getEventsForMonth(state.jy, m);
+      const hasToday = state.jy === TODAY_JY && m === TODAY_JM;
+
+      let daysHtml = '';
+      for (let i = 0; i < firstWeekday; i++) {
+        daysHtml += `<span class="year-day" style="visibility: hidden;"></span>`;
+      }
+
+      for (let d = 1; d <= totalDays; d++) {
+        const hasEvent = monthEvents.some(e => e.jd === d);
+        const isToday = state.jy === TODAY_JY && m === TODAY_JM && d === TODAY_JD;
+        const cls = [
+          'year-day',
+          hasEvent ? 'has-event' : '',
+          isToday ? 'is-today' : ''
+        ].filter(Boolean).join(' ');
+        daysHtml += `<span class="${cls}" title="${toFa(d)} ${MONTHS_FA[m - 1]}">${toFa(d)}</span>`;
+      }
+
+      monthsHtml += `
+        <button type="button" class="year-month ${hasToday ? 'has-today' : ''}" data-month="${m}">
+          <div class="year-month-name">${MONTHS_FA[m - 1]}</div>
+          <div class="year-month-days">${daysHtml}</div>
+        </button>
+      `;
+    }
+
+    return `<div class="view-year"><div class="year-grid">${monthsHtml}</div></div>`;
+  }
+
+  // ===== Render: Day View =====
+  function renderDayView() {
+    const jy = state.selectedJy, jm = state.selectedJm, jd = state.selectedJd;
+    const [gy, gm, gd] = jalaliToGregorian(jy, jm, jd);
+    const dayEvents = getEventsFor(jy, jm, jd);
+
+    const eventsHtml = dayEvents.length
+      ? dayEvents.map(e => `
+          <div class="day-event-card type-${e.type}">
+            <div class="day-event-icon">${typeIcon(e.type)}</div>
+            <div class="day-event-content">
+              <h4>${e.title}</h4>
+              <p>${e.desc}</p>
+            </div>
+          </div>
+        `).join('')
+      : `
+        <div class="day-empty">
+          <div class="day-empty-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <p>در این روز رویدادی ثبت نشده است. اگر اطلاعاتی دارید، در تکمیل این اطلس سهیم شوید.</p>
+        </div>
+      `;
+
+    return `
+      <div class="view-day">
+        <div class="day-hero">
+          <div class="day-hero-date">${toFa(jd)} ${MONTHS_FA[jm - 1]} ${toFa(jy)}</div>
+          <div class="day-hero-meta">${WEEKDAYS_FA[getJalaliWeekday(jy, jm, jd)]}</div>
+          <div class="day-hero-greg">${gd} ${GREG_MONTHS[gm - 1]} ${gy}</div>
+        </div>
+
+        <div class="day-section">
+          <h3 class="day-section-title">رویدادهای این روز</h3>
+          ${eventsHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  // ===== Render Main =====
+  function render() {
+    const container = document.getElementById('viewContainer');
+    if (!container) return;
+
+    let html = '';
+    switch (state.view) {
+      case 'month': html = renderMonthView(); break;
+      case 'week': html = renderWeekView(); break;
+      case 'year': html = renderYearView(); break;
+      case 'day': html = renderDayView(); break;
+    }
+    container.innerHTML = html;
+    updateTitle();
+    attachViewHandlers();
+  }
+
+  // ===== Handlers =====
+  function attachViewHandlers() {
+    // ماهانه
+    document.querySelectorAll('.month-cell[data-day]').forEach(cell => {
+      cell.addEventListener('click', () => {
+        const d = parseInt(cell.dataset.day, 10);
+        state.selectedJy = state.jy;
+        state.selectedJm = state.jm;
+        state.selectedJd = d;
+        openDayPanel(state.jy, state.jm, d);
+        document.querySelectorAll('.month-cell').forEach(c => c.classList.remove('is-selected'));
+        cell.classList.add('is-selected');
+      });
+    });
+
+    // هفتگی
+    document.querySelectorAll('.week-col').forEach(col => {
+      col.addEventListener('click', () => {
+        const d = parseInt(col.dataset.day, 10);
+        const jm = parseInt(col.dataset.jm, 10);
+        const jy = parseInt(col.dataset.jy, 10);
+        state.selectedJy = jy;
+        state.selectedJm = jm;
+        state.selectedJd = d;
+        openDayPanel(jy, jm, d);
+      });
+    });
+
+    // سالانه
+    document.querySelectorAll('.year-month').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.jm = parseInt(btn.dataset.month, 10);
+        setView('month');
+      });
+    });
+  }
+
+  // ===== Day Panel =====
+  function openDayPanel(jy, jm, jd) {
+    const panel = document.getElementById('dayPanel');
+    const panelDate = document.getElementById('panelDate');
+    const panelBody = document.getElementById('panelBody');
+
+    const dayEvents = getEventsFor(jy, jm, jd);
+    const [gy, gm, gd] = jalaliToGregorian(jy, jm, jd);
+
+    panelDate.textContent = `${toFa(jd)} ${MONTHS_FA[jm - 1]} ${toFa(jy)}`;
+    panelDate.setAttribute('data-jy', jy);
+    panelDate.setAttribute('data-jm', jm);
+    panelDate.setAttribute('data-jd', jd);
+
+    let bodyHtml = '';
+
+    if (dayEvents.length) {
+      bodyHtml += `
+        <div class="panel-section">
+          <div class="panel-section-title">رویدادها (${toFa(dayEvents.length)})</div>
+          ${dayEvents.map(e => `
+            <div class="panel-event">
+              <h4>${e.title}</h4>
+              <p>${e.desc} — ${typeLabel(e.type)}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    } else {
+      bodyHtml += `
+        <div class="panel-section">
+          <div class="panel-section-title">رویدادها</div>
+          <p class="panel-empty">در این روز رویدادی ثبت نشده است.</p>
+        </div>
+      `;
+    }
+
+    bodyHtml += `
+      <div class="panel-section">
+        <div class="panel-section-title">اطلاعات تقویمی</div>
+        <p style="font-size: 0.85rem; color: var(--c-ink-soft); line-height: 2; font-feature-settings: 'ss01';">
+          روز هفته: ${WEEKDAYS_FA[getJalaliWeekday(jy, jm, jd)]}<br>
+          تاریخ میلادی: ${gd} ${GREG_MONTHS[gm - 1]} ${gy}
+        </p>
+      </div>
+
+      <a href="#" class="btn btn-ghost panel-cta" onclick="event.preventDefault();">
+        مشاهده صفحه کامل روز
+      </a>
+    `;
+
+    panelBody.innerHTML = bodyHtml;
+    panel.classList.add('is-open');
+
+    // اسکرول در موبایل
+    if (window.innerWidth < 1100) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function closeDayPanel() {
+    document.getElementById('dayPanel').classList.remove('is-open');
+  }
+
+  // ===== View Switching =====
+  function setView(view) {
+    state.view = view;
+
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      const isActive = btn.dataset.view === view;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+    });
+
+    // اگر روزانه شد، روز انتخاب‌شده را نشان بده
+    if (view === 'day') {
+      state.selectedJy = state.jy;
+      state.selectedJm = state.jm;
+      // اگر روز انتخاب‌شده در این ماه نیست، ۱ بگذار
+      if (state.selectedJd > daysInJalaliMonth(state.jy, state.jm)) {
+        state.selectedJd = 1;
+      }
+    }
+
+    render();
+  }
+
+  // ===== Navigation =====
+  function navigate(dir) {
+    switch (state.view) {
+      case 'month':
+        if (dir === 'prev') {
+          state.jm--;
+          if (state.jm < 1) { state.jm = 12; state.jy--; }
+        } else if (dir === 'next') {
+          state.jm++;
+          if (state.jm > 12) { state.jm = 1; state.jy++; }
+        } else if (dir === 'today') {
+          state.jy = TODAY_JY;
+          state.jm = TODAY_JM;
+          state.jd = TODAY_JD;
+        }
+        break;
+
+      case 'week':
+        if (dir === 'prev') {
+          state.jd -= 7;
+          while (state.jd < 1) {
+            state.jm--;
+            if (state.jm < 1) { state.jm = 12; state.jy--; }
+            state.jd += daysInJalaliMonth(state.jy, state.jm);
+          }
+        } else if (dir === 'next') {
+          state.jd += 7;
+          while (state.jd > daysInJalaliMonth(state.jy, state.jm)) {
+            state.jd -= daysInJalaliMonth(state.jy, state.jm);
+            state.jm++;
+            if (state.jm > 12) { state.jm = 1; state.jy++; }
+          }
+        } else if (dir === 'today') {
+          state.jy = TODAY_JY;
+          state.jm = TODAY_JM;
+          state.jd = TODAY_JD;
+        }
+        break;
+
+      case 'year':
+        if (dir === 'prev') state.jy--;
+        else if (dir === 'next') state.jy++;
+        else if (dir === 'today') state.jy = TODAY_JY;
+        break;
+
+      case 'day':
+        if (dir === 'prev') {
+          state.selectedJd--;
+          if (state.selectedJd < 1) {
+            state.selectedJm--;
+            if (state.selectedJm < 1) { state.selectedJm = 12; state.selectedJy--; }
+            state.selectedJd = daysInJalaliMonth(state.selectedJy, state.selectedJm);
+          }
+        } else if (dir === 'next') {
+          state.selectedJd++;
+          if (state.selectedJd > daysInJalaliMonth(state.selectedJy, state.selectedJm)) {
+            state.selectedJd = 1;
+            state.selectedJm++;
+            if (state.selectedJm > 12) { state.selectedJm = 1; state.selectedJy++; }
+          }
+        } else if (dir === 'today') {
+          state.selectedJy = TODAY_JY;
+          state.selectedJm = TODAY_JM;
+          state.selectedJd = TODAY_JD;
+        }
+        break;
+    }
+
+    render();
+  }
+
+  // ===== Init =====
+  function init() {
+    render();
+
+    // View buttons
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => setView(btn.dataset.view));
+    });
+
+    // Nav buttons
+    document.querySelectorAll('[data-cal-nav]').forEach(btn => {
+      btn.addEventListener('click', () => navigate(btn.dataset.calNav));
+    });
+
+    // Filters
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+        state.filter = chip.dataset.filter;
+        render();
+      });
+    });
+
+    // Panel close
+    document.getElementById('panelClose')?.addEventListener('click', closeDayPanel);
+
+    // کلیدهای جهت‌دار
+    document.addEventListener('keydown', (e) => {
+      if (e.target.matches('input, textarea')) return;
+      if (e.key === 'ArrowRight') navigate('next');
+      else if (e.key === 'ArrowLeft') navigate('prev');
+      else if (e.key === 'Escape') closeDayPanel();
+    });
+  }
+
+  // ===== Theme =====
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') {
+    html.setAttribute('data-theme', 'night');
+    updateThemeIcon('night');
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'night' ? 'day' : 'night';
+    if (next === 'night') html.setAttribute('data-theme', 'night');
+    else html.removeAttribute('data-theme');
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  });
+
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    if (theme === 'night') {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>';
+    } else {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    }
+  }
+
+  // Start
+  init();
+
+})();
+</script>
+
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

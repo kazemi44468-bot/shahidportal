@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="مشاهده همه رویدادهای یک روز مشخص در تقویم شهدا" />
+<meta name="theme-color" content="#0f2e24" />
+<title>روز | تقویم شهدا</title>
+<link rel="icon" href="assets/images/logo.png">
+<link rel="stylesheet" href="assets/css/site-pages.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+<body data-page="day">
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی"><a data-page="home" href="index.html">نخست</a><a data-page="calendar" href="calendar.html">تقویم</a><a data-page="today" href="today.html">امروز</a><a data-page="martyrs" href="martyrs.html">شهدا</a><a data-page="events" href="events.html">رویدادها</a><a data-page="places" href="places.html">مکان‌ها</a><a data-page="periods" href="periods.html">دوره‌ها</a><a data-page="sources" href="sources.html">منابع</a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه</a><a data-page="search" href="search.html">جست‌وجو</a><a data-page="about" href="about.html">درباره</a><a data-page="contribute" href="contribute.html">همکاری</a><a data-page="contact" href="contact.html">تماس</a></nav></div></header></div></header>
+<main id="main" role="main">
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb" aria-label="مسیر">
+      <ol>
+        <li><a href="index.html">خانه</a></li>
+        <li><a href="calendar.html">تقویم</a></li>
+        <li aria-current="page">روز</li>
+      </ol>
+    </nav>
+    <span class="hero-eyebrow fade-up">در یک روز چه گذشت؟</span>
+    <h1 class="page-hero-title fade-up d1" id="dayTitle">انتخاب یک روز از تقویم</h1>
+    <p class="page-hero-lead fade-up d2" id="dayLead">
+      روز مورد نظر را از تقویم زیر انتخاب کنید تا همه رویدادهای ثبت‌شده آن روز نمایش داده شود.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cal-wrap">
+      <div class="cal-head">
+        <button class="cal-nav-btn" type="button" id="calPrev" aria-label="ماه قبل">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <div class="cal-month" id="calMonth">—</div>
+        <button class="cal-nav-btn" type="button" id="calNext" aria-label="ماه بعد">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+      <div class="cal-weekdays" aria-hidden="true" id="calWeekdays"></div>
+      <div class="cal-days" id="calDays"></div>
+    </div>
+
+    <div style="margin-top:var(--sp-7)">
+      <header class="section-head">
+        <div>
+          <h2 class="section-title" id="eventsTitle">رویدادهای این روز</h2>
+          <p class="section-sub" id="eventsSub">—</p>
+        </div>
+        <a href="events.html" class="link-more">همه رویدادها</a>
+      </header>
+      <div id="dayEvents"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+/* ---------- تبدیل تاریخ شمسی (الگوریتم دقیق) ---------- */
+function div(a, b) { return Math.floor(a / b); }
+function mod(a, b) { return a - Math.floor(a / b) * b; }
+
+function jalCal(jy) {
+  var breaks = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178];
+  var bl = breaks.length, gy = jy + 621, leapJ = -14, jp = breaks[0], jm, jump = 0, n, i;
+  if (jy < jp || jy >= breaks[bl - 1]) throw new Error('سال خارج از محدوده: ' + jy);
+  for (i = 1; i < bl; i += 1) {
+    jm = breaks[i];
+    jump = jm - jp;
+    if (jy < jm) break;
+    leapJ = leapJ + div(jump, 33) * 8 + div(mod(jump, 33), 4);
+    jp = jm;
+  }
+  n = jy - jp;
+  leapJ = leapJ + div(n, 33) * 8 + div(mod(n, 33) + 3, 4);
+  if (mod(jump, 33) === 4 && jump - n === 4) leapJ += 1;
+  var leapG = div(gy, 4) - div((div(gy, 100) + 1) * 3, 4) - 150;
+  var march = 20 + leapJ - leapG;
+  if (jump - n < 6) n = n - jump + div(jump + 4, 33) * 33;
+  var leap = mod(mod(n + 1, 33) - 1, 4);
+  if (leap === -1) leap = 4;
+  return { leap: leap, gy: gy, march: march };
+}
+
+function j2d(jy, jm, jd) {
+  var r = jalCal(jy);
+  return g2d(r.gy, 3, r.march) + (jm - 1) * 31 - div(jm, 7) * (jm - 7) + jd - 1;
+}
+
+function g2d(gy, gm, gd) {
+  var d = div((gy + div(gm - 8, 6) + 100100) * 1461, 4) + div(153 * mod(gm + 9, 12) + 2, 5) + gd - 34840408;
+  d = d - div(div(gy + 100100 + div(gm - 8, 6), 100) * 3, 4) + 752;
+  return d;
+}
+
+function d2j(jdn) {
+  var gy = d2g(jdn).gy, jy = gy - 621, r = jalCal(jy), jdn1f = g2d(gy, 3, r.march), jd, jm, k;
+  k = jdn - jdn1f;
+  if (k >= 0) {
+    if (k <= 185) { jm = 1 + div(k, 31); jd = mod(k, 31) + 1; return { jy: jy, jm: jm, jd: jd }; }
+    else k -= 186;
+  } else { jy -= 1; k += 179; if (r.leap === 1) k += 1; }
+  jm = 7 + div(k, 30);
+  jd = mod(k, 30) + 1;
+  return { jy: jy, jm: jm, jd: jd };
+}
+
+function d2g(jdn) {
+  var j, i, gd, gm, gy;
+  j = 4 * jdn + 139361631;
+  j = j + div(div(4 * jdn + 183187720, 146097) * 3, 4) * 4 - 3908;
+  i = div(mod(j, 1461), 4) * 5 + 308;
+  gd = div(mod(i, 153), 5) + 1;
+  gm = mod(div(i, 153), 12) + 1;
+  gy = div(j, 1461) - 100100 + div(8 - gm, 6);
+  return { gy: gy, gm: gm, gd: gd };
+}
+
+function jalaliMonthDays(jy, jm) {
+  if (jm <= 6) return 31;
+  if (jm <= 11) return 30;
+  return jalCal(jy).leap === 0 ? 30 : 29;
+}
+
+/* روز هفته شمسی: ۰ = شنبه */
+function jalaliWeekday(jy, jm, jd) {
+  return mod(j2d(jy, jm, jd) + 1, 7);
+}
+
+(function () {
+  'use strict';
+  var D = window.SiteData;
+
+  var today = D.todayJalali();
+  var state = {
+    y: parseInt(D.qs('y'), 10) || today[0],
+    m: parseInt(D.qs('m'), 10) || today[1],
+    d: parseInt(D.qs('d'), 10) || today[2]
+  };
+
+  var monthEl = document.getElementById('calMonth');
+  var daysEl = document.getElementById('calDays');
+  var wdEl = document.getElementById('calWeekdays');
+  var titleEl = document.getElementById('dayTitle');
+  var leadEl = document.getElementById('dayLead');
+  var evTitle = document.getElementById('eventsTitle');
+  var evSub = document.getElementById('eventsSub');
+  var evBox = document.getElementById('dayEvents');
+
+  wdEl.innerHTML = D.WEEKDAYS.map(function (w) { return '<span>' + w + '</span>'; }).join('');
+
+  function eventCard(e) {
+    var p = D.parseJalali(e.date);
+    return '<li class="event-row fade-up">' +
+      '<div class="event-date"><span class="d">' + D.toFa(p.d) + '</span><span class="m">' + D.MONTHS[p.m - 1] + '</span></div>' +
+      '<div class="event-info">' +
+        '<h3><a href="event.html?id=' + e.id + '">' + e.title + '</a></h3>' +
+        '<p>' + e.desc + '</p>' +
+      '</div>' +
+      '<span class="event-tag">' + e.type + '</span>' +
+    '</li>';
+  }
+
+  function renderEvents() {
+    var list = D.eventsOn(state.m, state.d);
+    var label = D.toFa(state.d) + ' ' + D.MONTHS[state.m - 1] + ' ' + D.toFa(state.y);
+
+    titleEl.textContent = label;
+    leadEl.textContent = 'رویدادهای ثبت‌شده در این روز تقویم.';
+
+    evTitle.textContent = 'رویدادهای ' + label;
+    evSub.textContent = list.length ? (D.toFa(list.length) + ' رویداد ثبت‌شده') : 'رویدادی ثبت نشده است';
+
+    if (list.length) {
+      evBox.innerHTML = '<ul class="event-list">' + list.map(eventCard).join('') + '</ul>';
+    } else {
+      evBox.innerHTML = '<div class="empty-state">' +
+        '<strong>برای این روز رویدادی ثبت نشده است</strong>' +
+        '<p>روز دیگری را انتخاب کنید یا رویداد این روز را پیشنهاد دهید.</p>' +
+        '<p style="margin-top:var(--sp-4)"><a class="btn btn-primary" href="contribute.html">پیشنهاد رویداد</a></p>' +
+        '</div>';
+    }
+  }
+
+  function renderCalendar() {
+    var first = jalaliWeekday(state.y, state.m, 1);
+    var total = jalaliMonthDays(state.y, state.m);
+    var isThisMonth = (state.y === today[0] && state.m === today[1]);
+
+    monthEl.textContent = D.MONTHS[state.m - 1] + ' ' + D.toFa(state.y);
+
+    var html = '';
+    for (var i = 0; i < first; i++) {
+      html += '<div class="cal-day is-empty" aria-hidden="true"></div>';
+    }
+    for (var d = 1; d <= total; d++) {
+      var has = D.eventsOn(state.m, d).length > 0;
+      var cls = ['cal-day'];
+      if (isThisMonth && d === today[2]) cls.push('is-today');
+      if (d === state.d) cls.push('is-selected');
+      if (has) cls.push('has-event');
+      html += '<button type="button" class="' + cls.join(' ') + '" data-day="' + d + '" aria-label="' +
+        D.toFa(d) + ' ' + D.MONTHS[state.m - 1] + (has ? ' — دارای رویداد' : '') + '">' +
+        '<span>' + D.toFa(d) + '</span></button>';
+    }
+    daysEl.innerHTML = html;
+
+    Array.prototype.forEach.call(daysEl.querySelectorAll('[data-day]'), function (btn) {
+      btn.addEventListener('click', function () {
+        state.d = parseInt(btn.dataset.day, 10);
+        renderCalendar();
+        renderEvents();
+        syncUrl();
+      });
+    });
+  }
+
+  function syncUrl() {
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', 'day.html?y=' + state.y + '&m=' + state.m + '&d=' + state.d);
+    }
+  }
+
+  document.getElementById('calPrev').addEventListener('click', function () {
+    state.m -= 1;
+    if (state.m < 1) { state.m = 12; state.y -= 1; }
+    renderCalendar(); renderEvents(); syncUrl();
+  });
+
+  document.getElementById('calNext').addEventListener('click', function () {
+    state.m += 1;
+    if (state.m > 12) { state.m = 1; state.y += 1; }
+    renderCalendar(); renderEvents(); syncUrl();
+  });
+
+  renderCalendar();
+  renderEvents();
+})();
+</script>
+</main>
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

@@ -7,7 +7,10 @@
 <meta name="theme-color" content="#0f2e24" />
 <title>تقویم شهدا | اطلس زمانی و انسانی</title>
 
-<link rel="icon" href="assets/images/logo.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f2e24'/><path d='M50 20 L60 45 L85 50 L60 55 L50 80 L40 55 L15 50 L40 45 Z' fill='%23d4af37'/></svg>" />
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" />
 
 <style>
 /* ============================================================
@@ -1048,17 +1051,66 @@ ul, ol { list-style: none; }
   }
 }
 </style>
-<link rel="stylesheet" href="assets/css/site.css">
 <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
-<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی"><a data-page="home" href="index.html">نخست</a><a data-page="calendar" href="calendar.html">تقویم</a><a data-page="today" href="today.html">امروز</a><a data-page="martyrs" href="martyrs.html">شهدا</a><a data-page="events" href="events.html">رویدادها</a><a data-page="places" href="places.html">مکان‌ها</a><a data-page="periods" href="periods.html">دوره‌ها</a><a data-page="sources" href="sources.html">منابع</a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه</a><a data-page="search" href="search.html">جست‌وجو</a><a data-page="about" href="about.html">درباره</a><a data-page="contribute" href="contribute.html">همکاری</a><a data-page="contact" href="contact.html">تماس</a></nav></div></header></div></header>
 
 <!-- ============================================================
      HEADER
 ============================================================ -->
+<header class="site-header" role="banner">
+  <div class="container header-inner">
 
+    <a href="index.html" class="brand" aria-label="تقویم شهدا — صفحه خانه">
+      <span class="brand-logo" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+          <path d="M12 3 L14 9 L20 10 L14 11 L12 17 L10 11 L4 10 L10 9 Z" fill="currentColor" stroke="none"/>
+          <circle cx="12" cy="10" r="1.5" fill="#0f2e24"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-title">تقویم شهدا</span>
+        <span class="brand-sub">اطلس زمانی و انسانی</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="ناوبری اصلی">
+      <ul>
+        <li><a href="index.html" class="is-active">خانه</a></li>
+        <li><a href="calendar.html">تقویم</a></li>
+        <li><a href="today.html">امروز</a></li>
+        <li><a href="martyrs.html">شهدا</a></li>
+        <li><a href="events.html">رویدادها</a></li>
+        <li><a href="places.html">مکان‌ها</a></li>
+        <li><a href="periods.html">دوره‌ها</a></li>
+        <li><a href="sources.html">منابع</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="search.html" class="btn-icon" aria-label="جست‌وجو">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <button class="btn-icon" id="themeToggle" aria-label="تغییر حالت شب و روز">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <button class="btn-icon menu-toggle" aria-label="منو" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
 
 <!-- ============================================================
      MAIN
@@ -1287,7 +1339,57 @@ ul, ol { list-style: none; }
 <!-- ============================================================
      FOOTER
 ============================================================ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container footer-inner">
 
+    <div class="footer-brand">
+      <span class="brand-logo" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+          <path d="M12 3 L14 9 L20 10 L14 11 L12 17 L10 11 L4 10 L10 9 Z" fill="currentColor" stroke="none"/>
+        </svg>
+      </span>
+      <p class="footer-title">تقویم شهدا</p>
+      <p class="footer-desc">
+        اطلس زمانی، تاریخی و انسانی شهدا، آزادگان و رویدادهای مرتبط — از تاریخ اسلام تا امروز و آینده.
+      </p>
+    </div>
+
+    <nav class="footer-nav" aria-label="ناوبری پاصفحه">
+      <div class="footer-col">
+        <h3>کشف</h3>
+        <ul>
+          <li><a href="calendar.html">تقویم</a></li>
+          <li><a href="today.html">امروز</a></li>
+          <li><a href="martyrs.html">شهدا</a></li>
+          <li><a href="events.html">رویدادها</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>دانش</h3>
+        <ul>
+          <li><a href="places.html">مکان‌ها</a></li>
+          <li><a href="periods.html">دوره‌ها</a></li>
+          <li><a href="sources.html">منابع</a></li>
+          <li><a href="search.html">جست‌وجو</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>پروژه</h3>
+        <ul>
+          <li><a href="about.html">درباره</a></li>
+          <li><a href="contribute.html">همکاری</a></li>
+          <li><a href="contact.html">تماس</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="footer-bottom">
+      <p>© تقویم شهدا — محصولی مستقل در اکوسیستم فرهنگی.</p>
+      <p class="footer-version">نسخه طرح: ۱۴۰۵/۰۷/۱۱ — نسخه ۴</p>
+    </div>
+
+  </div>
+</footer>
 
 <!-- ============================================================
      JAVASCRIPT
@@ -1539,7 +1641,5 @@ ul, ol { list-style: none; }
 })();
 </script>
 
-<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
-<script src="assets/js/site.js"></script>
 </body>
 </html>

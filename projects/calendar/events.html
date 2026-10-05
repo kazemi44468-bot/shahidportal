@@ -1,1 +1,2147 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>رویدادها | تقویم شهدا</title><link rel="icon" href="assets/images/logo.png"><link rel="stylesheet" href="assets/css/calendar.css"><link rel="stylesheet" href="assets/css/calendar-shell.css"></head><body><div id="calendarShellHeader"></div><main class="page"><section class="pageHero"><span>بانک رویداد</span><h1>رویدادها</h1><p>واقعه‌ها، شهادت‌ها، عملیات‌ها، یادمان‌ها و دیگر نقاط مهم خط زمانی.</p></section><section id="list" class="pageList eventArchive"></section></main><div id="calendarShellFooter"></div><script src="assets/js/calendar-shell.js"></script><script src="assets/js/data-loader.js"></script><script>(async()=>{const d=await loadCalendarData();document.getElementById("list").innerHTML=d.events.map(e=>"<a class='archiveItem' href='event.html?id="+e.id+"'><span>"+e.type+"</span><div><h3>"+e.title+"</h3><p>"+e.date+" · "+e.city+"</p><small>"+e.desc+"</small></div></a>").join("")})()</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="فهرست رویدادها — شهادت، عملیات، جنگ، قیام، یادمان، سالگرد و مناسبت‌ها" />
+<meta name="theme-color" content="#0f2e24" />
+<title>رویدادها | تقویم شهدا</title>
+
+<link rel="icon" href="assets/images/logo.png">
+<style>
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f2ede3;
+  --c-surface: #ffffff;
+  --c-surface-2: #f7f3ea;
+  --c-ink: #1a2420;
+  --c-ink-soft: #4a5651;
+  --c-ink-mute: #7a847f;
+  --c-line: #e6dfd0;
+  --c-line-soft: #efe9dd;
+
+  --c-primary: #0f2e24;
+  --c-primary-2: #1a4a3a;
+  --c-primary-3: #2a6a54;
+  --c-gold: #b8892b;
+  --c-gold-soft: #d4af37;
+  --c-gold-bg: #faf3e0;
+  --c-accent: #8b2f2f;
+
+  /* رنگ رویدادها */
+  --c-martyrdom: #8b2f2f;
+  --c-martyrdom-bg: #fbe9e9;
+  --c-operation: #2a6a54;
+  --c-operation-bg: #e8f0ed;
+  --c-war: #4a3a8b;
+  --c-war-bg: #eceaf5;
+  --c-revolution: #b8892b;
+  --c-revolution-bg: #faf3e0;
+  --c-ceremony: #2a5a9a;
+  --c-ceremony-bg: #eaf1fb;
+  --c-birth: #6a4a8b;
+  --c-birth-bg: #f0eaf5;
+
+  --c-night-bg: #0a1a15;
+  --c-night-surface: #11261e;
+  --c-night-ink: #e8e3d5;
+  --c-night-line: #1e3a2e;
+
+  --font: "Vazirmatn", "Tahoma", sans-serif;
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.35rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(15,46,36,.06), 0 1px 3px rgba(15,46,36,.04);
+  --shadow: 0 4px 12px rgba(15,46,36,.06), 0 2px 4px rgba(15,46,36,.04);
+  --shadow-md: 0 12px 32px rgba(15,46,36,.08), 0 4px 8px rgba(15,46,36,.04);
+  --shadow-lg: 0 24px 60px rgba(15,46,36,.10), 0 8px 16px rgba(15,46,36,.06);
+
+  --container: 1280px;
+  --header-h: 76px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-theme="night"] {
+  --c-bg: var(--c-night-bg);
+  --c-bg-alt: #0d2019;
+  --c-surface: var(--c-night-surface);
+  --c-surface-2: #163328;
+  --c-ink: var(--c-night-ink);
+  --c-ink-soft: #b8c4bd;
+  --c-ink-mute: #7a8a82;
+  --c-line: var(--c-night-line);
+  --c-line-soft: #183027;
+  --c-gold-bg: #1a2f24;
+  --c-martyrdom-bg: #2e1a1a;
+  --c-operation-bg: #16332a;
+  --c-war-bg: #1f1a33;
+  --c-revolution-bg: #2e2518;
+  --c-ceremony-bg: #16233a;
+  --c-birth-bg: #241a33;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--c-ink);
+  background: var(--c-bg);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 243, .85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .site-header { background: rgba(10, 26, 21, .85); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  height: var(--header-h);
+}
+
+.brand { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+
+.brand-logo {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  border-radius: 12px;
+  color: var(--c-gold-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-title {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-primary);
+  line-height: 1.2;
+}
+[data-theme="night"] .brand-title { color: var(--c-gold-soft); }
+
+.brand-sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.2;
+}
+
+.main-nav ul { display: flex; gap: var(--sp-1); align-items: center; }
+
+.main-nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: all .2s var(--ease);
+}
+.main-nav a:hover { color: var(--c-primary); background: var(--c-surface-2); }
+[data-theme="night"] .main-nav a:hover { color: var(--c-gold-soft); }
+
+.main-nav a.is-active { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .main-nav a.is-active { color: var(--c-gold-soft); }
+
+.main-nav a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px; right: 12px; left: 12px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+
+.header-actions { display: flex; gap: var(--sp-2); align-items: center; }
+
+.btn-icon {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+}
+.btn-icon:hover {
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  transform: translateY(-1px);
+}
+[data-theme="night"] .btn-icon:hover { color: var(--c-gold-soft); }
+
+.menu-toggle { display: none; }
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(15,46,36,.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15,46,36,.30);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-primary);
+  border: 1px solid var(--c-line);
+}
+.btn-ghost:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+[data-theme="night"] .btn-ghost { color: var(--c-ink); }
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--c-gold), var(--c-gold-soft));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(184,137,43,.25);
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,137,43,.35);
+}
+
+/* ============================================================
+   PAGE HEAD
+============================================================ */
+.page-head {
+  padding: var(--sp-7) 0 var(--sp-5);
+  background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg));
+  border-bottom: 1px solid var(--c-line-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 600px 300px at 80% 0%, rgba(184,137,43,.08), transparent 60%),
+    radial-gradient(ellipse 500px 250px at 10% 100%, rgba(15,46,36,.05), transparent 60%);
+  pointer-events: none;
+}
+
+.breadcrumb ol {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-bottom: var(--sp-3);
+  flex-wrap: wrap;
+}
+.breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-right: var(--sp-3);
+  color: var(--c-line);
+}
+.breadcrumb a { color: var(--c-ink-mute); }
+.breadcrumb a:hover { color: var(--c-gold); }
+.breadcrumb [aria-current] { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .breadcrumb [aria-current] { color: var(--c-gold-soft); }
+
+.page-title {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.02em;
+  margin-bottom: var(--sp-3);
+  line-height: 1.2;
+  position: relative;
+}
+[data-theme="night"] .page-title { color: var(--c-ink); }
+
+.page-lead {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  max-width: 720px;
+  line-height: 1.9;
+  position: relative;
+}
+
+/* ============================================================
+   TYPE LEGEND
+============================================================ */
+.type-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
+  position: relative;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-soft);
+  font-weight: 500;
+}
+
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.legend-dot.martyrdom { background: var(--c-martyrdom); }
+.legend-dot.operation { background: var(--c-operation); }
+.legend-dot.war { background: var(--c-war); }
+.legend-dot.revolution { background: var(--c-revolution); }
+.legend-dot.ceremony { background: var(--c-ceremony); }
+.legend-dot.birth { background: var(--c-birth); }
+
+/* ============================================================
+   SEARCH BAR
+============================================================ */
+.search-bar-wrap {
+  padding: var(--sp-5) 0;
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-line-soft);
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 248, 243, .92);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .search-bar-wrap { background: rgba(10, 26, 21, .92); }
+
+.search-bar {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+}
+
+.search-input-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.search-input-wrap svg {
+  position: absolute;
+  right: var(--sp-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-ink-mute);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--sp-4) var(--sp-7) var(--sp-4) var(--sp-4);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  color: var(--c-ink);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  outline: none;
+  transition: all .2s var(--ease);
+}
+.search-input:focus {
+  border-color: var(--c-gold);
+  box-shadow: 0 0 0 3px var(--c-gold-bg);
+}
+.search-input::placeholder { color: var(--c-ink-mute); }
+
+.view-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+}
+
+.view-toggle button {
+  width: 40px; height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--c-ink-mute);
+  transition: all .2s var(--ease);
+}
+
+.view-toggle button:hover { color: var(--c-primary); }
+.view-toggle button.is-active {
+  background: var(--c-primary);
+  color: #fff;
+}
+
+/* ============================================================
+   LAYOUT
+============================================================ */
+.events-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--sp-6);
+  padding: var(--sp-6) 0 var(--sp-8);
+  align-items: start;
+}
+
+/* ============================================================
+   SIDEBAR FILTERS
+============================================================ */
+.filters-sidebar {
+  position: sticky;
+  top: calc(var(--header-h) + 90px);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.filters-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+  background: var(--c-surface-2);
+}
+
+.filters-head h3 {
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: .02em;
+}
+[data-theme="night"] .filters-head h3 { color: var(--c-gold-soft); }
+
+.filters-clear {
+  font-size: var(--fs-xs);
+  color: var(--c-gold);
+  font-weight: 600;
+  transition: opacity .2s var(--ease);
+}
+.filters-clear:hover { opacity: .7; }
+
+.filter-group {
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+.filter-group:last-of-type { border-bottom: none; }
+
+.filter-title {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--c-ink-mute);
+  letter-spacing: .02em;
+  margin-bottom: var(--sp-3);
+  text-transform: uppercase;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  max-height: 220px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.filter-options::-webkit-scrollbar { width: 6px; }
+.filter-options::-webkit-scrollbar-thumb {
+  background: var(--c-line);
+  border-radius: 6px;
+}
+
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+  position: relative;
+}
+
+.filter-check:hover { background: var(--c-surface-2); color: var(--c-primary); }
+
+.filter-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0; height: 0;
+}
+
+.filter-check-mark {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid var(--c-line);
+  background: var(--c-surface);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: all .2s var(--ease);
+}
+
+.filter-check-mark svg {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all .2s var(--ease);
+  color: #fff;
+}
+
+.filter-check input:checked ~ .filter-check-mark {
+  background: var(--c-gold);
+  border-color: var(--c-gold);
+}
+
+.filter-check input:checked ~ .filter-check-mark svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.filter-count {
+  margin-right: auto;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  font-feature-settings: "ss01";
+}
+
+/* Type Dots in Filter */
+.type-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.type-dot.martyrdom { background: var(--c-martyrdom); }
+.type-dot.operation { background: var(--c-operation); }
+.type-dot.war { background: var(--c-war); }
+.type-dot.revolution { background: var(--c-revolution); }
+.type-dot.ceremony { background: var(--c-ceremony); }
+.type-dot.birth { background: var(--c-birth); }
+
+/* Month Filter */
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-1);
+}
+
+.month-btn {
+  padding: var(--sp-2) var(--sp-1);
+  font-family: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-sm);
+  transition: all .2s var(--ease);
+  font-feature-settings: "ss01";
+}
+
+.month-btn:hover { border-color: var(--c-gold); color: var(--c-gold); }
+
+.month-btn.is-active {
+  background: var(--c-gold);
+  border-color: var(--c-gold);
+  color: #fff;
+}
+
+/* ============================================================
+   RESULTS
+============================================================ */
+.results-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  margin-bottom: var(--sp-5);
+  flex-wrap: wrap;
+}
+
+.results-count {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  font-feature-settings: "ss01";
+}
+
+.results-count strong {
+  color: var(--c-gold);
+  font-weight: 800;
+  font-size: var(--fs-md);
+}
+
+.sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+}
+
+.sort-select {
+  padding: var(--sp-2) var(--sp-3);
+  padding-left: var(--sp-6);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  color: var(--c-ink);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a847f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left var(--sp-3) center;
+}
+
+.sort-select:focus { border-color: var(--c-gold); }
+
+/* Active Filters */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+
+.active-filters:empty { display: none; }
+
+.active-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border: 1px solid rgba(184,137,43,.25);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+
+.active-chip:hover {
+  background: var(--c-gold);
+  color: #fff;
+}
+
+.active-chip::after {
+  content: "×";
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ============================================================
+   EVENT GRID
+============================================================ */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--sp-4);
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all .3s var(--ease);
+  cursor: pointer;
+  position: relative;
+  text-align: right;
+  font-family: inherit;
+  padding: 0;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.event-card-stripe {
+  height: 4px;
+  width: 100%;
+}
+.event-card-stripe.martyrdom { background: var(--c-martyrdom); }
+.event-card-stripe.operation { background: var(--c-operation); }
+.event-card-stripe.war { background: var(--c-war); }
+.event-card-stripe.revolution { background: var(--c-revolution); }
+.event-card-stripe.ceremony { background: var(--c-ceremony); }
+.event-card-stripe.birth { background: var(--c-birth); }
+
+.event-card-body {
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  flex: 1;
+}
+
+.event-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+
+.event-card-date {
+  text-align: center;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--c-gold-bg);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  min-width: 60px;
+}
+
+.event-card-date .d {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--c-gold);
+  line-height: 1;
+  font-feature-settings: "ss01";
+}
+
+.event-card-date .m {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--c-ink-mute);
+  margin-top: 3px;
+  font-weight: 600;
+  font-feature-settings: "ss01";
+}
+
+.event-card-type {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 2px var(--sp-2);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  align-self: flex-start;
+}
+
+.event-card-type.martyrdom { background: var(--c-martyrdom-bg); color: var(--c-martyrdom); }
+.event-card-type.operation { background: var(--c-operation-bg); color: var(--c-operation); }
+.event-card-type.war { background: var(--c-war-bg); color: var(--c-war); }
+.event-card-type.revolution { background: var(--c-revolution-bg); color: var(--c-revolution); }
+.event-card-type.ceremony { background: var(--c-ceremony-bg); color: var(--c-ceremony); }
+.event-card-type.birth { background: var(--c-birth-bg); color: var(--c-birth); }
+
+.event-card-title {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  line-height: 1.4;
+  letter-spacing: -.01em;
+}
+[data-theme="night"] .event-card-title { color: var(--c-ink); }
+
+.event-card-desc {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: auto;
+  padding-top: var(--sp-3);
+  border-top: 1px dashed var(--c-line-soft);
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+}
+
+.event-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.event-card-meta svg { color: var(--c-gold); flex-shrink: 0; }
+
+.event-card-footer {
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--c-surface-2);
+  border-top: 1px solid var(--c-line-soft);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  font-feature-settings: "ss01";
+}
+
+.event-card-footer .year {
+  color: var(--c-gold);
+  font-weight: 700;
+}
+
+/* ============================================================
+   EVENT LIST
+============================================================ */
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.event-list-item {
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: var(--sp-4);
+  align-items: center;
+  padding: var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  text-align: right;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.event-list-item::before {
+  content: "";
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.event-list-item.martyrdom::before { background: var(--c-martyrdom); }
+.event-list-item.operation::before { background: var(--c-operation); }
+.event-list-item.war::before { background: var(--c-war); }
+.event-list-item.revolution::before { background: var(--c-revolution); }
+.event-list-item.ceremony::before { background: var(--c-ceremony); }
+.event-list-item.birth::before { background: var(--c-birth); }
+
+.event-list-item:hover {
+  border-color: var(--c-gold);
+  background: var(--c-gold-bg);
+  transform: translateX(-3px);
+}
+
+.event-list-date {
+  text-align: center;
+  padding: var(--sp-2);
+  background: var(--c-surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.event-list-date .d {
+  display: block;
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--c-gold);
+  line-height: 1;
+  font-feature-settings: "ss01";
+}
+
+.event-list-date .m {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  margin-top: 4px;
+  font-weight: 600;
+  font-feature-settings: "ss01";
+}
+
+.event-list-info h3 {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
+  line-height: 1.4;
+}
+
+.event-list-info p {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  line-height: 1.7;
+}
+
+.event-list-type {
+  font-size: var(--fs-xs);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.event-list-type.martyrdom { background: var(--c-martyrdom-bg); color: var(--c-martyrdom); }
+.event-list-type.operation { background: var(--c-operation-bg); color: var(--c-operation); }
+.event-list-type.war { background: var(--c-war-bg); color: var(--c-war); }
+.event-list-type.revolution { background: var(--c-revolution-bg); color: var(--c-revolution); }
+.event-list-type.ceremony { background: var(--c-ceremony-bg); color: var(--c-ceremony); }
+.event-list-type.birth { background: var(--c-birth-bg); color: var(--c-birth); }
+
+/* ============================================================
+   TIMELINE VIEW
+============================================================ */
+.events-timeline {
+  padding: var(--sp-6) var(--sp-5);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.timeline-year-group {
+  position: relative;
+  padding-right: var(--sp-7);
+  padding-bottom: var(--sp-6);
+}
+
+.timeline-year-group:last-child { padding-bottom: 0; }
+
+.timeline-year-group::before {
+  content: "";
+  position: absolute;
+  right: 16px; top: 40px; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--c-gold), var(--c-line-soft));
+  border-radius: 2px;
+}
+
+.timeline-year-group:last-child::before { display: none; }
+
+.timeline-year {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  border-radius: 999px;
+  font-size: var(--fs-md);
+  font-weight: 800;
+  margin-bottom: var(--sp-4);
+  font-feature-settings: "ss01";
+  box-shadow: 0 4px 12px rgba(15,46,36,.2);
+  position: relative;
+}
+
+.timeline-year::before {
+  content: "";
+  position: absolute;
+  right: -22px; top: 50%;
+  transform: translateY(-50%);
+  width: 12px; height: 12px;
+  background: var(--c-gold);
+  border: 3px solid var(--c-surface);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--c-gold-bg);
+}
+
+.timeline-events {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.timeline-event {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--c-surface-2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  align-items: center;
+  position: relative;
+  text-align: right;
+  font-family: inherit;
+  border: 1px solid transparent;
+}
+
+.timeline-event:hover {
+  background: var(--c-gold-bg);
+  border-color: var(--c-gold);
+  transform: translateX(-4px);
+}
+
+.timeline-event-date {
+  text-align: center;
+  padding: var(--sp-2);
+  background: var(--c-surface);
+  border-radius: var(--radius-sm);
+  border-right: 3px solid var(--c-gold);
+}
+
+.timeline-event-date .d {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--c-gold);
+  line-height: 1;
+  font-feature-settings: "ss01";
+}
+
+.timeline-event-date .m {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--c-ink-mute);
+  margin-top: 3px;
+  font-weight: 600;
+  font-feature-settings: "ss01";
+}
+
+.timeline-event-info h4 {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
+  line-height: 1.4;
+}
+
+.timeline-event-info p {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+.empty-state {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-5);
+  background: var(--c-surface);
+  border: 1px dashed var(--c-line);
+  border-radius: var(--radius-lg);
+  grid-column: 1 / -1;
+}
+
+.empty-icon {
+  width: 80px; height: 80px;
+  margin: 0 auto var(--sp-5);
+  background: var(--c-surface-2);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--c-ink-mute);
+}
+
+.empty-state h3 {
+  font-size: var(--fs-lg);
+  color: var(--c-ink);
+  margin-bottom: var(--sp-2);
+  font-weight: 700;
+}
+
+.empty-state p {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  max-width: 400px;
+  margin: 0 auto var(--sp-5);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   PAGINATION
+============================================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-7);
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 var(--sp-3);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  transition: all .2s var(--ease);
+  font-feature-settings: "ss01";
+}
+
+.page-btn:hover:not(:disabled):not(.is-active) {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  transform: translateY(-2px);
+}
+
+.page-btn.is-active {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  border-color: var(--c-primary);
+  box-shadow: 0 4px 12px rgba(15,46,36,.25);
+}
+
+.page-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.page-dots {
+  color: var(--c-ink-mute);
+  padding: 0 var(--sp-2);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  background: var(--c-primary);
+  color: rgba(255,255,255,.7);
+  padding: var(--sp-8) 0 var(--sp-5);
+  margin-top: var(--sp-7);
+}
+[data-theme="night"] .site-footer { background: #061410; }
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+.footer-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.footer-desc {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  max-width: 320px;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.footer-col h3 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+}
+
+.footer-col ul { display: grid; gap: var(--sp-2); }
+
+.footer-col a {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,.65);
+  transition: color .2s var(--ease);
+}
+.footer-col a:hover { color: var(--c-gold-soft); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   MOBILE FILTER TOGGLE
+============================================================ */
+.filter-toggle-mobile {
+  display: none;
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-4);
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+[data-theme="night"] .filter-toggle-mobile { color: var(--c-ink); }
+
+.filter-toggle-mobile svg { color: var(--c-gold); }
+
+.filter-toggle-mobile .badge {
+  background: var(--c-gold);
+  color: #fff;
+  padding: 2px var(--sp-2);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-right: auto;
+  margin-left: var(--sp-2);
+  font-feature-settings: "ss01";
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1100px) {
+  .events-layout { grid-template-columns: 1fr; }
+
+  .filters-sidebar {
+    position: static;
+    display: none;
+  }
+
+  .filters-sidebar.is-open { display: block; }
+
+  .filter-toggle-mobile { display: flex; }
+}
+
+@media (max-width: 960px) {
+  .main-nav { display: none; }
+  .menu-toggle { display: grid; }
+
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --fs-3xl: 2rem;
+    --fs-2xl: 1.75rem;
+    --fs-xl: 1.35rem;
+    --header-h: 64px;
+  }
+
+  .container { padding: 0 var(--sp-4); }
+
+  .page-head { padding: var(--sp-5) 0 var(--sp-4); }
+
+  .search-bar { flex-wrap: wrap; }
+  .search-input-wrap { min-width: 100%; }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card-body { padding: var(--sp-4); }
+
+  .event-list-item {
+    grid-template-columns: 70px 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+  }
+
+  .event-list-info h3 { font-size: var(--fs-sm); }
+  .event-list-info p { font-size: var(--fs-xs); }
+  .event-list-type { display: none; }
+
+  .timeline-event {
+    grid-template-columns: 60px 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+  }
+
+  .timeline-event-info h4 { font-size: var(--fs-sm); }
+  .timeline-event-info p { font-size: var(--fs-xs); }
+
+  .results-toolbar { padding: var(--sp-2) var(--sp-3); }
+
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.event-card,
+.event-list-item,
+.timeline-event {
+  animation: fadeUp .5s var(--ease) backwards;
+}
+
+.event-card:nth-child(1) { animation-delay: .02s; }
+.event-card:nth-child(2) { animation-delay: .04s; }
+.event-card:nth-child(3) { animation-delay: .06s; }
+.event-card:nth-child(4) { animation-delay: .08s; }
+.event-card:nth-child(5) { animation-delay: .10s; }
+.event-card:nth-child(6) { animation-delay: .12s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی"><a data-page="home" href="index.html">نخست</a><a data-page="calendar" href="calendar.html">تقویم</a><a data-page="today" href="today.html">امروز</a><a data-page="martyrs" href="martyrs.html">شهدا</a><a data-page="events" href="events.html">رویدادها</a><a data-page="places" href="places.html">مکان‌ها</a><a data-page="periods" href="periods.html">دوره‌ها</a><a data-page="sources" href="sources.html">منابع</a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه</a><a data-page="search" href="search.html">جست‌وجو</a><a data-page="about" href="about.html">درباره</a><a data-page="contribute" href="contribute.html">همکاری</a><a data-page="contact" href="contact.html">تماس</a></nav></div></header></div></header>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main id="main" role="main">
+
+  <!-- ====== PAGE HEAD ====== -->
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="مسیر">
+        <ol>
+          <li><a href="index.html">خانه</a></li>
+          <li aria-current="page">رویدادها</li>
+        </ol>
+      </nav>
+      <h1 class="page-title">رویدادهای تاریخی و یادمانی</h1>
+      <p class="page-lead">
+        شهادت‌ها، عملیات‌ها، جنگ‌ها، قیام‌ها، یادواره‌ها و سالگردها — همه در یک آرشیو زنده و مستند.
+      </p>
+
+      <!-- Legend -->
+      <div class="type-legend" aria-label="راهنمای نوع رویداد">
+        <span class="legend-item"><span class="legend-dot martyrdom"></span> شهادت</span>
+        <span class="legend-item"><span class="legend-dot operation"></span> عملیات</span>
+        <span class="legend-item"><span class="legend-dot war"></span> جنگ</span>
+        <span class="legend-item"><span class="legend-dot revolution"></span> انقلاب</span>
+        <span class="legend-item"><span class="legend-dot ceremony"></span> یادواره</span>
+        <span class="legend-item"><span class="legend-dot birth"></span> تولد</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SEARCH BAR ====== -->
+  <div class="search-bar-wrap">
+    <div class="container">
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <label for="eventsSearch" class="sr-only">جست‌وجو در رویدادها</label>
+          <input id="eventsSearch" type="search" class="search-input" placeholder="جست‌وجو بر اساس عنوان، مکان، عملیات یا کلیدواژه..." autocomplete="off" />
+        </div>
+
+        <div class="view-toggle" role="tablist" aria-label="نمای نمایش">
+          <button class="is-active" data-view="grid" role="tab" aria-selected="true" aria-label="نمای شبکه‌ای">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+          </button>
+          <button data-view="list" role="tab" aria-selected="false" aria-label="نمای لیستی">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <circle cx="3.5" cy="6" r="1"/>
+              <circle cx="3.5" cy="12" r="1"/>
+              <circle cx="3.5" cy="18" r="1"/>
+            </svg>
+          </button>
+          <button data-view="timeline" role="tab" aria-selected="false" aria-label="نمای خط زمانی">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="5" cy="6" r="2"/>
+              <circle cx="5" cy="18" r="2"/>
+              <line x1="5" y1="8" x2="5" y2="16"/>
+              <line x1="9" y1="6" x2="21" y2="6"/>
+              <line x1="9" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== LAYOUT ====== -->
+  <div class="container">
+    <div class="events-layout">
+
+      <!-- ====== SIDEBAR FILTERS ====== -->
+      <aside class="filters-sidebar" id="filtersSidebar" aria-label="فیلترها">
+        <div class="filters-head">
+          <h3>فیلترها</h3>
+          <button class="filters-clear" data-clear-all>پاک کردن همه</button>
+        </div>
+
+        <!-- نوع رویداد -->
+        <div class="filter-group">
+          <div class="filter-title">نوع رویداد</div>
+          <div class="filter-options" data-filter="type">
+            <label class="filter-check">
+              <input type="checkbox" value="martyrdom" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span class="type-dot martyrdom"></span>
+              <span>شهادت</span><span class="filter-count">۳۲</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="operation" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span class="type-dot operation"></span>
+              <span>عملیات</span><span class="filter-count">۱۸</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="war" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span class="type-dot war"></span>
+              <span>جنگ</span><span class="filter-count">۶</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="revolution" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span class="type-dot revolution"></span>
+              <span>انقلاب</span><span class="filter-count">۹</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="ceremony" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span class="type-dot ceremony"></span>
+              <span>یادواره</span><span class="filter-count">۲۴</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="birth" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span class="type-dot birth"></span>
+              <span>تولد</span><span class="filter-count">۱۵</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- دوره -->
+        <div class="filter-group">
+          <div class="filter-title">دوره تاریخی</div>
+          <div class="filter-options" data-filter="period">
+            <label class="filter-check">
+              <input type="checkbox" value="defa" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>دفاع مقدس</span><span class="filter-count">۴۸</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="mad" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>مدافعان حرم</span><span class="filter-count">۲۳</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="enghelab" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>انقلاب اسلامی</span><span class="filter-count">۱۵</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="moaser" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>تاریخ معاصر</span><span class="filter-count">۱۲</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- مکان -->
+        <div class="filter-group">
+          <div class="filter-title">استان / منطقه</div>
+          <div class="filter-options" data-filter="province">
+            <label class="filter-check">
+              <input type="checkbox" value="tehran" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>تهران</span><span class="filter-count">۳۲</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="khuzestan" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>خوزستان</span><span class="filter-count">۲۵</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="isfahan" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>اصفهان</span><span class="filter-count">۲۰</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="fars" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>فارس</span><span class="filter-count">۱۸</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="khorasan" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>خراسان رضوی</span><span class="filter-count">۱۵</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- ماه -->
+        <div class="filter-group">
+          <div class="filter-title">ماه</div>
+          <div class="month-grid" data-filter="month">
+            <button class="month-btn" data-month="1">فروردین</button>
+            <button class="month-btn" data-month="2">اردیبهشت</button>
+            <button class="month-btn" data-month="3">خرداد</button>
+            <button class="month-btn" data-month="4">تیر</button>
+            <button class="month-btn" data-month="5">مرداد</button>
+            <button class="month-btn" data-month="6">شهریور</button>
+            <button class="month-btn" data-month="7">مهر</button>
+            <button class="month-btn" data-month="8">آبان</button>
+            <button class="month-btn" data-month="9">آذر</button>
+            <button class="month-btn" data-month="10">دی</button>
+            <button class="month-btn" data-month="11">بهمن</button>
+            <button class="month-btn" data-month="12">اسفند</button>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ====== RESULTS ====== -->
+      <div class="results">
+
+        <button class="filter-toggle-mobile" id="filterToggleMobile" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+          <span>فیلترها</span>
+          <span class="badge" id="filterBadge" hidden>۰</span>
+        </button>
+
+        <div class="active-filters" id="activeFilters" aria-label="فیلترهای فعال"></div>
+
+        <div class="results-toolbar">
+          <p class="results-count">
+            <strong id="resultsCount">۰</strong> رویداد یافت شد
+          </p>
+          <div class="sort-wrap">
+            <label for="sortSelect">مرتب‌سازی:</label>
+            <select id="sortSelect" class="sort-select">
+              <option value="newest">جدیدترین</option>
+              <option value="oldest">قدیمی‌ترین</option>
+              <option value="title">عنوان (الفبا)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="resultsContainer"></div>
+
+        <nav class="pagination" id="pagination" aria-label="صفحه‌بندی"></nav>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ===== اعداد فارسی =====
+  function toFa(n) {
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  // ===== داده نمونه رویدادها =====
+  var EVENTS = window.PageData.events;
+  // ===== State =====
+  const state = {
+    query: '',
+    view: 'grid',
+    filters: {
+      type: [],
+      period: [],
+      province: [],
+      month: []
+    },
+    sort: 'newest',
+    page: 1,
+    perPage: 9
+  };
+
+  // ===== Elements =====
+  const resultsContainer = document.getElementById('resultsContainer');
+  const resultsCount = document.getElementById('resultsCount');
+  const pagination = document.getElementById('pagination');
+  const activeFilters = document.getElementById('activeFilters');
+  const searchInput = document.getElementById('eventsSearch');
+  const sortSelect = document.getElementById('sortSelect');
+  const filtersSidebar = document.getElementById('filtersSidebar');
+  const filterToggleMobile = document.getElementById('filterToggleMobile');
+  const filterBadge = document.getElementById('filterBadge');
+
+  // ===== Labels =====
+  const TYPE_LABELS = {
+    martyrdom: 'شهادت',
+    operation: 'عملیات',
+    war: 'جنگ',
+    revolution: 'انقلاب',
+    ceremony: 'یادواره',
+    birth: 'تولد'
+  };
+
+  const PERIOD_LABELS = {
+    'defa': 'دفاع مقدس',
+    'mad': 'مدافعان حرم',
+    'enghelab': 'انقلاب اسلامی',
+    'moaser': 'تاریخ معاصر'
+  };
+
+  const PROVINCE_LABELS = {
+    'tehran': 'تهران',
+    'khuzestan': 'خوزستان',
+    'isfahan': 'اصفهان',
+    'fars': 'فارس',
+    'khorasan': 'خراسان رضوی'
+  };
+
+  const MONTH_NAMES = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+
+  // ===== Filtering & Sorting =====
+  function filterEvents() {
+    return EVENTS.filter(e => {
+      // Query
+      if (state.query) {
+        const q = state.query.toLowerCase();
+        const haystack = `${e.title} ${e.desc} ${e.city} ${e.province} ${e.period} ${TYPE_LABELS[e.type]}`.toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+
+      // Type
+      if (state.filters.type.length && !state.filters.type.includes(e.type)) return false;
+
+      // Period
+      if (state.filters.period.length) {
+        const periodMap = {
+          'defa': 'دفاع مقدس',
+          'mad': 'مدافعان حرم',
+          'enghelab': 'انقلاب اسلامی',
+          'moaser': 'تاریخ معاصر'
+        };
+        const valid = state.filters.period.some(p => periodMap[p] === e.period);
+        if (!valid) return false;
+      }
+
+      // Province
+      if (state.filters.province.length) {
+        const provMap = {
+          'tehran': 'تهران',
+          'khuzestan': 'خوزستان',
+          'isfahan': 'اصفهان',
+          'fars': 'فارس',
+          'khorasan': 'خراسان رضوی'
+        };
+        const valid = state.filters.province.some(p => provMap[p] === e.province);
+        if (!valid) return false;
+      }
+
+      // Month
+      if (state.filters.month.length && !state.filters.month.includes(e.month)) return false;
+
+      return true;
+    }).sort((a, b) => {
+      switch (state.sort) {
+        case 'newest': return (b.year * 100 + b.month * 10 + b.day) - (a.year * 100 + a.month * 10 + a.day);
+        case 'oldest': return (a.year * 100 + a.month * 10 + a.day) - (b.year * 100 + b.month * 10 + b.day);
+        case 'title': return a.title.localeCompare(b.title, 'fa');
+        default: return 0;
+      }
+    });
+  }
+
+  // ===== Icons =====
+  const ICONS = {
+    pin: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+    calendar: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    arrow: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
+  };
+
+  // ===== Render =====
+  function render() {
+    const all = filterEvents();
+    const total = all.length;
+    const totalPages = Math.ceil(total / state.perPage) || 1;
+
+    if (state.page > totalPages) state.page = totalPages;
+
+    const start = (state.page - 1) * state.perPage;
+    const pageItems = all.slice(start, start + state.perPage);
+
+    resultsCount.textContent = toFa(total);
+
+    // Empty state
+    if (!total) {
+      resultsContainer.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <h3>رویدادی یافت نشد</h3>
+          <p>با تغییر فیلترها یا جست‌وجوی دیگری امتحان کنید. می‌توانید با همکاری در پروژه، رویدادهای بیشتری را ثبت کنید.</p>
+          <a href="contribute.html" class="btn btn-gold">افزودن رویداد جدید</a>
+        </div>
+      `;
+      pagination.innerHTML = '';
+      return;
+    }
+
+    // Views
+    if (state.view === 'grid') {
+      resultsContainer.innerHTML = `<div class="events-grid">${pageItems.map(renderCard).join('')}</div>`;
+    } else if (state.view === 'list') {
+      resultsContainer.innerHTML = `<div class="events-list">${pageItems.map(renderListItem).join('')}</div>`;
+    } else {
+      // Timeline
+      resultsContainer.innerHTML = renderTimeline(pageItems);
+    }
+
+    renderPagination(totalPages);
+
+    // Attach clicks
+    document.querySelectorAll('[data-event-id]').forEach(el => {
+      el.addEventListener('click', () => {
+        window.location.href = 'event.html';
+      });
+    });
+  }
+
+  function renderCard(e) {
+    const monthName = MONTH_NAMES[e.month - 1];
+    return `
+      <button class="event-card" data-event-id="${e.id}" aria-label="مشاهده ${e.title}">
+        <div class="event-card-stripe ${e.type}"></div>
+        <div class="event-card-body">
+          <div class="event-card-head">
+            <div class="event-card-date">
+              <span class="d">${toFa(e.day)}</span>
+              <span class="m">${monthName}</span>
+            </div>
+            <span class="event-card-type ${e.type}">${TYPE_LABELS[e.type]}</span>
+          </div>
+          <h3 class="event-card-title">${e.title}</h3>
+          <p class="event-card-desc">${e.desc}</p>
+          <div class="event-card-meta">
+            <span>${ICONS.pin} ${e.city}${e.city !== '—' ? '، ' : ''}${e.province}</span>
+            <span>${ICONS.calendar} ${e.period}</span>
+          </div>
+        </div>
+        <div class="event-card-footer">
+          <span class="year">${toFa(e.year)}</span>
+          <span>${e.related} رویداد مرتبط</span>
+        </div>
+      </button>
+    `;
+  }
+
+  function renderListItem(e) {
+    const monthName = MONTH_NAMES[e.month - 1];
+    return `
+      <button class="event-list-item ${e.type}" data-event-id="${e.id}" aria-label="مشاهده ${e.title}">
+        <div class="event-list-date">
+          <span class="d">${toFa(e.day)}</span>
+          <span class="m">${monthName}</span>
+        </div>
+        <div class="event-list-info">
+          <h3>${e.title}</h3>
+          <p>${e.desc}</p>
+        </div>
+        <span class="event-list-type ${e.type}">${TYPE_LABELS[e.type]}</span>
+      </button>
+    `;
+  }
+
+  function renderTimeline(items) {
+    // گروه‌بندی بر اساس سال
+    const grouped = {};
+    items.forEach(e => {
+      if (!grouped[e.year]) grouped[e.year] = [];
+      grouped[e.year].push(e);
+    });
+
+    const sortedYears = Object.keys(grouped).map(Number).sort((a, b) => b - a);
+
+    let html = '<div class="events-timeline">';
+    sortedYears.forEach(year => {
+      html += `
+        <div class="timeline-year-group">
+          <span class="timeline-year">${toFa(year)}</span>
+          <div class="timeline-events">
+            ${grouped[year].map(e => {
+              const monthName = MONTH_NAMES[e.month - 1];
+              return `
+                <button class="timeline-event" data-event-id="${e.id}" aria-label="${e.title}">
+                  <div class="timeline-event-date">
+                    <span class="d">${toFa(e.day)}</span>
+                    <span class="m">${monthName}</span>
+                  </div>
+                  <div class="timeline-event-info">
+                    <h4>${e.title}</h4>
+                    <p>${e.desc}</p>
+                  </div>
+                </button>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function renderPagination(totalPages) {
+    if (totalPages <= 1) {
+      pagination.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    html += `<button class="page-btn" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''} aria-label="قبلی">‹</button>`;
+
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || Math.abs(i - state.page) <= 1) {
+        pages.push(i);
+      } else if (pages[pages.length - 1] !== '...') {
+        pages.push('...');
+      }
+    }
+
+    pages.forEach(p => {
+      if (p === '...') {
+        html += `<span class="page-dots">…</span>`;
+      } else {
+        html += `<button class="page-btn ${p === state.page ? 'is-active' : ''}" data-page="${p}">${toFa(p)}</button>`;
+      }
+    });
+
+    html += `<button class="page-btn" data-page="${state.page + 1}" ${state.page === totalPages ? 'disabled' : ''} aria-label="بعدی">›</button>`;
+
+    pagination.innerHTML = html;
+
+    pagination.querySelectorAll('[data-page]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = parseInt(btn.dataset.page, 10);
+        if (p >= 1 && p <= totalPages && p !== state.page) {
+          state.page = p;
+          render();
+          window.scrollTo({ top: 300, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  // ===== Active Filters =====
+  function renderActiveFilters() {
+    const chips = [];
+
+    state.filters.type.forEach(v => {
+      chips.push(`<button class="active-chip" data-filter-key="type" data-filter-value="${v}">${TYPE_LABELS[v]}</button>`);
+    });
+
+    state.filters.period.forEach(v => {
+      chips.push(`<button class="active-chip" data-filter-key="period" data-filter-value="${v}">${PERIOD_LABELS[v]}</button>`);
+    });
+
+    state.filters.province.forEach(v => {
+      chips.push(`<button class="active-chip" data-filter-key="province" data-filter-value="${v}">${PROVINCE_LABELS[v]}</button>`);
+    });
+
+    state.filters.month.forEach(v => {
+      chips.push(`<button class="active-chip" data-filter-key="month" data-filter-value="${v}">ماه: ${MONTH_NAMES[v - 1]}</button>`);
+    });
+
+    activeFilters.innerHTML = chips.join('');
+
+    activeFilters.querySelectorAll('.active-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const key = chip.dataset.filterKey;
+        const value = chip.dataset.filterValue;
+
+        if (key === 'month') {
+          state.filters.month = state.filters.month.filter(v => v !== parseInt(value, 10));
+          const monthBtn = document.querySelector(`.month-btn[data-month="${value}"]`);
+          if (monthBtn) monthBtn.classList.remove('is-active');
+        } else {
+          state.filters[key] = state.filters[key].filter(v => v !== value);
+          const checkbox = document.querySelector(`input[type="checkbox"][value="${value}"]`);
+          if (checkbox) checkbox.checked = false;
+        }
+
+        state.page = 1;
+        updateFilterBadge();
+        renderActiveFilters();
+        render();
+      });
+    });
+  }
+
+  function updateFilterBadge() {
+    const total = state.filters.type.length + state.filters.period.length + state.filters.province.length + state.filters.month.length;
+    if (total > 0) {
+      filterBadge.textContent = toFa(total);
+      filterBadge.hidden = false;
+    } else {
+      filterBadge.hidden = true;
+    }
+  }
+
+  // ===== Event Handlers =====
+  searchInput?.addEventListener('input', (e) => {
+    state.query = e.target.value.trim();
+    state.page = 1;
+    render();
+  });
+
+  sortSelect?.addEventListener('change', (e) => {
+    state.sort = e.target.value;
+    state.page = 1;
+    render();
+  });
+
+  document.querySelectorAll('.view-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.view = btn.dataset.view;
+      document.querySelectorAll('.view-toggle button').forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', String(active));
+      });
+      state.page = 1;
+      render();
+    });
+  });
+
+  // Checkbox filters
+  document.querySelectorAll('.filter-check input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const filterGroup = cb.closest('[data-filter]');
+      const key = filterGroup.dataset.filter;
+
+      if (cb.checked) {
+        state.filters[key].push(cb.value);
+      } else {
+        state.filters[key] = state.filters[key].filter(v => v !== cb.value);
+      }
+
+      state.page = 1;
+      updateFilterBadge();
+      renderActiveFilters();
+      render();
+    });
+  });
+
+  // Month buttons
+  document.querySelectorAll('.month-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const month = parseInt(btn.dataset.month, 10);
+      const isActive = btn.classList.toggle('is-active');
+
+      if (isActive) {
+        state.filters.month.push(month);
+      } else {
+        state.filters.month = state.filters.month.filter(m => m !== month);
+      }
+
+      state.page = 1;
+      updateFilterBadge();
+      renderActiveFilters();
+      render();
+    });
+  });
+
+  // Clear all
+  document.querySelector('[data-clear-all]')?.addEventListener('click', () => {
+    state.filters = { type: [], period: [], province: [], month: [] };
+    state.query = '';
+    state.page = 1;
+    searchInput.value = '';
+    document.querySelectorAll('.filter-check input').forEach(cb => cb.checked = false);
+    document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('is-active'));
+    updateFilterBadge();
+    renderActiveFilters();
+    render();
+  });
+
+  // Mobile filter toggle
+  filterToggleMobile?.addEventListener('click', () => {
+    const isOpen = filtersSidebar.classList.toggle('is-open');
+    filterToggleMobile.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // ===== Theme =====
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') {
+    html.setAttribute('data-theme', 'night');
+    updateThemeIcon('night');
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'night' ? 'day' : 'night';
+    if (next === 'night') html.setAttribute('data-theme', 'night');
+    else html.removeAttribute('data-theme');
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  });
+
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    if (theme === 'night') {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>';
+    } else {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    }
+  }
+
+  // ===== Init =====
+  renderActiveFilters();
+  render();
+
+})();
+</script>
+
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

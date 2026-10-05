@@ -1,1 +1,2057 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>امروز | تقویم شهدا</title><link rel="icon" href="assets/images/logo.png"><link rel="stylesheet" href="assets/css/calendar.css"><link rel="stylesheet" href="assets/css/calendar-shell.css"></head><body><div id="calendarShellHeader"></div><main class="page"><section class="pageHero"><span>نمای روز</span><h1>امروز در تقویم شهدا</h1><p>رویدادها و یادمان‌هایی که برای تاریخ امروز در بانک محلی تقویم ثبت شده‌اند.</p></section><section class="todayPage box"><div class="todayPageDate" id="todayDate">—</div><div id="todayList" class="pageList"></div></section></main><div id="calendarShellFooter"></div><script src="assets/js/calendar-shell.js"></script><script src="assets/js/data-loader.js"></script><script>(async()=>{const fmt=new Intl.DateTimeFormat("en-US-u-ca-persian",{timeZone:"Asia/Tehran",year:"numeric",month:"numeric",day:"numeric"}),parts=d=>{const p={};fmt.formatToParts(d).forEach(x=>{if(["year","month","day"].includes(x.type))p[x.type]=Number(x.value)});return p},fa=n=>String(n).replace(/\d/g,x=>"۰۱۲۳۴۵۶۷۸۹"[x]),d=parts(new Date()),k=d.year+"/"+String(d.month).padStart(2,"0")+"/"+String(d.day).padStart(2,"0"),data=await loadCalendarData();document.getElementById("todayDate").textContent=fa(d.day)+" "+["","فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"][d.month]+" "+fa(d.year);const list=data.events.filter(e=>e.date===k);document.getElementById("todayList").innerHTML=list.length?list.map(e=>"<article><span>"+e.type+"</span><h3>"+e.title+"</h3><p>"+e.desc+"</p><small>"+e.source+"</small></article>").join(""):"<div class='emptyState'>برای امروز هنوز رویدادی در داده‌های فعلی ثبت نشده است.</div>"})()</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="امروز در تاریخ — شهید امروز، رویدادها و مناسبت‌های امروز" />
+<meta name="theme-color" content="#0f2e24" />
+<title>امروز در تاریخ | تقویم شهدا</title>
+
+<link rel="icon" href="assets/images/logo.png">
+<style>
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f2ede3;
+  --c-surface: #ffffff;
+  --c-surface-2: #f7f3ea;
+  --c-ink: #1a2420;
+  --c-ink-soft: #4a5651;
+  --c-ink-mute: #7a847f;
+  --c-line: #e6dfd0;
+  --c-line-soft: #efe9dd;
+
+  --c-primary: #0f2e24;
+  --c-primary-2: #1a4a3a;
+  --c-primary-3: #2a6a54;
+  --c-gold: #b8892b;
+  --c-gold-soft: #d4af37;
+  --c-gold-bg: #faf3e0;
+  --c-accent: #8b2f2f;
+
+  --c-martyrdom: #8b2f2f;
+  --c-martyrdom-bg: #fbe9e9;
+  --c-operation: #2a6a54;
+  --c-operation-bg: #e8f0ed;
+  --c-ceremony: #2a5a9a;
+  --c-ceremony-bg: #eaf1fb;
+  --c-birth: #6a4a8b;
+  --c-birth-bg: #f0eaf5;
+
+  --c-night-bg: #0a1a15;
+  --c-night-surface: #11261e;
+  --c-night-ink: #e8e3d5;
+  --c-night-line: #1e3a2e;
+
+  --font: "Vazirmatn", "Tahoma", sans-serif;
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.35rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+  --fs-4xl: 4rem;
+  --fs-5xl: 5rem;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 2px rgba(15,46,36,.06), 0 1px 3px rgba(15,46,36,.04);
+  --shadow: 0 4px 12px rgba(15,46,36,.06), 0 2px 4px rgba(15,46,36,.04);
+  --shadow-md: 0 12px 32px rgba(15,46,36,.08), 0 4px 8px rgba(15,46,36,.04);
+  --shadow-lg: 0 24px 60px rgba(15,46,36,.10), 0 8px 16px rgba(15,46,36,.06);
+  --shadow-gold: 0 12px 40px rgba(184,137,43,.20);
+
+  --container: 1200px;
+  --header-h: 76px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-theme="night"] {
+  --c-bg: var(--c-night-bg);
+  --c-bg-alt: #0d2019;
+  --c-surface: var(--c-night-surface);
+  --c-surface-2: #163328;
+  --c-ink: var(--c-night-ink);
+  --c-ink-soft: #b8c4bd;
+  --c-ink-mute: #7a8a82;
+  --c-line: var(--c-night-line);
+  --c-line-soft: #183027;
+  --c-gold-bg: #1a2f24;
+  --c-martyrdom-bg: #2e1a1a;
+  --c-operation-bg: #16332a;
+  --c-ceremony-bg: #16233a;
+  --c-birth-bg: #241a33;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--c-ink);
+  background: var(--c-bg);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 243, .85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .site-header { background: rgba(10, 26, 21, .85); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  height: var(--header-h);
+}
+
+.brand { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+
+.brand-logo {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  border-radius: 12px;
+  color: var(--c-gold-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-title {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-primary);
+  line-height: 1.2;
+}
+[data-theme="night"] .brand-title { color: var(--c-gold-soft); }
+
+.brand-sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.2;
+}
+
+.main-nav ul { display: flex; gap: var(--sp-1); align-items: center; }
+
+.main-nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: all .2s var(--ease);
+}
+.main-nav a:hover { color: var(--c-primary); background: var(--c-surface-2); }
+[data-theme="night"] .main-nav a:hover { color: var(--c-gold-soft); }
+
+.main-nav a.is-active { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .main-nav a.is-active { color: var(--c-gold-soft); }
+
+.main-nav a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px; right: 12px; left: 12px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+
+.header-actions { display: flex; gap: var(--sp-2); align-items: center; }
+
+.btn-icon {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+}
+.btn-icon:hover {
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  transform: translateY(-1px);
+}
+[data-theme="night"] .btn-icon:hover { color: var(--c-gold-soft); }
+
+.menu-toggle { display: none; }
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(15,46,36,.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15,46,36,.30);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-primary);
+  border: 1px solid var(--c-line);
+}
+.btn-ghost:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+[data-theme="night"] .btn-ghost { color: var(--c-ink); }
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--c-gold), var(--c-gold-soft));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(184,137,43,.25);
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,137,43,.35);
+}
+
+.btn-sm { padding: var(--sp-2) var(--sp-3); font-size: var(--fs-xs); }
+
+/* ============================================================
+   TODAY HERO
+============================================================ */
+.today-hero {
+  position: relative;
+  padding: var(--sp-8) 0 var(--sp-7);
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  overflow: hidden;
+}
+
+.today-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(212,175,55,.15), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212,175,55,.10), transparent 50%);
+  pointer-events: none;
+}
+
+.today-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,.015) 20px, rgba(255,255,255,.015) 40px);
+  pointer-events: none;
+}
+
+.today-hero-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-7);
+  align-items: center;
+}
+
+.today-hero-left {
+  max-width: 620px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-4);
+  background: rgba(212,175,55,.15);
+  border: 1px solid rgba(212,175,55,.3);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-5);
+  letter-spacing: .02em;
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--c-gold-soft);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+.today-hero-title {
+  font-size: clamp(1.75rem, 4vw, var(--fs-4xl));
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  margin-bottom: var(--sp-3);
+}
+
+.today-hero-title .accent {
+  color: var(--c-gold-soft);
+}
+
+.today-hero-lead {
+  font-size: var(--fs-md);
+  opacity: .9;
+  line-height: 1.9;
+  margin-bottom: var(--sp-5);
+}
+
+/* Date Big Display */
+.today-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+
+.date-chip {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-3) var(--sp-4);
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius);
+  min-width: 140px;
+}
+
+.date-chip-label {
+  font-size: var(--fs-xs);
+  opacity: .7;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.date-chip-value {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--c-gold-soft);
+  font-feature-settings: "ss01";
+  line-height: 1.2;
+}
+
+.date-chip-sub {
+  font-size: 0.7rem;
+  opacity: .6;
+  margin-top: 2px;
+  font-feature-settings: "ss01";
+}
+
+/* Clock */
+.today-hero-right {
+  text-align: center;
+  padding: var(--sp-5);
+}
+
+.today-clock {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--sp-6) var(--sp-7);
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--radius-xl);
+  position: relative;
+}
+
+.today-clock::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-xl);
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(212,175,55,.4), transparent 50%, rgba(212,175,55,.2));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.clock-time {
+  font-size: var(--fs-4xl);
+  font-weight: 800;
+  color: var(--c-gold-soft);
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-feature-settings: "ss01";
+  margin-bottom: var(--sp-2);
+}
+
+.clock-label {
+  font-size: var(--fs-xs);
+  opacity: .7;
+  letter-spacing: .04em;
+}
+
+.clock-location {
+  font-size: var(--fs-xs);
+  color: var(--c-gold-soft);
+  margin-top: var(--sp-3);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  opacity: .8;
+}
+
+/* ============================================================
+   DAY NAVIGATION
+============================================================ */
+.day-nav {
+  background: var(--c-surface);
+  border-bottom: 1px solid var(--c-line-soft);
+  padding: var(--sp-3) 0;
+}
+
+.day-nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.day-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  color: var(--c-ink-soft);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  transition: all .2s var(--ease);
+  font-family: inherit;
+}
+
+.day-nav-btn:hover {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  background: var(--c-gold-bg);
+  transform: translateY(-1px);
+}
+
+.day-nav-center {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  font-feature-settings: "ss01";
+}
+
+.day-nav-center a {
+  color: var(--c-gold);
+  font-weight: 600;
+  margin-right: var(--sp-1);
+}
+.day-nav-center a:hover { text-decoration: underline; }
+
+/* ============================================================
+   SECTIONS
+============================================================ */
+.section {
+  padding: var(--sp-7) 0;
+}
+
+.section-alt { background: var(--c-bg-alt); }
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+  flex-wrap: wrap;
+}
+
+.section-title-wrap {
+  position: relative;
+  padding-right: var(--sp-5);
+}
+
+.section-title-wrap::before {
+  content: "";
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 4px; height: 60%;
+  background: linear-gradient(180deg, var(--c-gold), var(--c-gold-soft));
+  border-radius: 4px;
+}
+
+.section-title {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.01em;
+  line-height: 1.3;
+}
+[data-theme="night"] .section-title { color: var(--c-ink); }
+
+.section-sub {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-top: 2px;
+}
+
+.link-more {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-gold);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  transition: gap .2s var(--ease);
+}
+.link-more::after { content: "←"; }
+.link-more:hover { gap: var(--sp-3); }
+
+/* ============================================================
+   MARTYR OF THE DAY
+============================================================ */
+.mod-wrapper {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 0;
+  background: var(--c-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--c-line-soft);
+  position: relative;
+}
+
+.mod-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle at top right, var(--c-gold-bg), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mod-media {
+  position: relative;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  min-height: 400px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.mod-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .92;
+}
+
+.mod-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(212,175,55,.15), transparent 60%),
+    linear-gradient(180deg, transparent 50%, rgba(15,46,36,.6));
+  pointer-events: none;
+}
+
+.mod-badge {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--c-primary);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  z-index: 2;
+  box-shadow: var(--shadow);
+}
+
+.mod-badge::before {
+  content: "✦";
+  color: var(--c-gold);
+}
+
+.mod-body {
+  padding: var(--sp-7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.mod-label {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--c-gold);
+  background: var(--c-gold-bg);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: 999px;
+  margin-bottom: var(--sp-4);
+  letter-spacing: .02em;
+}
+
+.mod-name {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-3);
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+[data-theme="night"] .mod-name { color: var(--c-ink); }
+
+.mod-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-bottom: var(--sp-5);
+  font-feature-settings: "ss01";
+}
+
+.mod-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.mod-meta svg { color: var(--c-gold); flex-shrink: 0; }
+
+.mod-quote {
+  position: relative;
+  padding: var(--sp-5) var(--sp-6);
+  background: var(--c-surface-2);
+  border-right: 4px solid var(--c-gold);
+  border-radius: var(--radius);
+  font-size: var(--fs-md);
+  line-height: 2;
+  color: var(--c-ink-soft);
+  margin-bottom: var(--sp-6);
+  font-style: normal;
+}
+
+.mod-quote::before {
+  content: "«";
+  position: absolute;
+  top: -8px; right: 16px;
+  font-size: 4rem;
+  color: var(--c-gold);
+  opacity: .25;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.mod-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+}
+
+/* ============================================================
+   EVENT CARDS
+============================================================ */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--sp-4);
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all .3s var(--ease);
+  cursor: pointer;
+  position: relative;
+  text-align: right;
+  font-family: inherit;
+  padding: 0;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.event-card::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; left: 0;
+  height: 4px;
+}
+.event-card.type-martyrdom::before { background: var(--c-martyrdom); }
+.event-card.type-operation::before { background: var(--c-operation); }
+.event-card.type-ceremony::before { background: var(--c-ceremony); }
+.event-card.type-birth::before { background: var(--c-birth); }
+
+.event-card-body {
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  flex: 1;
+}
+
+.event-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-3);
+}
+
+.event-card-date {
+  text-align: center;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--c-gold-bg);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  min-width: 60px;
+}
+
+.event-card-date .d {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--c-gold);
+  line-height: 1;
+  font-feature-settings: "ss01";
+}
+
+.event-card-date .m {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--c-ink-mute);
+  margin-top: 3px;
+  font-weight: 600;
+  font-feature-settings: "ss01";
+}
+
+.event-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 2px var(--sp-2);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.event-type-badge.martyrdom { background: var(--c-martyrdom-bg); color: var(--c-martyrdom); }
+.event-type-badge.operation { background: var(--c-operation-bg); color: var(--c-operation); }
+.event-type-badge.ceremony { background: var(--c-ceremony-bg); color: var(--c-ceremony); }
+.event-type-badge.birth { background: var(--c-birth-bg); color: var(--c-birth); }
+
+.event-card-title {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  line-height: 1.4;
+  letter-spacing: -.01em;
+}
+[data-theme="night"] .event-card-title { color: var(--c-ink); }
+
+.event-card-desc {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: auto;
+  padding-top: var(--sp-3);
+  border-top: 1px dashed var(--c-line-soft);
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+}
+
+.event-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.event-card-meta svg { color: var(--c-gold); flex-shrink: 0; }
+
+/* ============================================================
+   QUOTE OF THE DAY
+============================================================ */
+.quote-section {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  padding: var(--sp-8) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(212,175,55,.10), transparent 50%),
+    radial-gradient(circle at 85% 50%, rgba(212,175,55,.08), transparent 50%);
+  pointer-events: none;
+}
+
+.quote-inner {
+  position: relative;
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+}
+
+.quote-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-4);
+  background: rgba(212,175,55,.15);
+  border: 1px solid rgba(212,175,55,.3);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-5);
+  letter-spacing: .02em;
+}
+
+.quote-text {
+  font-size: clamp(1.25rem, 3vw, var(--fs-2xl));
+  font-weight: 700;
+  line-height: 1.8;
+  letter-spacing: -.01em;
+  margin-bottom: var(--sp-5);
+  position: relative;
+  padding: 0 var(--sp-5);
+}
+
+.quote-text::before,
+.quote-text::after {
+  font-family: Georgia, serif;
+  color: var(--c-gold-soft);
+  opacity: .5;
+  font-size: 2em;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.quote-text::before { content: "« "; }
+.quote-text::after { content: " »"; }
+
+.quote-author {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-size: var(--fs-sm);
+  opacity: .85;
+}
+
+.quote-author-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(212,175,55,.2);
+  border: 2px solid rgba(212,175,55,.4);
+  display: grid;
+  place-items: center;
+  color: var(--c-gold-soft);
+  font-weight: 800;
+  font-size: var(--fs-md);
+  font-feature-settings: "ss01";
+}
+
+.quote-author-info {
+  text-align: right;
+}
+
+.quote-author-info strong {
+  display: block;
+  color: #fff;
+  font-weight: 700;
+}
+
+.quote-author-info span {
+  display: block;
+  font-size: var(--fs-xs);
+  opacity: .7;
+  font-feature-settings: "ss01";
+}
+
+/* ============================================================
+   UPCOMING
+============================================================ */
+.upcoming-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.upcoming-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: var(--sp-4);
+  align-items: center;
+  padding: var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  text-align: right;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.upcoming-item::before {
+  content: "";
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.upcoming-item.type-martyrdom::before { background: var(--c-martyrdom); }
+.upcoming-item.type-operation::before { background: var(--c-operation); }
+.upcoming-item.type-ceremony::before { background: var(--c-ceremony); }
+.upcoming-item.type-birth::before { background: var(--c-birth); }
+
+.upcoming-item:hover {
+  border-color: var(--c-gold);
+  background: var(--c-gold-bg);
+  transform: translateX(-3px);
+}
+
+.upcoming-date {
+  text-align: center;
+  padding: var(--sp-2);
+  background: var(--c-surface-2);
+  border-radius: var(--radius-sm);
+}
+
+.upcoming-date .d {
+  display: block;
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--c-gold);
+  line-height: 1;
+  font-feature-settings: "ss01";
+}
+
+.upcoming-date .m {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  margin-top: 4px;
+  font-weight: 600;
+  font-feature-settings: "ss01";
+}
+
+.upcoming-info h3 {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
+  line-height: 1.4;
+}
+
+.upcoming-info p {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  line-height: 1.7;
+}
+
+.upcoming-days {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--c-gold);
+  background: var(--c-gold-bg);
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: 999px;
+  white-space: nowrap;
+  font-feature-settings: "ss01";
+}
+
+/* ============================================================
+   MEMORIAL QUICK
+============================================================ */
+.memorial-quick {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.memorial-quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-5) var(--sp-3);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  transition: all .25s var(--ease);
+  font-family: inherit;
+  color: var(--c-ink-soft);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.memorial-quick-btn:hover {
+  background: var(--c-gold-bg);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.memorial-quick-btn svg {
+  width: 28px; height: 28px;
+  color: var(--c-gold);
+  transition: transform .25s var(--ease);
+}
+
+.memorial-quick-btn:hover svg { transform: scale(1.15); }
+
+.memorial-quick-btn.is-active {
+  background: var(--c-gold-bg);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+
+/* ============================================================
+   PRAYER TIMES
+============================================================ */
+.prayer-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-sm);
+}
+
+.prayer-title {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+[data-theme="night"] .prayer-title { color: var(--c-ink); }
+
+.prayer-title svg { color: var(--c-gold); }
+
+.prayer-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+}
+
+.prayer-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sp-3);
+  background: var(--c-surface-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+}
+
+.prayer-item.is-active {
+  background: var(--c-gold-bg);
+  border: 1px solid var(--c-gold);
+}
+
+.prayer-name {
+  color: var(--c-ink-soft);
+  font-weight: 600;
+}
+
+.prayer-time {
+  color: var(--c-gold);
+  font-weight: 800;
+  font-feature-settings: "ss01";
+}
+
+/* ============================================================
+   LAYOUT (main + sidebar)
+============================================================ */
+.today-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+.today-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-7);
+}
+
+.today-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  position: sticky;
+  top: calc(var(--header-h) + 90px);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  background: var(--c-primary);
+  color: rgba(255,255,255,.7);
+  padding: var(--sp-8) 0 var(--sp-5);
+}
+[data-theme="night"] .site-footer { background: #061410; }
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+.footer-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.footer-desc {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  max-width: 320px;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.footer-col h3 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+}
+
+.footer-col ul { display: grid; gap: var(--sp-2); }
+
+.footer-col a {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,.65);
+  transition: color .2s var(--ease);
+}
+.footer-col a:hover { color: var(--c-gold-soft); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+.toast {
+  position: fixed;
+  bottom: var(--sp-5);
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--c-primary);
+  color: #fff;
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  transition: transform .4s var(--ease);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  max-width: 90vw;
+}
+
+.toast.is-show { transform: translateX(-50%) translateY(0); }
+
+.toast svg { color: var(--c-gold-soft); flex-shrink: 0; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1100px) {
+  .today-layout { grid-template-columns: 1fr; }
+  .today-aside { position: static; }
+
+  .today-hero-inner { grid-template-columns: 1fr; }
+  .today-hero-right { display: none; }
+}
+
+@media (max-width: 960px) {
+  .main-nav { display: none; }
+  .menu-toggle { display: grid; }
+
+  .mod-wrapper { grid-template-columns: 1fr; }
+  .mod-media { min-height: 280px; }
+
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --fs-5xl: 3rem;
+    --fs-4xl: 2.25rem;
+    --fs-3xl: 1.75rem;
+    --fs-2xl: 1.5rem;
+    --fs-xl: 1.25rem;
+    --header-h: 64px;
+  }
+
+  .container { padding: 0 var(--sp-4); }
+
+  .today-hero { padding: var(--sp-6) 0 var(--sp-5); }
+
+  .today-dates { flex-direction: column; }
+  .date-chip { min-width: 100%; }
+
+  .day-nav-inner { flex-direction: column; align-items: stretch; }
+  .day-nav-btn { justify-content: center; }
+
+  .section { padding: var(--sp-5) 0; }
+
+  .mod-body { padding: var(--sp-5); }
+  .mod-name { font-size: var(--fs-2xl); }
+  .mod-quote { padding: var(--sp-4); font-size: var(--fs-base); }
+  .mod-actions { flex-direction: column; }
+  .mod-actions .btn { width: 100%; }
+
+  .event-grid { grid-template-columns: 1fr; }
+
+  .upcoming-item {
+    grid-template-columns: 60px 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-3);
+  }
+
+  .upcoming-days { grid-column: 1 / -1; justify-self: start; }
+
+  .memorial-quick { max-width: 100%; }
+
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .prayer-list { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up { animation: fadeUp .6s var(--ease) backwards; }
+.fade-up.d1 { animation-delay: .08s; }
+.fade-up.d2 { animation-delay: .16s; }
+.fade-up.d3 { animation-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی"><a data-page="home" href="index.html">نخست</a><a data-page="calendar" href="calendar.html">تقویم</a><a data-page="today" href="today.html">امروز</a><a data-page="martyrs" href="martyrs.html">شهدا</a><a data-page="events" href="events.html">رویدادها</a><a data-page="places" href="places.html">مکان‌ها</a><a data-page="periods" href="periods.html">دوره‌ها</a><a data-page="sources" href="sources.html">منابع</a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه</a><a data-page="search" href="search.html">جست‌وجو</a><a data-page="about" href="about.html">درباره</a><a data-page="contribute" href="contribute.html">همکاری</a><a data-page="contact" href="contact.html">تماس</a></nav></div></header></div></header>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main id="main" role="main">
+
+  <!-- ====== TODAY HERO ====== -->
+  <section class="today-hero">
+    <div class="container today-hero-inner">
+
+      <div class="today-hero-left">
+        <span class="hero-eyebrow">امروز در تاریخ</span>
+
+        <h1 class="today-hero-title">
+          امروز، <span class="accent" id="heroDay">—</span> است<br>
+          روزی که یادش زنده است
+        </h1>
+
+        <p class="today-hero-lead">
+          رویدادها، شهدا، مناسبت‌ها و لحظه‌هایی که امروز را به یک روز ماندگار تبدیل می‌کنند.
+        </p>
+
+        <div class="today-dates">
+          <div class="date-chip">
+            <span class="date-chip-label">شمسی</span>
+            <span class="date-chip-value" id="dateShamsi">—</span>
+            <span class="date-chip-sub" id="weekdayShamsi">—</span>
+          </div>
+          <div class="date-chip">
+            <span class="date-chip-label">قمری</span>
+            <span class="date-chip-value" id="dateGhamari">—</span>
+            <span class="date-chip-sub" id="eventGhamari">—</span>
+          </div>
+          <div class="date-chip">
+            <span class="date-chip-label">میلادی</span>
+            <span class="date-chip-value" id="dateMiladi">—</span>
+            <span class="date-chip-sub" id="weekdayMiladi">—</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="today-hero-right">
+        <div class="today-clock">
+          <div class="clock-time" id="liveClock">۰۰:۰۰</div>
+          <div class="clock-label">ساعت تهران</div>
+          <div class="clock-location">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            ایران
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====== DAY NAVIGATION ====== -->
+  <div class="day-nav">
+    <div class="container day-nav-inner">
+      <button class="day-nav-btn" id="prevDay">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        روز قبل
+      </button>
+
+      <div class="day-nav-center">
+        امروز را می‌بینید —
+        <a href="calendar.html">مشاهده در تقویم</a>
+      </div>
+
+      <button class="day-nav-btn" id="nextDay">
+        روز بعد
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ====== LAYOUT ====== -->
+  <div class="container">
+    <div class="today-layout" style="padding: var(--sp-7) 0;">
+
+      <!-- ====== MAIN ====== -->
+      <div class="today-main">
+
+        <!-- ====== شهید امروز ====== -->
+        <section aria-labelledby="mod-title">
+          <header class="section-head">
+            <div class="section-title-wrap">
+              <h2 id="mod-title" class="section-title">شهید امروز</h2>
+              <p class="section-sub">یاد یک انسان فداکار در روزی که به او تعلق دارد</p>
+            </div>
+            <a href="martyrs.html" class="link-more">همه شهدا</a>
+          </header>
+
+          <article class="mod-wrapper fade-up">
+            <figure class="mod-media">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230f2e24'/%3E%3Cstop offset='1' stop-color='%232a6a54'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='500' fill='url(%23g)'/%3E%3Ccircle cx='200' cy='200' r='70' fill='%23d4af37' opacity='.15'/%3E%3Cpath d='M120 460 Q200 380 280 460' stroke='%23d4af37' stroke-width='2' fill='none' opacity='.3'/%3E%3C/svg%3E" alt="تصویر شهید امروز" loading="lazy" />
+              <span class="mod-badge">تأییدشده</span>
+              <figcaption class="sr-only">تصویر شهید امروز</figcaption>
+            </figure>
+
+            <div class="mod-body">
+              <span class="mod-label">شهید امروز</span>
+
+              <h3 class="mod-name">شهید علی محمدی</h3>
+
+              <div class="mod-meta">
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                  شهادت: ۳ خرداد ۱۳۶۵
+                </span>
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                  شلمچه، خوزستان
+                </span>
+                <span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2 L4 7 L4 12 C4 17 12 22 12 22 C12 22 20 17 20 12 L20 7 Z"/>
+                  </svg>
+                  عملیات کربلای ۵
+                </span>
+              </div>
+
+              <blockquote class="mod-quote">
+                خدا را شکر که در راه او قدم برداشتم. اگر باز هم به دنیا برگردم، همین راه را انتخاب می‌کنم.
+              </blockquote>
+
+              <div class="mod-actions">
+                <a href="martyr.html" class="btn btn-primary">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  مشاهده پرونده کامل
+                </a>
+                <button class="btn btn-ghost" data-memorial="candle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 12 L9 20 L15 20 L15 12 Z"/>
+                    <path d="M12 12 C12 8 12 6 12 4 C12 4 10 6 10 8 C10 10 12 10 12 12 Z" fill="currentColor"/>
+                  </svg>
+                  شمع روشن کن
+                </button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ====== رویدادهای امروز ====== -->
+        <section aria-labelledby="today-events-title">
+          <header class="section-head">
+            <div class="section-title-wrap">
+              <h2 id="today-events-title" class="section-title">رویدادهای امروز</h2>
+              <p class="section-sub">اتفاقاتی که در چنین روزی رخ داده‌اند</p>
+            </div>
+            <a href="events.html" class="link-more">همه رویدادها</a>
+          </header>
+
+          <div class="event-grid">
+            <button class="event-card type-martyrdom fade-up d1">
+              <div class="event-card-body">
+                <div class="event-card-head">
+                  <div class="event-card-date">
+                    <span class="d">۳</span>
+                    <span class="m">خرداد</span>
+                  </div>
+                  <span class="event-type-badge martyrdom">شهادت</span>
+                </div>
+                <h3 class="event-card-title">سالگرد شهادت شهید علی محمدی</h3>
+                <p class="event-card-desc">
+                  شهادت در عملیات کربلای ۵ در منطقه شلمچه، پس از رشادت‌های فراوان.
+                </p>
+                <div class="event-card-meta">
+                  <span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    شلمچه
+                  </span>
+                  <span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    ۱۳۶۵
+                  </span>
+                </div>
+              </div>
+            </button>
+
+            <button class="event-card type-operation fade-up d1">
+              <div class="event-card-body">
+                <div class="event-card-head">
+                  <div class="event-card-date">
+                    <span class="d">۳</span>
+                    <span class="m">خرداد</span>
+                  </div>
+                  <span class="event-type-badge operation">عملیات</span>
+                </div>
+                <h3 class="event-card-title">آزادسازی خرمشهر</h3>
+                <p class="event-card-desc">
+                  در چنین روزی خرمشهر پس از عملیات بیت‌المقدس آزاد شد.
+                </p>
+                <div class="event-card-meta">
+                  <span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    خرمشهر
+                  </span>
+                  <span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    ۱۳۶۱
+                  </span>
+                </div>
+              </div>
+            </button>
+
+            <button class="event-card type-ceremony fade-up d2">
+              <div class="event-card-body">
+                <div class="event-card-head">
+                  <div class="event-card-date">
+                    <span class="d">۳</span>
+                    <span class="m">خرداد</span>
+                  </div>
+                  <span class="event-type-badge ceremony">یادواره</span>
+                </div>
+                <h3 class="event-card-title">مراسم سالانه یادبود</h3>
+                <p class="event-card-desc">
+                  مراسم گرامیداشت سالگرد آزادسازی خرمشهر با حضور خانواده‌های شهدا.
+                </p>
+                <div class="event-card-meta">
+                  <span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    تهران
+                  </span>
+                  <span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    ۱۴۰۵
+                  </span>
+                </div>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <!-- ====== رویدادهای نزدیک ====== -->
+        <section aria-labelledby="upcoming-title">
+          <header class="section-head">
+            <div class="section-title-wrap">
+              <h2 id="upcoming-title" class="section-title">رویدادهای نزدیک</h2>
+              <p class="section-sub">هفت روز آینده</p>
+            </div>
+            <a href="events.html" class="link-more">همه رویدادها</a>
+          </header>
+
+          <div class="upcoming-list" id="upcomingList" aria-live="polite"></div>
+        </section>
+
+      </div>
+
+      <!-- ====== ASIDE ====== -->
+      <aside class="today-aside">
+
+        <!-- ====== یادبود سریع ====== -->
+        <section class="section" style="padding: 0;" aria-labelledby="memorial-title">
+          <h2 id="memorial-title" class="sr-only">یادبود سریع</h2>
+
+          <div class="memorial-quick">
+            <button class="memorial-quick-btn" data-memorial="candle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 12 L9 20 L15 20 L15 12 Z"/>
+                <path d="M12 12 C12 8 12 6 12 4 C12 4 10 6 10 8 C10 10 12 10 12 12 Z" fill="currentColor"/>
+              </svg>
+              شمع
+            </button>
+            <button class="memorial-quick-btn" data-memorial="flower">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 9 C12 6 14 4 12 2 C10 4 12 6 12 9"/>
+                <path d="M12 15 C12 18 10 20 12 22 C14 20 12 18 12 15"/>
+                <path d="M9 12 C6 12 4 10 2 12 C4 14 6 12 9 12"/>
+                <path d="M15 12 C18 12 20 14 22 12 C20 10 18 12 15 12"/>
+              </svg>
+              گل
+            </button>
+            <button class="memorial-quick-btn" data-memorial="prayer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2 L15 9 L22 9 L17 14 L19 21 L12 17 L5 21 L7 14 L2 9 L9 9 Z"/>
+              </svg>
+              دعا
+            </button>
+          </div>
+        </section>
+
+        <!-- ====== اوقات شرعی ====== -->
+        <section class="prayer-card fade-up d1" aria-labelledby="prayer-title">
+          <h3 id="prayer-title" class="prayer-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7 V12 L15 15"/>
+            </svg>
+            اوقات شرعی تهران
+          </h3>
+
+          <div class="prayer-list">
+            <div class="prayer-item">
+              <span class="prayer-name">اذان صبح</span>
+              <span class="prayer-time">۰۴:۱۲</span>
+            </div>
+            <div class="prayer-item">
+              <span class="prayer-name">طلوع آفتاب</span>
+              <span class="prayer-time">۰۵:۴۸</span>
+            </div>
+            <div class="prayer-item">
+              <span class="prayer-name">اذان ظهر</span>
+              <span class="prayer-time">۱۲:۰۵</span>
+            </div>
+            <div class="prayer-item is-active">
+              <span class="prayer-name">غروب آفتاب</span>
+              <span class="prayer-time">۱۸:۲۲</span>
+            </div>
+            <div class="prayer-item">
+              <span class="prayer-name">اذان مغرب</span>
+              <span class="prayer-time">۱۸:۴۰</span>
+            </div>
+            <div class="prayer-item">
+              <span class="prayer-name">نیمه شب شرعی</span>
+              <span class="prayer-time">۲۳:۱۷</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====== دسترسی سریع ====== -->
+        <section class="prayer-card fade-up d2" aria-labelledby="quick-title">
+          <h3 id="quick-title" class="prayer-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            دسترسی سریع
+          </h3>
+
+          <div style="display: grid; gap: var(--sp-2);">
+            <a href="calendar.html" class="btn btn-ghost btn-sm" style="width: 100%;">
+              مشاهده تقویم کامل
+            </a>
+            <a href="martyrs.html" class="btn btn-ghost btn-sm" style="width: 100%;">
+              فهرست همه شهدا
+            </a>
+            <a href="contribute.html" class="btn btn-gold btn-sm" style="width: 100%;">
+              افزودن رویداد یا خاطره
+            </a>
+          </div>
+        </section>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ====== QUOTE OF THE DAY ====== -->
+  <section class="quote-section" aria-labelledby="quote-title">
+    <div class="container quote-inner">
+      <span class="quote-label">نقل قول امروز</span>
+
+      <blockquote class="quote-text">
+        اگر امروز در میان شما نیستم، اما آرزو دارم راهم ادامه یابد و یادم زنده بماند.
+      </blockquote>
+
+      <div class="quote-author">
+        <div class="quote-author-avatar">ع</div>
+        <div class="quote-author-info">
+          <strong>شهید علی محمدی</strong>
+          <span>از وصیت‌نامه — ۱۳۶۵</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+
+<!-- ============================================================
+     TOAST
+============================================================ -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+  <span id="toastText">انجام شد</span>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ===== اعداد فارسی =====
+  function toFa(n) {
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  function pad2(n) {
+    return n < 10 ? '0' + n : String(n);
+  }
+
+  // ===== تبدیل تاریخ میلادی به شمسی =====
+  function toJalali(gy, gm, gd) {
+    const g_d_m = [0,31,59,90,120,151,181,212,243,273,304,334];
+    let jy = (gy <= 1600) ? 0 : 979;
+    gy -= (gy <= 1600) ? 621 : 1600;
+    const gy2 = (gm > 2) ? (gy + 1) : gy;
+    let days = (365 * gy) + Math.floor((gy2 + 3) / 4) - Math.floor((gy2 + 99) / 100)
+             + Math.floor((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
+    jy += 33 * Math.floor(days / 12053);
+    days %= 12053;
+    jy += 4 * Math.floor(days / 1461);
+    days %= 1461;
+    if (days > 365) {
+      jy += Math.floor((days - 1) / 365);
+      days = (days - 1) % 365;
+    }
+    const jm = (days < 186) ? 1 + Math.floor(days / 31) : 7 + Math.floor((days - 186) / 30);
+    const jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+    return [jy, jm, jd];
+  }
+
+  // ===== تبدیل میلادی به قمری (تقریبی) =====
+  function toHijri(gy, gm, gd) {
+    // الگوریتم تقریبی کویتی
+    const jd = Math.floor((1461 * (gy + 4800 + Math.floor((gm - 14) / 12))) / 4)
+             + Math.floor((367 * (gm - 2 - 12 * Math.floor((gm - 14) / 12))) / 12)
+             - Math.floor((3 * Math.floor((gy + 4900 + Math.floor((gm - 14) / 12)) / 100)) / 4)
+             + gd - 32075;
+
+    let l = jd - 1948440 + 10632;
+    let n = Math.floor((l - 1) / 10631);
+    l = l - 10631 * n + 354;
+    const j = Math.floor((10985 - l) / 5316) * Math.floor((50 * l) / 17719)
+            + Math.floor(l / 5670) * Math.floor((43 * l) / 15238);
+    l = l - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50)
+      - Math.floor(j / 16) * Math.floor((15238 * j) / 43) + 29;
+
+    const hm = Math.floor((24 * l) / 709);
+    const hd = l - Math.floor((709 * hm) / 24);
+    const hy = 30 * n + j - 30;
+    return [hy, hm, hd];
+  }
+
+  const MONTHS_FA = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+  const WEEKDAYS_FA = ['یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه','شنبه'];
+  const HIJRI_MONTHS = ['محرم','صفر','ربیع‌الاول','ربیع‌الثانی','جمادی‌الاول','جمادی‌الثانی','رجب','شعبان','رمضان','شوال','ذی‌القعده','ذی‌الحجه'];
+  const GREG_MONTHS = ['ژانویه','فوریه','مارس','آوریل','مه','ژوئن','ژوئیه','اوت','سپتامبر','اکتبر','نوامبر','دسامبر'];
+
+  // ===== Date state =====
+  let currentDate = new Date();
+
+  function renderDates() {
+    const d = currentDate;
+    const [jy, jm, jd] = toJalali(d.getFullYear(), d.getMonth() + 1, d.getDate());
+    const [hy, hm, hd] = toHijri(d.getFullYear(), d.getMonth() + 1, d.getDate());
+
+    // شمسی
+    document.getElementById('dateShamsi').textContent = `${toFa(jd)} ${MONTHS_FA[jm - 1]} ${toFa(jy)}`;
+    document.getElementById('weekdayShamsi').textContent = WEEKDAYS_FA[d.getDay()];
+
+    // قمری
+    document.getElementById('dateGhamari').textContent = `${toFa(hd)} ${HIJRI_MONTHS[hm - 1]} ${toFa(hy)}`;
+    document.getElementById('eventGhamari').textContent = 'تقویم قمری';
+
+    // میلادی
+    document.getElementById('dateMiladi').textContent = `${d.getDate()} ${GREG_MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+    document.getElementById('weekdayMiladi').textContent = '';
+
+    // Hero day
+    document.getElementById('heroDay').textContent = WEEKDAYS_FA[d.getDay()];
+
+    // Page title
+    document.title = `امروز — ${toFa(jd)} ${MONTHS_FA[jm - 1]} ${toFa(jy)} | تقویم شهدا`;
+  }
+
+  // ===== Live Clock =====
+  function updateClock() {
+    const now = new Date();
+    const h = pad2(now.getHours());
+    const m = pad2(now.getMinutes());
+    const s = pad2(now.getSeconds());
+    document.getElementById('liveClock').textContent = `${toFa(h)}:${toFa(m)}`;
+  }
+
+  // ===== Day Navigation =====
+  document.getElementById('prevDay')?.addEventListener('click', () => {
+    currentDate.setDate(currentDate.getDate() - 1);
+    renderDates();
+    showToast('روز قبل نمایش داده شد');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.getElementById('nextDay')?.addEventListener('click', () => {
+    currentDate.setDate(currentDate.getDate() + 1);
+    renderDates();
+    showToast('روز بعد نمایش داده شد');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ===== Toast =====
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toastText');
+  let toastTimer;
+
+  function showToast(msg) {
+    toastText.textContent = msg;
+    toast.classList.add('is-show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('is-show');
+    }, 2600);
+  }
+
+  // ===== Memorial =====
+  const memorialLabels = {
+    candle: 'شمع روشن شد',
+    flower: 'گل نثار شد',
+    prayer: 'دعا فرستاده شد'
+  };
+
+  document.querySelectorAll('[data-memorial]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.memorial;
+      btn.classList.toggle('is-active');
+      showToast(memorialLabels[type] || 'یادبود ثبت شد');
+    });
+  });
+
+  // ===== Theme =====
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') {
+    html.setAttribute('data-theme', 'night');
+    updateThemeIcon('night');
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'night' ? 'day' : 'night';
+    if (next === 'night') html.setAttribute('data-theme', 'night');
+    else html.removeAttribute('data-theme');
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  });
+
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    if (theme === 'night') {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>';
+    } else {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    }
+  }
+
+  // ===== Mobile menu =====
+  const menuToggle = document.querySelector('.menu-toggle');
+  menuToggle?.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+  });
+
+  // ===== Init =====
+  renderDates();
+  updateClock();
+  setInterval(updateClock, 30000);
+
+})();
+
+  // ===== رویدادهای نزدیک — بر پایه داده واقعی =====
+  (function renderUpcoming() {
+    var box = document.getElementById('upcomingList');
+    if (!box || !window.PageData) return;
+
+    var td = SiteData.todayJalali();          // [jy, jm, jd]
+    var todayAbs = td[0] * 372 + (td[1] - 1) * 31 + td[2];
+
+    function absOf(y, m, d) { return y * 372 + (m - 1) * 31 + d; }
+
+    var rows = [];
+    PageData.events.forEach(function (e) {
+      if (!e.month || !e.day) return;        // lunar / variable dates have no fixed slot
+      // next occurrence on or after today
+      var y = td[0];
+      var diff = absOf(y, e.month, e.day) - todayAbs;
+      if (diff < 0) { y += 1; diff = absOf(y, e.month, e.day) - todayAbs; }
+      rows.push({ e: e, diff: diff, month: e.month, day: e.day });
+    });
+
+    rows.sort(function (a, b) { return a.diff - b.diff; });
+    rows = rows.slice(0, 6);
+
+    if (!rows.length) {
+      box.innerHTML = '<div class="day-empty"><p>رویداد تقویمی ثابتی برای نمایش وجود ندارد.</p></div>';
+      return;
+    }
+
+    box.innerHTML = rows.map(function (r) {
+      var days = r.diff === 0 ? 'امروز' : (SiteData.toFa(r.diff) + ' روز دیگر');
+      return '<button class="upcoming-item type-' + r.e.type + '" data-event-id="' + r.e.eid + '" ' +
+        'aria-label="' + r.e.title + '">' +
+        '<div class="upcoming-date">' +
+          '<span class="d">' + SiteData.toFa(r.day) + '</span>' +
+          '<span class="m">' + SiteData.MONTHS[r.month - 1] + '</span>' +
+        '</div>' +
+        '<div class="upcoming-info">' +
+          '<h3>' + r.e.title + '</h3>' +
+          '<p>' + (r.e.desc || '') + '</p>' +
+        '</div>' +
+        '<span class="upcoming-days">' + days + '</span>' +
+      '</button>';
+    }).join('');
+
+    box.querySelectorAll('[data-event-id]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        window.location.href = 'event.html?id=' + b.dataset.eventId;
+      });
+    });
+  })();
+</script>
+
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
