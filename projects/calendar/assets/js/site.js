@@ -2,11 +2,12 @@
    تقویم شهدا — رفتار پوسته
    ------------------------------------------------------------
    ۱) تشخیص صفحه فعال و نشانه‌گذاری لینک آن (حتی داخل زیرمنو)
-   ۲) زیرمنوهای منو: هاور در دسکتاپ، کلیک و آکاردئون در موبایل
+   ۲) گروه‌های منو: کلیک روی کل گروه زیرمنو را باز/بسته می‌کند؛
+      در دسکتاپ هاور هم باز می‌کند. در موبایل آکاردئون می‌شود.
    ۳) دکمه شناور «بازگشت به بالا» با نمایش بر پایه اسکرول
 
-   دسترس‌پذیری: aria-expanded و aria-haspopup روی دکمه گروه‌ها،
-   بستن با Escape، بستن با کلیک بیرون، و پیمایش با کیبورد.
+   دسترس‌پذیری: aria-expanded و aria-haspopup روی فلش گروه،
+   بستن با Escape، بستن با کلیک بیرون، پیمایش با کیبورد.
    ============================================================ */
 (function () {
   'use strict';
@@ -16,22 +17,32 @@
     var key = path === 'index.html' ? 'home' : (path.replace('.html', '') || 'home');
 
     /* ---------- ۱) صفحه فعال ---------- */
-    var links = document.querySelectorAll('.shared-nav a[data-page]');
-    Array.prototype.forEach.call(links, function (a) {
-      var on = a.dataset.page === key;
-      a.classList.toggle('is-active', on);
-      if (on) {
-        a.setAttribute('aria-current', 'page');
-        // گروهِ نگه‌دارنده این لینک را هم فعال کن
-        var group = a.closest('.nav-group');
-        if (group) group.classList.add('is-active');
+    Array.prototype.forEach.call(
+      document.querySelectorAll('.shared-nav a[data-page]'),
+      function (a) {
+        var on = a.dataset.page === key;
+        a.classList.toggle('is-active', on);
+        if (on) {
+          a.setAttribute('aria-current', 'page');
+          var g = a.closest('.nav-group');
+          if (g) g.classList.add('is-active');
+        }
       }
-    });
+    );
+
+    /* گروهی که صفحه فعال در آن است را برجسته کن */
+    Array.prototype.forEach.call(
+      document.querySelectorAll('.shared-nav .nav-group[data-members]'),
+      function (g) {
+        var members = (g.dataset.members || '').split(',');
+        if (members.indexOf(key) !== -1) g.classList.add('is-active');
+      }
+    );
 
     /* ---------- ۲) منوی موبایل ---------- */
     var toggle = document.querySelector('.shared-menu-toggle');
     var nav = document.querySelector('.shared-nav');
-    var isMobile = function () { return window.matchMedia('(max-width: 720px)').matches; };
+    var isMobile = function () { return window.matchMedia('(max-width: 900px)').matches; };
 
     if (toggle && nav) {
       toggle.addEventListener('click', function () {
@@ -48,39 +59,57 @@
     function closeAllGroups(except) {
       groups.forEach(function (g) {
         if (g === except) return;
-        var b = g.querySelector('.nav-group-toggle');
         var m = g.querySelector('.nav-submenu');
-        if (b) b.setAttribute('aria-expanded', 'false');
+        var c = g.querySelector('.nav-group-caret');
         if (m) m.classList.remove('is-open');
+        if (c) c.setAttribute('aria-expanded', 'false');
       });
     }
 
     groups.forEach(function (g) {
-      var btn = g.querySelector('.nav-group-toggle');
+      var caret = g.querySelector('.nav-group-caret');
+      var label = g.querySelector('.nav-group-label');
       var menu = g.querySelector('.nav-submenu');
-      if (!btn || !menu) return;
+      if (!caret || !menu) return;
 
-      btn.setAttribute('aria-haspopup', 'true');
-      btn.setAttribute('aria-expanded', 'false');
+      function setOpen(open) {
+        menu.classList.toggle('is-open', open);
+        caret.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      function isOpen() { return menu.classList.contains('is-open'); }
 
-      btn.addEventListener('click', function (e) {
+      // کلیک روی کل گروه (برچسب یا فلش) زیرمنو را باز/بسته می‌کند،
+      // چون کاربر انتظار دارد کلیک روی منو کار کند.
+      g.addEventListener('click', function (e) {
         e.preventDefault();
-        var willOpen = !menu.classList.contains('is-open');
+        var willOpen = !isOpen();
         closeAllGroups(g);
-        menu.classList.toggle('is-open', willOpen);
-        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        setOpen(willOpen);
       });
 
-      // در دسکتاپ هاور خودش باز می‌کند؛ aria را هم همگام نگه دار
-      g.addEventListener('mouseenter', function () {
-        if (!isMobile()) btn.setAttribute('aria-expanded', 'true');
-      });
-      g.addEventListener('mouseleave', function () {
-        if (!isMobile()) {
-          btn.setAttribute('aria-expanded', 'false');
-          menu.classList.remove('is-open');
+      // فلش با کیبورد هم باز/بسته شود
+      caret.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var willOpen = !isOpen();
+          closeAllGroups(g);
+          setOpen(willOpen);
         }
       });
+
+      // دسکتاپ: هاور باز می‌کند
+      g.addEventListener('mouseenter', function () {
+        if (!isMobile()) { closeAllGroups(g); setOpen(true); }
+      });
+      g.addEventListener('mouseleave', function () {
+        if (!isMobile()) setOpen(false);
+      });
+
+      if (label) {
+        label.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') { setOpen(false); caret.focus(); }
+        });
+      }
     });
 
     document.addEventListener('click', function (e) {

@@ -107,16 +107,16 @@ async def main():
         await call("Page.navigate", {"url": url})
         await asyncio.sleep(1.5)
 
-        before = await js("document.querySelector('.nav-group-toggle').getAttribute('aria-expanded')")
-        await js("document.querySelector('.nav-group-toggle').click()")
+        before = await js("document.querySelector('.nav-group').getAttribute('aria-expanded')")
+        await js("document.querySelector('.nav-group').click()")
         await asyncio.sleep(0.4)
-        after = await js("document.querySelector('.nav-group-toggle').getAttribute('aria-expanded')")
+        after = await js("document.querySelector('.nav-group').getAttribute('aria-expanded')")
         open_cls = await js("document.querySelector('.nav-submenu').classList.contains('is-open')")
         print(f"  aria-expanded before={before} after click={after}  submenu is-open={open_cls}")
 
         await js("document.body.click()")
         await asyncio.sleep(0.3)
-        closed = await js("document.querySelector('.nav-group-toggle').getAttribute('aria-expanded')")
+        closed = await js("document.querySelector('.nav-group').getAttribute('aria-expanded')")
         print(f"  after outside click aria-expanded={closed}")
 
         # active page highlight should be inside the "کشف و دانش" group
@@ -150,7 +150,7 @@ async def main():
         await js("document.querySelector('.shared-menu-toggle').click()")
         await asyncio.sleep(0.3)
         nav_open = await js("document.querySelector('.shared-nav').classList.contains('is-open')")
-        await js("document.querySelector('.nav-group-toggle').click()")
+        await js("document.querySelector('.nav-group').click()")
         await asyncio.sleep(0.3)
         sub_open = await js("document.querySelector('.nav-submenu').classList.contains('is-open')")
         sub_visible = await js(
