@@ -32,6 +32,8 @@ def group(gid, label, href, links):
     )
 
 
+G_HOME = ('<a class="nav-home-link" data-page="home" href="index.html">نخست</a>')
+
 G_CAL = group("calendar", "تقویم و زمان", "calendar", [
     ("calendar", "تقویم کامل", "چهار نما: ماهانه، هفتگی، سالانه، روزانه"),
     ("today", "امروز در تاریخ", "رویدادهای همین روز"),
@@ -61,8 +63,9 @@ G_ABOUT = group("about", "درباره و همکاری", "about", [
     ("api", "داده و API", "دسترسی برنامه‌ای به داده"),
 ])
 
+# ترتیب: نخست | تقویم و زمان | کشف و دانش | درباره و همکاری | جست‌وجو
 NEW_NAV = ('<nav class="shared-nav" aria-label="منوی اصلی" id="sharedNav">'
-           + G_CAL + G_KNOW + G_SEARCH + G_ABOUT + '</nav>')
+           + G_HOME + G_CAL + G_KNOW + G_ABOUT + G_SEARCH + '</nav>')
 
 # match the whole nav element (may span one line)
 NAV_RE = re.compile(r'<nav class="shared-nav".*?</nav>', re.S)

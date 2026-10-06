@@ -34,6 +34,25 @@
       rgba(15,46,36,.18) 50%, rgba(184,137,43,.42) 82%, transparent 96%);
 }
 
+.shared-nav .nav-home-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 9px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #394943;
+  line-height: 1.6;
+  white-space: nowrap;
+  transition: background-color .2s var(--ease), color .2s var(--ease);
+}
+.shared-nav .nav-home-link:hover { background: rgba(255,255,255,.48); color: var(--shared-primary); }
+.shared-nav .nav-home-link.is-active {
+  color: var(--shared-primary);
+  font-weight: 700;
+  background: rgba(255,255,255,.3);
+}
+
 .shared-nav .nav-group {
   position: relative;
   display: inline-flex;
@@ -90,8 +109,9 @@
 
 .shared-nav .nav-submenu {
   position: absolute;
-  top: calc(100% + 8px);
+  top: 100%;
   inset-inline-end: 0;
+  margin-top: 2px;
   min-width: 240px;
   padding: 7px;
   background: rgba(250,248,243,.985);
@@ -101,6 +121,10 @@
   display: none;
   z-index: 1200;
 }
+/* پل نامرئی تا حرکت ماوس از دکمه به پنل، هاور را قطع نکند */
+.shared-nav .nav-submenu.is-open { display: block; }
+
+/* نوار طلایی تزئینی روی پنل */
 .shared-nav .nav-submenu::before {
   content: "";
   position: absolute;
@@ -111,7 +135,15 @@
   background: linear-gradient(90deg, transparent, rgba(184,137,43,.75), transparent);
   pointer-events: none;
 }
-.shared-nav .nav-submenu.is-open { display: block; }
+/* پل نامرئی تا حرکت ماوس از دکمه به پنل، هاور را قطع نکند */
+.shared-nav .nav-submenu::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -12px;
+  height: 12px;
+}
+
 .shared-nav .nav-group:hover > .nav-submenu { display: block; }
 
 .shared-nav .nav-submenu a {
