@@ -1,0 +1,207 @@
+/* ============================================================
+   تقویم شهدا — گروه‌بندی منو و دکمه بازگشت به بالا
+   ------------------------------------------------------------
+   منوی تخت قبلی ۱۳ آیتم داشت و در دسکتاپ شلوغ می‌شد. این فایل
+   همان لینک‌ها را در چهار گروه معنایی سازمان می‌دهد:
+     تقویم و زمان | کشف و دانش | جست‌وجو (تک‌دکمه) | درباره و همکاری
+   و یک دکمه شناور «بازگشت به بالا» اضافه می‌کند.
+
+   اصول دسترس‌پذیری: aria-expanded، aria-haspopup، پیمایش با
+   کیبورد (Enter/Space/Escape) و بستن با کلیک بیرون.
+   ============================================================ */
+
+/* ---------- گروه‌ها و زیرمنو (دسکتاپ) ---------- */
+.shared-nav .nav-group { position: relative; }
+
+.shared-nav .nav-group-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #394943;
+  font-family: inherit;
+  transition: background-color .2s var(--ease), color .2s var(--ease);
+}
+.shared-nav .nav-group-toggle:hover,
+.shared-nav .nav-group-toggle[aria-expanded="true"] {
+  background: rgba(255,255,255,.48);
+  color: var(--shared-primary);
+}
+.shared-nav .nav-group.is-active > .nav-group-toggle {
+  color: var(--shared-primary);
+  font-weight: 700;
+  background: rgba(255,255,255,.3);
+}
+
+/* فلش کوچک گروه */
+.shared-nav .nav-group-toggle::after {
+  content: "";
+  width: 5px; height: 5px;
+  border-right: 1.6px solid currentColor;
+  border-bottom: 1.6px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform .2s var(--ease);
+  opacity: .7;
+}
+.shared-nav .nav-group-toggle[aria-expanded="true"]::after {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.shared-nav .nav-submenu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  min-width: 240px;
+  padding: 7px;
+  background: rgba(250,248,243,.985);
+  border: 1px solid rgba(184,137,43,.24);
+  border-radius: 12px;
+  box-shadow: 0 14px 34px rgba(15,46,36,.14);
+  display: none;
+  z-index: 1200;
+}
+.shared-nav .nav-submenu.is-open { display: block; }
+.shared-nav .nav-group:hover > .nav-submenu { display: block; }
+
+.shared-nav .nav-submenu a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #394943;
+  white-space: nowrap;
+}
+.shared-nav .nav-submenu a:hover {
+  background: rgba(15,46,36,.06);
+  color: var(--shared-primary);
+}
+.shared-nav .nav-submenu a.is-active {
+  color: var(--shared-primary);
+  font-weight: 700;
+  background: var(--shared-gold-bg, #faf3e0);
+}
+.shared-nav .nav-submenu a.is-active::after {
+  content: "●";
+  font-size: 7px;
+  color: var(--shared-gold);
+}
+.nav-submenu .nav-submenu-hint {
+  display: block;
+  font-size: 10.5px;
+  color: var(--shared-ink-mute, #7a847f);
+  font-weight: 400;
+  margin-top: 1px;
+}
+
+/* جست‌وجو به‌صورت آیکون برای کم‌کردن شلوغی */
+.shared-nav a.nav-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  padding: 0;
+}
+.shared-nav a.nav-icon-link.is-active { background: rgba(255,255,255,.4); }
+
+/* ---------- دکمه بازگشت به بالا ---------- */
+.to-top {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 46px; height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--shared-primary), var(--shared-primary-2, #1a4a3a));
+  color: var(--c-gold-soft, #d4af37);
+  border: 1px solid rgba(212,175,55,.35);
+  box-shadow: 0 10px 26px rgba(15,46,36,.28);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity .28s var(--ease), transform .28s var(--ease), visibility .28s;
+  z-index: 1500;
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.to-top:hover {
+  color: #fff;
+  border-color: rgba(212,175,55,.65);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(15,46,36,.36);
+}
+.to-top:focus-visible {
+  outline: 3px solid rgba(184,137,43,.5);
+  outline-offset: 2px;
+}
+.to-top svg { width: 20px; height: 20px; }
+
+/* نوار پیشرفت اسکرول ظریف داخل دکمه */
+.to-top::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 11px;
+  border: 1.5px solid rgba(212,175,55,.22);
+  pointer-events: none;
+}
+
+@media (max-width: 720px) {
+  .to-top { left: 14px; bottom: 14px; width: 42px; height: 42px; border-radius: 12px; }
+}
+
+/* ---------- حالت موبایل: گروه‌ها به آکاردئون تبدیل می‌شوند ---------- */
+@media (max-width: 720px) {
+  .shared-nav .nav-group { width: 100%; }
+
+  .shared-nav .nav-group-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 11px 12px;
+    font-size: 13.5px;
+  }
+
+  /* در موبایل زیرمنو داخل جریان صفحه باز می‌شود، نه شناور */
+  .shared-nav .nav-submenu {
+    position: static;
+    display: none;
+    min-width: 0;
+    width: 100%;
+    margin: 2px 0 6px;
+    padding: 5px;
+    background: rgba(255,255,255,.5);
+    box-shadow: none;
+    border-color: rgba(184,137,43,.18);
+  }
+  /* در موبایل هاور نباید بازش کند؛ فقط کلاس is-open */
+  .shared-nav .nav-group:hover > .nav-submenu { display: none; }
+  .shared-nav .nav-submenu.is-open { display: block; }
+
+  .shared-nav .nav-submenu a {
+    padding: 10px 11px;
+    font-size: 13px;
+  }
+  .shared-nav a.nav-icon-link {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+    border-radius: 7px;
+    padding: 10px 12px;
+    height: auto;
+  }
+  .shared-nav a.nav-icon-link::after { content: "جست‌وجو"; font-size: 13px; }
+}
+
+/* ---------- احترام به کاهش حرکت ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .to-top, .shared-nav .nav-submenu, .shared-nav .nav-group-toggle::after {
+    transition-duration: .01ms !important;
+  }
+}
