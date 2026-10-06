@@ -1,1 +1,1757 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="معرفی تقویم شهدا"><title>معرفی | تقویم شهدا</title><link rel="icon" href="assets/images/logo.png"><link rel="stylesheet" href="assets/css/calendar.css"><link rel="stylesheet" href="assets/css/calendar-shell.css"></head><body><div id="calendarShellHeader"></div><main class="cs-page"><div class="wrap"><section class="cs-panel"><div class="k">معرفی محصول</div><h1>تقویم شهدا</h1><p>تقویم شهدا یک سامانه مستقل برای ثبت، دسته‌بندی و نمایش رویدادهای زمانی مرتبط با شهدا، دفاع مقدس و تاریخ شفاهی و یادمانی است.</p><h2>ماموریت</h2><p>هدف این محصول ایجاد یک لایه زمانی دقیق و قابل جست‌وجو برای سالروز شهادت، تولد شهدا، عملیات‌ها، وقایع تاریخی، مراسم و رویدادهای یادمانی است؛ به‌گونه‌ای که هر تاریخ بتواند به روایت‌ها و داده‌های مرتبط متصل شود.</p><h2>استقلال محصول</h2><p>تقویم شهدا سایت مستقلی با هویت، ناوبری، صفحات و ساختار فنی مستقل است. ارتباط آن با شهیدپورتال، بانک جامع شهدا و دیگر محصولات فقط از مسیر پیوندها و ارتباطات محتوایی انجام می‌شود و عملکرد تقویم به آن‌ها وابسته نیست.</p><h2>مسیر توسعه</h2><p>در ادامه، بانک رویدادها، جست‌وجوی پیشرفته، صفحات اختصاصی روز، آرشیو رویدادها، پیوند به پرونده شهدا و عملیات‌ها و سرویس‌های داده‌ای به‌صورت مرحله‌ای توسعه خواهند یافت.</p></section></div></main><div id="calendarShellFooter"></div><script src="assets/js/calendar-shell.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="درباره تقویم شهدا — اطلس زمانی، تاریخی و انسانی شهدا، آزادگان و رویدادهای مرتبط" />
+<meta name="theme-color" content="#0f2e24" />
+<title>درباره | تقویم شهدا</title>
+
+<link rel="icon" href="assets/images/logo.png">
+<style>
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f2ede3;
+  --c-surface: #ffffff;
+  --c-surface-2: #f7f3ea;
+  --c-ink: #1a2420;
+  --c-ink-soft: #4a5651;
+  --c-ink-mute: #7a847f;
+  --c-line: #e6dfd0;
+  --c-line-soft: #efe9dd;
+
+  --c-primary: #0f2e24;
+  --c-primary-2: #1a4a3a;
+  --c-primary-3: #2a6a54;
+  --c-gold: #b8892b;
+  --c-gold-soft: #d4af37;
+  --c-gold-bg: #faf3e0;
+  --c-accent: #8b2f2f;
+
+  --c-night-bg: #0a1a15;
+  --c-night-surface: #11261e;
+  --c-night-ink: #e8e3d5;
+  --c-night-line: #1e3a2e;
+
+  --font: "Vazirmatn", "Tahoma", sans-serif;
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.35rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+  --fs-4xl: 4rem;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 2px rgba(15,46,36,.06), 0 1px 3px rgba(15,46,36,.04);
+  --shadow: 0 4px 12px rgba(15,46,36,.06), 0 2px 4px rgba(15,46,36,.04);
+  --shadow-md: 0 12px 32px rgba(15,46,36,.08), 0 4px 8px rgba(15,46,36,.04);
+  --shadow-lg: 0 24px 60px rgba(15,46,36,.10), 0 8px 16px rgba(15,46,36,.06);
+
+  --container: 1200px;
+  --header-h: 76px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-theme="night"] {
+  --c-bg: var(--c-night-bg);
+  --c-bg-alt: #0d2019;
+  --c-surface: var(--c-night-surface);
+  --c-surface-2: #163328;
+  --c-ink: var(--c-night-ink);
+  --c-ink-soft: #b8c4bd;
+  --c-ink-mute: #7a8a82;
+  --c-line: var(--c-night-line);
+  --c-line-soft: #183027;
+  --c-gold-bg: #1a2f24;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--c-ink);
+  background: var(--c-bg);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 243, .85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .site-header { background: rgba(10, 26, 21, .85); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  height: var(--header-h);
+}
+
+.brand { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+
+.brand-logo {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  border-radius: 12px;
+  color: var(--c-gold-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-title {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-primary);
+  line-height: 1.2;
+}
+[data-theme="night"] .brand-title { color: var(--c-gold-soft); }
+
+.brand-sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.2;
+}
+
+.main-nav ul { display: flex; gap: var(--sp-1); align-items: center; }
+
+.main-nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: all .2s var(--ease);
+}
+.main-nav a:hover { color: var(--c-primary); background: var(--c-surface-2); }
+[data-theme="night"] .main-nav a:hover { color: var(--c-gold-soft); }
+
+.main-nav a.is-active { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .main-nav a.is-active { color: var(--c-gold-soft); }
+
+.main-nav a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px; right: 12px; left: 12px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+
+.header-actions { display: flex; gap: var(--sp-2); align-items: center; }
+
+.btn-icon {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+}
+.btn-icon:hover {
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  transform: translateY(-1px);
+}
+[data-theme="night"] .btn-icon:hover { color: var(--c-gold-soft); }
+
+.menu-toggle { display: none; }
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(15,46,36,.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15,46,36,.30);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-primary);
+  border: 1px solid var(--c-line);
+}
+.btn-ghost:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+[data-theme="night"] .btn-ghost { color: var(--c-ink); }
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--c-gold), var(--c-gold-soft));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(184,137,43,.25);
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,137,43,.35);
+}
+
+.btn-lg { padding: var(--sp-4) var(--sp-6); font-size: var(--fs-md); }
+
+/* ============================================================
+   PAGE HERO
+============================================================ */
+.page-hero {
+  position: relative;
+  padding: var(--sp-9) 0 var(--sp-8);
+  background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg));
+  border-bottom: 1px solid var(--c-line-soft);
+  overflow: hidden;
+  text-align: center;
+}
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 800px 400px at 50% 0%, rgba(184,137,43,.10), transparent 60%),
+    radial-gradient(ellipse 600px 300px at 20% 100%, rgba(15,46,36,.05), transparent 60%),
+    radial-gradient(ellipse 600px 300px at 80% 100%, rgba(15,46,36,.05), transparent 60%);
+  pointer-events: none;
+}
+
+.page-hero-inner {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.breadcrumb {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--sp-5);
+}
+
+.breadcrumb ol {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+.breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-right: var(--sp-3);
+  color: var(--c-line);
+}
+.breadcrumb a { color: var(--c-ink-mute); }
+.breadcrumb a:hover { color: var(--c-gold); }
+.breadcrumb [aria-current] { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .breadcrumb [aria-current] { color: var(--c-gold-soft); }
+
+.hero-eyebrow {
+  display: inline-block;
+  padding: var(--sp-1) var(--sp-4);
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border: 1px solid rgba(184,137,43,.25);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: .02em;
+  margin-bottom: var(--sp-5);
+}
+
+.page-hero-title {
+  font-size: clamp(2rem, 5vw, var(--fs-4xl));
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -.02em;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-5);
+}
+[data-theme="night"] .page-hero-title { color: var(--c-ink); }
+
+.page-hero-title .accent {
+  color: var(--c-gold);
+  position: relative;
+  display: inline-block;
+}
+.page-hero-title .accent::after {
+  content: "";
+  position: absolute;
+  bottom: .05em; right: 0; left: 0;
+  height: .3em;
+  background: var(--c-gold-bg);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.page-hero-lead {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  line-height: 2;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   SECTION
+============================================================ */
+.section {
+  padding: var(--sp-8) 0;
+}
+
+.section-alt { background: var(--c-bg-alt); }
+
+.section-head-center {
+  text-align: center;
+  margin-bottom: var(--sp-7);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.01em;
+  margin-bottom: var(--sp-3);
+  line-height: 1.3;
+}
+[data-theme="night"] .section-title { color: var(--c-ink); }
+
+.section-sub {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   VISION / PROSE
+============================================================ */
+.vision-content {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: var(--fs-md);
+  line-height: 2.1;
+  color: var(--c-ink-soft);
+  text-align: justify;
+}
+
+.vision-content p {
+  margin-bottom: var(--sp-5);
+}
+
+.vision-content p:last-child { margin-bottom: 0; }
+
+.vision-content p:first-of-type::first-letter {
+  font-size: 3.5em;
+  font-weight: 800;
+  color: var(--c-gold);
+  float: right;
+  line-height: 0.9;
+  margin-left: var(--sp-3);
+  margin-top: 6px;
+  font-feature-settings: "ss01";
+}
+
+.vision-content strong {
+  color: var(--c-ink);
+  font-weight: 700;
+}
+
+.vision-quote {
+  margin: var(--sp-6) 0;
+  padding: var(--sp-6) var(--sp-7);
+  background: linear-gradient(135deg, var(--c-gold-bg), var(--c-surface-2));
+  border-right: 4px solid var(--c-gold);
+  border-radius: var(--radius);
+  font-size: var(--fs-lg);
+  line-height: 2;
+  color: var(--c-ink);
+  font-style: normal;
+  text-align: right;
+  position: relative;
+}
+
+.vision-quote::before {
+  content: "«";
+  position: absolute;
+  top: -10px; right: 16px;
+  font-size: 5rem;
+  color: var(--c-gold);
+  opacity: .25;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ============================================================
+   SCOPE / DOMAIN CARDS
+============================================================ */
+.scope-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--sp-4);
+}
+
+.scope-card {
+  position: relative;
+  padding: var(--sp-6);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  transition: all .3s var(--ease);
+  overflow: hidden;
+}
+
+.scope-card::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle at top right, var(--c-gold-bg), transparent 70%);
+  border-radius: 0 var(--radius-lg) 0 80px;
+  transition: all .3s var(--ease);
+}
+
+.scope-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.scope-card:hover::before {
+  width: 100%; height: 100%;
+  border-radius: 0;
+}
+
+.scope-card > * { position: relative; z-index: 1; }
+
+.scope-icon {
+  width: 52px; height: 52px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: var(--c-gold-soft);
+  border-radius: var(--radius);
+  margin-bottom: var(--sp-4);
+  box-shadow: var(--shadow-sm);
+}
+
+.scope-title {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-3);
+  letter-spacing: -.01em;
+}
+[data-theme="night"] .scope-title { color: var(--c-ink); }
+
+.scope-text {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   PRINCIPLES
+============================================================ */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sp-4);
+}
+
+.principle-card {
+  padding: var(--sp-5);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  border-top: 4px solid var(--c-gold);
+  transition: all .2s var(--ease);
+  position: relative;
+}
+
+.principle-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.principle-num {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  color: var(--c-gold);
+  background: var(--c-gold-bg);
+  padding: 2px var(--sp-3);
+  border-radius: 999px;
+  margin-bottom: var(--sp-3);
+  letter-spacing: .04em;
+  font-feature-settings: "ss01";
+}
+
+.principle-title {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-2);
+}
+[data-theme="night"] .principle-title { color: var(--c-ink); }
+
+.principle-text {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   STATS
+============================================================ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--sp-4);
+}
+
+.stat-card {
+  text-align: center;
+  padding: var(--sp-6) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  transition: all .2s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, var(--c-gold-bg), transparent 60%);
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+  pointer-events: none;
+}
+
+.stat-card:hover {
+  border-color: var(--c-gold);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.stat-card:hover::before { opacity: .5; }
+
+.stat-card > * { position: relative; z-index: 1; }
+
+.stat-icon {
+  width: 48px; height: 48px;
+  margin: 0 auto var(--sp-3);
+  display: grid;
+  place-items: center;
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border-radius: 50%;
+}
+
+.stat-number {
+  display: block;
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--c-gold);
+  line-height: 1;
+  margin-bottom: var(--sp-2);
+  font-feature-settings: "ss01";
+}
+
+.stat-label {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  font-weight: 500;
+}
+
+/* ============================================================
+   ROADMAP / TIMELINE
+============================================================ */
+.roadmap {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.roadmap::before {
+  content: "";
+  position: absolute;
+  right: 24px; top: 20px; bottom: 20px;
+  width: 3px;
+  background: linear-gradient(180deg, var(--c-gold), var(--c-line-soft));
+  border-radius: 3px;
+}
+
+.roadmap-item {
+  position: relative;
+  padding-right: var(--sp-8);
+  padding-bottom: var(--sp-7);
+}
+
+.roadmap-item:last-child { padding-bottom: 0; }
+
+.roadmap-marker {
+  position: absolute;
+  right: 8px; top: 4px;
+  width: 36px; height: 36px;
+  display: grid;
+  place-items: center;
+  background: var(--c-surface);
+  border: 3px solid var(--c-gold);
+  border-radius: 50%;
+  color: var(--c-gold);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  box-shadow: 0 0 0 4px var(--c-bg), var(--shadow);
+  z-index: 2;
+  font-feature-settings: "ss01";
+}
+
+.roadmap-item.is-done .roadmap-marker {
+  background: var(--c-gold);
+  color: #fff;
+}
+
+.roadmap-item.is-active .roadmap-marker {
+  background: var(--c-primary);
+  border-color: var(--c-gold);
+  color: var(--c-gold-soft);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--c-bg), var(--shadow); }
+  50% { box-shadow: 0 0 0 4px var(--c-bg), 0 0 0 12px rgba(184,137,43,.15); }
+}
+
+.roadmap-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 2px var(--sp-3);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  margin-bottom: var(--sp-2);
+}
+
+.roadmap-status.done {
+  background: #e8f0ed;
+  color: var(--c-primary-3);
+}
+[data-theme="night"] .roadmap-status.done { background: #16332a; color: #6ec9a8; }
+
+.roadmap-status.active {
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+}
+
+.roadmap-status.future {
+  background: var(--c-surface-2);
+  color: var(--c-ink-mute);
+}
+
+.roadmap-title {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-2);
+  line-height: 1.4;
+}
+[data-theme="night"] .roadmap-title { color: var(--c-ink); }
+
+.roadmap-text {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   TEAM
+============================================================ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-4);
+}
+
+.team-card {
+  text-align: center;
+  padding: var(--sp-5);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  transition: all .2s var(--ease);
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow);
+}
+
+.team-avatar {
+  width: 80px; height: 80px;
+  margin: 0 auto var(--sp-4);
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  display: grid;
+  place-items: center;
+  color: var(--c-gold-soft);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  box-shadow: var(--shadow);
+  font-feature-settings: "ss01";
+}
+
+.team-name {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-1);
+}
+[data-theme="night"] .team-name { color: var(--c-ink); }
+
+.team-role {
+  font-size: var(--fs-sm);
+  color: var(--c-gold);
+  font-weight: 600;
+  margin-bottom: var(--sp-3);
+}
+
+.team-bio {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   CONTRIBUTE WAYS
+============================================================ */
+.ways-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sp-4);
+}
+
+.way-card {
+  padding: var(--sp-5);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  display: block;
+  text-align: right;
+  position: relative;
+  overflow: hidden;
+}
+
+.way-card::after {
+  content: "←";
+  position: absolute;
+  bottom: var(--sp-4);
+  left: var(--sp-4);
+  color: var(--c-gold);
+  font-size: var(--fs-lg);
+  opacity: 0;
+  transform: translateX(8px);
+  transition: all .3s var(--ease);
+}
+
+.way-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.way-card:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.way-icon {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border-radius: var(--radius);
+  margin-bottom: var(--sp-3);
+}
+
+.way-title {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-2);
+}
+[data-theme="night"] .way-title { color: var(--c-ink); }
+
+.way-text {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   CTA
+============================================================ */
+.cta-section {
+  padding: var(--sp-8) 0;
+}
+
+.cta-inner {
+  position: relative;
+  padding: var(--sp-9) var(--sp-7);
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  border-radius: var(--radius-xl);
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+.cta-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(212,175,55,.18), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212,175,55,.12), transparent 50%);
+  pointer-events: none;
+}
+
+.cta-inner > * { position: relative; }
+
+.cta-icon {
+  width: 72px; height: 72px;
+  margin: 0 auto var(--sp-5);
+  display: grid;
+  place-items: center;
+  background: rgba(212,175,55,.15);
+  border: 2px solid rgba(212,175,55,.3);
+  border-radius: 50%;
+  color: var(--c-gold-soft);
+}
+
+.cta-title {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  margin-bottom: var(--sp-4);
+  letter-spacing: -.01em;
+}
+
+.cta-text {
+  font-size: var(--fs-md);
+  opacity: .9;
+  max-width: 560px;
+  margin: 0 auto var(--sp-6);
+  line-height: 1.9;
+}
+
+.cta-actions {
+  display: flex;
+  gap: var(--sp-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-inner .btn-primary {
+  background: var(--c-gold);
+  box-shadow: 0 4px 14px rgba(184,137,43,.35);
+}
+.cta-inner .btn-primary:hover {
+  background: var(--c-gold-soft);
+  box-shadow: 0 8px 20px rgba(184,137,43,.45);
+}
+
+.cta-inner .btn-ghost {
+  color: #fff;
+  border-color: rgba(255,255,255,.3);
+}
+.cta-inner .btn-ghost:hover {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.5);
+  color: #fff;
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  background: var(--c-primary);
+  color: rgba(255,255,255,.7);
+  padding: var(--sp-8) 0 var(--sp-5);
+}
+[data-theme="night"] .site-footer { background: #061410; }
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+.footer-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.footer-desc {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  max-width: 320px;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.footer-col h3 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+}
+
+.footer-col ul { display: grid; gap: var(--sp-2); }
+
+.footer-col a {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,.65);
+  transition: color .2s var(--ease);
+}
+.footer-col a:hover { color: var(--c-gold-soft); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 960px) {
+  .main-nav { display: none; }
+  .menu-toggle { display: grid; }
+
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --fs-3xl: 2rem;
+    --fs-2xl: 1.75rem;
+    --fs-xl: 1.35rem;
+    --fs-4xl: 2.5rem;
+    --header-h: 64px;
+  }
+
+  .container { padding: 0 var(--sp-4); }
+
+  .page-hero { padding: var(--sp-7) 0 var(--sp-6); }
+
+  .section { padding: var(--sp-6) 0; }
+
+  .vision-content { font-size: var(--fs-base); }
+
+  .vision-quote {
+    padding: var(--sp-5) var(--sp-4);
+    font-size: var(--fs-md);
+  }
+
+  .vision-content p:first-of-type::first-letter {
+    font-size: 2.5em;
+  }
+
+  .roadmap::before { right: 16px; }
+  .roadmap-item { padding-right: var(--sp-7); }
+  .roadmap-marker {
+    width: 30px; height: 30px;
+    right: 2px;
+    font-size: 0.65rem;
+  }
+
+  .cta-inner { padding: var(--sp-7) var(--sp-5); }
+
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up { animation: fadeUp .7s var(--ease) backwards; }
+.fade-up.d1 { animation-delay: .1s; }
+.fade-up.d2 { animation-delay: .2s; }
+.fade-up.d3 { animation-delay: .3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی" id="sharedNav"><a class="nav-home-link" data-page="home" href="index.html">نخست</a><div class="nav-group" data-group="calendar" data-members="calendar,calendar,today,day"><a class="nav-group-label" href="calendar.html">تقویم و زمان</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی تقویم و زمان" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="calendar" href="calendar.html">تقویم کامل<span class="nav-submenu-hint">چهار نما: ماهانه، هفتگی، سالانه، روزانه</span></a><a data-page="today" href="today.html">امروز در تاریخ<span class="nav-submenu-hint">رویدادهای همین روز</span></a><a data-page="day" href="day.html">یک روز خاص<span class="nav-submenu-hint">جست‌وجو در هر روز تقویم</span></a></div></div><div class="nav-group" data-group="know" data-members="martyrs,martyrs,events,places,periods,sources,encyclopedia"><a class="nav-group-label" href="martyrs.html">کشف و دانش</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی کشف و دانش" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="martyrs" href="martyrs.html">اشخاص و شهدا<span class="nav-submenu-hint">پرونده شهدا، آزادگان و فداکاران</span></a><a data-page="events" href="events.html">رویدادها و عملیات<span class="nav-submenu-hint">آرشیو تاریخی و دفاع مقدس</span></a><a data-page="places" href="places.html">مکان‌ها<span class="nav-submenu-hint">جبهه‌ها، شهرها، مزارها و یادمان‌ها</span></a><a data-page="periods" href="periods.html">دوره‌های تاریخی<span class="nav-submenu-hint">از صدر اسلام تا معاصر</span></a><a data-page="sources" href="sources.html">منابع و اسناد<span class="nav-submenu-hint">اعتبارسنجی و ردیابی منابع</span></a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه<span class="nav-submenu-hint">همه موجودیت‌ها در یک نگاه</span></a></div></div><div class="nav-group" data-group="about" data-members="about,about,contribute,contact,api"><a class="nav-group-label" href="about.html">درباره و همکاری</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی درباره و همکاری" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="about" href="about.html">درباره پروژه<span class="nav-submenu-hint">چشم‌انداز، اصول و نقشه راه</span></a><a data-page="contribute" href="contribute.html">همکاری و مشارکت<span class="nav-submenu-hint">ثبت خاطره، سند و اصلاح اطلاعات</span></a><a data-page="contact" href="contact.html">تماس با ما<span class="nav-submenu-hint">ارتباط، گزارش خطا و پیشنهاد</span></a><a data-page="api" href="api.html">داده و API<span class="nav-submenu-hint">دسترسی برنامه‌ای به داده</span></a></div></div><a class="nav-icon-link" data-page="search" href="search.html" aria-label="جست‌وجوی پیشرفته" title="جست‌وجو"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a></nav></div></header></div></header>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main id="main" role="main">
+
+  <!-- ====== PAGE HERO ====== -->
+  <section class="page-hero">
+    <div class="container page-hero-inner">
+      <nav class="breadcrumb" aria-label="مسیر">
+        <ol>
+          <li><a href="index.html">خانه</a></li>
+          <li aria-current="page">درباره</li>
+        </ol>
+      </nav>
+
+      <span class="hero-eyebrow fade-up">درباره پروژه</span>
+
+      <h1 class="page-hero-title fade-up d1">
+        یک <span class="accent">اطلس زنده</span> از حافظه‌ی انسانی
+      </h1>
+
+      <p class="page-hero-lead fade-up d2">
+        تقویم شهدا فقط یک تقویم مناسبتی نیست؛ هدف، ساختن یک سامانه زمانی ـ رویدادی ـ دانشی است
+        که تاریخ را از مسیر روز و تاریخ به انسان‌ها، رویدادها، مکان‌ها و روایت‌ها متصل می‌کند.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== VISION ====== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head-center">
+        <h2 class="section-title">چشم‌انداز نهایی</h2>
+        <p class="section-sub">چرا این پروژه ساخته می‌شود و به کجا می‌رود</p>
+      </div>
+
+      <div class="vision-content">
+        <p>
+          <strong>تقویم شهدا</strong> نباید به یک تقویم مناسبتی محدود شود. هدف، ساخت یک
+          <strong>اطلس زمانی ـ تاریخی ـ انسانی</strong> است که تاریخ را از مسیر روز و تاریخ
+          به انسان‌ها، رویدادها، مکان‌ها، آثار و روایت‌های مرتبط متصل می‌کند.
+        </p>
+
+        <p>
+          این پروژه از ابتدا باید طوری طراحی شود که اگر امروز چندصد رکورد داشته باشد و در
+          آینده به میلیون‌ها رکورد از دوره‌ها و کشورهای مختلف برسد، معماری آن نیازمند
+          بازطراحی بنیادی نباشد. بنابراین توسعه‌پذیری، منبع‌محوری و احترام فرهنگی
+          در قلب همه تصمیم‌ها قرار دارد.
+        </p>
+
+        <blockquote class="vision-quote">
+          «همه» یک هدف توسعه‌ای است، نه ادعای کامل‌بودن داده. هر رکورد باید با منبع،
+          دوره تاریخی، منطقه و وضعیت اعتبار ثبت شود تا پروژه بتواند به‌صورت تدریجی و
+          قابل کنترل گسترش یابد.
+        </blockquote>
+
+        <p>
+          ما باور داریم که حافظه جمعی یک ملت، با <strong>روایت‌های زنده، مستند و قابل پژوهش</strong>
+          ساخته می‌شود. هر شهید یک روایت است، هر رویداد یک گره در شبکه دانش، و هر روز
+          یک دروازه به تاریخ. این پروژه می‌خواهد این دروازه‌ها را به روی همه باز کند.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SCOPE ====== -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head-center">
+        <h2 class="section-title">دامنه پروژه</h2>
+        <p class="section-sub">از تاریخ اسلام تا ایران معاصر و جهان</p>
+      </div>
+
+      <div class="scope-grid">
+        <article class="scope-card">
+          <div class="scope-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+              <path d="M12 3 L14 9 L20 10 L14 11 L12 17 L10 11 L4 10 L10 9 Z" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3 class="scope-title">شهدای اسلام</h3>
+          <p class="scope-text">
+            امکان ثبت و توسعه پرونده شهدای شناخته‌شده در تاریخ اسلام، با تفکیک دوره،
+            سرزمین، منبع و میزان مستند بودن روایت.
+          </p>
+        </article>
+
+        <article class="scope-card">
+          <div class="scope-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21 L12 3 L21 21 Z"/>
+              <line x1="12" y1="3" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="scope-title">شهدای ایران</h3>
+          <p class="scope-text">
+            از دوره‌های تاریخی و شخصیت‌های شناخته‌شده تا انقلاب، دفاع مقدس، مدافعان حرم
+            و سایر دوره‌های معاصر.
+          </p>
+        </article>
+
+        <article class="scope-card">
+          <div class="scope-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M3 12 H21 M12 3 C 15 7 15 17 12 21 M12 3 C 9 7 9 17 12 21"/>
+            </svg>
+          </div>
+          <h3 class="scope-title">شهدای جهان</h3>
+          <p class="scope-text">
+            افرادی از ملت‌ها و سرزمین‌های مختلف که در منابع معتبر به‌عنوان شهید یا
+            جان‌باخته راهی ارزشمند شناخته شده‌اند.
+          </p>
+        </article>
+
+        <article class="scope-card">
+          <div class="scope-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L4 7 L4 12 C4 17 12 22 12 22 C12 22 20 17 20 12 L20 7 Z"/>
+            </svg>
+          </div>
+          <h3 class="scope-title">آزادگان و فداکاران</h3>
+          <p class="scope-text">
+            ثبت مستقل یا مرتبطِ آزادگان، مبارزان، نجات‌دهندگان و انسان‌های فداکار؛
+            بدون تحمیل یک تعریف واحد به همه فرهنگ‌ها و دوره‌ها.
+          </p>
+        </article>
+
+        <article class="scope-card">
+          <div class="scope-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7 V12 L15 15"/>
+            </svg>
+          </div>
+          <h3 class="scope-title">از گذشته تا آینده</h3>
+          <p class="scope-text">
+            داده تاریخی از نخستین دوره‌های قابل ثبت تا زمان معاصر و همچنین رویدادهای
+            آینده مانند یادواره‌ها و سالگردها.
+          </p>
+        </article>
+
+        <article class="scope-card">
+          <div class="scope-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 V22 M2 12 H22"/>
+              <circle cx="12" cy="12" r="9"/>
+            </svg>
+          </div>
+          <h3 class="scope-title">توسعه بی‌انتها</h3>
+          <p class="scope-text">
+            هیچ عدد نهایی برای تعداد اشخاص، کشورها، دوره‌ها، منابع یا رویدادها در
+            معماری تعریف نمی‌شود. این پروژه همیشه در حال رشد است.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PRINCIPLES ====== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head-center">
+        <h2 class="section-title">اصول مادر پروژه</h2>
+        <p class="section-sub">شش اصلی که همه تصمیم‌ها را هدایت می‌کند</p>
+      </div>
+
+      <div class="principles-grid">
+        <article class="principle-card">
+          <span class="principle-num">اصل ۰۱</span>
+          <h3 class="principle-title">توسعه‌پذیری</h3>
+          <p class="principle-text">
+            هیچ قابلیت اصلی نباید معماری آینده را محدود کند. از همان ابتدا برای
+            میلیون‌ها رکورد و ده‌ها زبان طراحی می‌شود.
+          </p>
+        </article>
+
+        <article class="principle-card">
+          <span class="principle-num">اصل ۰۲</span>
+          <h3 class="principle-title">منبع‌محوری</h3>
+          <p class="principle-text">
+            هر ادعای مهم باید منبع، وضعیت بررسی و امکان ردیابی داشته باشد. تکرار
+            یک ادعا در چند منبع، جای اعتبارسنجی را نمی‌گیرد.
+          </p>
+        </article>
+
+        <article class="principle-card">
+          <span class="principle-num">اصل ۰۳</span>
+          <h3 class="principle-title">تفکیک واقعیت از روایت</h3>
+          <p class="principle-text">
+            اطلاعات تاریخی، روایت خانوادگی، تحلیل پژوهشی و محتوای کاربر باید از نظر
+            نوع و وضعیت مشخص باشند.
+          </p>
+        </article>
+
+        <article class="principle-card">
+          <span class="principle-num">اصل ۰۴</span>
+          <h3 class="principle-title">احترام فرهنگی</h3>
+          <p class="principle-text">
+            برای دوره‌ها و ملت‌های مختلف، اصطلاحات و زمینه تاریخی همان جامعه قابل
+            ثبت باشد؛ بدون تحمیل یک تعریف واحد.
+          </p>
+        </article>
+
+        <article class="principle-card">
+          <span class="principle-num">اصل ۰۵</span>
+          <h3 class="principle-title">مشارکت کنترل‌شده</h3>
+          <p class="principle-text">
+            هر مخاطب بتواند کمک کند، اما انتشار مستقیم داده بدون فرایند بررسی
+            انجام نشود. گردش تأیید شفاف و قابل ردیابی است.
+          </p>
+        </article>
+
+        <article class="principle-card">
+          <span class="principle-num">اصل ۰۶</span>
+          <h3 class="principle-title">استقلال محصول</h3>
+          <p class="principle-text">
+            تقویم شهدا محصولی مستقل است و تنها در سطح اکوسیستم با شهیدپورتال و
+            محصولات دیگر ارتباط دارد.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== STATS ====== -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head-center">
+        <h2 class="section-title">پروژه در یک نگاه</h2>
+        <p class="section-sub">آمار به‌صورت تدریجی و با ثبت منابع معتبر رشد می‌کند</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <span class="stat-number" data-count="1240">۰</span>
+          <span class="stat-label">شخص ثبت‌شده</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <span class="stat-number" data-count="3480">۰</span>
+          <span class="stat-label">رویداد</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <span class="stat-number" data-count="560">۰</span>
+          <span class="stat-label">مکان</span>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <span class="stat-number" data-count="2100">۰</span>
+          <span class="stat-label">منبع</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ROADMAP ====== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head-center">
+        <h2 class="section-title">مسیر پروژه</h2>
+        <p class="section-sub">از کجا آمده‌ایم و به کجا می‌رویم</p>
+      </div>
+
+      <div class="roadmap">
+        <div class="roadmap-item is-done">
+          <span class="roadmap-marker">✓</span>
+          <span class="roadmap-status done">انجام‌شده</span>
+          <h3 class="roadmap-title">تثبیت محصول مستقل</h3>
+          <p class="roadmap-text">
+            ایجاد هویت بصری مستقل، هدر، منو، فوتر، صفحه معرفی و تماس.
+            تقویم ماهانه، هفتگی، سالانه و روزانه در حال پایدارسازی است.
+          </p>
+        </div>
+
+        <div class="roadmap-item is-active">
+          <span class="roadmap-marker">◐</span>
+          <span class="roadmap-status active">در حال انجام</span>
+          <h3 class="roadmap-title">مدل داده و استانداردسازی</h3>
+          <p class="roadmap-text">
+            طراحی schema داده، شناسه‌های یکتا، مدل رویداد، مکان، دوره و منبع.
+            انتقال رویدادها از JS به ساختار داده مستقل.
+          </p>
+        </div>
+
+        <div class="roadmap-item">
+          <span class="roadmap-marker">۰۳</span>
+          <span class="roadmap-status future">آینده</span>
+          <h3 class="roadmap-title">آرشیو تاریخی و صفحات دانش</h3>
+          <p class="roadmap-text">
+            گسترش داده از سال ۱۳۰۰ به بعد، ساخت صفحه اختصاصی رویداد، شهید،
+            مکان و دوره با فیلتر پیشرفته.
+          </p>
+        </div>
+
+        <div class="roadmap-item">
+          <span class="roadmap-marker">۰۴</span>
+          <span class="roadmap-status future">آینده</span>
+          <h3 class="roadmap-title">شبکه ارتباطات و روایت‌گری</h3>
+          <p class="roadmap-text">
+            اتصال رویدادها به شهدا، عملیات‌ها، مکان‌ها، اسناد و روایت‌ها.
+            لایه چندرسانه‌ای شامل پادکست، ویدئو و اینفوگرافیک.
+          </p>
+        </div>
+
+        <div class="roadmap-item">
+          <span class="roadmap-marker">۰۵</span>
+          <span class="roadmap-status future">آینده</span>
+          <h3 class="roadmap-title">مشارکت عمومی و مدیریت</h3>
+          <p class="roadmap-text">
+            عضویت، پیشنهاد، اصلاح، خاطره، سند و همکاری تخصصی.
+            پنل مدیریت با گردش تأیید و نسخه‌بندی.
+          </p>
+        </div>
+
+        <div class="roadmap-item">
+          <span class="roadmap-marker">۰۶</span>
+          <span class="roadmap-status future">آینده</span>
+          <h3 class="roadmap-title">API و اکوسیستم</h3>
+          <p class="roadmap-text">
+            API پایدار، PWA، اپلیکیشن، ویجت، iCal و اتصال به محصولات
+            اکوسیستم فرهنگی.
+          </p>
+        </div>
+
+        <div class="roadmap-item">
+          <span class="roadmap-marker">۰۷</span>
+          <span class="roadmap-status future">آینده</span>
+          <h3 class="roadmap-title">دانش و هوشمندی</h3>
+          <p class="roadmap-text">
+            جست‌وجوی معنایی، پیشنهاد ارتباط، ابزار پژوهش و تحلیل شبکه زمانی؛
+            همه با کنترل انسانی و بر پایه داده معتبر.
+          </p>
+        </div>
+
+        <div class="roadmap-item">
+          <span class="roadmap-marker">۰۸</span>
+          <span class="roadmap-status future">آینده</span>
+          <h3 class="roadmap-title">گسترش جهانی</h3>
+          <p class="roadmap-text">
+            کشورها، زبان‌ها، دوره‌ها و منابع بین‌المللی؛ با مدل چندزبانه و
+            احترام به زمینه فرهنگی هر جامعه.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== WAYS TO CONTRIBUTE ====== -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head-center">
+        <h2 class="section-title">چگونه سهیم شویم؟</h2>
+        <p class="section-sub">راه‌های مختلف برای مشارکت در ساخت این اطلس</p>
+      </div>
+
+      <div class="ways-grid">
+        <a href="contribute.html" class="way-card">
+          <div class="way-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </div>
+          <h3 class="way-title">ثبت شخص جدید</h3>
+          <p class="way-text">
+            پیشنهاد ایجاد پرونده برای شهید، آزاده یا شخص مرتبط، همراه با منابع.
+          </p>
+        </a>
+
+        <a href="contribute.html" class="way-card">
+          <div class="way-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4 H4 a2 2 0 0 0 -2 2 v14 a2 2 0 0 0 2 2 h14 a2 2 0 0 0 2 -2 v-7"/>
+              <path d="M18.5 2.5 a2.121 2.121 0 0 1 3 3 L12 15 l-4 1 1 -4 9.5 -9.5z"/>
+            </svg>
+          </div>
+          <h3 class="way-title">اصلاح اطلاعات</h3>
+          <p class="way-text">
+            گزارش خطا، اختلاف تاریخی یا نقص در یک پرونده موجود.
+          </p>
+        </a>
+
+        <a href="contribute.html" class="way-card">
+          <div class="way-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1 -2 2 H7 l-4 4 V5 a2 2 0 0 1 2 -2 h14 a2 2 0 0 1 2 2 z"/>
+            </svg>
+          </div>
+          <h3 class="way-title">افزودن خاطره</h3>
+          <p class="way-text">
+            ارسال خاطرات خانواده، همرزمان و شاهدان با مشخصات منبع.
+          </p>
+        </a>
+
+        <a href="contribute.html" class="way-card">
+          <div class="way-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <h3 class="way-title">افزودن سند</h3>
+          <p class="way-text">
+            پیشنهاد کتاب، سند، عکس، صوت، ویدئو یا منبع اینترنتی معتبر.
+          </p>
+        </a>
+
+        <a href="contribute.html" class="way-card">
+          <div class="way-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13 a5 5 0 0 0 7.54 .54 l3 -3 a5 5 0 0 0 -7.07 -7.07 l-1.72 1.71"/>
+              <path d="M14 11 a5 5 0 0 0 -7.54 -.54 l-3 3 a5 5 0 0 0 7.07 7.07 l1.71 -1.71"/>
+            </svg>
+          </div>
+          <h3 class="way-title">پیشنهاد ارتباط</h3>
+          <p class="way-text">
+            پیشنهاد اتصال یک شخص، رویداد، مکان یا سند به رکورد دیگر.
+          </p>
+        </a>
+
+        <a href="contribute.html" class="way-card">
+          <div class="way-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0 -4 -4 H5 a4 4 0 0 0 -4 4 v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0 -3 -3.87"/>
+              <path d="M16 3.13 a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="way-title">همکاری تخصصی</h3>
+          <p class="way-text">
+            پژوهشگران، نویسندگان، خانواده‌ها و متخصصان در سطوح مختلف همکاری کنند.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TEAM ====== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head-center">
+        <h2 class="section-title">تیم و همکاران</h2>
+        <p class="section-sub">کسانی که در ساخت این اطلس سهیم هستند</p>
+      </div>
+
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="team-avatar">ت</div>
+          <h3 class="team-name">تیم توسعه</h3>
+          <p class="team-role">فنی و معماری</p>
+          <p class="team-bio">
+            طراحی و پیاده‌سازی زیرساخت، مدل داده، API و رابط کاربری.
+          </p>
+        </article>
+
+        <article class="team-card">
+          <div class="team-avatar">پ</div>
+          <h3 class="team-name">تیم پژوهش</h3>
+          <p class="team-role">منبع‌یابی و اعتبارسنجی</p>
+          <p class="team-bio">
+            جمع‌آوری، بررسی و مستندسازی داده‌ها از منابع معتبر.
+          </p>
+        </article>
+
+        <article class="team-card">
+          <div class="team-avatar">ر</div>
+          <h3 class="team-name">تیم روایت</h3>
+          <p class="team-role">محتوا و ویرایش</p>
+          <p class="team-bio">
+            نگارش، ویرایش و روایت‌گری داستان شهدا و رویدادها.
+          </p>
+        </article>
+
+        <article class="team-card">
+          <div class="team-avatar">د</div>
+          <h3 class="team-name">داوطلبان</h3>
+          <p class="team-role">مشارکت مردمی</p>
+          <p class="team-bio">
+            خانواده‌ها، همرزمان، دانشجویان و علاقه‌مندانی که در تکمیل داده کمک می‌کنند.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CTA ====== -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 L14 9 L20 10 L14 11 L12 17 L10 11 L4 10 L10 9 Z"/>
+          </svg>
+        </div>
+        <h2 class="cta-title">در تکمیل این اطلس سهیم شوید</h2>
+        <p class="cta-text">
+          خاطره، سند، تصویر یا اطلاعات اصلاحی دارید؟ با ثبت منبع، در ساخت این
+          حافظه جمعی مشارکت کنید.
+        </p>
+        <div class="cta-actions">
+          <a href="contribute.html" class="btn btn-primary btn-lg">شروع همکاری</a>
+          <a href="contact.html" class="btn btn-ghost btn-lg">تماس با ما</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ===== اعداد فارسی =====
+  function toFa(n) {
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  // ===== شمارنده آمار =====
+  function animateCounters() {
+    const counters = document.querySelectorAll('[data-count]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.count, 10);
+          const duration = 1800;
+          const start = performance.now();
+
+          function step(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(eased * target);
+            el.textContent = toFa(current.toLocaleString('en-US').replace(/,/g, '،'));
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = toFa(target.toLocaleString('en-US').replace(/,/g, '،'));
+          }
+
+          requestAnimationFrame(step);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    counters.forEach(c => observer.observe(c));
+  }
+
+  animateCounters();
+
+  // ===== Theme =====
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') {
+    html.setAttribute('data-theme', 'night');
+    updateThemeIcon('night');
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'night' ? 'day' : 'night';
+    if (next === 'night') html.setAttribute('data-theme', 'night');
+    else html.removeAttribute('data-theme');
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  });
+
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    if (theme === 'night') {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>';
+    } else {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    }
+  }
+
+  // ===== Mobile menu =====
+  const menuToggle = document.querySelector('.menu-toggle');
+  menuToggle?.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+  });
+
+  // ===== Scroll animations =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-up');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.scope-card, .principle-card, .stat-card, .way-card, .team-card, .roadmap-item').forEach(el => {
+    observer.observe(el);
+  });
+
+})();
+</script>
+
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+<button class="to-top" type="button" aria-label="بازگشت به بالای صفحه"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+</body>
+</html>

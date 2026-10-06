@@ -1,1 +1,2496 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>مشارکت | تقویم شهدا</title><link rel="icon" href="assets/images/logo.png"><link rel="stylesheet" href="assets/css/calendar.css"><link rel="stylesheet" href="assets/css/calendar-shell.css"></head><body><div id="calendarShellHeader"></div><main class="page"><section class="pageHero"><span>مشارکت و تکمیل</span><h1>در توسعه تقویم مشارکت کنید</h1><p>این محصول برای توسعه تدریجی و همکاری مخاطبان، پژوهشگران، خانواده‌ها و متخصصان طراحی شده است.</p></section><section class="infoGrid"><article><b>افزودن شخص یا شهید</b><p>پیشنهاد یک پرونده جدید همراه با تاریخ، مکان و منابع.</p></article><article><b>اصلاح و تکمیل</b><p>اعلام خطا، اصلاح تاریخ، اضافه‌کردن ارتباطات یا تکمیل روایت.</p></article><article><b>ارسال سند و خاطره</b><p>ارائه سند، تصویر یا خاطره برای بررسی و استفاده در نسخه تأییدشده.</p></article><article><b>همکاری تخصصی</b><p>همکاری پژوهشی برای اعتبارسنجی و توسعه داده‌های تاریخی.</p></article></section><section class="workflow box"><b>چرخه بررسی</b><div><span>ارسال</span><i>←</i><span>بررسی اولیه</span><i>←</i><span>اعتبارسنجی</span><i>←</i><span>تأیید</span><i>←</i><span>انتشار</span></div></section></main><div id="calendarShellFooter"></div><script src="assets/js/calendar-shell.js"></script><script src="assets/js/main.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="همکاری در تقویم شهدا — ثبت خاطره، سند، اصلاح اطلاعات و پیشنهاد رویداد" />
+<meta name="theme-color" content="#0f2e24" />
+<title>همکاری | تقویم شهدا</title>
+
+<link rel="icon" href="assets/images/logo.png"><rect width='100' height='100' rx='20' fill='%230f2e24'/><path d='M50 20 L60 45 L85 50 L60 55 L50 80 L40 55 L15 50 L40 45 Z' fill='%23d4af37'/></svg>" />
+<style>
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f2ede3;
+  --c-surface: #ffffff;
+  --c-surface-2: #f7f3ea;
+  --c-ink: #1a2420;
+  --c-ink-soft: #4a5651;
+  --c-ink-mute: #7a847f;
+  --c-line: #e6dfd0;
+  --c-line-soft: #efe9dd;
+
+  --c-primary: #0f2e24;
+  --c-primary-2: #1a4a3a;
+  --c-primary-3: #2a6a54;
+  --c-gold: #b8892b;
+  --c-gold-soft: #d4af37;
+  --c-gold-bg: #faf3e0;
+  --c-accent: #8b2f2f;
+  --c-success: #2a6a54;
+  --c-success-bg: #e8f0ed;
+  --c-warning: #b8892b;
+  --c-error: #8b2f2f;
+  --c-error-bg: #fbe9e9;
+
+  --c-night-bg: #0a1a15;
+  --c-night-surface: #11261e;
+  --c-night-ink: #e8e3d5;
+  --c-night-line: #1e3a2e;
+
+  --font: "Vazirmatn", "Tahoma", sans-serif;
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.35rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --shadow-sm: 0 1px 2px rgba(15,46,36,.06), 0 1px 3px rgba(15,46,36,.04);
+  --shadow: 0 4px 12px rgba(15,46,36,.06), 0 2px 4px rgba(15,46,36,.04);
+  --shadow-md: 0 12px 32px rgba(15,46,36,.08), 0 4px 8px rgba(15,46,36,.04);
+  --shadow-lg: 0 24px 60px rgba(15,46,36,.10), 0 8px 16px rgba(15,46,36,.06);
+
+  --container: 1100px;
+  --header-h: 76px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-theme="night"] {
+  --c-bg: var(--c-night-bg);
+  --c-bg-alt: #0d2019;
+  --c-surface: var(--c-night-surface);
+  --c-surface-2: #163328;
+  --c-ink: var(--c-night-ink);
+  --c-ink-soft: #b8c4bd;
+  --c-ink-mute: #7a8a82;
+  --c-line: var(--c-night-line);
+  --c-line-soft: #183027;
+  --c-gold-bg: #1a2f24;
+  --c-success-bg: #16332a;
+  --c-error-bg: #2e1a1a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--c-ink);
+  background: var(--c-bg);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 243, .85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .site-header { background: rgba(10, 26, 21, .85); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  height: var(--header-h);
+}
+
+.brand { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+
+.brand-logo {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  border-radius: 12px;
+  color: var(--c-gold-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-title {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-primary);
+  line-height: 1.2;
+}
+[data-theme="night"] .brand-title { color: var(--c-gold-soft); }
+
+.brand-sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.2;
+}
+
+.main-nav ul { display: flex; gap: var(--sp-1); align-items: center; }
+
+.main-nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: all .2s var(--ease);
+}
+.main-nav a:hover { color: var(--c-primary); background: var(--c-surface-2); }
+[data-theme="night"] .main-nav a:hover { color: var(--c-gold-soft); }
+
+.main-nav a.is-active { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .main-nav a.is-active { color: var(--c-gold-soft); }
+
+.main-nav a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px; right: 12px; left: 12px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+
+.header-actions { display: flex; gap: var(--sp-2); align-items: center; }
+
+.btn-icon {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+}
+.btn-icon:hover {
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  transform: translateY(-1px);
+}
+[data-theme="night"] .btn-icon:hover { color: var(--c-gold-soft); }
+
+.menu-toggle { display: none; }
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(15,46,36,.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15,46,36,.30);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-primary);
+  border: 1px solid var(--c-line);
+}
+.btn-ghost:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+[data-theme="night"] .btn-ghost { color: var(--c-ink); }
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--c-gold), var(--c-gold-soft));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(184,137,43,.25);
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,137,43,.35);
+}
+
+.btn-lg { padding: var(--sp-4) var(--sp-6); font-size: var(--fs-md); }
+
+/* ============================================================
+   PAGE HEAD
+============================================================ */
+.page-head {
+  padding: var(--sp-7) 0 var(--sp-6);
+  background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg));
+  border-bottom: 1px solid var(--c-line-soft);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 700px 350px at 50% 0%, rgba(184,137,43,.10), transparent 60%);
+  pointer-events: none;
+}
+
+.breadcrumb ol {
+  display: inline-flex;
+  gap: var(--sp-3);
+  align-items: center;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  padding: var(--sp-2) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--sp-5);
+  position: relative;
+}
+.breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-right: var(--sp-3);
+  color: var(--c-line);
+}
+.breadcrumb a { color: var(--c-ink-mute); }
+.breadcrumb a:hover { color: var(--c-gold); }
+.breadcrumb [aria-current] { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .breadcrumb [aria-current] { color: var(--c-gold-soft); }
+
+.page-title {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.02em;
+  margin-bottom: var(--sp-3);
+  line-height: 1.2;
+  position: relative;
+}
+[data-theme="night"] .page-title { color: var(--c-ink); }
+
+.page-lead {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.9;
+  position: relative;
+}
+
+/* ============================================================
+   FLOW / WORKFLOW
+============================================================ */
+.flow-section {
+  padding: var(--sp-7) 0 var(--sp-6);
+}
+
+.flow-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--sp-2);
+  position: relative;
+}
+
+.flow-step {
+  text-align: center;
+  padding: var(--sp-4) var(--sp-2);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  position: relative;
+  transition: all .3s var(--ease);
+}
+
+.flow-step:hover {
+  border-color: var(--c-gold);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.flow-step-num {
+  width: 36px; height: 36px;
+  margin: 0 auto var(--sp-3);
+  display: grid;
+  place-items: center;
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: var(--fs-sm);
+  font-feature-settings: "ss01";
+}
+
+.flow-step.is-done .flow-step-num {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+}
+
+.flow-step-title {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
+}
+
+.flow-step-desc {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.7;
+}
+
+/* Arrow between steps */
+.flow-step:not(:last-child)::after {
+  content: "←";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-gold);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  z-index: 2;
+}
+
+/* ============================================================
+   CONTRIBUTE TYPES
+============================================================ */
+.types-section {
+  padding: var(--sp-6) 0;
+}
+
+.section-title-center {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  text-align: center;
+  margin-bottom: var(--sp-2);
+  letter-spacing: -.01em;
+}
+[data-theme="night"] .section-title-center { color: var(--c-ink); }
+
+.section-sub-center {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  text-align: center;
+  margin-bottom: var(--sp-6);
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.9;
+}
+
+.types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-4);
+}
+
+.type-card {
+  position: relative;
+  padding: var(--sp-5);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all .25s var(--ease);
+  text-align: right;
+  font-family: inherit;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.type-card::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle at top right, var(--c-gold-bg), transparent 70%);
+  border-radius: 0 var(--radius-lg) 0 80px;
+  transition: all .3s var(--ease);
+}
+
+.type-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.type-card:hover::before {
+  width: 100%; height: 100%;
+  border-radius: 0;
+}
+
+.type-card > * { position: relative; z-index: 1; }
+
+.type-card.is-selected {
+  border-color: var(--c-gold);
+  background: var(--c-gold-bg);
+  box-shadow: var(--shadow-md);
+}
+
+.type-card.is-selected::after {
+  content: "✓";
+  position: absolute;
+  top: var(--sp-3);
+  left: var(--sp-3);
+  width: 28px; height: 28px;
+  display: grid;
+  place-items: center;
+  background: var(--c-gold);
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: var(--fs-sm);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(184,137,43,.4);
+}
+
+.type-icon {
+  width: 52px; height: 52px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: var(--c-gold-soft);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: all .25s var(--ease);
+}
+
+.type-card:hover .type-icon,
+.type-card.is-selected .type-icon {
+  transform: rotate(-6deg) scale(1.05);
+}
+
+.type-title {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.01em;
+  line-height: 1.3;
+}
+[data-theme="night"] .type-title { color: var(--c-ink); }
+
+.type-text {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.8;
+}
+
+/* ============================================================
+   FORM SECTION
+============================================================ */
+.form-section {
+  padding: var(--sp-6) 0 var(--sp-8);
+}
+
+.form-wrapper {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-xl);
+  padding: var(--sp-7);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: linear-gradient(90deg, var(--c-gold), var(--c-gold-soft), var(--c-gold));
+}
+
+.form-header {
+  margin-bottom: var(--sp-6);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.form-header-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border: 1px solid rgba(184,137,43,.25);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+}
+
+.form-header-title {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-2);
+  letter-spacing: -.01em;
+}
+[data-theme="night"] .form-header-title { color: var(--c-ink); }
+
+.form-header-desc {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.9;
+}
+
+/* ===== Form ===== */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+}
+
+.form-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+}
+
+.form-label {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-ink);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.form-label .req {
+  color: var(--c-gold);
+  font-weight: 800;
+}
+
+.form-hint {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.7;
+  margin-top: -4px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  color: var(--c-ink);
+  background: var(--c-surface-2);
+  border: 1.5px solid var(--c-line);
+  border-radius: var(--radius);
+  outline: none;
+  transition: all .2s var(--ease);
+  line-height: 1.6;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: var(--c-gold);
+  background: var(--c-surface);
+  box-shadow: 0 0 0 4px var(--c-gold-bg);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--c-ink-mute);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.9;
+}
+
+.form-textarea.large { min-height: 180px; }
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b8892b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left var(--sp-4) center;
+  padding-left: var(--sp-7);
+  cursor: pointer;
+}
+
+/* Validation states */
+.form-input.is-error,
+.form-textarea.is-error,
+.form-select.is-error {
+  border-color: var(--c-error);
+  background: var(--c-error-bg);
+}
+
+.form-input.is-valid,
+.form-textarea.is-valid,
+.form-select.is-valid {
+  border-color: var(--c-success);
+}
+
+.form-error {
+  font-size: var(--fs-xs);
+  color: var(--c-error);
+  font-weight: 600;
+  display: none;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.form-error.is-show { display: flex; }
+
+/* ===== Counter ===== */
+.char-counter {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  text-align: left;
+  margin-top: -4px;
+  font-feature-settings: "ss01";
+}
+
+.char-counter.is-warning { color: var(--c-gold); }
+.char-counter.is-error { color: var(--c-error); }
+
+/* ===== File Upload ===== */
+.file-upload {
+  border: 2px dashed var(--c-line);
+  border-radius: var(--radius);
+  padding: var(--sp-6) var(--sp-4);
+  text-align: center;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  background: var(--c-surface-2);
+  position: relative;
+}
+
+.file-upload:hover,
+.file-upload.is-dragover {
+  border-color: var(--c-gold);
+  background: var(--c-gold-bg);
+}
+
+.file-upload input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload-icon {
+  width: 56px; height: 56px;
+  margin: 0 auto var(--sp-3);
+  display: grid;
+  place-items: center;
+  background: var(--c-surface);
+  border-radius: 50%;
+  color: var(--c-gold);
+  box-shadow: var(--shadow-sm);
+}
+
+.file-upload-title {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
+}
+
+.file-upload-desc {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+}
+
+.file-list {
+  margin-top: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+}
+
+.file-item-icon {
+  width: 32px; height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.file-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-item-name {
+  font-weight: 600;
+  color: var(--c-ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-item-size {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  font-feature-settings: "ss01";
+}
+
+.file-item-remove {
+  width: 28px; height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--c-ink-mute);
+  transition: all .2s var(--ease);
+  flex-shrink: 0;
+}
+
+.file-item-remove:hover {
+  background: var(--c-error-bg);
+  color: var(--c-error);
+}
+
+/* ===== Checkbox ===== */
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-surface-2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  position: relative;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 1.8;
+}
+
+.form-check:hover { background: var(--c-gold-bg); }
+
+.form-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0; height: 0;
+}
+
+.form-check-mark {
+  width: 20px; height: 20px;
+  border: 1.5px solid var(--c-line);
+  border-radius: 5px;
+  background: var(--c-surface);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all .2s var(--ease);
+}
+
+.form-check-mark svg {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all .2s var(--ease);
+  color: #fff;
+}
+
+.form-check input:checked ~ .form-check-mark {
+  background: var(--c-gold);
+  border-color: var(--c-gold);
+}
+
+.form-check input:checked ~ .form-check-mark svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.form-check-text strong {
+  color: var(--c-ink);
+  font-weight: 700;
+}
+
+/* ===== Actions ===== */
+.form-actions {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--c-line-soft);
+  margin-top: var(--sp-2);
+}
+
+.form-actions .btn { min-width: 140px; }
+
+/* ===== Progress ===== */
+.form-progress {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-surface-2);
+  border-radius: var(--radius);
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-5);
+}
+
+.form-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--c-line-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.form-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--c-gold), var(--c-gold-soft));
+  border-radius: 999px;
+  transition: width .4s var(--ease);
+}
+
+.form-progress-text {
+  font-weight: 700;
+  color: var(--c-gold);
+  font-feature-settings: "ss01";
+  white-space: nowrap;
+}
+
+/* ============================================================
+   SUCCESS STATE
+============================================================ */
+.success-state {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-5);
+  display: none;
+}
+
+.success-state.is-show { display: block; animation: fadeUp .6s var(--ease); }
+
+.success-icon {
+  width: 96px; height: 96px;
+  margin: 0 auto var(--sp-5);
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: var(--c-gold-soft);
+  border-radius: 50%;
+  box-shadow: 0 12px 40px rgba(15,46,36,.25);
+  animation: pulse-success 2s infinite;
+}
+
+@keyframes pulse-success {
+  0%, 100% { box-shadow: 0 12px 40px rgba(15,46,36,.25), 0 0 0 0 rgba(184,137,43,.3); }
+  50% { box-shadow: 0 12px 40px rgba(15,46,36,.25), 0 0 0 20px rgba(184,137,43,0); }
+}
+
+.success-title {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-3);
+}
+[data-theme="night"] .success-title { color: var(--c-ink); }
+
+.success-text {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  max-width: 500px;
+  margin: 0 auto var(--sp-6);
+  line-height: 1.9;
+}
+
+.success-code {
+  display: inline-block;
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border: 1px dashed var(--c-gold);
+  border-radius: var(--radius);
+  font-size: var(--fs-md);
+  font-weight: 800;
+  margin-bottom: var(--sp-6);
+  letter-spacing: .05em;
+  font-feature-settings: "ss01";
+}
+
+.success-actions {
+  display: flex;
+  gap: var(--sp-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   FAQ
+============================================================ */
+.faq-section {
+  padding: var(--sp-7) 0;
+  background: var(--c-bg-alt);
+  border-top: 1px solid var(--c-line-soft);
+}
+
+.faq-list {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.faq-item {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all .2s var(--ease);
+}
+
+.faq-item:hover {
+  border-color: var(--c-gold);
+}
+
+.faq-item.is-open {
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: color .2s var(--ease);
+  text-align: right;
+  font-family: inherit;
+}
+
+.faq-question:hover { color: var(--c-gold); }
+
+.faq-item.is-open .faq-question { color: var(--c-gold); }
+
+.faq-icon {
+  width: 32px; height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform .3s var(--ease);
+}
+
+.faq-item.is-open .faq-icon {
+  transform: rotate(180deg);
+  background: var(--c-gold);
+  color: #fff;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s var(--ease), padding .3s var(--ease);
+}
+
+.faq-item.is-open .faq-answer {
+  max-height: 400px;
+  padding: 0 var(--sp-5) var(--sp-5);
+}
+
+.faq-answer p {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  line-height: 2;
+}
+
+/* ============================================================
+   CONTACT STRIP
+============================================================ */
+.contact-strip {
+  padding: var(--sp-7) 0;
+}
+
+.contact-inner {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  border-radius: var(--radius-xl);
+  padding: var(--sp-7) var(--sp-6);
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(212,175,55,.15), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(212,175,55,.10), transparent 50%);
+  pointer-events: none;
+}
+
+.contact-inner > * { position: relative; }
+
+.contact-title {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  margin-bottom: var(--sp-3);
+}
+
+.contact-text {
+  font-size: var(--fs-md);
+  opacity: .9;
+  margin-bottom: var(--sp-5);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.9;
+}
+
+.contact-actions {
+  display: flex;
+  gap: var(--sp-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contact-inner .btn-primary {
+  background: var(--c-gold);
+  box-shadow: 0 4px 14px rgba(184,137,43,.35);
+}
+.contact-inner .btn-primary:hover {
+  background: var(--c-gold-soft);
+}
+
+.contact-inner .btn-ghost {
+  color: #fff;
+  border-color: rgba(255,255,255,.3);
+}
+.contact-inner .btn-ghost:hover {
+  background: rgba(255,255,255,.1);
+  border-color: rgba(255,255,255,.5);
+  color: #fff;
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  background: var(--c-primary);
+  color: rgba(255,255,255,.7);
+  padding: var(--sp-8) 0 var(--sp-5);
+}
+[data-theme="night"] .site-footer { background: #061410; }
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+.footer-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.footer-desc {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  max-width: 320px;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.footer-col h3 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+}
+
+.footer-col ul { display: grid; gap: var(--sp-2); }
+
+.footer-col a {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,.65);
+  transition: color .2s var(--ease);
+}
+.footer-col a:hover { color: var(--c-gold-soft); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   TOAST
+============================================================ */
+.toast {
+  position: fixed;
+  bottom: var(--sp-5);
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--c-primary);
+  color: #fff;
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  transition: transform .4s var(--ease);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  max-width: 90vw;
+}
+
+.toast.is-show { transform: translateX(-50%) translateY(0); }
+
+.toast svg { color: var(--c-gold-soft); flex-shrink: 0; }
+
+.toast.is-error { background: var(--c-error); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 960px) {
+  .main-nav { display: none; }
+  .menu-toggle { display: grid; }
+
+  .flow-steps { grid-template-columns: repeat(3, 1fr); }
+  .flow-step:nth-child(4),
+  .flow-step:nth-child(5) { grid-column: span 1; }
+  .flow-step:not(:last-child)::after { display: none; }
+
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --fs-3xl: 2rem;
+    --fs-2xl: 1.75rem;
+    --fs-xl: 1.35rem;
+    --header-h: 64px;
+  }
+
+  .container { padding: 0 var(--sp-4); }
+
+  .page-head { padding: var(--sp-6) 0 var(--sp-5); }
+
+  .flow-steps { grid-template-columns: 1fr 1fr; }
+
+  .form-wrapper { padding: var(--sp-5) var(--sp-4); }
+
+  .form-row-2,
+  .form-row-3 { grid-template-columns: 1fr; }
+
+  .form-actions { flex-direction: column; }
+  .form-actions .btn { width: 100%; }
+
+  .success-actions { flex-direction: column; }
+  .success-actions .btn { width: 100%; }
+
+  .contact-actions { flex-direction: column; }
+  .contact-actions .btn { width: 100%; }
+
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .faq-question { font-size: var(--fs-sm); padding: var(--sp-3) var(--sp-4); }
+  .faq-item.is-open .faq-answer { padding: 0 var(--sp-4) var(--sp-4); }
+}
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up { animation: fadeUp .5s var(--ease) backwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی" id="sharedNav"><a class="nav-home-link" data-page="home" href="index.html">نخست</a><div class="nav-group" data-group="calendar" data-members="calendar,calendar,today,day"><a class="nav-group-label" href="calendar.html">تقویم و زمان</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی تقویم و زمان" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="calendar" href="calendar.html">تقویم کامل<span class="nav-submenu-hint">چهار نما: ماهانه، هفتگی، سالانه، روزانه</span></a><a data-page="today" href="today.html">امروز در تاریخ<span class="nav-submenu-hint">رویدادهای همین روز</span></a><a data-page="day" href="day.html">یک روز خاص<span class="nav-submenu-hint">جست‌وجو در هر روز تقویم</span></a></div></div><div class="nav-group" data-group="know" data-members="martyrs,martyrs,events,places,periods,sources,encyclopedia"><a class="nav-group-label" href="martyrs.html">کشف و دانش</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی کشف و دانش" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="martyrs" href="martyrs.html">اشخاص و شهدا<span class="nav-submenu-hint">پرونده شهدا، آزادگان و فداکاران</span></a><a data-page="events" href="events.html">رویدادها و عملیات<span class="nav-submenu-hint">آرشیو تاریخی و دفاع مقدس</span></a><a data-page="places" href="places.html">مکان‌ها<span class="nav-submenu-hint">جبهه‌ها، شهرها، مزارها و یادمان‌ها</span></a><a data-page="periods" href="periods.html">دوره‌های تاریخی<span class="nav-submenu-hint">از صدر اسلام تا معاصر</span></a><a data-page="sources" href="sources.html">منابع و اسناد<span class="nav-submenu-hint">اعتبارسنجی و ردیابی منابع</span></a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه<span class="nav-submenu-hint">همه موجودیت‌ها در یک نگاه</span></a></div></div><div class="nav-group" data-group="about" data-members="about,about,contribute,contact,api"><a class="nav-group-label" href="about.html">درباره و همکاری</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی درباره و همکاری" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="about" href="about.html">درباره پروژه<span class="nav-submenu-hint">چشم‌انداز، اصول و نقشه راه</span></a><a data-page="contribute" href="contribute.html">همکاری و مشارکت<span class="nav-submenu-hint">ثبت خاطره، سند و اصلاح اطلاعات</span></a><a data-page="contact" href="contact.html">تماس با ما<span class="nav-submenu-hint">ارتباط، گزارش خطا و پیشنهاد</span></a><a data-page="api" href="api.html">داده و API<span class="nav-submenu-hint">دسترسی برنامه‌ای به داده</span></a></div></div><a class="nav-icon-link" data-page="search" href="search.html" aria-label="جست‌وجوی پیشرفته" title="جست‌وجو"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a></nav></div></header></div></header>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main id="main" role="main">
+
+  <!-- ====== PAGE HEAD ====== -->
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="مسیر">
+        <ol>
+          <li><a href="index.html">خانه</a></li>
+          <li aria-current="page">همکاری</li>
+        </ol>
+      </nav>
+
+      <h1 class="page-title">در تکمیل این اطلس سهیم شوید</h1>
+      <p class="page-lead">
+        شما می‌توانید با ثبت خاطره، سند، تصویر، اصلاح اطلاعات یا پیشنهاد ارتباط،
+        در ساخت این حافظه جمعی مشارکت کنید. هر داده با بررسی و ثبت منبع منتشر می‌شود.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== FLOW ====== -->
+  <section class="flow-section">
+    <div class="container">
+      <h2 class="section-title-center">گردش محتوا</h2>
+      <p class="section-sub-center">
+        پس از ارسال، محتوای شما از یک مسیر شفاف عبور می‌کند تا با کیفیت منتشر شود.
+      </p>
+
+      <div class="flow-steps">
+        <div class="flow-step is-done">
+          <div class="flow-step-num">۱</div>
+          <h3 class="flow-step-title">ارسال</h3>
+          <p class="flow-step-desc">شما فرم را پر و ارسال می‌کنید</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">۲</div>
+          <h3 class="flow-step-title">ثبت پیشنهاد</h3>
+          <p class="flow-step-desc">در سامانه ثبت و شماره پیگیری صادر می‌شود</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">۳</div>
+          <h3 class="flow-step-title">بررسی اولیه</h3>
+          <p class="flow-step-desc">تیم بررسی، منبع و صحت را ارزیابی می‌کند</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">۴</div>
+          <h3 class="flow-step-title">اعتبارسنجی</h3>
+          <p class="flow-step-desc">در صورت نیاز، با شما تماس گرفته می‌شود</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">۵</div>
+          <h3 class="flow-step-title">انتشار</h3>
+          <p class="flow-step-desc">پس از تأیید، در سایت منتشر می‌شود</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== TYPES ====== -->
+  <section class="types-section">
+    <div class="container">
+      <h2 class="section-title-center">چه چیزی می‌خواهید ارسال کنید؟</h2>
+      <p class="section-sub-center">
+        نوع مشارکت خود را انتخاب کنید تا فرم مناسب نمایش داده شود.
+      </p>
+
+      <div class="types-grid" id="typesGrid">
+        <button class="type-card" data-type="martyr">
+          <div class="type-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+              <line x1="19" y1="8" x2="19" y2="14"/>
+              <line x1="22" y1="11" x2="16" y2="11"/>
+            </svg>
+          </div>
+          <h3 class="type-title">ثبت شخص جدید</h3>
+          <p class="type-text">پیشنهاد ایجاد پرونده برای شهید، آزاده یا شخص مرتبط.</p>
+        </button>
+
+        <button class="type-card" data-type="correction">
+          <div class="type-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4 H4 a2 2 0 0 0 -2 2 v14 a2 2 0 0 0 2 2 h14 a2 2 0 0 0 2 -2 v-7"/>
+              <path d="M18.5 2.5 a2.121 2.121 0 0 1 3 3 L12 15 l-4 1 1 -4 9.5 -9.5z"/>
+            </svg>
+          </div>
+          <h3 class="type-title">اصلاح اطلاعات</h3>
+          <p class="type-text">گزارش خطا، اختلاف تاریخی یا نقص در پرونده‌های موجود.</p>
+        </button>
+
+        <button class="type-card" data-type="memory">
+          <div class="type-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1 -2 2 H7 l-4 4 V5 a2 2 0 0 1 2 -2 h14 a2 2 0 0 1 2 2 z"/>
+            </svg>
+          </div>
+          <h3 class="type-title">افزودن خاطره</h3>
+          <p class="type-text">خاطرات خانواده، همرزمان و شاهدان با ثبت منبع.</p>
+        </button>
+
+        <button class="type-card" data-type="source">
+          <div class="type-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+            </svg>
+          </div>
+          <h3 class="type-title">افزودن سند</h3>
+          <p class="type-text">کتاب، سند، عکس، صوت، ویدئو یا منبع اینترنتی.</p>
+        </button>
+
+        <button class="type-card" data-type="relation">
+          <div class="type-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13 a5 5 0 0 0 7.54 .54 l3 -3 a5 5 0 0 0 -7.07 -7.07 l-1.72 1.71"/>
+              <path d="M14 11 a5 5 0 0 0 -7.54 -.54 l-3 3 a5 5 0 0 0 7.07 7.07 l1.71 -1.71"/>
+            </svg>
+          </div>
+          <h3 class="type-title">پیشنهاد ارتباط</h3>
+          <p class="type-text">اتصال یک شخص، رویداد، مکان یا سند به رکورد دیگر.</p>
+        </button>
+
+        <button class="type-card" data-type="expert">
+          <div class="type-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0 -4 -4 H5 a4 4 0 0 0 -4 4 v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0 -3 -3.87"/>
+              <path d="M16 3.13 a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="type-title">همکاری تخصصی</h3>
+          <p class="type-text">پژوهشگران، نویسندگان، خانواده‌ها و متخصصان.</p>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FORM ====== -->
+  <section class="form-section">
+    <div class="container">
+      <div class="form-wrapper" id="formWrapper">
+
+        <!-- ====== Success ====== -->
+        <div class="success-state" id="successState">
+          <div class="success-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h2 class="success-title">ارسال با موفقیت ثبت شد</h2>
+          <p class="success-text">
+            از مشارکت شما سپاسگزاریم. کد پیگیری زیر را برای پیگیری وضعیت نگه دارید.
+            پس از بررسی، در صورت نیاز با شما تماس خواهیم گرفت.
+          </p>
+          <div class="success-code" id="successCode">—</div>
+          <div class="success-actions">
+            <button class="btn btn-primary" id="newSubmission">ارسال مورد جدید</button>
+            <a href="index.html" class="btn btn-ghost">بازگشت به خانه</a>
+          </div>
+        </div>
+
+        <!-- ====== Form ====== -->
+        <div id="formContent">
+          <div class="form-header">
+            <span class="form-header-label" id="formLabel">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              انتخاب کنید
+            </span>
+            <h2 class="form-header-title" id="formTitle">فرم مشارکت</h2>
+            <p class="form-header-desc" id="formDesc">
+              ابتدا نوع مشارکت خود را از بخش بالا انتخاب کنید.
+            </p>
+          </div>
+
+          <!-- Progress -->
+          <div class="form-progress" id="formProgress">
+            <span class="form-progress-text" id="progressText">۰٪</span>
+            <div class="form-progress-bar">
+              <div class="form-progress-fill" id="progressFill"></div>
+            </div>
+            <span style="color: var(--c-ink-mute); font-size: var(--fs-xs);">تکمیل فرم</span>
+          </div>
+
+          <form class="form" id="contributeForm" novalidate>
+
+            <!-- Dynamic Fields Container -->
+            <div id="dynamicFields">
+              <!-- توسط JS پر می‌شود -->
+            </div>
+
+            <!-- Contact info (مشترک بین همه) -->
+            <div class="form-row-2">
+              <div class="form-row">
+                <label for="fullName" class="form-label">
+                  نام و نام خانوادگی شما <span class="req">*</span>
+                </label>
+                <input id="fullName" name="fullName" type="text" class="form-input" required autocomplete="name" />
+                <span class="form-error" data-error-for="fullName">لطفاً نام خود را وارد کنید.</span>
+              </div>
+
+              <div class="form-row">
+                <label for="phone" class="form-label">
+                  شماره تماس <span class="req">*</span>
+                </label>
+                <input id="phone" name="phone" type="tel" class="form-input" placeholder="۰۹۱۲۱۲۳۴۵۶۷" required autocomplete="tel" />
+                <span class="form-error" data-error-for="phone">شماره تماس معتبر وارد کنید.</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="email" class="form-label">ایمیل (اختیاری)</label>
+              <input id="email" name="email" type="email" class="form-input" placeholder="example@email.com" autocomplete="email" />
+              <span class="form-hint">در صورت تمایل، برای اطلاع‌رسانی سریع‌تر</span>
+              <span class="form-error" data-error-for="email">ایمیل معتبر وارد کنید.</span>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-row">
+              <label class="form-label">پیوست فایل (اختیاری)</label>
+              <span class="form-hint">تصویر، سند، صوت یا ویدئو — حداکثر ۱۰ مگابایت</span>
+
+              <div class="file-upload" id="fileUpload">
+                <input type="file" id="fileInput" multiple accept="image/*,.pdf,.doc,.docx,audio/*,video/*" />
+                <div class="file-upload-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                  </svg>
+                </div>
+                <div class="file-upload-title">فایل‌ها را اینجا بکشید یا کلیک کنید</div>
+                <div class="file-upload-desc">فرمت‌های مجاز: JPG, PNG, PDF, DOC, MP3, MP4</div>
+              </div>
+
+              <div class="file-list" id="fileList"></div>
+            </div>
+
+            <!-- Consent -->
+            <label class="form-check">
+              <input type="checkbox" id="consent" required />
+              <span class="form-check-mark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </span>
+              <span class="form-check-text">
+                <strong>تأیید می‌کنم</strong> که اطلاعات ارسالی صحیح است و حق انتشار آن را دارم.
+                همچنین با <a href="#" style="color: var(--c-gold); text-decoration: underline;">شرایط استفاده</a> و
+                <a href="#" style="color: var(--c-gold); text-decoration: underline;">سیاست حفظ حریم خصوصی</a> موافقم.
+              </span>
+            </label>
+            <span class="form-error" data-error-for="consent" style="margin-top: calc(-1 * var(--sp-3));">لطفاً تأییدیه را بپذیرید.</span>
+
+            <!-- Actions -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                ارسال برای بررسی
+              </button>
+              <button type="reset" class="btn btn-ghost btn-lg" id="resetBtn">پاک کردن فرم</button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FAQ ====== -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title-center">سوالات متداول</h2>
+      <p class="section-sub-center">پاسخ به پرسش‌های رایج درباره مشارکت</p>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>چه نوع محتوایی می‌توانم ارسال کنم؟</span>
+            <span class="faq-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              هر محتوایی که به شهدا، آزادگان، رویدادهای تاریخی، مکان‌ها، اسناد یا روایت‌ها
+              مرتبط باشد. از خاطره و وصیت‌نامه تا عکس، سند، صوت، ویدئو و پیشنهاد ارتباط.
+              همه محتوا با ذکر منبع و بررسی منتشر می‌شود.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>چقدر طول می‌کشد تا محتوای من منتشر شود؟</span>
+            <span class="faq-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              فرایند بررسی معمولاً بین ۳ تا ۱۴ روز کاری طول می‌کشد. پس از بررسی، در صورت
+              نیاز برای تکمیل اطلاعات با شما تماس گرفته می‌شود و در نهایت محتوا منتشر
+              می‌گردد. کد پیگیری برای شما صادر می‌شود.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>آیا می‌توانم اطلاعات را ناشناس ارسال کنم؟</span>
+            <span class="faq-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              در حال حاضر برای ثبت نام و شماره تماس الزامی است تا بتوانیم در صورت
+              نیاز با شما تماس بگیریم و صحت اطلاعات را بررسی کنیم. اما در انتشار
+              عمومی، نام شما به‌عنوان منبع فقط در صورت تمایل شما نمایش داده می‌شود.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>آیا محتوای من مالکیت دارد؟</span>
+            <span class="faq-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              شما مالکیت معنوی محتوای خود را حفظ می‌کنید. با ارسال، به ما اجازه
+              انتشار با ذکر منبع می‌دهید. برای عکس‌ها و اسناد، لازم است حق انتشار
+              داشته باشید و در صورت نیاز، رضایت خانواده شهید را دریافت کرده باشید.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span>اگر اطلاعات من ناقص یا اشتباه باشد چه می‌شود؟</span>
+            <span class="faq-icon">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              پس از بررسی اولیه، در صورت نیاز به تکمیل یا اصلاح، با شما تماس گرفته
+              می‌شود. این فرایند به کیفیت داده‌های منتشرشده کمک می‌کند. حتی اگر
+              اطلاعات ناقص باشد، می‌توانید ارسال کنید؛ تیم ما در تکمیل آن کمک خواهد کرد.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section class="contact-strip">
+    <div class="container">
+      <div class="contact-inner">
+        <h2 class="contact-title">راه دیگری برای همکاری می‌خواهید؟</h2>
+        <p class="contact-text">
+          برای همکاری تخصصی، پژوهش، ترجمه، یا هر پیشنهاد دیگری با ما در تماس باشید.
+        </p>
+        <div class="contact-actions">
+          <a href="contact.html" class="btn btn-primary btn-lg">تماس با ما</a>
+          <a href="about.html" class="btn btn-ghost btn-lg">درباره پروژه</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+
+<!-- ============================================================
+     TOAST
+============================================================ -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <polyline points="20 6 9 17 4 12"></polyline>
+  </svg>
+  <span id="toastText">انجام شد</span>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ===== اعداد فارسی =====
+  function toFa(n) {
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  // ===== State =====
+  const state = {
+    type: null,
+    files: []
+  };
+
+  // ===== Config per Type =====
+  const TYPE_CONFIG = {
+    martyr: {
+      label: 'ثبت شخص جدید',
+      title: 'فرم ثبت شخص جدید',
+      desc: 'اطلاعات یک شهید، آزاده یا شخص مرتبط را ثبت کنید. هرچه اطلاعات دقیق‌تر باشد، بهتر می‌توانیم پرونده را کامل کنیم.',
+      fields: `
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="personName" class="form-label">نام و نام خانوادگی <span class="req">*</span></label>
+            <input id="personName" type="text" class="form-input" required data-required />
+            <span class="form-error" data-error-for="personName">نام شخص را وارد کنید.</span>
+          </div>
+          <div class="form-row">
+            <label for="fatherName" class="form-label">نام پدر</label>
+            <input id="fatherName" type="text" class="form-input" />
+          </div>
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-row">
+            <label for="birthDate" class="form-label">تاریخ تولد</label>
+            <input id="birthDate" type="text" class="form-input" placeholder="۱۳۴۵/۰۱/۱۵" />
+          </div>
+          <div class="form-row">
+            <label for="martyrDate" class="form-label">تاریخ شهادت <span class="req">*</span></label>
+            <input id="martyrDate" type="text" class="form-input" placeholder="۱۳۶۵/۰۳/۰۳" required data-required />
+            <span class="form-error" data-error-for="martyrDate">تاریخ شهادت را وارد کنید.</span>
+          </div>
+          <div class="form-row">
+            <label for="birthPlace" class="form-label">محل تولد</label>
+            <input id="birthPlace" type="text" class="form-input" placeholder="استان — شهر" />
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="martyrPlace" class="form-label">محل شهادت</label>
+            <input id="martyrPlace" type="text" class="form-input" placeholder="مثلاً شلمچه" />
+          </div>
+          <div class="form-row">
+            <label for="martyrPeriod" class="form-label">دوره تاریخی</label>
+            <select id="martyrPeriod" class="form-select">
+              <option value="">— انتخاب کنید —</option>
+              <option value="defa">دفاع مقدس</option>
+              <option value="mad">مدافعان حرم</option>
+              <option value="enghelab">انقلاب اسلامی</option>
+              <option value="security">شهدای امنیت</option>
+              <option value="health">شهدای سلامت</option>
+              <option value="other">سایر</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="personBio" class="form-label">زندگی‌نامه و توضیحات</label>
+          <textarea id="personBio" class="form-textarea large" maxlength="2000" placeholder="هر اطلاعاتی که فکر می‌کنید مفید است..."></textarea>
+          <span class="char-counter" data-counter-for="personBio">۰ / ۲۰۰۰</span>
+        </div>
+
+        <div class="form-row">
+          <label for="personSource" class="form-label">منبع <span class="req">*</span></label>
+          <input id="personSource" type="text" class="form-input" placeholder="کتاب، سایت، مصاحبه، آرشیو..." required data-required />
+          <span class="form-hint">منبع معتبر به اعتبارسنجی سریع‌تر کمک می‌کند.</span>
+          <span class="form-error" data-error-for="personSource">منبع را وارد کنید.</span>
+        </div>
+      `
+    },
+    correction: {
+      label: 'اصلاح اطلاعات',
+      title: 'فرم اصلاح اطلاعات',
+      desc: 'اگر خطا، اختلاف تاریخی یا نقصی در یک پرونده موجود دیده‌اید، لطفاً با ذکر دقیق مشکل و منبع اصلاح، اطلاع دهید.',
+      fields: `
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="recordName" class="form-label">نام رکورد (شخص، رویداد، مکان) <span class="req">*</span></label>
+            <input id="recordName" type="text" class="form-input" required data-required />
+            <span class="form-error" data-error-for="recordName">نام رکورد را وارد کنید.</span>
+          </div>
+          <div class="form-row">
+            <label for="recordUrl" class="form-label">نشانی صفحه</label>
+            <input id="recordUrl" type="url" class="form-input" placeholder="https://..." />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="correctionType" class="form-label">نوع اصلاح <span class="req">*</span></label>
+          <select id="correctionType" class="form-select" required data-required>
+            <option value="">— انتخاب کنید —</option>
+            <option value="typo">غلط املایی</option>
+            <option value="date">تاریخ اشتباه</option>
+            <option value="place">مکان اشتباه</option>
+            <option value="name">نام یا نسبت اشتباه</option>
+            <option value="missing">اطلاعات ناقص</option>
+            <option value="other">سایر</option>
+          </select>
+          <span class="form-error" data-error-for="correctionType">نوع اصلاح را انتخاب کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="currentInfo" class="form-label">اطلاعات فعلی (اشتباه) <span class="req">*</span></label>
+          <textarea id="currentInfo" class="form-textarea" required data-required placeholder="آنچه در سایت آمده است..."></textarea>
+          <span class="form-error" data-error-for="currentInfo">اطلاعات فعلی را وارد کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="correctInfo" class="form-label">اطلاعات صحیح <span class="req">*</span></label>
+          <textarea id="correctInfo" class="form-textarea" required data-required placeholder="آنچه باید باشد..."></textarea>
+          <span class="form-error" data-error-for="correctInfo">اطلاعات صحیح را وارد کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="correctionSource" class="form-label">منبع اصلاح <span class="req">*</span></label>
+          <input id="correctionSource" type="text" class="form-input" required data-required placeholder="کتاب، سایت، مصاحبه، آرشیو..." />
+          <span class="form-error" data-error-for="correctionSource">منبع را وارد کنید.</span>
+        </div>
+      `
+    },
+    memory: {
+      label: 'افزودن خاطره',
+      title: 'فرم افزودن خاطره',
+      desc: 'خاطرات خانواده، همرزمان و شاهدان از ارزشمندترین سرمایه‌های این اطلس است. لطفاً با ذکر منبع و مشخصات راوی، خاطره را ثبت کنید.',
+      fields: `
+        <div class="form-row">
+          <label for="memorySubject" class="form-label">موضوع خاطره (نام شهید یا رویداد) <span class="req">*</span></label>
+          <input id="memorySubject" type="text" class="form-input" required data-required />
+          <span class="form-error" data-error-for="memorySubject">موضوع را وارد کنید.</span>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="narratorName" class="form-label">نام راوی <span class="req">*</span></label>
+            <input id="narratorName" type="text" class="form-input" required data-required />
+            <span class="form-error" data-error-for="narratorName">نام راوی را وارد کنید.</span>
+          </div>
+          <div class="form-row">
+            <label for="narratorRelation" class="form-label">نسبت با موضوع</label>
+            <select id="narratorRelation" class="form-select">
+              <option value="">— انتخاب کنید —</option>
+              <option value="family">خانواده</option>
+              <option value="friend">همرزم / دوست</option>
+              <option value="witness">شاهد</option>
+              <option value="researcher">پژوهشگر</option>
+              <option value="other">سایر</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="memoryText" class="form-label">متن خاطره <span class="req">*</span></label>
+          <textarea id="memoryText" class="form-textarea large" required data-required maxlength="3000" placeholder="خاطره را با جزئیات و صمیمیت بنویسید..."></textarea>
+          <span class="char-counter" data-counter-for="memoryText">۰ / ۳۰۰۰</span>
+          <span class="form-error" data-error-for="memoryText">متن خاطره را وارد کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="memorySource" class="form-label">منبع / تاریخ ثبت <span class="req">*</span></label>
+          <input id="memorySource" type="text" class="form-input" required data-required placeholder="مثلاً: مصاحبه ۱۴۰۰/۰۵/۱۲" />
+          <span class="form-error" data-error-for="memorySource">منبع را وارد کنید.</span>
+        </div>
+      `
+    },
+    source: {
+      label: 'افزودن سند',
+      title: 'فرم افزودن سند',
+      desc: 'کتاب، سند، عکس، صوت، ویدئو یا منبع اینترنتی را با مشخصات کامل معرفی کنید. اگر فایل دارید، در بخش پیوست بارگذاری کنید.',
+      fields: `
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="sourceTitle" class="form-label">عنوان سند <span class="req">*</span></label>
+            <input id="sourceTitle" type="text" class="form-input" required data-required />
+            <span class="form-error" data-error-for="sourceTitle">عنوان را وارد کنید.</span>
+          </div>
+          <div class="form-row">
+            <label for="sourceType" class="form-label">نوع سند <span class="req">*</span></label>
+            <select id="sourceType" class="form-select" required data-required>
+              <option value="">— انتخاب کنید —</option>
+              <option value="book">کتاب</option>
+              <option value="document">سند</option>
+              <option value="photo">عکس</option>
+              <option value="audio">صوت</option>
+              <option value="video">ویدئو</option>
+              <option value="website">منبع اینترنتی</option>
+              <option value="archive">آرشیو</option>
+            </select>
+            <span class="form-error" data-error-for="sourceType">نوع سند را انتخاب کنید.</span>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="sourceAuthor" class="form-label">نویسنده / پدیدآورنده</label>
+            <input id="sourceAuthor" type="text" class="form-input" />
+          </div>
+          <div class="form-row">
+            <label for="sourceYear" class="form-label">سال انتشار / تاریخ</label>
+            <input id="sourceYear" type="text" class="form-input" placeholder="۱۴۰۰" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="sourceDesc" class="form-label">توضیحات و ارزش سند <span class="req">*</span></label>
+          <textarea id="sourceDesc" class="form-textarea large" required data-required maxlength="1500" placeholder="این سند چه اطلاعاتی دارد و چرا مهم است؟"></textarea>
+          <span class="char-counter" data-counter-for="sourceDesc">۰ / ۱۵۰۰</span>
+          <span class="form-error" data-error-for="sourceDesc">توضیحات را وارد کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="sourceUrl" class="form-label">نشانی اینترنتی (در صورت وجود)</label>
+          <input id="sourceUrl" type="url" class="form-input" placeholder="https://..." />
+        </div>
+
+        <div class="form-row">
+          <label for="sourceRights" class="form-label">وضعیت حقوق استفاده <span class="req">*</span></label>
+          <select id="sourceRights" class="form-select" required data-required>
+            <option value="">— انتخاب کنید —</option>
+            <option value="public">عمومی — آزاد</option>
+            <option value="permitted">با اجازه صاحب اثر</option>
+            <option value="family">با رضایت خانواده شهید</option>
+            <option value="unknown">نامشخص</option>
+          </select>
+          <span class="form-hint">این مورد برای حفظ حقوق معنوی و مادی ضروری است.</span>
+          <span class="form-error" data-error-for="sourceRights">وضعیت حقوق را انتخاب کنید.</span>
+        </div>
+      `
+    },
+    relation: {
+      label: 'پیشنهاد ارتباط',
+      title: 'فرم پیشنهاد ارتباط',
+      desc: 'اگر می‌دانید دو رکورد (شخص، رویداد، مکان، سند) به هم مرتبط هستند، این ارتباط را پیشنهاد دهید.',
+      fields: `
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="fromRecord" class="form-label">از رکورد <span class="req">*</span></label>
+            <input id="fromRecord" type="text" class="form-input" required data-required placeholder="نام شخص، رویداد، مکان یا سند" />
+            <span class="form-error" data-error-for="fromRecord">رکورد مبدأ را وارد کنید.</span>
+          </div>
+          <div class="form-row">
+            <label for="toRecord" class="form-label">به رکورد <span class="req">*</span></label>
+            <input id="toRecord" type="text" class="form-input" required data-required />
+            <span class="form-error" data-error-for="toRecord">رکورد مقصد را وارد کنید.</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="relationType" class="form-label">نوع ارتباط <span class="req">*</span></label>
+          <select id="relationType" class="form-select" required data-required>
+            <option value="">— انتخاب کنید —</option>
+            <option value="participant">حضور در</option>
+            <option value="witness">شاهد</option>
+            <option value="family">نسبت خانوادگی</option>
+            <option value="comrade">همرزم</option>
+            <option value="location">در مکان</option>
+            <option value="source">منبع برای</option>
+            <option value="other">سایر</option>
+          </select>
+          <span class="form-error" data-error-for="relationType">نوع ارتباط را انتخاب کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="relationDesc" class="form-label">توضیح ارتباط <span class="req">*</span></label>
+          <textarea id="relationDesc" class="form-textarea" required data-required maxlength="1000" placeholder="این ارتباط از کجا معلوم است؟ منبع چیست؟"></textarea>
+          <span class="char-counter" data-counter-for="relationDesc">۰ / ۱۰۰۰</span>
+          <span class="form-error" data-error-for="relationDesc">توضیح را وارد کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="relationSource" class="form-label">منبع <span class="req">*</span></label>
+          <input id="relationSource" type="text" class="form-input" required data-required />
+          <span class="form-error" data-error-for="relationSource">منبع را وارد کنید.</span>
+        </div>
+      `
+    },
+    expert: {
+      label: 'همکاری تخصصی',
+      title: 'فرم همکاری تخصصی',
+      desc: 'اگر پژوهشگر، نویسنده، تدوینگر، عکاس، یا متخصص حوزه‌ای هستید، می‌توانید در سطوح مختلف با ما همکاری کنید.',
+      fields: `
+        <div class="form-row-2">
+          <div class="form-row">
+            <label for="expertField" class="form-label">حوزه تخصص <span class="req">*</span></label>
+            <select id="expertField" class="form-select" required data-required>
+              <option value="">— انتخاب کنید —</option>
+              <option value="research">پژوهش تاریخی</option>
+              <option value="writing">نویسندگی و ویرایش</option>
+              <option value="media">عکاسی و فیلم</option>
+              <option value="audio">صوت و پادکست</option>
+              <option value="translation">ترجمه</option>
+              <option value="design">طراحی و UI</option>
+              <option value="tech">فنی و برنامه‌نویسی</option>
+              <option value="other">سایر</option>
+            </select>
+            <span class="form-error" data-error-for="expertField">حوزه تخصص را انتخاب کنید.</span>
+          </div>
+          <div class="form-row">
+            <label for="expertExperience" class="form-label">سابقه کار</label>
+            <input id="expertExperience" type="text" class="form-input" placeholder="مثلاً ۵ سال" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="expertProposal" class="form-label">پیشنهاد همکاری <span class="req">*</span></label>
+          <textarea id="expertProposal" class="form-textarea large" required data-required maxlength="1500" placeholder="چه کاری می‌توانید انجام دهید؟ چه پیشنهادی دارید؟"></textarea>
+          <span class="char-counter" data-counter-for="expertProposal">۰ / ۱۵۰۰</span>
+          <span class="form-error" data-error-for="expertProposal">پیشنهاد خود را وارد کنید.</span>
+        </div>
+
+        <div class="form-row">
+          <label for="expertPortfolio" class="form-label">نمونه کار یا رزومه (لینک)</label>
+          <input id="expertPortfolio" type="url" class="form-input" placeholder="https://..." />
+        </div>
+
+        <div class="form-row">
+          <label for="expertAvailability" class="form-label">میزان زمان در دسترس</label>
+          <select id="expertAvailability" class="form-select">
+            <option value="">— انتخاب کنید —</option>
+            <option value="full">تمام‌وقت</option>
+            <option value="part">پاره‌وقت</option>
+            <option value="project">پروژه‌ای</option>
+            <option value="volunteer">داوطلبانه</option>
+          </select>
+        </div>
+      `
+    }
+  };
+
+  // ===== Elements =====
+  const typesGrid = document.getElementById('typesGrid');
+  const formLabel = document.getElementById('formLabel');
+  const formTitle = document.getElementById('formTitle');
+  const formDesc = document.getElementById('formDesc');
+  const dynamicFields = document.getElementById('dynamicFields');
+  const form = document.getElementById('contributeForm');
+  const fileUpload = document.getElementById('fileUpload');
+  const fileInput = document.getElementById('fileInput');
+  const fileList = document.getElementById('fileList');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const successState = document.getElementById('successState');
+  const formContent = document.getElementById('formContent');
+  const successCode = document.getElementById('successCode');
+  const newSubmission = document.getElementById('newSubmission');
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toastText');
+
+  // ===== Type Selection =====
+  typesGrid?.querySelectorAll('.type-card').forEach(card => {
+    card.addEventListener('click', () => {
+      typesGrid.querySelectorAll('.type-card').forEach(c => c.classList.remove('is-selected'));
+      card.classList.add('is-selected');
+
+      const type = card.dataset.type;
+      state.type = type;
+
+      renderForm(type);
+
+      // اسکرول به فرم
+      document.querySelector('.form-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // ===== Render Form =====
+  function renderForm(type) {
+    const config = TYPE_CONFIG[type];
+    if (!config) return;
+
+    formLabel.innerHTML = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      ${config.label}
+    `;
+    formTitle.textContent = config.title;
+    formDesc.textContent = config.desc;
+    dynamicFields.innerHTML = config.fields;
+
+    // فعال‌سازی شمارنده‌ها
+    attachCounters();
+
+    // فعال‌سازی validation زنده
+    attachLiveValidation();
+
+    // به‌روزرسانی progress
+    updateProgress();
+
+    // فوکوس روی اولین input
+    setTimeout(() => {
+      dynamicFields.querySelector('input, textarea, select')?.focus();
+    }, 300);
+  }
+
+  // ===== Char Counters =====
+  function attachCounters() {
+    document.querySelectorAll('[data-counter-for]').forEach(counter => {
+      const targetId = counter.dataset.counterFor;
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      const max = parseInt(target.getAttribute('maxlength'), 10) || 1000;
+
+      const update = () => {
+        const len = target.value.length;
+        const ratio = len / max;
+        counter.textContent = `${toFa(len)} / ${toFa(max)}`;
+        counter.classList.toggle('is-warning', ratio > 0.8 && ratio <= 1);
+        counter.classList.toggle('is-error', ratio > 1);
+      };
+
+      target.addEventListener('input', update);
+      update();
+    });
+  }
+
+  // ===== Live Validation =====
+  function attachLiveValidation() {
+    document.querySelectorAll('[data-required]').forEach(input => {
+      input.addEventListener('blur', () => validateField(input));
+      input.addEventListener('input', () => {
+        if (input.classList.contains('is-error')) validateField(input);
+      });
+    });
+  }
+
+  function validateField(input) {
+    const name = input.id;
+    const errorEl = document.querySelector(`[data-error-for="${name}"]`);
+    const value = input.value.trim();
+
+    let isValid = true;
+    let message = '';
+
+    if (input.hasAttribute('required') && !value) {
+      isValid = false;
+      message = 'این فیلد الزامی است.';
+    } else if (input.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      isValid = false;
+      message = 'ایمیل معتبر وارد کنید.';
+    } else if (input.type === 'tel' && value && !/^[۰-۹0-9\s\-+()]{7,}$/.test(value)) {
+      isValid = false;
+      message = 'شماره تماس معتبر وارد کنید.';
+    }
+
+    input.classList.toggle('is-error', !isValid);
+    input.classList.toggle('is-valid', isValid && value);
+
+    if (errorEl) {
+      if (!isValid && message) {
+        errorEl.textContent = message;
+      }
+      errorEl.classList.toggle('is-show', !isValid);
+    }
+
+    return isValid;
+  }
+
+  // ===== Progress =====
+  function updateProgress() {
+    const requiredFields = form.querySelectorAll('[required]');
+    const filled = Array.from(requiredFields).filter(f => {
+      if (f.type === 'checkbox') return f.checked;
+      return f.value.trim() !== '';
+    }).length;
+
+    const percent = requiredFields.length ? Math.round((filled / requiredFields.length) * 100) : 0;
+    progressFill.style.width = `${percent}%`;
+    progressText.textContent = `${toFa(percent)}٪`;
+  }
+
+  form?.addEventListener('input', updateProgress);
+  form?.addEventListener('change', updateProgress);
+
+  // ===== File Upload =====
+  fileUpload?.addEventListener('click', () => fileInput.click());
+
+  fileUpload?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    fileUpload.classList.add('is-dragover');
+  });
+
+  fileUpload?.addEventListener('dragleave', () => {
+    fileUpload.classList.remove('is-dragover');
+  });
+
+  fileUpload?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    fileUpload.classList.remove('is-dragover');
+    handleFiles(e.dataTransfer.files);
+  });
+
+  fileInput?.addEventListener('change', (e) => {
+    handleFiles(e.target.files);
+  });
+
+  function handleFiles(files) {
+    Array.from(files).forEach(file => {
+      if (file.size > 10 * 1024 * 1024) {
+        showToast(`فایل «${file.name}» بیش از ۱۰ مگابایت است.`, true);
+        return;
+      }
+      state.files.push(file);
+    });
+    renderFileList();
+  }
+
+  function renderFileList() {
+    if (!state.files.length) {
+      fileList.innerHTML = '';
+      return;
+    }
+
+    fileList.innerHTML = state.files.map((file, i) => {
+      const size = (file.size / 1024).toFixed(0);
+      const icon = file.type.startsWith('image') ? '🖼' : file.type.startsWith('audio') ? '🎵' : file.type.startsWith('video') ? '🎬' : '📄';
+      return `
+        <div class="file-item">
+          <span class="file-item-icon">${icon}</span>
+          <span class="file-item-info">
+            <span class="file-item-name">${file.name}</span>
+            <span class="file-item-size">${toFa(size)} کیلوبایت</span>
+          </span>
+          <button type="button" class="file-item-remove" data-file-index="${i}" aria-label="حذف فایل">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      `;
+    }).join('');
+
+    fileList.querySelectorAll('[data-file-index]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.fileIndex, 10);
+        state.files.splice(idx, 1);
+        renderFileList();
+      });
+    });
+  }
+
+  // ===== Form Submit =====
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (!state.type) {
+      showToast('لطفاً ابتدا نوع مشارکت را انتخاب کنید.', true);
+      document.querySelector('.types-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    // Validate all
+    let allValid = true;
+    const requiredFields = form.querySelectorAll('[required]');
+    requiredFields.forEach(f => {
+      if (!validateField(f)) allValid = false;
+    });
+
+    // Validate common fields
+    ['fullName', 'phone'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && !validateField(el)) allValid = false;
+    });
+
+    if (!allValid) {
+      showToast('لطفاً خطاهای فرم را برطرف کنید.', true);
+      const firstError = form.querySelector('.is-error');
+      firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstError?.focus();
+      return;
+    }
+
+    // Simulate submission
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
+        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+      </svg>
+      در حال ارسال...
+    `;
+
+    setTimeout(() => {
+      // Generate tracking code
+      const code = 'TS-' + Date.now().toString(36).toUpperCase().slice(-6);
+      successCode.textContent = code;
+
+      formContent.style.display = 'none';
+      successState.classList.add('is-show');
+
+      // Reset
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+        ارسال برای بررسی
+      `;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      showToast('ارسال با موفقیت ثبت شد');
+    }, 1400);
+  });
+
+  // ===== Reset =====
+  document.getElementById('resetBtn')?.addEventListener('click', () => {
+    setTimeout(() => {
+      state.files = [];
+      renderFileList();
+      document.querySelectorAll('.is-error, .is-valid').forEach(el => {
+        el.classList.remove('is-error', 'is-valid');
+      });
+      document.querySelectorAll('.form-error').forEach(el => el.classList.remove('is-show'));
+      updateProgress();
+    }, 50);
+  });
+
+  // ===== New Submission =====
+  newSubmission?.addEventListener('click', () => {
+    successState.classList.remove('is-show');
+    formContent.style.display = '';
+    form.reset();
+    state.type = null;
+    state.files = [];
+    renderFileList();
+    dynamicFields.innerHTML = '';
+    typesGrid.querySelectorAll('.type-card').forEach(c => c.classList.remove('is-selected'));
+    formLabel.innerHTML = `
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      انتخاب کنید
+    `;
+    formTitle.textContent = 'فرم مشارکت';
+    formDesc.textContent = 'ابتدا نوع مشارکت خود را از بخش بالا انتخاب کنید.';
+    updateProgress();
+    document.querySelector('.types-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // ===== FAQ =====
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('is-open');
+
+      // بستن همه
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('is-open');
+        i.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+      });
+
+      // باز کردن این یکی
+      if (!isOpen) {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ===== Toast =====
+  let toastTimer;
+  function showToast(msg, isError = false) {
+    toastText.textContent = msg;
+    toast.classList.toggle('is-error', isError);
+    toast.classList.add('is-show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('is-show');
+    }, 3000);
+  }
+
+  // ===== Theme =====
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') {
+    html.setAttribute('data-theme', 'night');
+    updateThemeIcon('night');
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'night' ? 'day' : 'night';
+    if (next === 'night') html.setAttribute('data-theme', 'night');
+    else html.removeAttribute('data-theme');
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  });
+
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    if (theme === 'night') {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>';
+    } else {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    }
+  }
+
+  // ===== Mobile menu =====
+  const menuToggle = document.querySelector('.menu-toggle');
+  menuToggle?.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!expanded));
+  });
+
+})();
+</script>
+
+<style>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
+
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+<button class="to-top" type="button" aria-label="بازگشت به بالای صفحه"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+</body>
+</html>

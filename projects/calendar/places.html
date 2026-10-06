@@ -1,1 +1,118 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>مکان‌ها | تقویم شهدا</title><link rel="icon" href="assets/images/logo.png"><link rel="stylesheet" href="assets/css/calendar.css"><link rel="stylesheet" href="assets/css/calendar-shell.css"></head><body><div id="calendarShellHeader"></div><main class="page"><section class="pageHero"><span>اطلس مکان</span><h1>مکان‌ها</h1><p>مکان‌هایی که در پرونده اشخاص و رویدادهای تقویم نقش دارند.</p></section><section id="list" class="entityGrid"></section></main><div id="calendarShellFooter"></div><script src="assets/js/calendar-shell.js"></script><script src="assets/js/data-loader.js"></script><script>(async()=>{const d=await loadCalendarData();document.getElementById("list").innerHTML=d.places.map(p=>"<article class='entityCard'><span>مکان تاریخی</span><h2>"+p.name+"</h2><p>"+p.region+" · "+p.country+"</p><small>"+p.related+"</small></article>").join("")})()</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="مکان‌های مرتبط با شهدا، عملیات‌ها، مزارها و یادمان‌ها در تقویم شهدا" />
+<meta name="theme-color" content="#0f2e24" />
+<title>مکان‌ها | تقویم شهدا</title>
+<link rel="icon" href="assets/images/logo.png">
+<link rel="stylesheet" href="assets/css/site-pages.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی" id="sharedNav"><a class="nav-home-link" data-page="home" href="index.html">نخست</a><div class="nav-group" data-group="calendar" data-members="calendar,calendar,today,day"><a class="nav-group-label" href="calendar.html">تقویم و زمان</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی تقویم و زمان" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="calendar" href="calendar.html">تقویم کامل<span class="nav-submenu-hint">چهار نما: ماهانه، هفتگی، سالانه، روزانه</span></a><a data-page="today" href="today.html">امروز در تاریخ<span class="nav-submenu-hint">رویدادهای همین روز</span></a><a data-page="day" href="day.html">یک روز خاص<span class="nav-submenu-hint">جست‌وجو در هر روز تقویم</span></a></div></div><div class="nav-group" data-group="know" data-members="martyrs,martyrs,events,places,periods,sources,encyclopedia"><a class="nav-group-label" href="martyrs.html">کشف و دانش</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی کشف و دانش" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="martyrs" href="martyrs.html">اشخاص و شهدا<span class="nav-submenu-hint">پرونده شهدا، آزادگان و فداکاران</span></a><a data-page="events" href="events.html">رویدادها و عملیات<span class="nav-submenu-hint">آرشیو تاریخی و دفاع مقدس</span></a><a data-page="places" href="places.html">مکان‌ها<span class="nav-submenu-hint">جبهه‌ها، شهرها، مزارها و یادمان‌ها</span></a><a data-page="periods" href="periods.html">دوره‌های تاریخی<span class="nav-submenu-hint">از صدر اسلام تا معاصر</span></a><a data-page="sources" href="sources.html">منابع و اسناد<span class="nav-submenu-hint">اعتبارسنجی و ردیابی منابع</span></a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه<span class="nav-submenu-hint">همه موجودیت‌ها در یک نگاه</span></a></div></div><div class="nav-group" data-group="about" data-members="about,about,contribute,contact,api"><a class="nav-group-label" href="about.html">درباره و همکاری</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی درباره و همکاری" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="about" href="about.html">درباره پروژه<span class="nav-submenu-hint">چشم‌انداز، اصول و نقشه راه</span></a><a data-page="contribute" href="contribute.html">همکاری و مشارکت<span class="nav-submenu-hint">ثبت خاطره، سند و اصلاح اطلاعات</span></a><a data-page="contact" href="contact.html">تماس با ما<span class="nav-submenu-hint">ارتباط، گزارش خطا و پیشنهاد</span></a><a data-page="api" href="api.html">داده و API<span class="nav-submenu-hint">دسترسی برنامه‌ای به داده</span></a></div></div><a class="nav-icon-link" data-page="search" href="search.html" aria-label="جست‌وجوی پیشرفته" title="جست‌وجو"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a></nav></div></header></div></header>
+<main id="main" role="main">
+<section class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="breadcrumb" aria-label="مسیر">
+      <ol>
+        <li><a href="index.html">خانه</a></li>
+        <li aria-current="page">مکان‌ها</li>
+      </ol>
+    </nav>
+    <span class="hero-eyebrow fade-up">اطلس مکان</span>
+    <h1 class="page-hero-title fade-up d1">مکان‌هایی که <span class="accent">یاد</span> را در خود دارند</h1>
+    <p class="page-hero-lead fade-up d2">
+      کشورها، استان‌ها، شهرها، جبهه‌ها، مزارها و یادمان‌هایی که در پرونده اشخاص و
+      رویدادهای تقویم نقش دارند.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="filter-bar">
+      <input type="search" id="placeFilter" class="search-field" placeholder="جست‌وجو در نام مکان، استان یا رویداد مرتبط..." aria-label="جست‌وجو در مکان‌ها" />
+      <button type="button" class="filter-chip is-active" data-country="all">همه</button>
+      <button type="button" class="filter-chip" data-country="ایران">ایران</button>
+      <button type="button" class="filter-chip" data-country="عراق">عراق</button>
+    </div>
+
+    <div class="entity-grid" id="placeGrid" aria-live="polite"></div>
+    <div class="empty-state" id="placeEmpty" hidden>
+      <strong>مکانی یافت نشد</strong>
+      <p>عبارت جست‌وجو را تغییر دهید یا فیلتر کشور را بردارید.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-title">مکانی را می‌شناسید که ثبت نشده است؟</h2>
+      <p class="cta-text">مکان‌های مرتبط با شهدا، عملیات‌ها و یادمان‌ها را با ذکر منبع پیشنهاد دهید.</p>
+      <div class="cta-actions">
+        <a href="contribute.html" class="btn btn-primary">پیشنهاد مکان</a>
+        <a href="sources.html" class="btn btn-ghost">منابع و اسناد</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  'use strict';
+  var D = window.SiteData;
+  var grid = document.getElementById('placeGrid');
+  var empty = document.getElementById('placeEmpty');
+  var input = document.getElementById('placeFilter');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.filter-chip'));
+  var country = 'all';
+
+  function card(p) {
+    return '<article class="entity-card fade-up">' +
+      '<span class="entity-kind">' + p.type + '</span>' +
+      '<h2 class="entity-name">' + p.name + '</h2>' +
+      '<p class="entity-meta">' + p.region + ' · ' + p.country + '</p>' +
+      '<p class="entity-text">مرتبط با: ' + p.related + '</p>' +
+      '<div class="entity-foot"><span>شناسه: ' + p.id + '</span><span>' + p.country + '</span></div>' +
+      '</article>';
+  }
+
+  function render() {
+    var q = (input.value || '').trim();
+    var list = D.places.filter(function (p) {
+      var okCountry = country === 'all' || p.country === country;
+      var hay = p.name + ' ' + p.region + ' ' + p.country + ' ' + p.related + ' ' + p.type;
+      var okQuery = !q || hay.indexOf(q) !== -1;
+      return okCountry && okQuery;
+    });
+    grid.innerHTML = list.map(card).join('');
+    empty.hidden = list.length !== 0;
+  }
+
+  input.addEventListener('input', render);
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      chips.forEach(function (x) { x.classList.remove('is-active'); });
+      c.classList.add('is-active');
+      country = c.dataset.country;
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+</main>
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+
+<script src="assets/js/site.js"></script>
+<button class="to-top" type="button" aria-label="بازگشت به بالای صفحه"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+</body>
+</html>

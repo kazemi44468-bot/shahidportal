@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="منابع، اسناد و فرایند اعتبارسنجی در تقویم شهدا" />
+<meta name="description" content="اطلاعات و رویدادهای یک دوره تاریخی در تقویم شهدا" />
 <meta name="theme-color" content="#0f2e24" />
-<title>منابع و اسناد | تقویم شهدا</title>
+<title>پرونده دوره | تقویم شهدا</title>
 <link rel="icon" href="assets/images/logo.png">
 <link rel="stylesheet" href="assets/css/site-pages.css">
 <link rel="stylesheet" href="assets/css/site.css">
@@ -22,53 +22,21 @@
     <nav class="breadcrumb" aria-label="مسیر">
       <ol>
         <li><a href="index.html">خانه</a></li>
-        <li aria-current="page">منابع و اسناد</li>
+        <li><a href="periods.html">دوره‌ها</a></li>
+        <li aria-current="page">پرونده دوره</li>
       </ol>
     </nav>
-    <span class="hero-eyebrow fade-up">اعتبار و ردیابی</span>
-    <h1 class="page-hero-title fade-up d1">منابع، اسناد و <span class="accent">اعتبارسنجی</span></h1>
-    <p class="page-hero-lead fade-up d2">
-      هر ادعای مهم در این پروژه باید منبع، وضعیت بررسی و امکان ردیابی داشته باشد.
-      تکرار یک ادعا در چند منبع، جای اعتبارسنجی را نمی‌گیرد.
-    </p>
+    <div id="periodHero">
+      <span class="hero-eyebrow">پرونده دوره</span>
+      <h1 class="page-hero-title" id="periodTitle">در حال بارگذاری…</h1>
+      <p class="page-hero-lead" id="periodLead"></p>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="notice">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex:0 0 20px;margin-top:3px">
-        <circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="12" y1="16" x2="12" y2="16.01"/>
-      </svg>
-      <span>وضعیت اعتبار هر رکورد جداگانه ثبت می‌شود: <strong>پیشنهادی</strong>، <strong>بررسی</strong>، <strong>تأییدشده</strong> یا <strong>آرشیوی</strong>. اختلاف روایت‌ها نیز ثبت‌شدنی است.</span>
-    </div>
-
-    <header class="section-head">
-      <div>
-        <h2 class="section-title">فهرست منابع</h2>
-        <p class="section-sub">منابع رسمی، پژوهشی، محلی و شفاهی</p>
-      </div>
-      <a href="contribute.html" class="link-more">افزودن منبع</a>
-    </header>
-
-    <div class="entity-grid" id="sourceGrid"></div>
-    <div class="empty-state" id="sourceEmpty" hidden>
-      <strong>منبعی ثبت نشده است</strong>
-      <p>هنوز رکوردی در لایه داده منابع وجود ندارد.</p>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="container">
-    <div class="cta-inner">
-      <h2 class="cta-title">سند، کتاب یا آرشیوی دارید؟</h2>
-      <p class="cta-text">با ثبت منبع معتبر، به استحکام این اطلس کمک کنید.</p>
-      <div class="cta-actions">
-        <a href="contribute.html" class="btn btn-primary">ثبت منبع</a>
-        <a href="contact.html" class="btn btn-ghost">تماس با ما</a>
-      </div>
-    </div>
+    <div id="periodBody"></div>
   </div>
 </section>
 
@@ -76,20 +44,70 @@
 (function () {
   'use strict';
   var D = window.SiteData;
-  var grid = document.getElementById('sourceGrid');
-  var empty = document.getElementById('sourceEmpty');
+  var id = D.qs('id');
+  var p = id ? D.find(D.periods, id) : D.periods[0];
+  var titleEl = document.getElementById('periodTitle');
+  var leadEl = document.getElementById('periodLead');
+  var bodyEl = document.getElementById('periodBody');
 
-  grid.innerHTML = D.sources.map(function (s) {
-    return '<article class="entity-card fade-up">' +
-      '<span class="entity-kind">' + s.kind + '</span>' +
-      '<h3 class="entity-name">' + s.title + '</h3>' +
-      '<p class="entity-meta">' + s.org + '</p>' +
-      '<p class="entity-text">' + s.note + '</p>' +
-      '<div class="entity-foot"><span>شناسه: ' + s.id + '</span><span>' + s.kind + '</span></div>' +
-      '</article>';
-  }).join('');
+  if (!p) {
+    titleEl.textContent = 'دوره یافت نشد';
+    leadEl.textContent = 'شناسه‌ای که خواسته‌اید در لایه داده وجود ندارد.';
+    bodyEl.innerHTML = '<div class="empty-state"><strong>دوره‌ای با این شناسه ثبت نشده است</strong>' +
+      '<p>شناسه: ' + (id || '—') + '</p>' +
+      '<p style="margin-top:var(--sp-4)"><a class="btn btn-primary" href="periods.html">بازگشت به فهرست دوره‌ها</a></p></div>';
+    return;
+  }
 
-  empty.hidden = D.sources.length !== 0;
+  document.title = p.title + ' | تقویم شهدا';
+  titleEl.textContent = p.title;
+  leadEl.textContent = (p.from === p.to) ? p.from : (p.from + ' تا ' + p.to);
+
+  var relatedEvents = D.events.filter(function (e) {
+    var j = D.parseJalali(e.date);
+    return j && D.parseJalali(p.from) && j.y >= D.parseJalali(p.from).y && j.y <= (D.parseJalali(p.to) ? D.parseJalali(p.to).y : 9999);
+  });
+
+  bodyEl.innerHTML =
+    '<div class="detail-layout">' +
+      '<div>' +
+        '<article class="detail-card">' +
+          '<h2 class="section-title" style="margin-bottom:var(--sp-4)">درباره این دوره</h2>' +
+          '<p class="detail-text">' + p.note + '</p>' +
+        '</article>' +
+        '<article class="detail-card" style="margin-top:var(--sp-5)">' +
+          '<h2 class="section-title" style="margin-bottom:var(--sp-4)">رویدادهای این دوره</h2>' +
+          (relatedEvents.length
+            ? '<ul class="event-list">' + relatedEvents.map(function (e) {
+                var j = D.parseJalali(e.date);
+                return '<li class="event-row"><div class="event-date"><span class="d">' + D.toFa(j.d) +
+                  '</span><span class="m">' + D.MONTHS[j.m - 1] + '</span></div>' +
+                  '<div class="event-info"><h3><a href="event.html?id=' + e.id + '">' + e.title + '</a></h3>' +
+                  '<p>' + e.desc + '</p></div>' +
+                  '<span class="event-tag">' + e.type + '</span></li>';
+              }).join('') + '</ul>'
+            : '<p class="detail-text">برای این دوره رویدادی در لایه داده ثبت نشده است.</p>') +
+        '</article>' +
+      '</div>' +
+      '<aside>' +
+        '<div class="aside-card">' +
+          '<h3>اطلاعات دوره</h3>' +
+          '<dl class="info-list">' +
+            '<div class="info-row"><dt>شناسه</dt><dd dir="ltr">' + p.id + '</dd></div>' +
+            '<div class="info-row"><dt>از</dt><dd>' + (p.from || '—') + '</dd></div>' +
+            '<div class="info-row"><dt>تا</dt><dd>' + (p.to || '—') + '</dd></div>' +
+            '<div class="info-row"><dt>تعداد رویداد</dt><dd>' + D.toFa(relatedEvents.length) + '</dd></div>' +
+          '</dl>' +
+        '</div>' +
+        '<div class="aside-card">' +
+          '<h3>اقدام‌ها</h3>' +
+          '<div style="display:grid;gap:var(--sp-2)">' +
+            '<a class="btn btn-primary" href="periods.html">همه دوره‌ها</a>' +
+            '<a class="btn btn-ghost" href="events.html">آرشیو رویدادها</a>' +
+          '</div>' +
+        '</div>' +
+      '</aside>' +
+    '</div>';
 })();
 </script>
 </main>

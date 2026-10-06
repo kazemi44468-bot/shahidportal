@@ -1,1 +1,1886 @@
-<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>اشخاص و شهدا | تقویم شهدا</title><link rel="icon" href="assets/images/logo.png"><link rel="stylesheet" href="assets/css/calendar.css"><link rel="stylesheet" href="assets/css/calendar-shell.css"></head><body><div id="calendarShellHeader"></div><main class="page"><section class="pageHero"><span>دانش اشخاص</span><h1>اشخاص و شهدا</h1><p>هسته‌ای برای پرونده‌های اشخاص، شهدا و چهره‌های مرتبط با رویدادهای تاریخی.</p></section><section id="list" class="entityGrid"></section></main><div id="calendarShellFooter"></div><script src="assets/js/calendar-shell.js"></script><script src="assets/js/data-loader.js"></script><script>(async()=>{const d=await loadCalendarData();document.getElementById("list").innerHTML=d.martyrs.map(m=>"<a class='entityCard' href='martyr.html?id="+m.id+"'><span>پرونده شخص</span><h2>"+m.name+"</h2><p>تولد: "+m.birth+" · شهادت: "+m.martyrdom+"</p><small>"+m.place+" · "+m.source+"</small></a>").join("")||"<div class='emptyState'>هنوز پرونده‌ای در بانک محلی ثبت نشده است.</div>"})()</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="فهرست شهدا — جست‌وجو و مرور پرونده شهدا، آزادگان و انسان‌های فداکار" />
+<meta name="theme-color" content="#0f2e24" />
+<title>شهدا | تقویم شهدا</title>
+
+<link rel="icon" href="assets/images/logo.png">
+<style>
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f2ede3;
+  --c-surface: #ffffff;
+  --c-surface-2: #f7f3ea;
+  --c-ink: #1a2420;
+  --c-ink-soft: #4a5651;
+  --c-ink-mute: #7a847f;
+  --c-line: #e6dfd0;
+  --c-line-soft: #efe9dd;
+
+  --c-primary: #0f2e24;
+  --c-primary-2: #1a4a3a;
+  --c-primary-3: #2a6a54;
+  --c-gold: #b8892b;
+  --c-gold-soft: #d4af37;
+  --c-gold-bg: #faf3e0;
+  --c-accent: #8b2f2f;
+
+  --c-night-bg: #0a1a15;
+  --c-night-surface: #11261e;
+  --c-night-ink: #e8e3d5;
+  --c-night-line: #1e3a2e;
+
+  --font: "Vazirmatn", "Tahoma", sans-serif;
+  --fs-xs: 0.78rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.35rem;
+  --fs-xl: 1.75rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 3rem;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 20px;
+
+  --shadow-sm: 0 1px 2px rgba(15,46,36,.06), 0 1px 3px rgba(15,46,36,.04);
+  --shadow: 0 4px 12px rgba(15,46,36,.06), 0 2px 4px rgba(15,46,36,.04);
+  --shadow-md: 0 12px 32px rgba(15,46,36,.08), 0 4px 8px rgba(15,46,36,.04);
+  --shadow-lg: 0 24px 60px rgba(15,46,36,.10), 0 8px 16px rgba(15,46,36,.06);
+
+  --container: 1280px;
+  --header-h: 76px;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+[data-theme="night"] {
+  --c-bg: var(--c-night-bg);
+  --c-bg-alt: #0d2019;
+  --c-surface: var(--c-night-surface);
+  --c-surface-2: #163328;
+  --c-ink: var(--c-night-ink);
+  --c-ink-soft: #b8c4bd;
+  --c-ink-mute: #7a8a82;
+  --c-line: var(--c-night-line);
+  --c-line-soft: #183027;
+  --c-gold-bg: #1a2f24;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: 1.75;
+  color: var(--c-ink);
+  background: var(--c-bg);
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: color .2s var(--ease); }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+ul, ol { list-style: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+/* ============================================================
+   HEADER
+============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 248, 243, .85);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .site-header { background: rgba(10, 26, 21, .85); }
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  height: var(--header-h);
+}
+
+.brand { display: flex; align-items: center; gap: var(--sp-3); flex-shrink: 0; }
+
+.brand-logo {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  border-radius: 12px;
+  color: var(--c-gold-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-title {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--c-primary);
+  line-height: 1.2;
+}
+[data-theme="night"] .brand-title { color: var(--c-gold-soft); }
+
+.brand-sub {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  line-height: 1.2;
+}
+
+.main-nav ul { display: flex; gap: var(--sp-1); align-items: center; }
+
+.main-nav a {
+  display: block;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-ink-soft);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: all .2s var(--ease);
+}
+.main-nav a:hover { color: var(--c-primary); background: var(--c-surface-2); }
+[data-theme="night"] .main-nav a:hover { color: var(--c-gold-soft); }
+
+.main-nav a.is-active { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .main-nav a.is-active { color: var(--c-gold-soft); }
+
+.main-nav a.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 2px; right: 12px; left: 12px;
+  height: 2px;
+  background: var(--c-gold);
+  border-radius: 2px;
+}
+
+.header-actions { display: flex; gap: var(--sp-2); align-items: center; }
+
+.btn-icon {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+}
+.btn-icon:hover {
+  background: var(--c-surface-2);
+  color: var(--c-primary);
+  transform: translateY(-1px);
+}
+[data-theme="night"] .btn-icon:hover { color: var(--c-gold-soft); }
+
+.menu-toggle { display: none; }
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(15,46,36,.25);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--c-primary-2), var(--c-primary-3));
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15,46,36,.30);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--c-primary);
+  border: 1px solid var(--c-line);
+}
+.btn-ghost:hover {
+  background: var(--c-surface-2);
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+[data-theme="night"] .btn-ghost { color: var(--c-ink); }
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--c-gold), var(--c-gold-soft));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(184,137,43,.25);
+}
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(184,137,43,.35);
+}
+
+.btn-sm { padding: var(--sp-2) var(--sp-3); font-size: var(--fs-xs); }
+
+/* ============================================================
+   PAGE HEAD
+============================================================ */
+.page-head {
+  padding: var(--sp-7) 0 var(--sp-5);
+  background: linear-gradient(180deg, var(--c-bg-alt), var(--c-bg));
+  border-bottom: 1px solid var(--c-line-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 600px 300px at 80% 0%, rgba(184,137,43,.08), transparent 60%);
+  pointer-events: none;
+}
+
+.breadcrumb ol {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  margin-bottom: var(--sp-3);
+  flex-wrap: wrap;
+}
+.breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-right: var(--sp-3);
+  color: var(--c-line);
+}
+.breadcrumb a { color: var(--c-ink-mute); }
+.breadcrumb a:hover { color: var(--c-gold); }
+.breadcrumb [aria-current] { color: var(--c-primary); font-weight: 600; }
+[data-theme="night"] .breadcrumb [aria-current] { color: var(--c-gold-soft); }
+
+.page-title {
+  font-size: var(--fs-3xl);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: -.02em;
+  margin-bottom: var(--sp-3);
+  line-height: 1.2;
+  position: relative;
+}
+[data-theme="night"] .page-title { color: var(--c-ink); }
+
+.page-lead {
+  font-size: var(--fs-md);
+  color: var(--c-ink-soft);
+  max-width: 720px;
+  line-height: 1.9;
+  position: relative;
+}
+
+/* ============================================================
+   SEARCH BAR (TOP)
+============================================================ */
+.search-bar-wrap {
+  padding: var(--sp-5) 0;
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-line-soft);
+  position: sticky;
+  top: var(--header-h);
+  z-index: 40;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 248, 243, .92);
+  transition: background-color .3s var(--ease);
+}
+[data-theme="night"] .search-bar-wrap { background: rgba(10, 26, 21, .92); }
+
+.search-bar {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: center;
+}
+
+.search-input-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.search-input-wrap svg {
+  position: absolute;
+  right: var(--sp-4);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-ink-mute);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--sp-4) var(--sp-7) var(--sp-4) var(--sp-4);
+  font-family: inherit;
+  font-size: var(--fs-base);
+  color: var(--c-ink);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  outline: none;
+  transition: all .2s var(--ease);
+}
+.search-input:focus {
+  border-color: var(--c-gold);
+  box-shadow: 0 0 0 3px var(--c-gold-bg);
+}
+.search-input::placeholder { color: var(--c-ink-mute); }
+
+.view-toggle {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+}
+
+.view-toggle button {
+  width: 40px; height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  color: var(--c-ink-mute);
+  transition: all .2s var(--ease);
+}
+
+.view-toggle button:hover { color: var(--c-primary); }
+.view-toggle button.is-active {
+  background: var(--c-primary);
+  color: #fff;
+}
+
+/* ============================================================
+   LAYOUT
+============================================================ */
+.martyrs-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--sp-6);
+  padding: var(--sp-6) 0 var(--sp-8);
+  align-items: start;
+}
+
+/* ============================================================
+   SIDEBAR FILTERS
+============================================================ */
+.filters-sidebar {
+  position: sticky;
+  top: calc(var(--header-h) + 90px);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.filters-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+  background: var(--c-surface-2);
+}
+
+.filters-head h3 {
+  font-size: var(--fs-sm);
+  font-weight: 800;
+  color: var(--c-primary);
+  letter-spacing: .02em;
+}
+[data-theme="night"] .filters-head h3 { color: var(--c-gold-soft); }
+
+.filters-clear {
+  font-size: var(--fs-xs);
+  color: var(--c-gold);
+  font-weight: 600;
+  transition: opacity .2s var(--ease);
+}
+.filters-clear:hover { opacity: .7; }
+
+.filter-group {
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+.filter-group:last-of-type { border-bottom: none; }
+
+.filter-title {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--c-ink-mute);
+  letter-spacing: .02em;
+  margin-bottom: var(--sp-3);
+  text-transform: uppercase;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.filter-options::-webkit-scrollbar { width: 6px; }
+.filter-options::-webkit-scrollbar-thumb {
+  background: var(--c-line);
+  border-radius: 6px;
+}
+
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  transition: all .2s var(--ease);
+  position: relative;
+}
+
+.filter-check:hover { background: var(--c-surface-2); color: var(--c-primary); }
+
+.filter-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0; height: 0;
+}
+
+.filter-check-mark {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 1.5px solid var(--c-line);
+  background: var(--c-surface);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: all .2s var(--ease);
+}
+
+.filter-check-mark svg {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all .2s var(--ease);
+  color: #fff;
+}
+
+.filter-check input:checked ~ .filter-check-mark {
+  background: var(--c-gold);
+  border-color: var(--c-gold);
+}
+
+.filter-check input:checked ~ .filter-check-mark svg {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.filter-count {
+  margin-right: auto;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  font-feature-settings: "ss01";
+}
+
+/* Range Filter */
+.range-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  margin-bottom: var(--sp-2);
+  font-feature-settings: "ss01";
+}
+
+.range-display strong {
+  color: var(--c-gold);
+  font-weight: 700;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 4px;
+  background: var(--c-line);
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(184,137,43,.4);
+  transition: transform .2s var(--ease);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(184,137,43,.4);
+}
+
+/* ============================================================
+   RESULTS TOOLBAR
+============================================================ */
+.results-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  margin-bottom: var(--sp-5);
+  flex-wrap: wrap;
+}
+
+.results-count {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-soft);
+  font-feature-settings: "ss01";
+}
+
+.results-count strong {
+  color: var(--c-gold);
+  font-weight: 800;
+  font-size: var(--fs-md);
+}
+
+.sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+}
+
+.sort-select {
+  padding: var(--sp-2) var(--sp-3);
+  padding-left: var(--sp-6);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  color: var(--c-ink);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237a847f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left var(--sp-3) center;
+  padding-left: var(--sp-6);
+}
+
+.sort-select:focus { border-color: var(--c-gold); }
+
+/* Active Filters Chips */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-4);
+}
+
+.active-filters:empty { display: none; }
+
+.active-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-1) var(--sp-3);
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+  border: 1px solid rgba(184,137,43,.25);
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+}
+
+.active-chip:hover {
+  background: var(--c-gold);
+  color: #fff;
+}
+
+.active-chip::after {
+  content: "×";
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+/* ============================================================
+   MARTYR GRID
+============================================================ */
+.martyrs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sp-4);
+}
+
+.martyr-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all .3s var(--ease);
+  position: relative;
+  cursor: pointer;
+  text-align: right;
+  font-family: inherit;
+  padding: 0;
+}
+
+.martyr-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow-md);
+}
+
+.martyr-card-photo {
+  aspect-ratio: 4 / 5;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  position: relative;
+  overflow: hidden;
+}
+
+.martyr-card-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s var(--ease);
+}
+
+.martyr-card:hover .martyr-card-photo img { transform: scale(1.06); }
+
+.martyr-card-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(15,46,36,.5));
+  pointer-events: none;
+}
+
+.martyr-card-badge {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  background: rgba(255,255,255,.95);
+  color: var(--c-primary);
+  padding: 4px var(--sp-3);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.martyr-card-badge.verified::before {
+  content: "✓";
+  color: var(--c-primary-3);
+  font-weight: 900;
+}
+
+.martyr-card-badge.pending {
+  background: rgba(250, 243, 224, .95);
+  color: var(--c-gold);
+}
+
+.martyr-card-body {
+  padding: var(--sp-4);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.martyr-card-name {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-primary);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+}
+[data-theme="night"] .martyr-card-name { color: var(--c-ink); }
+
+.martyr-card-dates {
+  font-size: var(--fs-xs);
+  color: var(--c-ink-mute);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-feature-settings: "ss01";
+}
+
+.martyr-card-dates span {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.martyr-card-dates svg {
+  color: var(--c-gold);
+  flex-shrink: 0;
+}
+
+.martyr-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: var(--sp-2);
+}
+
+.martyr-card-tag {
+  font-size: 0.68rem;
+  padding: 2px var(--sp-2);
+  background: var(--c-surface-2);
+  color: var(--c-ink-soft);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.martyr-card-tag.gold {
+  background: var(--c-gold-bg);
+  color: var(--c-gold);
+}
+
+/* ============================================================
+   MARTYR LIST (Alternative View)
+============================================================ */
+.martyrs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.martyr-list-item {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: var(--sp-4);
+  align-items: center;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+  transition: all .2s var(--ease);
+  cursor: pointer;
+  text-align: right;
+  font-family: inherit;
+}
+
+.martyr-list-item:hover {
+  border-color: var(--c-gold);
+  background: var(--c-gold-bg);
+  transform: translateX(-3px);
+}
+
+.martyr-list-photo {
+  width: 100px; height: 100px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-3));
+  flex-shrink: 0;
+}
+
+.martyr-list-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.martyr-list-info h3 {
+  font-size: var(--fs-md);
+  font-weight: 800;
+  color: var(--c-ink);
+  margin-bottom: var(--sp-1);
+}
+
+.martyr-list-meta {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  font-feature-settings: "ss01";
+}
+
+.martyr-list-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.martyr-list-meta svg { color: var(--c-gold); }
+
+.martyr-list-arrow {
+  width: 36px; height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-surface-2);
+  color: var(--c-ink-mute);
+  transition: all .2s var(--ease);
+}
+
+.martyr-list-item:hover .martyr-list-arrow {
+  background: var(--c-gold);
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+/* ============================================================
+   EMPTY STATE
+============================================================ */
+.empty-state {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-5);
+  background: var(--c-surface);
+  border: 1px dashed var(--c-line);
+  border-radius: var(--radius-lg);
+  grid-column: 1 / -1;
+}
+
+.empty-icon {
+  width: 80px; height: 80px;
+  margin: 0 auto var(--sp-5);
+  background: var(--c-surface-2);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--c-ink-mute);
+}
+
+.empty-state h3 {
+  font-size: var(--fs-lg);
+  color: var(--c-ink);
+  margin-bottom: var(--sp-2);
+  font-weight: 700;
+}
+
+.empty-state p {
+  font-size: var(--fs-sm);
+  color: var(--c-ink-mute);
+  max-width: 400px;
+  margin: 0 auto var(--sp-5);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   PAGINATION
+============================================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-7);
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 var(--sp-3);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  transition: all .2s var(--ease);
+  font-feature-settings: "ss01";
+}
+
+.page-btn:hover:not(:disabled):not(.is-active) {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  transform: translateY(-2px);
+}
+
+.page-btn.is-active {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  border-color: var(--c-primary);
+  box-shadow: 0 4px 12px rgba(15,46,36,.25);
+}
+
+.page-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.page-dots {
+  color: var(--c-ink-mute);
+  padding: 0 var(--sp-2);
+}
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.site-footer {
+  background: var(--c-primary);
+  color: rgba(255,255,255,.7);
+  padding: var(--sp-8) 0 var(--sp-5);
+  margin-top: var(--sp-7);
+}
+[data-theme="night"] .site-footer { background: #061410; }
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
+  gap: var(--sp-7);
+  align-items: start;
+}
+
+.footer-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.footer-desc {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  max-width: 320px;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+}
+
+.footer-col h3 {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-gold-soft);
+  margin-bottom: var(--sp-3);
+  letter-spacing: .02em;
+}
+
+.footer-col ul { display: grid; gap: var(--sp-2); }
+
+.footer-col a {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,.65);
+  transition: color .2s var(--ease);
+}
+.footer-col a:hover { color: var(--c-gold-soft); }
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  padding-top: var(--sp-5);
+  margin-top: var(--sp-5);
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-size: var(--fs-xs);
+  color: rgba(255,255,255,.5);
+}
+
+/* ============================================================
+   MOBILE FILTER TOGGLE
+============================================================ */
+.filter-toggle-mobile {
+  display: none;
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--c-primary);
+  margin-bottom: var(--sp-4);
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+[data-theme="night"] .filter-toggle-mobile { color: var(--c-ink); }
+
+.filter-toggle-mobile svg { color: var(--c-gold); }
+
+.filter-toggle-mobile .badge {
+  background: var(--c-gold);
+  color: #fff;
+  padding: 2px var(--sp-2);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-right: auto;
+  margin-left: var(--sp-2);
+  font-feature-settings: "ss01";
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1100px) {
+  .martyrs-layout { grid-template-columns: 1fr; }
+
+  .filters-sidebar {
+    position: static;
+    display: none;
+  }
+
+  .filters-sidebar.is-open { display: block; }
+
+  .filter-toggle-mobile { display: flex; }
+}
+
+@media (max-width: 960px) {
+  .main-nav { display: none; }
+  .menu-toggle { display: grid; }
+
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --fs-3xl: 2rem;
+    --fs-2xl: 1.75rem;
+    --fs-xl: 1.35rem;
+    --header-h: 64px;
+  }
+
+  .container { padding: 0 var(--sp-4); }
+
+  .page-head { padding: var(--sp-5) 0 var(--sp-4); }
+
+  .search-bar { flex-wrap: wrap; }
+  .search-input-wrap { min-width: 100%; }
+
+  .martyrs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--sp-3);
+  }
+
+  .martyr-card-body { padding: var(--sp-3); }
+  .martyr-card-name { font-size: var(--fs-sm); }
+  .martyr-card-tags { display: none; }
+
+  .martyr-list-item {
+    grid-template-columns: 70px 1fr;
+    gap: var(--sp-3);
+    padding: var(--sp-2) var(--sp-3);
+  }
+
+  .martyr-list-photo { width: 70px; height: 70px; }
+  .martyr-list-arrow { display: none; }
+  .martyr-list-info h3 { font-size: var(--fs-sm); }
+  .martyr-list-meta { font-size: var(--fs-xs); }
+
+  .results-toolbar { padding: var(--sp-2) var(--sp-3); }
+
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.martyr-card,
+.martyr-list-item {
+  animation: fadeUp .5s var(--ease) backwards;
+}
+
+.martyr-card:nth-child(1) { animation-delay: .02s; }
+.martyr-card:nth-child(2) { animation-delay: .04s; }
+.martyr-card:nth-child(3) { animation-delay: .06s; }
+.martyr-card:nth-child(4) { animation-delay: .08s; }
+.martyr-card:nth-child(5) { animation-delay: .10s; }
+.martyr-card:nth-child(6) { animation-delay: .12s; }
+.martyr-card:nth-child(7) { animation-delay: .14s; }
+.martyr-card:nth-child(8) { animation-delay: .16s; }
+.martyr-card:nth-child(9) { animation-delay: .18s; }
+.martyr-card:nth-child(10) { animation-delay: .20s; }
+.martyr-card:nth-child(11) { animation-delay: .22s; }
+.martyr-card:nth-child(12) { animation-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site-nav.css">
+<script src="assets/js/site-data.js"></script>
+<script src="assets/js/page-data.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<header class="shared-header"><div class="shared-container shared-header-inner"><a class="shared-brand" href="index.html"><img src="assets/images/logo.png" alt="تقویم شهدا" class="shared-logo"><span class="shared-brand-text"><strong>تقویم شهدا</strong><small>اطلس زمانی و انسانی شهدا</small></span></a><button class="shared-menu-toggle" type="button" aria-label="باز کردن منو" aria-expanded="false">☰</button><nav class="shared-nav" aria-label="منوی اصلی" id="sharedNav"><a class="nav-home-link" data-page="home" href="index.html">نخست</a><div class="nav-group" data-group="calendar" data-members="calendar,calendar,today,day"><a class="nav-group-label" href="calendar.html">تقویم و زمان</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی تقویم و زمان" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="calendar" href="calendar.html">تقویم کامل<span class="nav-submenu-hint">چهار نما: ماهانه، هفتگی، سالانه، روزانه</span></a><a data-page="today" href="today.html">امروز در تاریخ<span class="nav-submenu-hint">رویدادهای همین روز</span></a><a data-page="day" href="day.html">یک روز خاص<span class="nav-submenu-hint">جست‌وجو در هر روز تقویم</span></a></div></div><div class="nav-group" data-group="know" data-members="martyrs,martyrs,events,places,periods,sources,encyclopedia"><a class="nav-group-label" href="martyrs.html">کشف و دانش</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی کشف و دانش" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="martyrs" href="martyrs.html">اشخاص و شهدا<span class="nav-submenu-hint">پرونده شهدا، آزادگان و فداکاران</span></a><a data-page="events" href="events.html">رویدادها و عملیات<span class="nav-submenu-hint">آرشیو تاریخی و دفاع مقدس</span></a><a data-page="places" href="places.html">مکان‌ها<span class="nav-submenu-hint">جبهه‌ها، شهرها، مزارها و یادمان‌ها</span></a><a data-page="periods" href="periods.html">دوره‌های تاریخی<span class="nav-submenu-hint">از صدر اسلام تا معاصر</span></a><a data-page="sources" href="sources.html">منابع و اسناد<span class="nav-submenu-hint">اعتبارسنجی و ردیابی منابع</span></a><a data-page="encyclopedia" href="encyclopedia.html">دانشنامه<span class="nav-submenu-hint">همه موجودیت‌ها در یک نگاه</span></a></div></div><div class="nav-group" data-group="about" data-members="about,about,contribute,contact,api"><a class="nav-group-label" href="about.html">درباره و همکاری</a><button type="button" class="nav-group-caret" aria-label="نمایش زیرمنوی درباره و همکاری" aria-haspopup="true" aria-expanded="false"></button><div class="nav-submenu"><a data-page="about" href="about.html">درباره پروژه<span class="nav-submenu-hint">چشم‌انداز، اصول و نقشه راه</span></a><a data-page="contribute" href="contribute.html">همکاری و مشارکت<span class="nav-submenu-hint">ثبت خاطره، سند و اصلاح اطلاعات</span></a><a data-page="contact" href="contact.html">تماس با ما<span class="nav-submenu-hint">ارتباط، گزارش خطا و پیشنهاد</span></a><a data-page="api" href="api.html">داده و API<span class="nav-submenu-hint">دسترسی برنامه‌ای به داده</span></a></div></div><a class="nav-icon-link" data-page="search" href="search.html" aria-label="جست‌وجوی پیشرفته" title="جست‌وجو"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg></a></nav></div></header></div></header>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+
+
+<!-- ============================================================
+     MAIN
+============================================================ -->
+<main id="main" role="main">
+
+  <!-- ====== PAGE HEAD ====== -->
+  <section class="page-head">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="مسیر">
+        <ol>
+          <li><a href="index.html">خانه</a></li>
+          <li aria-current="page">شهدا</li>
+        </ol>
+      </nav>
+      <h1 class="page-title">شهدا، آزادگان و فداکاران</h1>
+      <p class="page-lead">
+        جست‌وجو، مرور و کشف پرونده شهدا از دوره‌های مختلف تاریخی، دفاع مقدس، مدافعان حرم و دیگر انسان‌های فداکار.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====== SEARCH BAR ====== -->
+  <div class="search-bar-wrap">
+    <div class="container">
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <label for="martyrsSearch" class="sr-only">جست‌وجو در شهدا</label>
+          <input id="martyrsSearch" type="search" class="search-input" placeholder="جست‌وجو بر اساس نام، محل، عملیات یا کلیدواژه..." autocomplete="off" />
+        </div>
+
+        <div class="view-toggle" role="tablist" aria-label="نمای نمایش">
+          <button class="is-active" data-view="grid" role="tab" aria-selected="true" aria-label="نمای شبکه‌ای">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+          </button>
+          <button data-view="list" role="tab" aria-selected="false" aria-label="نمای لیستی">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <circle cx="3.5" cy="6" r="1"/>
+              <circle cx="3.5" cy="12" r="1"/>
+              <circle cx="3.5" cy="18" r="1"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== LAYOUT ====== -->
+  <div class="container">
+    <div class="martyrs-layout">
+
+      <!-- ====== SIDEBAR FILTERS ====== -->
+      <aside class="filters-sidebar" id="filtersSidebar" aria-label="فیلترها">
+        <div class="filters-head">
+          <h3>فیلترها</h3>
+          <button class="filters-clear" data-clear-all>پاک کردن همه</button>
+        </div>
+
+        <!-- دوره -->
+        <div class="filter-group">
+          <div class="filter-title">دوره تاریخی</div>
+          <div class="filter-options" data-filter="period">
+            <label class="filter-check">
+              <input type="checkbox" value="defa" />
+              <span class="filter-check-mark">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>دفاع مقدس</span>
+              <span class="filter-count">۴۸</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="mad defens" />
+              <span class="filter-check-mark">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>مدافعان حرم</span>
+              <span class="filter-count">۲۳</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="enghelab" />
+              <span class="filter-check-mark">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>انقلاب اسلامی</span>
+              <span class="filter-count">۱۵</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="security" />
+              <span class="filter-check-mark">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>شهدای امنیت</span>
+              <span class="filter-count">۱۲</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="health" />
+              <span class="filter-check-mark">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </span>
+              <span>شهدای سلامت</span>
+              <span class="filter-count">۸</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- استان -->
+        <div class="filter-group">
+          <div class="filter-title">استان</div>
+          <div class="filter-options" data-filter="province">
+            <label class="filter-check">
+              <input type="checkbox" value="tehran" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>تهران</span><span class="filter-count">۳۲</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="isfahan" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>اصفهان</span><span class="filter-count">۲۸</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="khuzestan" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>خوزستان</span><span class="filter-count">۲۵</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="fars" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>فارس</span><span class="filter-count">۲۰</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="mashhad" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>خراسان رضوی</span><span class="filter-count">۱۸</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- عملیات -->
+        <div class="filter-group">
+          <div class="filter-title">عملیات</div>
+          <div class="filter-options" data-filter="operation">
+            <label class="filter-check">
+              <input type="checkbox" value="karbala5" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>کربلای ۵</span><span class="filter-count">۱۴</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="beit" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>بیت‌المقدس</span><span class="filter-count">۱۲</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="valfajr" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>والفجر</span><span class="filter-count">۱۰</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="badr" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>بدر</span><span class="filter-count">۸</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" value="kheibar" />
+              <span class="filter-check-mark"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span>خیبر</span><span class="filter-count">۷</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- بازه سال -->
+        <div class="filter-group">
+          <div class="filter-title">سال شهادت</div>
+          <div class="range-display">
+            <span>از <strong id="yearFrom">۱۳۵۹</strong></span>
+            <span>تا <strong id="yearTo">۱۴۰۵</strong></span>
+          </div>
+          <input type="range" id="yearRange" min="1359" max="1405" value="1405" aria-label="سال شهادت" />
+        </div>
+
+      </aside>
+
+      <!-- ====== RESULTS ====== -->
+      <div class="results">
+
+        <!-- Mobile filter toggle -->
+        <button class="filter-toggle-mobile" id="filterToggleMobile" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+          </svg>
+          <span>فیلترها</span>
+          <span class="badge" id="filterBadge" hidden>۰</span>
+        </button>
+
+        <!-- Active filters -->
+        <div class="active-filters" id="activeFilters" aria-label="فیلترهای فعال"></div>
+
+        <!-- Results toolbar -->
+        <div class="results-toolbar">
+          <p class="results-count">
+            <strong id="resultsCount">۰</strong> نتیجه یافت شد
+          </p>
+          <div class="sort-wrap">
+            <label for="sortSelect">مرتب‌سازی:</label>
+            <select id="sortSelect" class="sort-select">
+              <option value="newest">جدیدترین</option>
+              <option value="oldest">قدیمی‌ترین</option>
+              <option value="name">نام (الفبا)</option>
+              <option value="age">سن شهادت</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grid / List Container -->
+        <div id="resultsContainer"></div>
+
+        <!-- Pagination -->
+        <nav class="pagination" id="pagination" aria-label="صفحه‌بندی"></nav>
+
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+(function() {
+  'use strict';
+
+  // ===== اعداد فارسی =====
+  function toFa(n) {
+    return String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+  }
+
+  // ===== داده نمونه شهدا =====
+  var MARTYRS = window.PageData.martyrs;
+  // ===== State =====
+  const state = {
+    query: '',
+    view: 'grid',
+    filters: {
+      period: [],
+      province: [],
+      operation: [],
+      yearTo: 1405
+    },
+    sort: 'newest',
+    page: 1,
+    perPage: 8
+  };
+
+  // ===== Elements =====
+  const resultsContainer = document.getElementById('resultsContainer');
+  const resultsCount = document.getElementById('resultsCount');
+  const pagination = document.getElementById('pagination');
+  const activeFilters = document.getElementById('activeFilters');
+  const searchInput = document.getElementById('martyrsSearch');
+  const sortSelect = document.getElementById('sortSelect');
+  const yearRange = document.getElementById('yearRange');
+  const yearToDisplay = document.getElementById('yearTo');
+  const filtersSidebar = document.getElementById('filtersSidebar');
+  const filterToggleMobile = document.getElementById('filterToggleMobile');
+  const filterBadge = document.getElementById('filterBadge');
+
+  // ===== Filtering & Sorting =====
+  function filterMartyrs() {
+    return MARTYRS.filter(m => {
+      // Query
+      if (state.query) {
+        const q = state.query.toLowerCase();
+        const haystack = `${m.name} ${m.city} ${m.province} ${m.operation} ${m.period} ${m.tags.join(' ')}`.toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+
+      // Period
+      if (state.filters.period.length) {
+        const periodMap = {
+          'defa': 'دفاع مقدس',
+          'mad defens': 'مدافعان حرم',
+          'enghelab': 'انقلاب اسلامی',
+          'security': 'شهدای امنیت',
+          'health': 'شهدای سلامت'
+        };
+        const valid = state.filters.period.some(p => periodMap[p] === m.period);
+        if (!valid) return false;
+      }
+
+      // Province
+      if (state.filters.province.length) {
+        const provMap = {
+          'tehran': 'تهران',
+          'isfahan': 'اصفهان',
+          'khuzestan': 'خوزستان',
+          'fars': 'فارس',
+          'mashhad': 'مشهد'
+        };
+        const valid = state.filters.province.some(p => provMap[p] === m.province);
+        if (!valid) return false;
+      }
+
+      // Operation
+      if (state.filters.operation.length) {
+        const opMap = {
+          'karbala5': 'کربلای ۵',
+          'beit': 'بیت‌المقدس',
+          'valfajr': 'والفجر',
+          'badr': 'بدر',
+          'kheibar': 'خیبر'
+        };
+        const valid = state.filters.operation.some(o => m.operation.includes(opMap[o]));
+        if (!valid) return false;
+      }
+
+      // Year
+      if (m.martyrdom > state.filters.yearTo) return false;
+
+      return true;
+    }).sort((a, b) => {
+      switch (state.sort) {
+        case 'newest': return b.martyrdom - a.martyrdom;
+        case 'oldest': return a.martyrdom - b.martyrdom;
+        case 'name': return a.name.localeCompare(b.name, 'fa');
+        case 'age': return a.age - b.age;
+        default: return 0;
+      }
+    });
+  }
+
+  // ===== SVG icon helpers =====
+  const ICONS = {
+    calendar: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    star: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L14 9 L20 10 L14 11 L12 17 L10 11 L4 10 L10 9 Z"/></svg>',
+    pin: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+    arrow: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'
+  };
+
+  // ===== Render =====
+  function render() {
+    const all = filterMartyrs();
+    const total = all.length;
+    const totalPages = Math.ceil(total / state.perPage) || 1;
+
+    if (state.page > totalPages) state.page = totalPages;
+
+    const start = (state.page - 1) * state.perPage;
+    const pageItems = all.slice(start, start + state.perPage);
+
+    resultsCount.textContent = toFa(total);
+
+    // Container
+    if (!total) {
+      resultsContainer.innerHTML = `
+        <div class="martyrs-grid">
+          <div class="empty-state">
+            <div class="empty-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <h3>نتیجه‌ای یافت نشد</h3>
+            <p>با تغییر فیلترها یا جست‌وجوی دیگری امتحان کنید. می‌توانید با همکاری در پروژه، شهدای بیشتری را ثبت کنید.</p>
+            <a href="contribute.html" class="btn btn-gold">افزودن شهید جدید</a>
+          </div>
+        </div>
+      `;
+      pagination.innerHTML = '';
+      return;
+    }
+
+    if (state.view === 'grid') {
+      resultsContainer.innerHTML = `
+        <div class="martyrs-grid">
+          ${pageItems.map(m => renderCard(m)).join('')}
+        </div>
+      `;
+    } else {
+      resultsContainer.innerHTML = `
+        <div class="martyrs-list">
+          ${pageItems.map(m => renderListItem(m)).join('')}
+        </div>
+      `;
+    }
+
+    // Pagination
+    renderPagination(totalPages);
+
+    // Attach card clicks
+    document.querySelectorAll('[data-martyr-id]').forEach(el => {
+      el.addEventListener('click', () => {
+        window.location.href = 'martyr.html';
+      });
+    });
+  }
+
+  function renderCard(m) {
+    const initials = m.name.replace('شهید ', '').split(' ')[0];
+    return `
+      <button class="martyr-card" data-martyr-id="${m.id}" aria-label="پرونده ${m.name}">
+        <div class="martyr-card-photo">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 250'%3E%3Cdefs%3E%3ClinearGradient id='g${m.id}' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230f2e24'/%3E%3Cstop offset='1' stop-color='%232a6a54'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='250' fill='url(%23g${m.id})'/%3E%3Ccircle cx='100' cy='100' r='40' fill='%23d4af37' opacity='.15'/%3E%3Ctext x='100' y='230' text-anchor='middle' fill='%23d4af37' opacity='.4' font-size='14' font-family='sans-serif'%3E${initials}%3C/text%3E%3C/svg%3E" alt="" loading="lazy" />
+          <span class="martyr-card-badge ${m.verified ? 'verified' : 'pending'}">${m.verified ? 'تأییدشده' : 'در بررسی'}</span>
+        </div>
+        <div class="martyr-card-body">
+          <h3 class="martyr-card-name">${m.name}</h3>
+          <div class="martyr-card-dates">
+            <span>${ICONS.calendar} شهادت: ${m.martyrDate}</span>
+            <span>${ICONS.pin} ${m.city}، ${m.province}</span>
+          </div>
+          <div class="martyr-card-tags">
+            <span class="martyr-card-tag gold">${m.period}</span>
+            ${m.tags.slice(0, 1).map(t => `<span class="martyr-card-tag">${t}</span>`).join('')}
+          </div>
+        </div>
+      </button>
+    `;
+  }
+
+  function renderListItem(m) {
+    return `
+      <button class="martyr-list-item" data-martyr-id="${m.id}" aria-label="پرونده ${m.name}">
+        <div class="martyr-list-photo">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='gl${m.id}' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230f2e24'/%3E%3Cstop offset='1' stop-color='%232a6a54'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23gl${m.id})'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%23d4af37' opacity='.15'/%3E%3C/svg%3E" alt="" loading="lazy" />
+        </div>
+        <div class="martyr-list-info">
+          <h3>${m.name}</h3>
+          <div class="martyr-list-meta">
+            <span>${ICONS.calendar} ${m.martyrDate}</span>
+            <span>${ICONS.pin} ${m.city}، ${m.province}</span>
+            <span>${ICONS.star} ${m.period}</span>
+          </div>
+        </div>
+        <span class="martyr-list-arrow">${ICONS.arrow}</span>
+      </button>
+    `;
+  }
+
+  function renderPagination(totalPages) {
+    if (totalPages <= 1) {
+      pagination.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    html += `<button class="page-btn" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''} aria-label="قبلی">‹</button>`;
+
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || Math.abs(i - state.page) <= 1) {
+        pages.push(i);
+      } else if (pages[pages.length - 1] !== '...') {
+        pages.push('...');
+      }
+    }
+
+    pages.forEach(p => {
+      if (p === '...') {
+        html += `<span class="page-dots">…</span>`;
+      } else {
+        html += `<button class="page-btn ${p === state.page ? 'is-active' : ''}" data-page="${p}">${toFa(p)}</button>`;
+      }
+    });
+
+    html += `<button class="page-btn" data-page="${state.page + 1}" ${state.page === totalPages ? 'disabled' : ''} aria-label="بعدی">›</button>`;
+
+    pagination.innerHTML = html;
+
+    pagination.querySelectorAll('[data-page]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = parseInt(btn.dataset.page, 10);
+        if (p >= 1 && p <= totalPages && p !== state.page) {
+          state.page = p;
+          render();
+          window.scrollTo({ top: 300, behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  // ===== Active Filters Render =====
+  const FILTER_LABELS = {
+    'defa': 'دفاع مقدس',
+    'mad defens': 'مدافعان حرم',
+    'enghelab': 'انقلاب اسلامی',
+    'security': 'شهدای امنیت',
+    'health': 'شهدای سلامت',
+    'tehran': 'تهران',
+    'isfahan': 'اصفهان',
+    'khuzestan': 'خوزستان',
+    'fars': 'فارس',
+    'mashhad': 'مشهد',
+    'karbala5': 'کربلای ۵',
+    'beit': 'بیت‌المقدس',
+    'valfajr': 'والفجر',
+    'badr': 'بدر',
+    'kheibar': 'خیبر'
+  };
+
+  function renderActiveFilters() {
+    const chips = [];
+
+    Object.entries(state.filters).forEach(([key, values]) => {
+      if (key === 'yearTo') return;
+      values.forEach(v => {
+        chips.push(`<button class="active-chip" data-filter-key="${key}" data-filter-value="${v}">${FILTER_LABELS[v] || v}</button>`);
+      });
+    });
+
+    if (state.filters.yearTo < 1405) {
+      chips.push(`<button class="active-chip" data-filter-key="yearTo" data-filter-value="${state.filters.yearTo}">تا سال ${toFa(state.filters.yearTo)}</button>`);
+    }
+
+    activeFilters.innerHTML = chips.join('');
+
+    activeFilters.querySelectorAll('.active-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const key = chip.dataset.filterKey;
+        const value = chip.dataset.filterValue;
+
+        if (key === 'yearTo') {
+          state.filters.yearTo = 1405;
+          yearRange.value = 1405;
+          yearToDisplay.textContent = toFa(1405);
+        } else {
+          state.filters[key] = state.filters[key].filter(v => v !== value);
+          const checkbox = document.querySelector(`input[type="checkbox"][value="${value}"]`);
+          if (checkbox) checkbox.checked = false;
+        }
+
+        state.page = 1;
+        updateFilterBadge();
+        renderActiveFilters();
+        render();
+      });
+    });
+  }
+
+  // ===== Filter Badge =====
+  function updateFilterBadge() {
+    const total = state.filters.period.length + state.filters.province.length + state.filters.operation.length + (state.filters.yearTo < 1405 ? 1 : 0);
+    if (total > 0) {
+      filterBadge.textContent = toFa(total);
+      filterBadge.hidden = false;
+    } else {
+      filterBadge.hidden = true;
+    }
+  }
+
+  // ===== Event Handlers =====
+  searchInput?.addEventListener('input', (e) => {
+    state.query = e.target.value.trim();
+    state.page = 1;
+    render();
+  });
+
+  sortSelect?.addEventListener('change', (e) => {
+    state.sort = e.target.value;
+    state.page = 1;
+    render();
+  });
+
+  document.querySelectorAll('.view-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      state.view = btn.dataset.view;
+      document.querySelectorAll('.view-toggle button').forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-selected', String(active));
+      });
+      render();
+    });
+  });
+
+  // Checkbox filters
+  document.querySelectorAll('.filter-check input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const filterGroup = cb.closest('[data-filter]');
+      const key = filterGroup.dataset.filter;
+
+      if (cb.checked) {
+        state.filters[key].push(cb.value);
+      } else {
+        state.filters[key] = state.filters[key].filter(v => v !== cb.value);
+      }
+
+      state.page = 1;
+      updateFilterBadge();
+      renderActiveFilters();
+      render();
+    });
+  });
+
+  // Year range
+  yearRange?.addEventListener('input', (e) => {
+    state.filters.yearTo = parseInt(e.target.value, 10);
+    yearToDisplay.textContent = toFa(state.filters.yearTo);
+    state.page = 1;
+    updateFilterBadge();
+    renderActiveFilters();
+    render();
+  });
+
+  // Clear all
+  document.querySelector('[data-clear-all]')?.addEventListener('click', () => {
+    state.filters = { period: [], province: [], operation: [], yearTo: 1405 };
+    state.query = '';
+    state.page = 1;
+    searchInput.value = '';
+    yearRange.value = 1405;
+    yearToDisplay.textContent = toFa(1405);
+    document.querySelectorAll('.filter-check input').forEach(cb => cb.checked = false);
+    updateFilterBadge();
+    renderActiveFilters();
+    render();
+  });
+
+  // Mobile filter toggle
+  filterToggleMobile?.addEventListener('click', () => {
+    const isOpen = filtersSidebar.classList.toggle('is-open');
+    filterToggleMobile.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // ===== Theme =====
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const html = document.documentElement;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'night') {
+    html.setAttribute('data-theme', 'night');
+    updateThemeIcon('night');
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const next = current === 'night' ? 'day' : 'night';
+    if (next === 'night') html.setAttribute('data-theme', 'night');
+    else html.removeAttribute('data-theme');
+    localStorage.setItem('theme', next);
+    updateThemeIcon(next);
+  });
+
+  function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    if (theme === 'night') {
+      themeIcon.innerHTML = '<circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>';
+    } else {
+      themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    }
+  }
+
+  // ===== Init =====
+  renderActiveFilters();
+  render();
+
+})();
+</script>
+
+<footer class="shared-footer"><div class="shared-container shared-footer-grid"><div class="shared-footer-main"><a href="index.html" class="shared-footer-brand"><img src="assets/images/logo.png" alt="تقویم شهدا"><span><strong>تقویم شهدا</strong><small>اطلس زمانی، تاریخی و انسانی شهدا و رویدادهای مرتبط؛ مرجع زمانی، تاریخی و انسانی برای ثبت، جست‌وجو و شناخت شهدا و رویدادهای مرتبط.</small></span></a></div><div class="shared-footer-links"><a href="index.html">نخست</a><a href="calendar.html">تقویم</a><a href="today.html">امروز</a><a href="martyrs.html">شهدا</a><a href="events.html">رویدادها</a></div><div class="shared-footer-links"><a href="places.html">مکان‌ها</a><a href="periods.html">دوره‌ها</a><a href="sources.html">منابع</a><a href="encyclopedia.html">دانشنامه</a><a href="contact.html">تماس</a></div></div></footer>
+<script src="assets/js/site.js"></script>
+<button class="to-top" type="button" aria-label="بازگشت به بالای صفحه"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg></button>
+</body>
+</html>
